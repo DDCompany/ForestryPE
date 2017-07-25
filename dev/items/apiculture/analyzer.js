@@ -53,37 +53,43 @@ var updatableAnalyzer = {
                         slotScanning.count = 0;
                     }
                 } else if (slotPhase1.id && drawedBee != slotPhase1.id && BeeRegistry.isBee(slotPhase1.id)) {
-                    if (slotPhase2.id || slotPhase3.id) {
-                        var pos = Player.getPosition();
-                        World.drop(pos.x, pos.y, pos.z, slotPhase1.id, slotPhase1.count, slotPhase1.data);
-                        slotPhase1.count = 0;
-                        return;
-                    } else {
-                        var bee = BeeRegistry.getBeeFromItem(slotPhase1.id, slotPhase1.data);
-                        drawPage1(bee);
-                        drawedBee = slotPhase1.id;
+                    var bee = BeeRegistry.getBeeFromItem(slotPhase1.id, slotPhase1.data);
+                    if (bee.analyzed) {
+                        if (slotPhase2.id || slotPhase3.id) {
+                            var pos = Player.getPosition();
+                            World.drop(pos.x, pos.y, pos.z, slotPhase1.id, slotPhase1.count, slotPhase1.data);
+                            slotPhase1.count = 0;
+                            return;
+                        } else {
+                            drawPage1(bee);
+                            drawedBee = slotPhase1.id;
+                        }
                     }
                 } else if (slotPhase2.id && drawedBee !== slotPhase2.id && BeeRegistry.isBee(slotPhase2.id)) {
-                    if (slotPhase1.id || slotPhase3.id) {
-                        var pos = Player.getPosition();
-                        World.drop(pos.x, pos.y, pos.z, slotPhase2.id, slotPhase2.count, slotPhase2.data);
-                        slotPhase2.count = 0;
-                        return;
-                    } else {
-                        var bee = BeeRegistry.getBeeFromItem(slotPhase2.id, slotPhase2.data);
-                        drawPage2(bee);
-                        drawedBee = slotPhase2.id;
+                    var bee = BeeRegistry.getBeeFromItem(slotPhase2.id, slotPhase2.data);
+                    if (bee.analyzed) {
+                        if (slotPhase1.id || slotPhase3.id) {
+                            var pos = Player.getPosition();
+                            World.drop(pos.x, pos.y, pos.z, slotPhase2.id, slotPhase2.count, slotPhase2.data);
+                            slotPhase2.count = 0;
+                            return;
+                        } else {
+                            drawPage2(bee);
+                            drawedBee = slotPhase2.id;
+                        }
                     }
                 } else if (slotPhase3.id && drawedBee !== slotPhase3.id && BeeRegistry.isBee(slotPhase3.id)) {
-                    if (slotPhase2.id || slotPhase1.id) {
-                        var pos = Player.getPosition();
-                        World.drop(pos.x, pos.y, pos.z, slotPhase3.id, slotPhase3.count, slotPhase3.data);
-                        slotPhase3.count = 0;
-                        return;
-                    } else {
-                        var bee = BeeRegistry.getBeeFromItem(slotPhase3.id, slotPhase3.data);
-                        drawPage3(bee);
-                        drawedBee = slotPhase3.id;
+                    var bee = BeeRegistry.getBeeFromItem(slotPhase3.id, slotPhase3.data);
+                    if (bee.analyzed) {
+                        if (slotPhase2.id || slotPhase1.id) {
+                            var pos = Player.getPosition();
+                            World.drop(pos.x, pos.y, pos.z, slotPhase3.id, slotPhase3.count, slotPhase3.data);
+                            slotPhase3.count = 0;
+                            return;
+                        } else {
+                            drawPage3(bee);
+                            drawedBee = slotPhase3.id;
+                        }
                     }
                 } else if (drawedBee !== slotScanning.id && drawedBee !== slotPhase1.id && drawedBee !== slotPhase2.id && drawedBee !== slotPhase3.id) {
                     for (key in drawedElements) {
@@ -96,9 +102,12 @@ var updatableAnalyzer = {
                 var content = analyzerContainer.getGuiContent();
                 var pos = Player.getPosition();
 
-                for (var key in content) {
-                    content.elements[key].type === "slot" || (this.openedUI.dropSlot(key, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5));
-                }
+                analyzerContainer.dropSlot("slotHoney", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
+                analyzerContainer.dropSlot("slotScanning", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
+                analyzerContainer.dropSlot("slotPhase1", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
+                analyzerContainer.dropSlot("slotPhase2", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
+                analyzerContainer.dropSlot("slotPhase3", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
+
 
                 for (var key in drawedElements) {
                     content.elements[key] = null;
@@ -122,23 +131,45 @@ Callback.addCallback("LevelLoaded", function () {
 function drawPage1(bee) {
     var content = analyzerContainer.getGuiContent();
 
+    var active = "Active";
+    var inactive = "Inactive";
+
     drawedElements["textActive"] = {
         type: "text",
         x: COLUMN_1,
         y: LINE,
-        width: 200,
+        width: (active.length + 1) * (ANALYZER_FONT.size / 2) + 10,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Active"
+        text: active
     };
+
+    drawedElements["slotActiveSpecies"] = {
+        type: "slot",
+        x: COLUMN_1 + ((active.length + 1) * (ANALYZER_FONT.size / 2)) + 10,
+        y: LINE - 15,
+        visual: true,
+        size: 50,
+        bitmap: "slot_empty"
+    };
+
     drawedElements["textInactive"] = {
         type: "text",
         x: COLUMN_2,
         y: LINE,
-        width: 200,
+        width: (inactive.length + 1) * (ANALYZER_FONT.size / 2) + 10,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Inactive"
+        text: inactive
+    };
+
+    drawedElements["slotInactiveSpecies"] = {
+        type: "slot",
+        x: COLUMN_2 + ((inactive.length + 1) * (ANALYZER_FONT.size / 2)) + 10,
+        y: LINE - 15,
+        visual: true,
+        size: 50,
+        bitmap: "slot_empty"
     };
 
     LINE += 32;
@@ -276,20 +307,25 @@ function drawPage1(bee) {
         type: "text",
         x: COLUMN_1,
         y: LINE,
-        width: 200,
+        width: 35,
         height: 32,
         font: BeeRegistry.isDominant("FERTILITY", bee.getActiveChromosome("FERTILITY")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: bee.getActiveChromosome("FERTILITY")
+        text: bee.getActiveChromosome("FERTILITY") + " x "
     };
+
+    drawedElements["imageFertility"] = {type: "image", x: COLUMN_1 + 40, y: LINE, bitmap: "analyzer_bee", scale: 2.5};
+
     drawedElements["textFertility2"] = {
         type: "text",
         x: COLUMN_2,
         y: LINE,
-        width: 200,
+        width: 35,
         height: 32,
         font: BeeRegistry.isDominant("FERTILITY", bee.getInactiveChromosome("FERTILITY")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: bee.getInactiveChromosome("FERTILITY")
+        text: bee.getInactiveChromosome("FERTILITY") + " x "
     };
+
+    drawedElements["imageFertility2"] = {type: "image", x: COLUMN_2 + 40, y: LINE, bitmap: "analyzer_bee", scale: 2.5};
 
     LINE += 32;
 
@@ -356,9 +392,17 @@ function drawPage1(bee) {
     for (key in drawedElements) {
         content.elements[key] = drawedElements[key];
     }
+    var slotSpeciesActive = analyzerContainer.getSlot("slotActiveSpecies");
+    var slotSpeciesInactive = analyzerContainer.getSlot("slotInactiveSpecies");
+
+    slotSpeciesActive.id = bee.getBeeType().droneID;
+    slotSpeciesActive.count = 1;
+    slotSpeciesInactive.id = bee.getInactiveBeeType().droneID;
+    slotSpeciesInactive.count = 1;
 
     LINE = 50;
 }
+
 
 function drawPage2(bee) {
     var content = analyzerContainer.getGuiContent();
@@ -399,16 +443,17 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getActiveChromosome("CLIMATE"))
     };
+
     drawedElements["textClimate2"] = {
         type: "text",
         x: COLUMN_2,
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getInactiveChromosome("CLIMATE"))
     };
 
@@ -418,28 +463,46 @@ function drawPage2(bee) {
         type: "text",
         x: COLUMN_0,
         y: LINE,
-        width: 200,
+        width: 180,
         height: 32,
         font: ANALYZER_FONT,
-        text: "   Tolerance"
+        text: "  Tolerance"
     };
+
     drawedElements["textClimateTol1"] = {
         type: "text",
+        x: COLUMN_1 + 38,
+        y: LINE,
+        width: 162,
+        height: 32,
+        font: BeeRegistry.isDominant("TOLERANCE", bee.getActiveChromosome("TEMPERATURE_TOLERANCE")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: "{" + bee.getClimateTolValue() + "}"
+    };
+
+    drawedElements["imageClimateActive"] = {
+        type: "image",
         x: COLUMN_1,
         y: LINE,
-        width: 200,
-        height: 32,
-        font: ANALYZER_FONT,
-        text: bee.getActiveChromosome("TEMPERATURE_TOLERANCE")
+        bitmap: bee.getActiveChromosome("TEMPERATURE_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        scale: 2.5
     };
+
     drawedElements["textClimateTol2"] = {
         type: "text",
+        x: COLUMN_2 + 38,
+        y: LINE,
+        width: 162,
+        height: 32,
+        font: BeeRegistry.isDominant("TOLERANCE", bee.getInactiveChromosome("TEMPERATURE_TOLERANCE")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: "{" + bee.getInactiveClimateTolValue() + "}"
+    };
+
+    drawedElements["imageClimateInactive"] = {
+        type: "image",
         x: COLUMN_2,
         y: LINE,
-        width: 200,
-        height: 32,
-        font: ANALYZER_FONT,
-        text: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE")
+        bitmap: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        scale: 2.5
     };
 
     LINE += 32;
@@ -459,7 +522,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getActiveChromosome("HUMIDITY"))
     };
     drawedElements["textHumidity2"] = {
@@ -468,7 +531,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getInactiveChromosome("HUMIDITY"))
     };
 
@@ -478,28 +541,45 @@ function drawPage2(bee) {
         type: "text",
         x: COLUMN_0,
         y: LINE,
-        width: 200,
+        width: 180,
         height: 32,
         font: ANALYZER_FONT,
         text: "   Tolerance"
     };
     drawedElements["textHumidityTol1"] = {
         type: "text",
+        x: COLUMN_1 + 38,
+        y: LINE,
+        width: 162,
+        height: 32,
+        font: BeeRegistry.isDominant("TOLERANCE", bee.getActiveChromosome("HUMIDITY_TOLERANCE")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: "{" + bee.getHumidityTolValue() + "}"
+    };
+
+    drawedElements["imageHumidityActive"] = {
+        type: "image",
         x: COLUMN_1,
         y: LINE,
-        width: 200,
-        height: 32,
-        font: ANALYZER_FONT,
-        text: bee.getActiveChromosome("HUMIDITY_TOLERANCE")
+        bitmap: bee.getActiveChromosome("HUMIDITY_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        scale: 2.5
     };
+
     drawedElements["textHumidityTol2"] = {
         type: "text",
+        x: COLUMN_2 + 38,
+        y: LINE,
+        width: 162,
+        height: 32,
+        font: BeeRegistry.isDominant("TOLERANCE", bee.getInactiveChromosome("HUMIDITY_TOLERANCE")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: "{" + bee.getInactiveHumidityTolValue() + "}"
+    };
+
+    drawedElements["imageHumidityInactive"] = {
+        type: "image",
         x: COLUMN_2,
         y: LINE,
-        width: 200,
-        height: 32,
-        font: ANALYZER_FONT,
-        text: bee.getInactiveChromosome("HUMIDITY_TOLERANCE")
+        bitmap: bee.getInactiveChromosome("HUMIDITY_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        scale: 2.5
     };
 
     LINE += 32;
@@ -519,7 +599,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.localize("Yes")
     };
     drawedElements["textDiurnal2"] = {
@@ -528,7 +608,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: BeeRegistry.localize("Yes")
     };
 
@@ -549,7 +629,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getActiveChromosome("NEVER_SLEEPS") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
     drawedElements["textNocturnal2"] = {
@@ -558,7 +638,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getInactiveChromosome("NEVER_SLEEPS") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
 
@@ -579,7 +659,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getActiveChromosome("TOLERATES_RAIN") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
     drawedElements["textFlyer2"] = {
@@ -588,7 +668,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getInactiveChromosome("TOLERATES_RAIN") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
 
@@ -609,7 +689,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getActiveChromosome("CAVE_DWELLING") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
     drawedElements["textCave2"] = {
@@ -618,7 +698,7 @@ function drawPage2(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: ANALYZER_FONT,
+        font: ANALYZER_FONT_BLUE,
         text: bee.getInactiveChromosome("CAVE_DWELLING") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
     };
 
@@ -671,7 +751,14 @@ function drawPage3(bee) {
     var produce = bee.getProduce();
     var t = 0;
     for (var key in produce) {
-        drawedElements["slotProduce" + t] = {type: "slot", x: COLUMN_0 + (t * 60), y: LINE, size: 50, visual: true};
+        drawedElements["slotProduce" + t] = {
+            type: "slot",
+            x: COLUMN_0 + (t * 60),
+            y: LINE,
+            size: 50,
+            visual: true,
+            bitmap: "slot_empty"
+        };
         t++;
     }
 
@@ -692,7 +779,14 @@ function drawPage3(bee) {
     var specialty = bee.getSpecialty();
     t = 0;
     for (var key in specialty) {
-        drawedElements["slotSpecialty" + t] = {type: "slot", x: COLUMN_0 + (t * 60), y: LINE, size: 50, visual: true};
+        drawedElements["slotSpecialty" + t] = {
+            type: "slot",
+            x: COLUMN_0 + (t * 60),
+            y: LINE,
+            size: 50,
+            visual: true,
+            bitmap: "slot_empty"
+        };
         t++;
     }
 

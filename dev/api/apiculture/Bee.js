@@ -9,7 +9,6 @@ function Bee(species, beetype, save, inactive_species) {
     this.pristine = true;
     this.generation = 0;
 
-
     this.save = function () {
         this.unique = BeeRegistry.getBeeNextUniqueID();
         BeeSaver.bees[this.unique] = this;
@@ -33,9 +32,13 @@ function Bee(species, beetype, save, inactive_species) {
         }
     }
 
+    this.getMaxHealth = function () {
+        return this.getActiveChromosome("LIFESPAN");
+    };
+
     this.getProduce = function () {
-        var arr = this.getActiveChromosome("PRODUCE");
-        var arr2 = this.getInactiveChromosome("PRODUCE");
+        var arr = this.getBeeType().produce;
+        var arr2 = this.getInactiveBeeType().produce;
         for (var key in arr2) {
             var skip = false;
             for (var key2 in arr) {
@@ -51,6 +54,22 @@ function Bee(species, beetype, save, inactive_species) {
         return arr;
     };
 
+    this.getClimateTolValue = function () {
+        return BeeRegistry.getToleranceValue(this.getActiveChromosome("TEMPERATURE_TOLERANCE"));
+    };
+
+    this.getInactiveClimateTolValue = function () {
+        return BeeRegistry.getToleranceValue(this.getInactiveChromosome("TEMPERATURE_TOLERANCE"));
+    };
+
+    this.getHumidityTolValue = function () {
+        return BeeRegistry.getToleranceValue(this.getActiveChromosome("HUMIDITY_TOLERANCE"));
+    };
+
+    this.getInactiveHumidityTolValue = function () {
+        return BeeRegistry.getToleranceValue(this.getInactiveChromosome("HUMIDITY_TOLERANCE"));
+    };
+
     this.getBeeType = function () {
         return BeeRegistry.getBeeByType(this.type);
     };
@@ -60,7 +79,7 @@ function Bee(species, beetype, save, inactive_species) {
     };
 
     this.getSpecialty = function () {
-        return this.getActiveChromosome("SPECIALTY");
+        return this.getBeeType().specialty;
     };
 
     this.isSaved = function () {
@@ -74,6 +93,8 @@ function Bee(species, beetype, save, inactive_species) {
     this.getInactiveChromosome = function (name) {
         return (typeof this.inactive_chromosomes_list[name] != "undefined" && typeof this.inactive_chromosomes_list[name] != "null") ? this.inactive_chromosomes_list[name] : BeeRegistry.bees[this.inactive_chromosomes_list.SPECIES].getChromosome(name);
     };
+
+    this.health = this.getMaxHealth();
 
     this.getSaveScope = function () {
         var scope = {};
