@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "show_resource_errors": true,
+  "crateEnabled": true,
+  "gen": {
+    "beehives": true,
+    "beehivesForest": true,
+    "beehivesMeadows": true,
+    "beehivesModest": true,
+    "beehivesTropical": true,
+    "beehivesWintry": true,
+    "beehivesMarshy": true,
+    "beehivesEnder": true,
+    "beehivesForestChance": 0.3,
+    "beehivesMeadowsChance": 0.3,
+    "beehivesModestChance": 0.3,
+    "beehivesTropicalChance": 0.3,
+    "beehivesWintryChance": 0.3,
+    "beehivesMarshyChance": 0.3,
+    "beehivesEnderChance": 0.7,
+    "apatite": true,
+    "apatiteInChunk": 12,
+    "apatiteSize": 3
+  }
+}
