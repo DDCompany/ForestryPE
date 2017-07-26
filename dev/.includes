@@ -5,6 +5,10 @@ api/apiculture/BeeSaver.js
 api/apiculture/Bee.js
 api/apiculture/BeeLogic.js
 
+api/core/ContainerHelper.js
+
+localize.js
+
 items/apiculture/analyzer.js
 
 blocks/machines/apiary/apiary.js

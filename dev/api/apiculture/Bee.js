@@ -14,27 +14,6 @@ function Bee(species, beetype, save, inactive_species) {
         BeeSaver.bees[this.unique] = this;
         !this.item.id || (this.item.data = this.unique);
     };
-    if (species) {
-        this.active_chromosomes_list["SPECIES"] = species;
-        this.inactive_chromosomes_list["SPECIES"] = inactive_species ? inactive_species : species;
-        if (save || typeof save == "undefined") {
-            this.save();
-        }
-        if (this.beetype == BeeRegistry.BEETYPE_QUEEN) {
-            this.item.id = BeeRegistry.getQueenByType(this.type);
-            this.item.data = this.unique;
-        } else if (this.beetype == BeeRegistry.BEETYPE_DRONE) {
-            this.item.id = BeeRegistry.getDroneByType(species);
-            this.item.data = this.unique;
-        } else if (this.beetype == BeeRegistry.BEETYPE_PRINCESS) {
-            this.item.id = BeeRegistry.getPrincessByType(species);
-            this.item.data = this.unique;
-        }
-    }
-
-    this.getMaxHealth = function () {
-        return this.getActiveChromosome("LIFESPAN");
-    };
 
     this.getProduce = function () {
         var arr = this.getBeeType().produce;
@@ -94,8 +73,6 @@ function Bee(species, beetype, save, inactive_species) {
         return (typeof this.inactive_chromosomes_list[name] != "undefined" && typeof this.inactive_chromosomes_list[name] != "null") ? this.inactive_chromosomes_list[name] : BeeRegistry.bees[this.inactive_chromosomes_list.SPECIES].getChromosome(name);
     };
 
-    this.health = this.getMaxHealth();
-
     this.getSaveScope = function () {
         var scope = {};
         for (var key in this) {
@@ -110,5 +87,29 @@ function Bee(species, beetype, save, inactive_species) {
 
         return this;
     };
+
+    this.getMaxHealth = function () {
+        return this.getActiveChromosome("LIFESPAN");
+    };
+
+    if (species) {
+        this.active_chromosomes_list["SPECIES"] = species;
+        this.inactive_chromosomes_list["SPECIES"] = inactive_species ? inactive_species : species;
+        if (save || typeof save == "undefined") {
+            this.save();
+        }
+        if (this.beetype == BeeRegistry.BEETYPE_QUEEN) {
+            this.item.id = BeeRegistry.getQueenByType(this.type);
+            this.item.data = this.unique;
+        } else if (this.beetype == BeeRegistry.BEETYPE_DRONE) {
+            this.item.id = BeeRegistry.getDroneByType(species);
+            this.item.data = this.unique;
+        } else if (this.beetype == BeeRegistry.BEETYPE_PRINCESS) {
+            this.item.id = BeeRegistry.getPrincessByType(species);
+            this.item.data = this.unique;
+        }
+
+        this.health = this.getMaxHealth();
+    }
 
 }

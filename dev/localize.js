@@ -1,0 +1,1 @@
+Translation.addTranslation("apiary.error.flowers", {en: "No flowers found", ru: "Цветы не найдены"});

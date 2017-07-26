@@ -71,6 +71,7 @@ var BeeRegistry = {
     HUMIDITY_ARID_BIOMES: [8, 2, 130],
 
     chromosomes_list: {},
+    mutations: {},
 
     init: function () {
 
@@ -90,6 +91,28 @@ var BeeRegistry = {
         this.chromosomes_list["PRODUCE"] = [];
         this.chromosomes_list["SPECIALTY"] = [];
 
+    },
+
+    addMutation: function (arg) {
+        if (!arg.species1) {
+            Logger.Log("[ForestryAPI]Species1 is undefined!", "ERROR");
+            return;
+        }
+        if (!arg.species2) {
+            Logger.Log("[ForestryAPI]Species2 is undefined!", "ERROR");
+            return;
+        }
+        if (!arg.chance) {
+            Logger.Log("[ForestryAPI]Chance is undefined or equals zero!", "ERROR");
+            return;
+        }
+
+        if (!arg.result) {
+            Logger.Log("[ForestryAPI]Result is undefined!", "ERROR");
+            return;
+        }
+
+        this.mutations[arg.result] = arg;
     },
 
     getBeeNextUniqueID: function () {
@@ -117,15 +140,15 @@ var BeeRegistry = {
 
     registerBee: function (arg) {
         if (!arg.localize) {
-            Logger.LogError("NAME IS UNDEFINED", "ForestryAPI");
+            Logger.Log("Localize is undefined", "ERROR");
             return;
         }
         if (!arg.chromosomes) {
-            Logger.LogError("Chromosomes IS UNDEFINED", "ForestryAPI");
+            Logger.Log("Chromosomes is undefined", "ERROR");
             return;
         }
         if (!arg.typename) {
-            Logger.LogError("Type name IS UNDEFINED", "ForestryAPI");
+            Logger.Log("Type name is undefined", "ERROR");
             return;
         }
 
@@ -159,6 +182,12 @@ var BeeRegistry = {
 
         if (!arg.textures.queen) {
             arg.textures.queen = "queen" + arg.typename;
+        }
+
+        if (arg.mutations) {
+            for (var key in arg.mutations) {
+                this.addMutation(arg.mutations[key]);
+            }
         }
 
         IDRegistry.genItemID("princess" + arg.typename);
@@ -318,6 +347,13 @@ BeeRegistry.registerBee({
             en: "Test queen"
         }
     },
+    mutations: [
+        {
+            species1: "Tester",
+            species2: "BIG",
+            chance: 0.4
+        }
+    ],
     typename: "Tester",
     produce: [[1, 0, 0.8]],
     specialty: [[3, 0, 0.7]],
