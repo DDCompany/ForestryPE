@@ -6,11 +6,11 @@ var ContainerHelper = {
             for (var key2 in slots) {
                 if (!count) break;
                 var slot = container.getSlot(slots[key2]);
-                if (slot.id == toPut[key][0] && slot.data == toPut[key][1] && slot.count < Item.getMaxStack(slot.id)) {
+                if (slot.id === toPut[key][0] && slot.data === toPut[key][1] && slot.count < Item.getMaxStack(slot.id)) {
                     var f = Math.min(count, Item.getMaxStack(slot.id) - slot.count);
                     count -= f;
                     slot.count += f;
-                } else if (slot.id == 0) {
+                } else if (slot.id === 0) {
                     slot.id = toPut[key][0];
                     slot.data = toPut[key][1];
                     slot.count = toPut[key][2];

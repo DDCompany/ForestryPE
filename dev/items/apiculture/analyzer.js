@@ -279,8 +279,8 @@ function drawPage1(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: BeeRegistry.isDominant("FLOWERS", bee.getActiveChromosome("FLOWERS")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("FLOWERS", bee.getActiveChromosome("FLOWERS"))
+        font: BeeRegistry.isDominant("FLOWERS", bee.getFlowers()) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: BeeRegistry.getChromosomeValueName("FLOWERS", bee.getFlowers())
     };
     drawedElements["textFlowers2"] = {
         type: "text",
@@ -288,8 +288,8 @@ function drawPage1(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: BeeRegistry.isDominant("FLOWERS", bee.getInactiveChromosome("FLOWERS")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("FLOWERS", bee.getInactiveChromosome("FLOWERS"))
+        font: BeeRegistry.isDominant("FLOWERS", bee.getInactiveFlowers()) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: BeeRegistry.getChromosomeValueName("FLOWERS", bee.getInactiveFlowers())
     };
 
     LINE += 32;
@@ -444,7 +444,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getActiveChromosome("CLIMATE"))
+        text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getClimate())
     };
 
     drawedElements["textClimate2"] = {
@@ -454,7 +454,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getInactiveChromosome("CLIMATE"))
+        text: BeeRegistry.getChromosomeValueName("CLIMATE", bee.getInactiveClimate())
     };
 
     LINE += 32;
@@ -523,7 +523,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getActiveChromosome("HUMIDITY"))
+        text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getHumidity())
     };
     drawedElements["textHumidity2"] = {
         type: "text",
@@ -532,7 +532,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getInactiveChromosome("HUMIDITY"))
+        text: BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getInactiveHumidity())
     };
 
     LINE += 32;
