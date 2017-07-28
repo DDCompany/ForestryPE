@@ -4,6 +4,7 @@ var BeeLogic = {
         queen.active_chromosomes_list = princess.active_chromosomes_list;
         queen.inactive_chromosomes_list = princess.inactive_chromosomes_list;
         queen.mate = drone;
+        queen.generation = princess.generation;
 
         return queen;
     },
@@ -49,54 +50,81 @@ var BeeLogic = {
     },
 
     spawnPrincess: function (bee) {
+        return this.createOffspring(bee, BeeRegistry.BEETYPE_PRINCESS);
+    },
+
+    spawnDrones: function (bee) {
+        var toCreate = parseInt(bee.getActiveChromosome("FERTILITY"));
+        var arr = [];
+        for (var i = 0; i < toCreate; i++) {
+            arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_DRONE));
+        }
+
+        return arr;
+    },
+
+    createOffspring: function (bee, bee_type) {
         if (!bee.mate) {
             return null;
         }
 
-        var active = null;
-        var inactive = null;
+        var species1 = bee.active_chromosomes_list.SPECIES;
+        var species2 = bee.inactive_chromosomes_list.SPECIES;
+
+        var parent1in = null;
+        var parent1act = null;
+        var parent2in = null;
+        var parent2act = null;
 
         var mutated1 = this.mutateSpecies(bee, bee.mate);
         if (mutated1) {
-            active = Util.objectUnion(BeeRegistry.chromosomes_list, mutated1.chromosomes_list, {SPECIES: mutated1.type});
+            species1 = mutated1.type;
+            parent1in = mutated1.chromosomes;
+            parent1act = mutated1.chromosomes;
         } else {
-            active = Util.objectUnion(BeeRegistry.chromosomes_list, bee.active_chromosomes_list);
+            parent1in = Util.objectUnion(BeeRegistry.chromosomes_list, bee.active_chromosomes_list);
+            parent1act = Util.objectUnion(BeeRegistry.chromosomes_list, bee.inactive_chromosomes_list);
         }
 
         var mutated2 = this.mutateSpecies(bee, bee.mate);
         if (mutated2) {
-            inactive = Util.objectUnion(BeeRegistry.chromosomes_list, mutated2.chromosomes_list, {SPECIES: mutated2.type});
+            species2 = mutated2.type;
+            parent2in = mutated2.chromosomes;
+            parent2act = mutated2.chromosomes;
         } else {
-            inactive = Util.objectUnion(BeeRegistry.chromosomes_list, bee.inactive_chromosomes_list);
+            parent2in = Util.objectUnion(BeeRegistry.chromosomes_list, bee.mate.active_chromosomes_list);
+            parent2act = Util.objectUnion(BeeRegistry.chromosomes_list, bee.mate.inactive_chromosomes_list);
         }
 
-        var princess = new Bee(bee.active_chromosomes_list.SPECIES, BeeRegistry.BEETYPE_PRINCESS, true, bee.inactive_chromosomes_list.SPECIES);
+        var princess = new Bee(species1, bee_type, true, species2);
 
-        for (var key in active) {
-            if (key === "SPECIES") continue;
-            var ch = this.inheritChromosome(active[key], inactive[key]);
+        for (var key in parent1act) {
+            var ch = this.inheritChromosome({
+                active: parent1act[key],
+                inactive: parent1in[key]
+            }, {active: parent2act[key], inactive: parent2in[key]});
             princess.active_chromosomes_list[key] = ch.active;
             princess.inactive_chromosomes_list[key] = ch.inactive;
         }
 
-        princess.generation++;
-        Debug.m(princess.item);
+        princess.generation = ++bee.generation;
+
         return princess;
     },
 
     inheritChromosome: function (chromosomes1, chromosomes2) {
         var ch = null;
         if (Math.random() <= 0.5) {
-            ch = chromosomes1;
+            ch = chromosomes1.active;
         } else {
-            ch = chromosomes1;
+            ch = chromosomes1.inactive;
         }
 
         var ch2 = null;
         if (Math.random() <= 0.5) {
-            ch2 = chromosomes2;
+            ch2 = chromosomes2.active;
         } else {
-            ch2 = chromosomes2;
+            ch2 = chromosomes2.inactive;
         }
 
         if (Math.random() <= 0.5) {
@@ -110,7 +138,8 @@ var BeeLogic = {
         var combinations = BeeRegistry.getMutations(parent1.type, parent2.type);
         for (var key in combinations) {
             if (true) {
-                return BeeRegistry.getBeeByType(combinations[key].result);
+                var mut = BeeRegistry.getBeeByType(combinations[key].result);
+                return {type: mut.type, chromosomes: Util.objectUnion(mut.chromosomes_list, {SPECIES: mut.type})};
             }
         }
 

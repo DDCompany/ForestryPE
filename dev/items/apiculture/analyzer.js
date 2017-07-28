@@ -131,8 +131,8 @@ Callback.addCallback("LevelLoaded", function () {
 function drawPage1(bee) {
     var content = analyzerContainer.getGuiContent();
 
-    var active = "Active";
-    var inactive = "Inactive";
+    var active = Translation.translate("analyzer.active");
+    var inactive = Translation.translate("analyzer.inactive");
 
     drawedElements["textActive"] = {
         type: "text",
@@ -181,7 +181,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Species"
+        text: Translation.translate("analyzer.species")
     };
     drawedElements["textSpecies1"] = {
         type: "text",
@@ -211,7 +211,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Lifespan"
+        text: Translation.translate("analyzer.lifespan")
     };
     drawedElements["textLifespan1"] = {
         type: "text",
@@ -241,7 +241,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Production"
+        text: Translation.translate("analyzer.speed")
     };
     drawedElements["textProduction1"] = {
         type: "text",
@@ -271,7 +271,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Flower Type"
+        text: Translation.translate("analyzer.flowers")
     };
     drawedElements["textFlowers1"] = {
         type: "text",
@@ -301,7 +301,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Fertility"
+        text: Translation.translate("analyzer.fertility")
     };
     drawedElements["textFertility1"] = {
         type: "text",
@@ -336,7 +336,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Territory"
+        text: Translation.translate("analyzer.territory")
     };
     drawedElements["textTerritory1"] = {
         type: "text",
@@ -366,7 +366,7 @@ function drawPage1(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Effect"
+        text: Translation.translate("analyzer.effect")
     };
     drawedElements["textEffect1"] = {
         type: "text",
@@ -414,7 +414,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Active"
+        text: Translation.translate("analyzer.active")
     };
     drawedElements["textInactive"] = {
         type: "text",
@@ -423,7 +423,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Inactive"
+        text: Translation.translate("analyzer.inactive")
     };
 
     LINE += 32;
@@ -435,7 +435,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Climate"
+        text: Translation.translate("analyzer.climate")
     };
     drawedElements["textClimate1"] = {
         type: "text",
@@ -466,7 +466,7 @@ function drawPage2(bee) {
         width: 180,
         height: 32,
         font: ANALYZER_FONT,
-        text: "  Tolerance"
+        text: "   " + Translation.translate("analyzer.tolerance")
     };
 
     drawedElements["textClimateTol1"] = {
@@ -514,7 +514,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Humidity"
+        text: Translation.translate("analyzer.humidity")
     };
     drawedElements["textHumidity1"] = {
         type: "text",
@@ -544,7 +544,7 @@ function drawPage2(bee) {
         width: 180,
         height: 32,
         font: ANALYZER_FONT,
-        text: "   Tolerance"
+        text: "  " + Translation.translate("analyzer.tolerance")
     };
     drawedElements["textHumidityTol1"] = {
         type: "text",
@@ -591,7 +591,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Diurnal"
+        text: Translation.translate("analyzer.diurnal")
     };
     drawedElements["textDiurnal1"] = {
         type: "text",
@@ -600,7 +600,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.localize("Yes")
+        text: Translation.translate("analyzer.yes")
     };
     drawedElements["textDiurnal2"] = {
         type: "text",
@@ -609,7 +609,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: BeeRegistry.localize("Yes")
+        text: Translation.translate("analyzer.no")
     };
 
     LINE += 32;
@@ -621,7 +621,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Nocturnal"
+        text: Translation.translate("analyzer.nocturnal")
     };
     drawedElements["textNocturnal1"] = {
         type: "text",
@@ -630,7 +630,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getActiveChromosome("NEVER_SLEEPS") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getActiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
     drawedElements["textNocturnal2"] = {
         type: "text",
@@ -639,7 +639,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getInactiveChromosome("NEVER_SLEEPS") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getInactiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
 
     LINE += 32;
@@ -651,7 +651,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Tolerant Flyer"
+        text: Translation.translate("analyzer.flyer")
     };
     drawedElements["textFlyer1"] = {
         type: "text",
@@ -660,7 +660,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getActiveChromosome("TOLERATES_RAIN") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getActiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
     drawedElements["textFlyer2"] = {
         type: "text",
@@ -669,7 +669,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getInactiveChromosome("TOLERATES_RAIN") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getInactiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
 
     LINE += 32;
@@ -681,7 +681,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Cave Dwelling"
+        text: Translation.translate("analyzer.cave")
     };
     drawedElements["textCave1"] = {
         type: "text",
@@ -690,7 +690,7 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getActiveChromosome("CAVE_DWELLING") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getActiveChromosome("CAVE_DWELLING") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
     drawedElements["textCave2"] = {
         type: "text",
@@ -699,18 +699,18 @@ function drawPage2(bee) {
         width: 200,
         height: 32,
         font: ANALYZER_FONT_BLUE,
-        text: bee.getInactiveChromosome("CAVE_DWELLING") === true ? BeeRegistry.localize("Yes") : BeeRegistry.localize("No")
+        text: bee.getInactiveChromosome("CAVE_DWELLING") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
     };
 
     LINE += 32;
 
-    var stock = bee.pristine ? "Pristine Stock" : "Ignoble Stock";
-    var generation = bee.generation + " Generations in Captivity";
+    var stock = bee.pristine ? Translation.translate("analyzer.pristine") : Translation.translate("analyzer.ignoble");
+    var generation = bee.generation + " " + Translation.translate("analyzer.generation");
     drawedElements["textStock"] = {
         type: "text",
         x: 335 + ((590 - stock.length * (ANALYZER_FONT_GREEN.size / 2)) / 2),
         y: LINE,
-        width: stock.length * (ANALYZER_FONT_GREEN.size / 2) + 30,
+        width: stock.length * (ANALYZER_FONT_GREEN.size / 2) + 50,
         height: 32,
         font: ANALYZER_FONT_GREEN,
         text: stock
@@ -720,7 +720,7 @@ function drawPage2(bee) {
         type: "text",
         x: 335 + (590 - generation.length * (ANALYZER_FONT_GREEN.size / 2)) / 2,
         y: LINE,
-        width: generation.length * (ANALYZER_FONT_GREEN.size / 2) + 32,
+        width: generation.length * (ANALYZER_FONT_GREEN.size / 2) + 50,
         height: 32,
         font: ANALYZER_FONT_GREEN,
         text: generation
@@ -740,10 +740,10 @@ function drawPage3(bee) {
         type: "text",
         x: COLUMN_0,
         y: LINE,
-        width: 220,
+        width: 500,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Possible Produce:"
+        text: Translation.translate("analyzer.produce") + ":"
     };
 
     LINE += 32;
@@ -768,10 +768,10 @@ function drawPage3(bee) {
         type: "text",
         x: COLUMN_0,
         y: LINE,
-        width: 220,
+        width: 500,
         height: 32,
         font: ANALYZER_FONT,
-        text: "Possible Specialty:"
+        text: Translation.translate("analyzer.specialty") + ":"
     };
 
     LINE += 32;

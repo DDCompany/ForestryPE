@@ -129,6 +129,53 @@ function Bee(species, beetype, save, inactive_species) {
         }
     };
 
+    this.destroy = function () {
+        if (!this.isSaved()) return;
+        delete BeeSaver.bees[this.unique];
+    };
+
+    this.isValidClimate = function (x, y) {
+        var up = 0;
+        var down = 0;
+        var value = BiomeHelper.getBiomeClimate(World.getBiome(x, y));
+        var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["TEMPERATURE_TOLERANCE"]);
+        if (tol == BeeRegistry.TOLERANCE_BOTH) {
+            up = this.getClimateTolValue();
+            down = this.getClimateTolValue();
+        } else if (tol == BeeRegistry.TOLERANCE_UP) {
+            up = this.getClimateTolValue();
+        } else if (tol == BeeRegistry.TOLERANCE_DOWN) {
+            down = this.getClimateTolValue();
+        }
+
+        if (this.getBeeType().climate + up >= value && this.getBeeType().climate - down <= value) {
+            return true;
+        }
+
+        return false;
+    };
+
+    this.isValidHumidity = function (x, y) {
+        var up = 0;
+        var down = 0;
+        var value = BiomeHelper.getBiomeHumidity(World.getBiome(x, y));
+        var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["HUMIDITY_TOLERANCE"]);
+        if (tol == BeeRegistry.TOLERANCE_BOTH) {
+            up = this.getHumidityTolValue();
+            down = this.getHumidityTolValue();
+        } else if (tol == BeeRegistry.TOLERANCE_UP) {
+            up = this.getHumidityTolValue();
+        } else if (tol == BeeRegistry.TOLERANCE_DOWN) {
+            down = this.getHumidityTolValue();
+        }
+
+        if (this.getBeeType().humidity + up >= value && this.getBeeType().humidity - down <= value) {
+            return true;
+        }
+
+        return false;
+    };
+
     if (species) {
         this.active_chromosomes_list["SPECIES"] = species;
         this.inactive_chromosomes_list["SPECIES"] = inactive_species ? inactive_species : species;

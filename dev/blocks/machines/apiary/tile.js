@@ -21,7 +21,8 @@ TileEntity.registerPrototype(BlockID.apiary, {
                 slotPrincess: "slot1",
                 slotDrone: "slot2",
                 produceSlots: this.OUTPUT_SLOTS,
-                slotPrincessOut: this.OUTPUT_SLOTS
+                slotPrincessOut: this.OUTPUT_SLOTS,
+                slotDronesOut: this.OUTPUT_SLOTS
             })
         }
 

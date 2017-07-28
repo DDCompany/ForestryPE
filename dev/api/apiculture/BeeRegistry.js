@@ -33,24 +33,6 @@ var BeeRegistry = {
     SPEED_SLOWER: 0.6,
     SPEED_SLOWEST: 0.3,
 
-    CLIMATE_ICY_BIOMES: [12],
-    CLIMATE_COLD_BIOMES: [30, 158, 5, 133, 32, 160],
-    CLIMATE_WARM_BIOMES: [21, 149],
-    CLIMATE_HOT_BIOMES: [2, 130],
-    CLIMATE_HELLISH_BIOMES: [8],
-
-    CLIMATE_HELLISH: "Hellish",
-    CLIMATE_HOT: "Hot",
-    CLIMATE_WARM: "Warm",
-    CLIMATE_NORMAL: "Normal",
-    CLIMATE_COLD: "Cold",
-    CLIMATE_ICY: "Icy",
-
-    HUMIDITY_DAMP: "Damp",
-    HUMIDITY_NORMAL: "Normal",
-    HUMIDITY_ARID: "Arid",
-
-    TOLERANCE_NONE: 0,
     TOLERANCE_BOTH_1: 1,
     TOLERANCE_BOTH_2: 2,
     TOLERANCE_BOTH_3: 3,
@@ -67,8 +49,10 @@ var BeeRegistry = {
     TOLERANCE_DOWN_4: 14,
     TOLERANCE_DOWN_5: 15,
 
-    HUMIDITY_DAMP_BIOMES: [149, 6, 134, 21],
-    HUMIDITY_ARID_BIOMES: [8, 2, 130],
+    TOLERANCE_NONE: 0,
+    TOLERANCE_BOTH: 1,
+    TOLERANCE_UP: 2,
+    TOLERANCE_DOWN: 3,
 
     chromosomes_list: {},
     mutations: {},
@@ -86,6 +70,15 @@ var BeeRegistry = {
         this.chromosomes_list["TERRITORY"] = "9x6x9";
         this.chromosomes_list["EFFECT"] = BeeEffects.EFFECT_NONE;
 
+    },
+
+    convertToItemArray: function (bees) {
+        var arr = [];
+        for (var key in bees) {
+            arr.push([bees[key].item.id, bees[key].item.data, 1]);
+        }
+
+        return arr;
     },
 
     addMutation: function (arg) {
@@ -114,7 +107,7 @@ var BeeRegistry = {
         var muts = [];
         for (var key in this.mutations) {
             var mut = this.mutations[key];
-            if ((mut.species1 == species1 && mut.species2 == species2) || (mut.species2 == species1 && mut.species1 == species2)) {
+            if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
                 muts.push(mut);
             }
         }
@@ -142,7 +135,11 @@ var BeeRegistry = {
     },
 
     getToleranceValue: function (value) {
-        return value == 0 ? 0 : (value < 6 ? value : (value < 11 ? value - 5 : value - 10));
+        return value === 0 ? 0 : (value < 6 ? value : (value < 11 ? value - 5 : value - 10));
+    },
+
+    getTolerance: function (tol) {
+        return tol === 0 ? 0 : (tol < 6 ? this.TOLERANCE_BOTH : (tol < 11 ? this.TOLERANCE_UP : this.TOLERANCE_DOWN))
     },
 
     registerBee: function (arg) {
@@ -164,12 +161,12 @@ var BeeRegistry = {
         }
 
         if (!arg.humidity) {
-            arg.humidity = BeeRegistry.HUMIDITY_NORMAL;
+            arg.humidity = BiomeHelper.HUMIDITY_NORMAL;
         }
 
 
         if (!arg.climate) {
-            arg.climate = BeeRegistry.CLIMATE_NORMAL;
+            arg.climate = BiomeHelper.CLIMATE_NORMAL;
         }
 
         if (!arg.dominant) {
@@ -212,18 +209,15 @@ var BeeRegistry = {
         }
 
         IDRegistry.genItemID("princess" + arg.species);
-        Item.createItem("princess" + arg.species, arg.localize.princess.en, {
-            name: arg.textures.princess,
-            meta: 0
-        }, {stack: 1});
+        Item.createItem("princess" + arg.species, arg.localize.princess.en, {name: arg.textures.princess, meta: 0}, {});
         Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
 
         IDRegistry.genItemID("drone" + arg.species);
-        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone, meta: 0}, {stack: 1});
+        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone, meta: 0}, {});
         Translation.addTranslation(arg.localize.drone.en, arg.localize.drone);
 
         IDRegistry.genItemID("queen" + arg.species);
-        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {stack: 1});
+        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
         var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
@@ -287,44 +281,49 @@ var BeeRegistry = {
 
     getChromosomeValueName: function (name, value) {
         if (name === "LIFESPAN") {
-            return value === BeeRegistry.LIFESPAN_SHORTER ? BeeRegistry.localize("Shorted") :
-                (value === BeeRegistry.LIFESPAN_SHORTENED ? BeeRegistry.localize("Shortened") :
-                    (value === BeeRegistry.LIFESPAN_SHORTEST ? BeeRegistry.localize("Shortest") :
-                        (value === BeeRegistry.LIFESPAN_SHORT ? BeeRegistry.localize("Short") :
-                            (value === BeeRegistry.LIFESPAN_NORMAL ? BeeRegistry.localize("Normal") :
-                                (value === BeeRegistry.LIFESPAN_ELONGATED ? BeeRegistry.localize("Elongated") :
-                                    (value === BeeRegistry.LIFESPAN_LONG ? BeeRegistry.localize("Long") :
-                                        (value === BeeRegistry.LIFESPAN_LONGER ? BeeRegistry.localize("Longer") :
-                                            (value === BeeRegistry.LIFESPAN_LONGEST ? BeeRegistry.localize("Longest") : value))))))));
+            return value === BeeRegistry.LIFESPAN_SHORTER ? Translation.translate("bees.lifespan.shorted") :
+                (value === BeeRegistry.LIFESPAN_SHORTENED ? Translation.translate("bees.lifespan.shortened") :
+                    (value === BeeRegistry.LIFESPAN_SHORTEST ? Translation.translate("bees.lifespan.shortest") :
+                        (value === BeeRegistry.LIFESPAN_SHORT ? Translation.translate("bees.lifespan.short") :
+                            (value === BeeRegistry.LIFESPAN_NORMAL ? Translation.translate("bees.lifespan.normal") :
+                                (value === BeeRegistry.LIFESPAN_ELONGATED ? Translation.translate("bees.lifespan.elongated") :
+                                    (value === BeeRegistry.LIFESPAN_LONG ? Translation.translate("bees.lifespan.long") :
+                                        (value === BeeRegistry.LIFESPAN_LONGER ? Translation.translate("bees.lifespan.longer") :
+                                            (value === BeeRegistry.LIFESPAN_LONGEST ? Translation.translate("bees.lifespan.longest") : value))))))));
         } else if (name === "SPEED") {
-            return value === BeeRegistry.SPEED_FAST ? BeeRegistry.localize("Fast") :
-                (value === BeeRegistry.SPEED_FASTER ? BeeRegistry.localize("Faster") :
-                    (value === BeeRegistry.SPEED_FASTEST ? BeeRegistry.localize("Fastest") :
-                        (value === BeeRegistry.SPEED_NORMAL ? BeeRegistry.localize("Normal") :
-                            (value === BeeRegistry.SPEED_SLOW ? BeeRegistry.localize("Slow") :
-                                (value === BeeRegistry.SPEED_SLOWER ? BeeRegistry.localize("Slower") :
-                                    (value === BeeRegistry.SPEED_SLOWEST ? BeeRegistry.localize("Slowest") : value))))))
+            return value === BeeRegistry.SPEED_FAST ? Translation.translate("bees.speed.fast") :
+                (value === BeeRegistry.SPEED_FASTER ? Translation.translate("bees.speed.faster") :
+                    (value === BeeRegistry.SPEED_FASTEST ? Translation.translate("bees.speed.fastest") :
+                        (value === BeeRegistry.SPEED_NORMAL ? Translation.translate("bees.speed.normal") :
+                            (value === BeeRegistry.SPEED_SLOW ? Translation.translate("bees.speed.slow") :
+                                (value === BeeRegistry.SPEED_SLOWER ? Translation.translate("bees.speed.slower") :
+                                    (value === BeeRegistry.SPEED_SLOWEST ? Translation.translate("bees.speed.slowest") : value))))))
         } else if (name === "FLOWERS") {
-            return BeeRegistry.localize(value[0]);
+            return Translation.translate(value[0]);
         } else if (name === "EFFECT") {
-            return value === BeeEffects.EFFECT_NONE ? BeeRegistry.localize("None") :
-                (value === BeeEffects.EFFECT_AGGRESS ? BeeRegistry.localize("Aggress") :
-                    (value === BeeEffects.EFFECT_BEATIFIC ? BeeRegistry.localize("Beatific") :
-                        (value === BeeEffects.EFFECT_CREEPER ? BeeRegistry.localize("Creeper") :
-                            (value === BeeEffects.EFFECT_DRUNKARD ? BeeRegistry.localize("Drunkard") :
-                                (value === BeeEffects.EFFECT_ENDS ? BeeRegistry.localize("Ends") :
-                                    (value === BeeEffects.EFFECT_EXPLORER ? BeeRegistry.localize("Explorer") :
-                                        (value === BeeEffects.EFFECT_FLAMMABLE ? BeeRegistry.localize("Flammable") :
-                                            (value === BeeEffects.EFFECT_FREEZING ? BeeRegistry.localize("Freezing") :
-                                                (value === BeeEffects.EFFECT_HEROIC ? BeeRegistry.localize("Heroic") :
-                                                    (value === BeeEffects.EFFECT_POISON ? BeeRegistry.localize("Poison") :
-                                                        (value === BeeEffects.EFFECT_RADIOACT ? BeeRegistry.localize("Radiact") :
-                                                            (value === BeeEffects.EFFECT_REANIMATION ? BeeRegistry.localize("Reanimation") :
-                                                                (value === BeeEffects.EFFECT_REPULSION ? BeeRegistry.localize("Repulsion") : value)))))) )))))))
+            return value === BeeEffects.EFFECT_NONE ? Translation.translate("bees.effect.none") :
+                (value === BeeEffects.EFFECT_AGGRESS ? Translation.translate("bees.effect.aggress") :
+                    (value === BeeEffects.EFFECT_BEATIFIC ? Translation.translate("bees.effect.beatific") :
+                        (value === BeeEffects.EFFECT_CREEPER ? Translation.translate("bees.effect.creeper") :
+                            (value === BeeEffects.EFFECT_DRUNKARD ? Translation.translate("bees.effect.drunkard") :
+                                (value === BeeEffects.EFFECT_EXPLORER ? Translation.translate("bees.effect.explorer") :
+                                    (value === BeeEffects.EFFECT_ENDS ? Translation.translate("bees.effect.ends") :
+                                        (value === BeeEffects.EFFECT_FLAMMABLE ? Translation.translate("bees.effect.flammable") :
+                                            (value === BeeEffects.EFFECT_FREEZING ? Translation.translate("bees.effect.freezing") :
+                                                (value === BeeEffects.EFFECT_HEROIC ? Translation.translate("bees.effect.heroic") :
+                                                    (value === BeeEffects.EFFECT_POISON ? Translation.translate("bees.effect.poison") :
+                                                        (value === BeeEffects.EFFECT_RADIOACT ? Translation.translate("bees.effect.radiact") :
+                                                            (value === BeeEffects.EFFECT_REANIMATION ? Translation.translate("bees.effect.reanimation") :
+                                                                (value === BeeEffects.EFFECT_REPULSION ? Translation.translate("bees.effect.repulsion") : value)))))))))))));
         } else if (name === "CLIMATE") {
-            return BeeRegistry.localize(value);
+            return value === BiomeHelper.CLIMATE_ICY ? Translation.translate("climate.icy") :
+                (value === BiomeHelper.CLIMATE_COLD ? Translation.translate("climate.cold") :
+                    (value === BiomeHelper.CLIMATE_NORMAL ? Translation.translate("climate.normal") :
+                        (value === BiomeHelper.CLIMATE_WARM ? Translation.translate("climate.warm") :
+                            (value === BiomeHelper.CLIMATE_HOT ? Translation.translate("climate.hot") : Translation.translate("bees.climate.hellish")))));
         } else if (name === "HUMIDITY") {
-            return BeeRegistry.localize(value);
+            return value === BiomeHelper.HUMIDITY_ARID ? Translation.translate("humidity.arid") :
+                (value === BiomeHelper.HUMIDITY_DAMP ? Translation.translate("humidity.damp") : Translation.translate("humidity.normal"));
         }
 
         return value;
@@ -344,10 +343,6 @@ var BeeRegistry = {
         }
 
         return false;
-    },
-
-    localize: function (loc) {
-        return loc;
     }
 };
 
