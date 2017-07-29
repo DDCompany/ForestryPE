@@ -1,6 +1,11 @@
+header.js
+
+api/core/Config.js
 api/core/Util.js
 api/core/ContainerHelper.js
 api/core/BiomeHelper.js
+api/core/ModelHelper.js
+
 api/apiculture/BeeType.js
 api/apiculture/BeeEffect.js
 api/apiculture/BeeRegistry.js
@@ -8,6 +13,8 @@ api/apiculture/BeeSaver.js
 api/apiculture/Bee.js
 api/apiculture/BeeLogic.js
 api/apiculture/BeeHouse.js
+api/apiculture/Modifier.js
+api/apiculture/BeeFrame.js
 
 localize.js
 

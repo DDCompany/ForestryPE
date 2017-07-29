@@ -16,6 +16,10 @@ TileEntity.registerPrototype(BlockID.apiary, {
 
         var content = this.container.getGuiContent();
 
+        if (!this.houseModifierList) {
+            this.houseModifierList = Modifier.emptyList();
+        }
+
         if (!this.house) {
             this.house = new BeeHouse(this, {
                 slotPrincess: "slot1",
@@ -23,10 +27,25 @@ TileEntity.registerPrototype(BlockID.apiary, {
                 produceSlots: this.OUTPUT_SLOTS,
                 slotPrincessOut: this.OUTPUT_SLOTS,
                 slotDronesOut: this.OUTPUT_SLOTS
-            })
+            }, this.houseModifierList)
+        }
+        var modifiers = new ModifierList([]);
+
+        if (this.house.queen) {
+            for (var i = 0; i < 3; i++) {
+                var slot = this.container.getSlot("slotFrame" + i);
+                if (slot.id && BeeFrame.isFrame(slot.id)) {
+                    var frame = BeeFrame.frames[slot.id];
+                    modifiers.modifiers.push(frame.modifier);
+                    if (this.data.progressCycle == 0) slot = frame.onFrameUsed(slot, this.house);
+                    if (slot.data > frame.durability) {
+                        slot.count = 0;
+                    }
+                }
+            }
         }
 
-        this.house.tick();
+        this.house.tick(modifiers);
 
         if (content) {
             var healthScale = content.elements["progressScale"];
@@ -41,11 +60,6 @@ TileEntity.registerPrototype(BlockID.apiary, {
             }
         }
 
-        /*if(content && this.errorToDraw != undefined){
-            this.drawErr(this.errorToDraw, content);
-            this.errorToDraw = undefined;
-        }*/
-
         if (this.house.error && content && (!content.elements["error"] || content.elements["error"].text != this.house.error)) {
             content.elements["error"] = {type: "text", x: 345, y: 320, width: 500, height: 30, text: this.house.error};
         } else if (!this.house.error && content && content.elements["error"]) {
@@ -54,44 +68,6 @@ TileEntity.registerPrototype(BlockID.apiary, {
 
         this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
 
-        /*var slot1 = this.container.getSlot("slot1");
-        var slot2 = this.container.getSlot("slot2");
-        var content = this.container.getGuiContent();
-
-        if (BeeRegistry.getBeeTypeByID(slot1.id) == BeeRegistry.BEETYPE_PRINCESS && BeeRegistry.getBeeTypeByID(slot2.id) == BeeRegistry.BEETYPE_DRONE) {
-            this.tickBreeding();
-        } else if (BeeRegistry.getBeeTypeByID(slot1.id) == BeeRegistry.BEETYPE_QUEEN) {
-            if (!this.bee) {
-                this.bee = BeeRegistry.getBeeFromItem(slot1.id, slot1.data);
-            }
-            this.tickWork();
-        } else {
-            this.data.progress = 0;
-            this.data.progressMax = 0;
-            this.bee = null;
-        }
-
-        if (content) {
-            var healthImage = content.elements["progressScale"];
-            if (this.data.progress <= (this.data.progressMax * 0.8) && this.data.progress >= (this.data.progressMax * 0.5)) {
-                healthImage.bitmap = "apiary_scale_yellow";
-            } else if (this.data.progress <= (this.data.progressMax * 0.5) && this.data.progress >= (this.data.progressMax * 0.3)) {
-                healthImage.bitmap = "apiary_scale_orange";
-            } else if (this.data.progress <= (this.data.progressMax * 0.3)) {
-                healthImage.bitmap = "apiary_scale_red";
-            } else {
-                healthImage.bitmap = "apiary_scale_green";
-            }
-        }
-
-        if (this.error && content && (!content.elements["error"] || content.elements["error"].text != this.error)) {
-            content.elements["error"] = {type: "text", x: 345, y: 320, width: 500, height: 30, text: this.error};
-        } else if (!this.error && content && content.elements["error"]) {
-            content.elements["error"] = null;
-        }
-
-        this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
-        this.container.validateAll();*/
     },
 
     getGuiScreen: function () {

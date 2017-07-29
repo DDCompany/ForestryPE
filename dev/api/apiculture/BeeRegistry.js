@@ -1,3 +1,8 @@
+/*
+    Callbacks:
+    onQueenDeath
+    onQueenCycle
+ */
 var BeeRegistry = {
     bees: {},
 
@@ -364,7 +369,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Tester",
-    produce: [],
+    produce: [[1, 0, 0.1]],
     chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 

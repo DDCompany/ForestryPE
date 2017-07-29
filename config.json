@@ -21,5 +21,8 @@
     "apatite": true,
     "apatiteInChunk": 12,
     "apatiteSize": 3
+  },
+  "beekeeping": {
+    "secondPrincessChance": 0
   }
 }

@@ -1,14 +1,15 @@
-function BeeHouse(tile, slots) {
+function BeeHouse(tile, slots, houseModifierList) {
     this.tile = tile;
     this.container = tile.container;
     this.slots = slots;
     this.queen = null;
     this.error = null;
+    this.houseModifierList = houseModifierList;
 
     this.TOTAL_BREEDING_TIME = 100;
-    this.CYCLE_TIME = 1;
+    this.CYCLE_TIME = 10;
 
-    this.tick = function () {
+    this.tick = function (modifiersList) {
         var slot1 = this.container.getSlot(this.slots.slotPrincess);
         var slot2 = this.container.getSlot(this.slots.slotDrone);
 
@@ -24,7 +25,7 @@ function BeeHouse(tile, slots) {
             if (!this.queen) {
                 this.queen = BeeRegistry.getBeeFromItem(slot1.id, slot1.data);
             }
-            this.tickQueenWork()
+            this.tickQueenWork(modifiersList)
         } else {
             this.data.progress = 0;
             this.data.progressMax = 0;
@@ -51,7 +52,7 @@ function BeeHouse(tile, slots) {
         }
     };
 
-    this.tickQueenWork = function () {
+    this.tickQueenWork = function (modifiersList) {
         if (World.getThreadTime() % 128 === 0) {
             if (!BeeLogic.findFlowers(this.queen, {x: this.tile.x, y: this.tile.y, z: this.tile.z})) {
                 this.error = Translation.translate("apiary.error.flowers");
@@ -59,6 +60,8 @@ function BeeHouse(tile, slots) {
                 this.error = Translation.translate("apiary.error.climate");
             } else if (!this.queen.isValidHumidity(this.tile.x, this.tile.y)) {
                 this.error = Translation.translate("apiary.error.humidity");
+            } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z)) {
+                this.error = Translation.translate("apiary.error.sky");
             } else {
                 this.error = null;
             }
@@ -73,14 +76,17 @@ function BeeHouse(tile, slots) {
         if (this.data.progressCycle >= this.CYCLE_TIME) {
             this.queen.health--;
             this.data.progressCycle = 0;
-            ContainerHelper.putInSlots(BeeLogic.produce(this.queen), this.container, this.slots.produceSlots);
+            ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.container, this.slots.produceSlots);
             if (this.queen.health <= 0) {
-                ContainerHelper.putInSlotsObj(BeeLogic.spawnPrincess(this.queen).item, this.container, this.slots.slotPrincessOut);
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen)), this.container, this.slots.slotDronesOut)
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList)), this.container, this.slots.slotPrincessOut);
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList)), this.container, this.slots.slotDronesOut)
                 this.container.getSlot(this.slots.slotPrincess).count = 0;
+                Callback.invokeCallback("onQueenDeath", this.house);
                 this.queen.destroy();
                 this.queen = null;
             }
+        } else {
+            Callback.invokeCallback("onQueenCycle", this.house);
         }
     };
 }

@@ -9,10 +9,10 @@ var BeeLogic = {
         return queen;
     },
 
-    produce: function (queen) {
+    produce: function (queen, productionModifier, houseModifier) {
         var produce = queen.getProduce();
         var specialty = queen.getSpecialty();
-        var speed = queen.getActiveChromosome("SPEED");
+        var speed = queen.getActiveChromosome("SPEED") * productionModifier * houseModifier;
         var result = [];
 
         for (var key in produce) {
@@ -49,21 +49,26 @@ var BeeLogic = {
 
     },
 
-    spawnPrincess: function (bee) {
-        return this.createOffspring(bee, BeeRegistry.BEETYPE_PRINCESS);
+    spawnPrincess: function (bee, modifierList, houseModifierList, house) {
+        var arr = [];
+        var count = Math.random() < Config.secondPrincessChance ? 2 : 1;
+        for (var i = 0; i < count; i++) {
+            arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_PRINCESS, modifierList, houseModifierList, house));
+        }
+        return arr;
     },
 
-    spawnDrones: function (bee) {
+    spawnDrones: function (bee, modifierList, houseModifierList, house) {
         var toCreate = parseInt(bee.getActiveChromosome("FERTILITY"));
         var arr = [];
         for (var i = 0; i < toCreate; i++) {
-            arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_DRONE));
+            arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_DRONE, modifierList, houseModifierList, house));
         }
 
         return arr;
     },
 
-    createOffspring: function (bee, bee_type) {
+    createOffspring: function (bee, bee_type, modifierList, houseModifierList, house) {
         if (!bee.mate) {
             return null;
         }
@@ -76,7 +81,7 @@ var BeeLogic = {
         var parent2in = null;
         var parent2act = null;
 
-        var mutated1 = this.mutateSpecies(bee, bee.mate);
+        var mutated1 = this.mutateSpecies(bee, bee.mate, modifierList, houseModifierList, house);
         if (mutated1) {
             species1 = mutated1.type;
             parent1in = mutated1.chromosomes;
@@ -86,7 +91,7 @@ var BeeLogic = {
             parent1act = Util.objectUnion(BeeRegistry.chromosomes_list, bee.inactive_chromosomes_list);
         }
 
-        var mutated2 = this.mutateSpecies(bee, bee.mate);
+        var mutated2 = this.mutateSpecies(bee, bee.mate, modifierList, houseModifierList, house);
         if (mutated2) {
             species2 = mutated2.type;
             parent2in = mutated2.chromosomes;
@@ -105,6 +110,7 @@ var BeeLogic = {
             }, {active: parent2act[key], inactive: parent2in[key]});
             princess.active_chromosomes_list[key] = ch.active;
             princess.inactive_chromosomes_list[key] = ch.inactive;
+            if (key === "SPECIES") princess.type = ch.active;
         }
 
         princess.generation = ++bee.generation;
@@ -134,10 +140,10 @@ var BeeLogic = {
         }
     },
 
-    mutateSpecies: function (parent1, parent2) {
+    mutateSpecies: function (parent1, parent2, modifierList, houseModifierList, house) {
         var combinations = BeeRegistry.getMutations(parent1.type, parent2.type);
         for (var key in combinations) {
-            if (true) {
+            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house, combinations[key].chance) * houseModifierList.getMutationModifier(house, combinations[key].chance)) {
                 var mut = BeeRegistry.getBeeByType(combinations[key].result);
                 return {type: mut.type, chromosomes: Util.objectUnion(mut.chromosomes_list, {SPECIES: mut.type})};
             }
