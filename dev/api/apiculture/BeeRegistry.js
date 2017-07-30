@@ -77,6 +77,14 @@ var BeeRegistry = {
 
     },
 
+    rangeToObject: function (range) {
+        return {
+            x: parseInt(range.split("x")[0]),
+            y: parseInt(range.split("x")[1]),
+            z: parseInt(range.split("x")[2])
+        };
+    },
+
     convertToItemArray: function (bees) {
         var arr = [];
         for (var key in bees) {
@@ -213,6 +221,10 @@ var BeeRegistry = {
             }
         }
 
+        if (!arg.effect) {
+            arg.effect = BeeEffects.EFFECT_NONE;
+        }
+
         IDRegistry.genItemID("princess" + arg.species);
         Item.createItem("princess" + arg.species, arg.localize.princess.en, {name: arg.textures.princess, meta: 0}, {});
         Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
@@ -225,7 +237,7 @@ var BeeRegistry = {
         Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
-        var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
+        var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate, arg.effect);
         bee_type.chromosomes_list = arg.chromosomes;
         bee_type.dominant = arg.dominant;
         bee_type.produce = arg.produce;
@@ -370,6 +382,7 @@ BeeRegistry.registerBee({
     },
     species: "Tester",
     produce: [[1, 0, 0.1]],
+    effect: BeeEffects.EFFECT_DRUNKARD,
     chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 

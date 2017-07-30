@@ -60,8 +60,12 @@ function BeeHouse(tile, slots, houseModifierList) {
                 this.error = Translation.translate("apiary.error.climate");
             } else if (!this.queen.isValidHumidity(this.tile.x, this.tile.y)) {
                 this.error = Translation.translate("apiary.error.humidity");
-            } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z)) {
+            } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
                 this.error = Translation.translate("apiary.error.sky");
+            } else if (World.getWeather().rain > 0 && !modifiersList.isSealed() && !houseModifierList.isSealed() && !this.queen.getActiveChromosome("TOLERATES_RAIN")) {
+                this.error = Translation.translate("apiary.error.rain");
+            } else if (!(World.__inworld.getLightLevel(this.tile.x, this.tile.y + 1, this.tile.z) >= 15) && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
+                this.error = Translation.translate("apiary.error.night");
             } else {
                 this.error = null;
             }
@@ -73,9 +77,15 @@ function BeeHouse(tile, slots, houseModifierList) {
 
         this.data.progress = this.queen.health * this.CYCLE_TIME;
         this.data.progressCycle++;
-        if (this.data.progressCycle >= this.CYCLE_TIME) {
+
+        if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this, 1) * this.houseModifierList.getLifespanModifier(this, 1)) {
             this.queen.health--;
             this.data.progressCycle = 0;
+            BeeEffects.doEffect(this.queen.getBeeType().effect, {
+                x: this.tile.x,
+                y: this.tile.y,
+                z: this.tile.z
+            }, BeeRegistry.rangeToObject(this.queen.getActiveChromosome("TERRITORY")));
             ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.container, this.slots.produceSlots);
             if (this.queen.health <= 0) {
                 ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList)), this.container, this.slots.slotPrincessOut);

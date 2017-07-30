@@ -32,11 +32,7 @@ var BeeLogic = {
 
     findFlowers: function (bee, coords) {
         var flowers = bee.getFlowers();
-        var territory = {
-            x: parseInt(bee.getActiveChromosome("TERRITORY").split("x")[0]),
-            y: parseInt(bee.getActiveChromosome("TERRITORY").split("x")[1]),
-            z: parseInt(bee.getActiveChromosome("TERRITORY").split("x")[2])
-        };
+        var territory = BeeRegistry.rangeToObject(bee.getActiveChromosome("TERRITORY"));
 
         for (var xx = coords.x - territory.x; xx < coords.x + territory.x; xx++) {
             for (var yy = coords.y - territory.y; yy < coords.y + territory.y; yy++) {

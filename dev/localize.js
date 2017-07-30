@@ -2,6 +2,14 @@ Translation.addTranslation("apiary.error.flowers", {en: "No flowers found", ru: 
 Translation.addTranslation("apiary.error.climate", {en: "Incorrect temperature", ru: "Некорректная температура"});
 Translation.addTranslation("apiary.error.humidity", {en: "Incorrect humidity", ru: "Некорректная влажность"});
 Translation.addTranslation("apiary.error.sky", {en: "Can't see sky", ru: "Не видно неба"});
+Translation.addTranslation("apiary.error.night", {
+    en: "These bees do not work at night",
+    ru: "Эти пчёлы не работают ночью"
+});
+Translation.addTranslation("apiary.error.rain", {
+    en: "These bees do not work during the rain",
+    ru: "Эти пчёлы не работают во время дождя"
+});
 
 Translation.addTranslation("bees.lifespan.shorted", {en: "Shorted", ru: "Кратчайший"});
 Translation.addTranslation("bees.lifespan.shortest", {en: "Shortest", ru: "Наикратчайший"});

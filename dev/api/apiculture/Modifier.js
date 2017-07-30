@@ -7,19 +7,22 @@ var Modifier = {
         }
 
         obj2.getProductionModifier || (obj2.getProductionModifier = function (house, currect) {
-            return 1.0
+            return 1
+        });
+        obj2.getLifespanModifier || (obj2.getLifespanModifier = function (house, currect) {
+            return 1
         });
         obj2.getMutationModifier || (obj2.getMutationModifier = function (house, currect) {
-            return 1.0
+            return 1
         });
         obj2.isSealed || (obj2.isSealed = function (house, currect) {
-            return 1.0
+            return 1
         });
         obj2.isSelfLighted || (obj2.isSelfLighted = function (house, currect) {
-            return 1.0
+            return 1
         });
         obj2.isSunlightSimulated || (obj2.isSunlightSimulated = function (house, currect) {
-            return 1.0
+            return 1
         });
 
         return obj2;
@@ -33,6 +36,14 @@ var Modifier = {
 function ModifierList(modifiers) {
 
     this.modifiers = modifiers;
+
+    this.getLifespanModifier = function (house, currect) {
+        var value = currect;
+        for (var key in this.modifiers) {
+            value *= this.modifiers[key].getLifespanModifier(house, value);
+        }
+        return value;
+    };
 
     //Модификатор шанса продукции
     this.getProductionModifier = function (house, currect) {
