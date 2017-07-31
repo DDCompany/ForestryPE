@@ -88,8 +88,8 @@ function BeeHouse(tile, slots, houseModifierList) {
             }, BeeRegistry.rangeToObject(this.queen.getActiveChromosome("TERRITORY")));
             ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.container, this.slots.produceSlots);
             if (this.queen.health <= 0) {
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList)), this.container, this.slots.slotPrincessOut);
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList)), this.container, this.slots.slotDronesOut)
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList, this)), this.container, this.slots.slotPrincessOut);
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.container, this.slots.slotDronesOut)
                 this.container.getSlot(this.slots.slotPrincess).count = 0;
                 Callback.invokeCallback("onQueenDeath", this.house);
                 this.queen.destroy();

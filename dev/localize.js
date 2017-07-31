@@ -1,3 +1,26 @@
+//COMBS
+Translation.addTranslation("Cocoa comb", {ru: "Какао-соты"});
+Translation.addTranslation("Dripping comb", {ru: "Капающие соты"});
+Translation.addTranslation("Honey comb", {ru: "Медовые соты"});
+Translation.addTranslation("Frozen comb", {ru: "Морозные соты"});
+Translation.addTranslation("Mellow comb", {ru: "Выдержанные соты"});
+Translation.addTranslation("Mossy comb", {ru: "Замшелые соты"});
+Translation.addTranslation("Mysterious comb", {ru: "Таинственные соты"});
+Translation.addTranslation("Parched comb", {ru: "Пересохшие соты"});
+Translation.addTranslation("Powdery comb", {ru: "Рыхлые соты"});
+Translation.addTranslation("Silky comb", {ru: "Шелковые соты"});
+Translation.addTranslation("Simmering comb", {ru: "Кипящие соты"});
+Translation.addTranslation("Stringy comb", {ru: "Вязкие соты"});
+Translation.addTranslation("Wheaten comb", {ru: "Пшеничные соты"});
+Translation.addTranslation("Irradiated comb", {ru: "Облученные соты"});
+
+//ARMOR
+Translation.addTranslation("Apiarist helmet", {ru: "Защитная маска пчеловода"});
+Translation.addTranslation("Apiarist chestplate", {ru: "Куртка пчеловода"});
+Translation.addTranslation("Apiarist leggings", {ru: "Штаны пчеловода"});
+Translation.addTranslation("Apiarist boots", {ru: "Ботинки пчеловода"});
+
+//OTHER
 Translation.addTranslation("apiary.error.flowers", {en: "No flowers found", ru: "Цветы не найдены"});
 Translation.addTranslation("apiary.error.climate", {en: "Incorrect temperature", ru: "Некорректная температура"});
 Translation.addTranslation("apiary.error.humidity", {en: "Incorrect humidity", ru: "Некорректная влажность"});

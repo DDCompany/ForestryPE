@@ -33,9 +33,9 @@ var updatableAnalyzer = {
 
                 if (slotScanning.id && !slotPhase1.id && !slotPhase2.id && !slotPhase3.id && drawedBee !== slotScanning.id && BeeRegistry.isBee(slotScanning.id)) {
                     var bee = BeeRegistry.getBeeFromItem(slotScanning.id, slotScanning.data);
-                    if (bee.analyzed || (slotHoney.id === ItemID.honeyDrop || slotHoney.id === ItemID.honeydew)) {
+                    if (!bee.analyzed && (slotHoney.id === ItemID.honeyDrop || slotHoney.id === ItemID.honeydew)) {
                         slotHoney.count--;
-                    } else {
+                    } else if (!bee.analyzed) {
                         return;
                     }
                     if (!bee.isSaved()) {
@@ -91,15 +91,14 @@ var updatableAnalyzer = {
                             drawedBee = slotPhase3.id;
                         }
                     }
-                } else if (drawedBee !== slotScanning.id && drawedBee !== slotPhase1.id && drawedBee !== slotPhase2.id && drawedBee !== slotPhase3.id) {
+                } else if ((drawedBee !== slotScanning.id && drawedBee !== slotPhase1.id && drawedBee !== slotPhase2.id && drawedBee !== slotPhase3.id) || (!drawedBee && drawedElements !== {})) {
                     for (key in drawedElements) {
                         analyzerContainer.getGuiContent().elements[key] = null;
                     }
                     drawedElements = {};
                     drawedBee = 0;
                 }
-            } else {
-                var content = analyzerContainer.getGuiContent();
+            } else if (temp) {
                 var pos = Player.getPosition();
 
                 analyzerContainer.dropSlot("slotHoney", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
@@ -108,12 +107,6 @@ var updatableAnalyzer = {
                 analyzerContainer.dropSlot("slotPhase2", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
                 analyzerContainer.dropSlot("slotPhase3", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
 
-
-                for (var key in drawedElements) {
-                    content.elements[key] = null;
-                }
-
-                drawedElements = {};
                 analyzerContainer = null;
                 temp = false;
                 drawedBee = 0;

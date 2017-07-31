@@ -69,8 +69,8 @@ var BeeLogic = {
             return null;
         }
 
-        var species1 = bee.active_chromosomes_list.SPECIES;
-        var species2 = bee.inactive_chromosomes_list.SPECIES;
+        var species1 = bee.type;
+        var species2 = bee.mate.type;
 
         var parent1in = null;
         var parent1act = null;
@@ -83,8 +83,8 @@ var BeeLogic = {
             parent1in = mutated1.chromosomes;
             parent1act = mutated1.chromosomes;
         } else {
-            parent1in = Util.objectUnion(BeeRegistry.chromosomes_list, bee.active_chromosomes_list);
-            parent1act = Util.objectUnion(BeeRegistry.chromosomes_list, bee.inactive_chromosomes_list);
+            parent1in = Util.objectUnion(BeeRegistry.chromosomes_list, BeeRegistry.getBeeByType(species1).chromosomes_list, bee.active_chromosomes_list);
+            parent1act = Util.objectUnion(BeeRegistry.chromosomes_list, BeeRegistry.getBeeByType(species1).chromosomes_list, bee.inactive_chromosomes_list);
         }
 
         var mutated2 = this.mutateSpecies(bee, bee.mate, modifierList, houseModifierList, house);
@@ -93,8 +93,8 @@ var BeeLogic = {
             parent2in = mutated2.chromosomes;
             parent2act = mutated2.chromosomes;
         } else {
-            parent2in = Util.objectUnion(BeeRegistry.chromosomes_list, bee.mate.active_chromosomes_list);
-            parent2act = Util.objectUnion(BeeRegistry.chromosomes_list, bee.mate.inactive_chromosomes_list);
+            parent2in = Util.objectUnion(BeeRegistry.chromosomes_list, BeeRegistry.getBeeByType(species2).chromosomes_list, bee.mate.active_chromosomes_list);
+            parent2act = Util.objectUnion(BeeRegistry.chromosomes_list, BeeRegistry.getBeeByType(species2).chromosomes_list, bee.mate.inactive_chromosomes_list);
         }
 
         var princess = new Bee(species1, bee_type, true, species2);
@@ -109,21 +109,23 @@ var BeeLogic = {
             if (key === "SPECIES") princess.type = ch.active;
         }
 
-        princess.generation = ++bee.generation;
+        princess.generation = bee.generation;
+        princess.generation++;
+        princess.refreshItem();
 
         return princess;
     },
 
     inheritChromosome: function (chromosomes1, chromosomes2) {
         var ch = null;
-        if (Math.random() <= 0.5) {
+        if (Math.random() < 0.5) {
             ch = chromosomes1.active;
         } else {
             ch = chromosomes1.inactive;
         }
 
         var ch2 = null;
-        if (Math.random() <= 0.5) {
+        if (Math.random() < 0.5) {
             ch2 = chromosomes2.active;
         } else {
             ch2 = chromosomes2.inactive;
@@ -139,7 +141,7 @@ var BeeLogic = {
     mutateSpecies: function (parent1, parent2, modifierList, houseModifierList, house) {
         var combinations = BeeRegistry.getMutations(parent1.type, parent2.type);
         for (var key in combinations) {
-            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house, combinations[key].chance) * houseModifierList.getMutationModifier(house, combinations[key].chance)) {
+            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house, combinations[key].chance) * houseModifierList.getMutationModifier(house, combinations[key].chance && combinations[key].onMutate(house))) {
                 var mut = BeeRegistry.getBeeByType(combinations[key].result);
                 return {type: mut.type, chromosomes: Util.objectUnion(mut.chromosomes_list, {SPECIES: mut.type})};
             }

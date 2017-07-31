@@ -113,6 +113,12 @@ var BeeRegistry = {
             return;
         }
 
+        if (!arg.onMutate) {
+            arg.onMutate = function () {
+                return true;
+            };
+        }
+
         this.mutations[arg.result] = arg;
     },
 
@@ -365,7 +371,7 @@ var BeeRegistry = {
 
 BeeRegistry.init();
 
-BeeRegistry.registerBee({
+/*BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Тестовая принцесса",
@@ -431,4 +437,4 @@ BeeRegistry.registerBee({
     species: "BIG",
     produce: [],
     chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_4}
-});
+});*/

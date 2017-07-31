@@ -56,10 +56,10 @@ var BeeFrame = {
 BeeFrame.registerFrame({
     codeName: "frameUntreated",
     localize: {en: "Test frame", ru: "Тестовый фреуаау"},
-    modifier: Modifier.getFromObject({
+    modifier: {
         getProductionModifier: function () {
             return 2.0;
         }
-    }),
+    },
     durability: 20
 });

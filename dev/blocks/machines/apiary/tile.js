@@ -17,7 +17,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
         var content = this.container.getGuiContent();
 
         if (!this.houseModifierList) {
-            this.houseModifierList = Modifier.emptyList();
+            this.houseModifierList = new ModifierList([]);
         }
 
         if (!this.house) {

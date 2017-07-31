@@ -1,5 +1,5 @@
 var Util = {
-    objectUnion: function (objs) {
+    objectUnion: function () {
         var obj = {};
         for (var key in arguments) {
             var n = arguments[key];
