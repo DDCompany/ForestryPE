@@ -20,7 +20,13 @@
     "beehivesEnderChance": 0.7,
     "apatite": true,
     "apatiteInChunk": 12,
-    "apatiteSize": 3
+    "apatiteSize": 3,
+    "copper": true,
+    "copperInChunk": 20,
+    "copperSize": 6,
+    "tin": true,
+    "tinInChunk": 18,
+    "tinSize": 6
   },
   "beekeeping": {
     "secondPrincessChance": 0

@@ -23,6 +23,14 @@ var Config = {
     genApatiteInChunk: __config__.access("gen.apatiteInChunk"),
     genApatiteSize: __config__.access("gen.apatiteSize"),
 
+    getCopper: __config__.access("gen.copper"),
+    genCopperInChunk: __config__.access("gen.copperInChunk"),
+    genCopperSize: __config__.access("gen.copperSize"),
+
+    getTin: __config__.access("gen.tin"),
+    genTinInChunk: __config__.access("gen.tinInChunk"),
+    genTinSize: __config__.access("gen.tinSize"),
+
     /* ----- BEEKEEPING ----- */
 
     secondPrincessChance: __config__.access("beekeeping.secondPrincessChance"),
