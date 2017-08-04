@@ -3,6 +3,7 @@ var ModelHelper = {
     createFactoryModel: function (blockID, textures) {
 
         Block.setPrototype("miscTile" + blockID, {
+            type: Block.TYPE_BASE,
 
             getVariations: function () {
                 return [

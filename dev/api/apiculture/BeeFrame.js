@@ -53,7 +53,7 @@ var BeeFrame = {
 
 };
 
-BeeFrame.registerFrame({
+/*BeeFrame.registerFrame({
     codeName: "frameUntreated",
     localize: {en: "Test frame", ru: "Тестовый фреуаау"},
     modifier: {
@@ -62,4 +62,4 @@ BeeFrame.registerFrame({
         }
     },
     durability: 20
-});
+});*/

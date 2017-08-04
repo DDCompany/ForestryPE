@@ -367,8 +367,8 @@ function drawPage1(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: BeeRegistry.isDominant("EFFECT", bee.getBeeType().effect) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("EFFECT", bee.getBeeType().effect)
+        font: BeeRegistry.isDominant("EFFECT", bee.getActiveChromosome("EFFECT")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: BeeRegistry.getChromosomeValueName("EFFECT", bee.getActiveChromosome("EFFECT"))
     };
     drawedElements["textEffect2"] = {
         type: "text",
@@ -376,8 +376,8 @@ function drawPage1(bee) {
         y: LINE,
         width: 200,
         height: 32,
-        font: BeeRegistry.isDominant("EFFECT", bee.getInactiveBeeType().effect) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-        text: BeeRegistry.getChromosomeValueName("EFFECT", bee.getInactiveBeeType().effect)
+        font: BeeRegistry.isDominant("EFFECT", bee.getInactiveChromosome("EFFECT")) ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
+        text: BeeRegistry.getChromosomeValueName("EFFECT", bee.getInactiveChromosome("EFFECT"))
     };
 
     LINE += 32;

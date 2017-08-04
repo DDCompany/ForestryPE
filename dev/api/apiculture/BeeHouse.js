@@ -35,6 +35,10 @@ function BeeHouse(tile, slots, houseModifierList) {
         this.container.validateAll();
     };
 
+    this.getBiome = function () {
+        return World.getBiome(this.tile.x, this.tile.z);
+    };
+
     this.tickBreeding = function () {
         var slot1 = this.container.getSlot(this.slots.slotPrincess);
         var slot2 = this.container.getSlot(this.slots.slotDrone);
@@ -56,9 +60,9 @@ function BeeHouse(tile, slots, houseModifierList) {
         if (World.getThreadTime() % 128 === 0) {
             if (!BeeLogic.findFlowers(this.queen, {x: this.tile.x, y: this.tile.y, z: this.tile.z})) {
                 this.error = Translation.translate("apiary.error.flowers");
-            } else if (!this.queen.isValidClimate(this.tile.x, this.tile.y)) {
+            } else if (!this.queen.isValidClimate(this.tile.x, this.tile.y, this.getBiome())) {
                 this.error = Translation.translate("apiary.error.climate");
-            } else if (!this.queen.isValidHumidity(this.tile.x, this.tile.y)) {
+            } else if (!this.queen.isValidHumidity(this.tile.x, this.tile.y, this.getBiome())) {
                 this.error = Translation.translate("apiary.error.humidity");
             } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
                 this.error = Translation.translate("apiary.error.sky");
@@ -81,7 +85,7 @@ function BeeHouse(tile, slots, houseModifierList) {
         if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this, 1) * this.houseModifierList.getLifespanModifier(this, 1)) {
             this.queen.health--;
             this.data.progressCycle = 0;
-            BeeEffects.doEffect(this.queen.getBeeType().effect, {
+            BeeEffects.doEffect(this.queen.getActiveChromosome("EFFECT"), {
                 x: this.tile.x,
                 y: this.tile.y,
                 z: this.tile.z

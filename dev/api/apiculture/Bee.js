@@ -10,9 +10,10 @@ function Bee(species, beetype, save, inactive_species) {
     this.generation = 0;
 
     this.save = function () {
+        if (this.isSaved()) return;
         this.unique = BeeRegistry.getBeeNextUniqueID();
         BeeSaver.bees[this.unique] = this;
-        !this.item.id || (this.item.data = this.unique);
+        this.item.data = this.unique;
     };
 
     this.getProduce = function () {
@@ -109,6 +110,7 @@ function Bee(species, beetype, save, inactive_species) {
     this.readSaveScope = function (scope) {
         for (var key in scope) this[key] = scope[key];
 
+        BeeSaver.bees[this.unique] = this;
         return this;
     };
 
@@ -134,17 +136,17 @@ function Bee(species, beetype, save, inactive_species) {
         delete BeeSaver.bees[this.unique];
     };
 
-    this.isValidClimate = function (x, y) {
+    this.isValidClimate = function (x, y, biome) {
         var up = 0;
         var down = 0;
-        var value = BiomeHelper.getBiomeClimate(World.getBiome(x, y));
+        var value = BiomeHelper.getBiomeClimate(!biome ? World.getBiome(x, y) : biome);
         var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["TEMPERATURE_TOLERANCE"]);
-        if (tol == BeeRegistry.TOLERANCE_BOTH) {
+        if (tol === BeeRegistry.TOLERANCE_BOTH) {
             up = this.getClimateTolValue();
             down = this.getClimateTolValue();
-        } else if (tol == BeeRegistry.TOLERANCE_UP) {
+        } else if (tol === BeeRegistry.TOLERANCE_UP) {
             up = this.getClimateTolValue();
-        } else if (tol == BeeRegistry.TOLERANCE_DOWN) {
+        } else if (tol === BeeRegistry.TOLERANCE_DOWN) {
             down = this.getClimateTolValue();
         }
 
@@ -155,17 +157,17 @@ function Bee(species, beetype, save, inactive_species) {
         return false;
     };
 
-    this.isValidHumidity = function (x, y) {
+    this.isValidHumidity = function (x, y, biome) {
         var up = 0;
         var down = 0;
-        var value = BiomeHelper.getBiomeHumidity(World.getBiome(x, y));
+        var value = BiomeHelper.getBiomeHumidity(!biome ? World.getBiome(x, y) : biome);
         var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["HUMIDITY_TOLERANCE"]);
-        if (tol == BeeRegistry.TOLERANCE_BOTH) {
+        if (tol === BeeRegistry.TOLERANCE_BOTH) {
             up = this.getHumidityTolValue();
             down = this.getHumidityTolValue();
-        } else if (tol == BeeRegistry.TOLERANCE_UP) {
+        } else if (tol === BeeRegistry.TOLERANCE_UP) {
             up = this.getHumidityTolValue();
-        } else if (tol == BeeRegistry.TOLERANCE_DOWN) {
+        } else if (tol === BeeRegistry.TOLERANCE_DOWN) {
             down = this.getHumidityTolValue();
         }
 

@@ -5,14 +5,18 @@ var BeeSaver = {
 
 Saver.addSavesScope("BeeSaverScope",
     function read(scope) {
-        for (key in scope) {
-            BeeSaver.bees[key] = new Bee(null).readSaveScope(scope[key]);
+        BeeSaver.uniqueID = scope.uniqueID;
+        for (var key in scope["bees"]) {
+            BeeSaver.bees[key] = new Bee(null).readSaveScope(scope["bees"][key]);
         }
     },
 
     function save() {
-        var scope = {};
-        for (var key in BeeSaver.bees) scope[key] = BeeSaver.bees[key].getSaveScope();
+        var scope = {
+            uniqueID: BeeSaver.uniqueID,
+            bees: {}
+        };
+        for (var key in BeeSaver.bees) scope["bees"][key] = BeeSaver.bees[key].getSaveScope();
         return scope;
     }
 );

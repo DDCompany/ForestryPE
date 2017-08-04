@@ -12,6 +12,10 @@ TileEntity.registerPrototype(BlockID.apiary, {
         this.data.biome_override = World.getBiome(this.x, this.z);
     },
 
+    getTransportSlots: function () {
+        return {input: [], output: []};
+    },
+
     tick: function () {
 
         var content = this.container.getGuiContent();

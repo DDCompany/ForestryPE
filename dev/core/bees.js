@@ -29,8 +29,14 @@ BeeRegistry.registerBee({
     species: "Austere",
     humidity: BiomeHelper.HUMIDITY_ARID,
     climate: BiomeHelper.CLIMATE_HOT,
+    flowers: BeeRegistry.FLOWERS_CACTI,
     produce: [[ItemID.combParched, 0, 0.2], [ItemID.combPowdery, 0, 0.5]],
-    chromosomes: {NEVER_SLEEPS: true}
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_CREEPER,
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
+        NEVER_SLEEPS: true
+    }
 });
 
 BeeRegistry.registerBee({
@@ -57,8 +63,10 @@ BeeRegistry.registerBee({
     ],
     species: "Avenging",
     produce: [[ItemID.combIrradiated, 0, 0.4]],
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
+    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
+
+var chhhh = 1;
 
 BeeRegistry.registerBee({
     localize: {
@@ -82,20 +90,18 @@ BeeRegistry.registerBee({
 
 var mut1 = ["Forest", "Meadows", "Modest", "Tropical", "Wintry", "Marshy"];
 
-//DON'T WORK
 for (var key in mut1) {
     for (var key2 in mut1) {
         if (mut1[key] !== mut1[key2]) {
             BeeRegistry.addMutation({
-                species1: String(mut1[key]),
-                species2: String(mut1[key2]),
+                species1: mut1[key],
+                species2: mut1[key2],
                 result: "Common",
-                chance: 1
+                chance: 0.15
             });
         }
     }
 }
-
 BeeRegistry.registerBee({
     localize: {
         princess: {
@@ -116,6 +122,15 @@ BeeRegistry.registerBee({
     chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORTEST, TOLERATES_RAIN: true}
 });
 
+for (var key in mut1) {
+    BeeRegistry.addMutation({
+        species1: mut1[key],
+        species2: "Common",
+        result: "Cultivated",
+        chance: 0.12
+    });
+}
+
 BeeRegistry.registerBee({
     localize: {
         princess: {
@@ -135,7 +150,23 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combSimmering, 0, 0.45], [348, 0, 0.15]],
     humidity: BiomeHelper.HUMIDITY_ARID,
     climate: BiomeHelper.CLIMATE_HELLISH,
+    flowers: BeeRegistry.FLOWERS_NETHER,
+    mutations: [
+        {
+            species1: "Sinister",
+            species2: "Fiendish",
+            chance: 0.25,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        }
+    ],
     chromosomes: {
+        NEVER_SLEEPS: true,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         EFFECT: BeeEffects.EFFECT_FLAMMABLE,
         LIFESPAN: BeeRegistry.LIFESPAN_LONGER,
         TOLERATES_RAIN: true,
@@ -160,6 +191,13 @@ BeeRegistry.registerBee({
     },
     species: "Diligent",
     produce: [[ItemID.combStringy, 0, 0.2]],
+    mutations: [
+        {
+            species1: "Common",
+            species2: "Cultivated",
+            chance: 0.1
+        }
+    ],
     chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, LIFESPAN: BeeRegistry.LIFESPAN_SHORT}
 });
 
@@ -179,10 +217,20 @@ BeeRegistry.registerBee({
         }
     },
     species: "Edenic",
+    mutations: [
+        {
+            species1: "Tropical",
+            species2: "Exotic",
+            chance: 0.08
+        }
+    ],
     produce: [[ItemID.combSilky, 0, 0.2]],
     humidity: BiomeHelper.HUMIDITY_DAMP,
     climate: BiomeHelper.CLIMATE_WARM,
+    flowers: BeeRegistry.FLOWERS_JUNGLE,
     chromosomes: {
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         SPEED: BeeRegistry.SPEED_SLOWEST,
         LIFESPAN: BeeRegistry.LIFESPAN_LONGER,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_2,
@@ -208,7 +256,12 @@ BeeRegistry.registerBee({
     species: "Ender",
     produce: [[ItemID.combMysterious, 0, 0.3]],
     climate: BiomeHelper.CLIMATE_COLD,
-    chromosomes: {}
+    flowers: BeeRegistry.FLOWERS_ENDS,
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_ENDS,
+        TERRITORY: "11x8x11",
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1
+    }
 });
 
 BeeRegistry.registerBee({
@@ -230,7 +283,19 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combSilky, 0, 0.3]],
     climate: BiomeHelper.CLIMATE_WARM,
     humidity: BiomeHelper.HUMIDITY_DAMP,
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_LONG}
+    flowers: BeeRegistry.FLOWERS_JUNGLE,
+    mutations: [
+        {
+            species1: "Austere",
+            species2: "Tropical",
+            chance: 0.12
+        }
+    ],
+    chromosomes: {
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        LIFESPAN: BeeRegistry.LIFESPAN_LONG
+    }
 });
 
 BeeRegistry.registerBee({
@@ -252,7 +317,48 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combSimmering, 0, 0.55], [ItemID.ash, 0, 0.15]],
     climate: BiomeHelper.CLIMATE_HELLISH,
     humidity: BiomeHelper.HUMIDITY_ARID,
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_LONG, EFFECT: BeeEffects.EFFECT_AGGRESS}
+    flowers: BeeRegistry.FLOWERS_NETHER,
+    mutations: [
+        {
+            species1: "Modest",
+            species2: "Sinister",
+            chance: 0.4,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        },
+        {
+            species1: "Tropical",
+            species2: "Sinister",
+            chance: 0.4,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        },
+        {
+            species1: "Cultivated",
+            species2: "Sinister",
+            chance: 0.4,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        }
+    ],
+    chromosomes: {
+        NEVER_SLEEPS: true,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
+        LIFESPAN: BeeRegistry.LIFESPAN_LONG,
+        EFFECT: BeeEffects.EFFECT_AGGRESS
+    }
 });
 
 BeeRegistry.registerBee({
@@ -294,7 +400,32 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combParched, 0, 0.3]],
     climate: BiomeHelper.CLIMATE_HOT,
     humidity: BiomeHelper.HUMIDITY_ARID,
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_LONG}
+    flowers: BeeRegistry.FLOWERS_CACTI,
+    mutations: [
+        {
+            species1: "Modest",
+            species2: "Sinister",
+            chance: 0.16,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HOT) return true;
+
+                return false;
+            }
+        },
+        {
+            species1: "Modest",
+            species2: "Fiendish",
+            chance: 0.1,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HOT) return true;
+
+                return false;
+            }
+        }
+    ],
+    chromosomes: {TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1, LIFESPAN: BeeRegistry.LIFESPAN_LONG}
 });
 
 BeeRegistry.registerBee({
@@ -315,7 +446,18 @@ BeeRegistry.registerBee({
     species: "Glacial",
     produce: [[ItemID.combFrozen, 0, 0.2], [ItemID.iceShard, 0, 0.4]],
     climate: BiomeHelper.CLIMATE_ICY,
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORT, SPEED: BeeRegistry.SPEED_SLOWER}
+    mutations: [
+        {
+            species1: "Wintry",
+            species2: "Icy",
+            chance: 0.08
+        }
+    ],
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_FREEZING,
+        LIFESPAN: BeeRegistry.LIFESPAN_SHORT,
+        SPEED: BeeRegistry.SPEED_SLOWER
+    }
 });
 
 BeeRegistry.registerBee({
@@ -335,7 +477,8 @@ BeeRegistry.registerBee({
     },
     species: "Hermitic",
     produce: [[ItemID.combMellow, 0, 0.2]],
-    chromosomes: {}
+    flowers: BeeRegistry.FLOWERS_WHEAT,
+    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 
 BeeRegistry.registerBee({
@@ -356,7 +499,18 @@ BeeRegistry.registerBee({
     species: "Icy",
     produce: [[ItemID.combFrozen, 0, 0.2], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOW, LIFESPAN: BeeRegistry.LIFESPAN_SHORT}
+    mutations: [
+        {
+            species1: "Industrious",
+            species2: "Wintry",
+            chance: 0.12
+        }
+    ],
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_FREEZING,
+        SPEED: BeeRegistry.SPEED_SLOW,
+        LIFESPAN: BeeRegistry.LIFESPAN_SHORT
+    }
 });
 
 BeeRegistry.registerBee({
@@ -376,6 +530,13 @@ BeeRegistry.registerBee({
     },
     species: "Industrious",
     produce: [[ItemID.combStringy, 0, 0.2], [ItemID.pollen1, 0, 0.15]],
+    mutations: [
+        {
+            species1: "Diligent",
+            species2: "Unweary",
+            chance: 0.08
+        }
+    ],
     chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER}
 });
 
@@ -396,7 +557,14 @@ BeeRegistry.registerBee({
     },
     species: "Leporine",
     produce: [[ItemID.combSilky, 0, 0.3], [344, 0, 0.1]],
-    chromosomes: {}
+    mutations: [
+        {
+            species1: "Meadows",
+            species2: "Forest",
+            chance: 0.01
+        }
+    ],
+    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2}
 });
 
 BeeRegistry.registerBee({
@@ -416,6 +584,13 @@ BeeRegistry.registerBee({
     },
     species: "Majestic",
     produce: [[ItemID.combDripping, 0, 0.3]],
+    mutations: [
+        {
+            species1: "Cultivated",
+            species2: "Noble",
+            chance: 0.08
+        }
+    ],
     chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORTENED, FERTILITY: 4}
 });
 
@@ -437,7 +612,8 @@ BeeRegistry.registerBee({
     species: "Marshy",
     produce: [[ItemID.combMossy, 0, 0.3]],
     humidity: BiomeHelper.HUMIDITY_DAMP,
-    chromosomes: {}
+    flowers: BeeRegistry.FLOWERS_MUSHROOMS,
+    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 
 BeeRegistry.registerBee({
@@ -479,7 +655,12 @@ BeeRegistry.registerBee({
     species: "Merry",
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
-    chromosomes: {NEVER_SLEEPS: true}
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_FREEZING,
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
+        NEVER_SLEEPS: true
+    }
 });
 
 BeeRegistry.registerBee({
@@ -501,7 +682,14 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combParched, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_HOT,
     humidity: BiomeHelper.HUMIDITY_ARID,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, LIFESPAN: BeeRegistry.LIFESPAN_SHORT}
+    flowers: BeeRegistry.FLOWERS_CACTI,
+    chromosomes: {
+        NEVER_SLEEPS: true,
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        SPEED: BeeRegistry.SPEED_SLOWER,
+        LIFESPAN: BeeRegistry.LIFESPAN_SHORT
+    }
 });
 
 BeeRegistry.registerBee({
@@ -522,7 +710,8 @@ BeeRegistry.registerBee({
     species: "Monastic",
     produce: [[ItemID.combWheaten, 0, 0.3], [ItemID.combMellow, 0, 0.1]],
     specialty: [[ItemID.combMellow, 0, 0.1]],
-    chromosomes: {}
+    flowers: BeeRegistry.FLOWERS_WHEAT,
+    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 
 BeeRegistry.registerBee({
@@ -542,6 +731,13 @@ BeeRegistry.registerBee({
     },
     species: "Noble",
     produce: [[ItemID.combDripping, 0, 0.2]],
+    mutations: [
+        {
+            species1: "Common",
+            species2: "Cultivated",
+            chance: 0.1
+        }
+    ],
     chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, LIFESPAN: BeeRegistry.LIFESPAN_SHORT}
 });
 
@@ -563,7 +759,8 @@ BeeRegistry.registerBee({
     species: "Phantasmal",
     produce: [[ItemID.combMysterious, 0, 0.4]],
     climate: BiomeHelper.CLIMATE_COLD,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWEST, LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
+    flowers: BeeRegistry.FLOWERS_ENDS,
+    chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWEST, LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
 
 BeeRegistry.registerBee({
@@ -583,6 +780,14 @@ BeeRegistry.registerBee({
     },
     species: "Rural",
     produce: [[ItemID.combWheaten, 0, 0.2]],
+    flowers: BeeRegistry.FLOWERS_WHEAT,
+    mutations: [
+        {
+            species1: "Meadows",
+            species2: "Diligent",
+            chance: 0.12
+        }
+    ],
     chromosomes: {}
 });
 
@@ -603,7 +808,8 @@ BeeRegistry.registerBee({
     },
     species: "Secluded",
     produce: [[ItemID.combMellow, 0, 0.2]],
-    chromosomes: {}
+    flowers: BeeRegistry.FLOWERS_WHEAT,
+    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
 
 BeeRegistry.registerBee({
@@ -625,7 +831,37 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combSimmering, 0, 0.45]],
     climate: BiomeHelper.CLIMATE_HELLISH,
     humidity: BiomeHelper.HUMIDITY_ARID,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_AGGRESS}
+    flowers: BeeRegistry.FLOWERS_NETHER,
+    mutations: [
+        {
+            species1: "Modest",
+            species2: "Cultivated",
+            chance: 0.6,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        },
+        {
+            species1: "Tropical",
+            species2: "Cultivated",
+            chance: 0.6,
+            onMutate: function (house) {
+                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
+
+                return false;
+            }
+        }
+    ],
+    chromosomes: {
+        NEVER_SLEEPS: true,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
+        SPEED: BeeRegistry.SPEED_SLOWER,
+        EFFECT: BeeEffects.EFFECT_AGGRESS
+    }
 });
 
 BeeRegistry.registerBee({
@@ -646,7 +882,8 @@ BeeRegistry.registerBee({
     species: "Spectral",
     produce: [[ItemID.combMysterious, 0, 0.5]],
     climate: BiomeHelper.CLIMATE_COLD,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_AGGRESS}
+    flowers: BeeRegistry.FLOWERS_ENDS,
+    chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_AGGRESS}
 });
 
 BeeRegistry.registerBee({
@@ -667,7 +904,13 @@ BeeRegistry.registerBee({
     species: "Tipsy",
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
-    chromosomes: {NEVER_SLEEPS: true, EFFECT: BeeEffects.EFFECT_DRUNKARD}
+    chromosomes: {
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
+        NEVER_SLEEPS: true,
+        EFFECT: BeeEffects.EFFECT_DRUNKARD
+    }
 });
 
 BeeRegistry.registerBee({
@@ -689,7 +932,13 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combSilky, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_WARM,
     humidity: BiomeHelper.HUMIDITY_DAMP,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, LIFESPAN: BeeRegistry.LIFESPAN_SHORT}
+    flowers: BeeRegistry.FLOWERS_JUNGLE,
+    chromosomes: {
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        SPEED: BeeRegistry.SPEED_SLOWER,
+        LIFESPAN: BeeRegistry.LIFESPAN_SHORT
+    }
 });
 
 BeeRegistry.registerBee({
@@ -709,6 +958,13 @@ BeeRegistry.registerBee({
     },
     species: "Unweary",
     produce: [[ItemID.combSilky, 0, 0.2]],
+    mutations: [
+        {
+            species1: "Cultivated",
+            species2: "Diligent",
+            chance: 0.08
+        }
+    ],
     chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORTENED}
 });
 
@@ -755,7 +1011,7 @@ BeeRegistry.registerBee({
     },
     species: "Vengeful",
     produce: [[ItemID.combIrradiated, 0, 0.4]],
-    chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_LONGER}
+    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGER}
 });
 
 BeeRegistry.registerBee({
@@ -775,7 +1031,7 @@ BeeRegistry.registerBee({
     },
     species: "Vindictive",
     produce: [[ItemID.combIrradiated, 0, 0.25]],
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER}
+    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", SPEED: BeeRegistry.SPEED_SLOWER}
 });
 
 BeeRegistry.registerBee({
@@ -796,7 +1052,13 @@ BeeRegistry.registerBee({
     species: "Wintry",
     produce: [[ItemID.combFrozen, 0, 0.3]],
     climate: BiomeHelper.CLIMATE_ICY,
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, LIFESPAN: BeeRegistry.LIFESPAN_SHORT, FERTILITY: 4}
+    chromosomes: {
+        EFFECT: BeeEffects.EFFECT_FREEZING,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
+        SPEED: BeeRegistry.SPEED_SLOWER,
+        LIFESPAN: BeeRegistry.LIFESPAN_SHORT,
+        FERTILITY: 4
+    }
 });
 
 BeeRegistry.registerBee({
@@ -816,5 +1078,12 @@ BeeRegistry.registerBee({
     },
     species: "Imperial",
     produce: [[ItemID.combDripping, 0, 0.2], [ItemID.royalJelly, 0, 0.15]],
+    mutations: [
+        {
+            species1: "Noble",
+            species2: "Majestic",
+            chance: 0.08
+        }
+    ],
     chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_BEATIFIC}
 });

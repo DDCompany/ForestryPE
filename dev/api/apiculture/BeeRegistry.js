@@ -119,18 +119,23 @@ var BeeRegistry = {
             };
         }
 
-        this.mutations[arg.result] = arg;
+        if (!this.mutations[arg.result]) {
+            this.mutations[arg.result] = [];
+        }
+
+        this.mutations[arg.result].push(arg);
     },
 
     getMutations: function (species1, species2) {
         var muts = [];
         for (var key in this.mutations) {
-            var mut = this.mutations[key];
-            if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
-                muts.push(mut);
+            for (var key2 in this.mutations[key]) {
+                var mut = this.mutations[key][key2];
+                if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
+                    muts.push(mut);
+                }
             }
         }
-
         return muts;
     },
 
@@ -138,6 +143,7 @@ var BeeRegistry = {
         if (!BeeSaver.uniqueID) {
             BeeSaver.uniqueID = 0;
         }
+
         return ++BeeSaver.uniqueID;
     },
 
@@ -227,10 +233,6 @@ var BeeRegistry = {
             }
         }
 
-        if (!arg.effect) {
-            arg.effect = BeeEffects.EFFECT_NONE;
-        }
-
         IDRegistry.genItemID("princess" + arg.species);
         Item.createItem("princess" + arg.species, arg.localize.princess.en, {name: arg.textures.princess, meta: 0}, {});
         Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
@@ -243,7 +245,7 @@ var BeeRegistry = {
         Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
-        var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate, arg.effect);
+        var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
         bee_type.chromosomes_list = arg.chromosomes;
         bee_type.dominant = arg.dominant;
         bee_type.produce = arg.produce;
@@ -290,7 +292,11 @@ var BeeRegistry = {
         var bee = null;
 
         if (!BeeSaver.bees[data]) {
-            bee = new Bee(BeeRegistry.getTypeByID(id), BeeRegistry.getBeeTypeByID(id), false);
+            var beetype = BeeRegistry.getBeeTypeByID(id);
+            bee = new Bee(BeeRegistry.getTypeByID(id), beetype, false);
+            if (beetype == BeeRegistry.BEETYPE_QUEEN) {
+                bee.mate = new Bee(BeeRegistry.getTypeByID(id), BeeRegistry.BEETYPE_DRONE, false);
+            }
             return bee;
         }
 
@@ -343,7 +349,7 @@ var BeeRegistry = {
                 (value === BiomeHelper.CLIMATE_COLD ? Translation.translate("climate.cold") :
                     (value === BiomeHelper.CLIMATE_NORMAL ? Translation.translate("climate.normal") :
                         (value === BiomeHelper.CLIMATE_WARM ? Translation.translate("climate.warm") :
-                            (value === BiomeHelper.CLIMATE_HOT ? Translation.translate("climate.hot") : Translation.translate("bees.climate.hellish")))));
+                            (value === BiomeHelper.CLIMATE_HOT ? Translation.translate("climate.hot") : Translation.translate("climate.hellish")))));
         } else if (name === "HUMIDITY") {
             return value === BiomeHelper.HUMIDITY_ARID ? Translation.translate("humidity.arid") :
                 (value === BiomeHelper.HUMIDITY_DAMP ? Translation.translate("humidity.damp") : Translation.translate("humidity.normal"));
