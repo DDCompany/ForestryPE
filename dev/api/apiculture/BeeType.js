@@ -1,3 +1,13 @@
+/**
+ * @param {string} type
+ * @param {number} princessID
+ * @param {number} droneID
+ * @param {number} queenID
+ * @param {Array} flowers
+ * @param {number} humidity
+ * @param {number} climate
+ * @constructor
+ */
 function BeeType(type, princessID, droneID, queenID, flowers, humidity, climate) {
     this.chromosomes_list = {};
     this.type = type;

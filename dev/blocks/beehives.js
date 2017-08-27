@@ -144,7 +144,35 @@ Block.setPrototype("beehive", {
     },
     getMaterial: function (a) {
         return "beehive"
+    }
+});
+
+Block.setPrototype("beehiveSwarm", {
+    type: Block.TYPE_BASE,
+
+    getVariations: function () {
+        return [
+            {
+                name: "Swarm hive",
+                texture: [["beehiveSwarm", 0], ["beehiveSwarm", 0], ["beehiveSwarm", 1]],
+                inCreative: true
+            }
+        ];
     },
+
+    getDrop: function (a) {
+        var tile = World.getTileEntity(a.x, a.y, a.z);
+        if (tile && tile.data.bee)
+            return [[tile.data.bee.id, 1, tile.data.bee.data]];
+        return [];
+    },
+    getMaterial: function (a) {
+        return "beehive"
+    }
+});
+
+TileEntity.registerPrototype(BlockID.beehiveSwarm, {
+    defaultValues: {}
 });
 
 function generateBeehive(data, coords) {

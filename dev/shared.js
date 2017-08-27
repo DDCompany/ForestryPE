@@ -16,6 +16,7 @@ ModAPI.registerAPI("ForestryAPI", {
     RecipeRegistry: RecipeRegistry,
     Util: Util,
     Dictionary: Dictionary,
+    ApiaryRegistry: ApiaryRegistry,
 
     requireGlobal: function (command) {
         return eval(command);

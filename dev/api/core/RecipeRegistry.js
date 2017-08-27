@@ -109,6 +109,6 @@ var RecipeRegistry = {
                 return recipe;
             }
         }
-    },
+    }
 
 };

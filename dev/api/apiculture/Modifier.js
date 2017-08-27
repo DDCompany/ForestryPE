@@ -2,6 +2,7 @@ function ModifierList(modifiers) {
 
     this.modifiers = modifiers;
 
+    //Модификатор продолжительности жизни
     this.getLifespanModifier = function (house, currect) {
         var value = currect;
         for (var key in this.modifiers) {
@@ -48,4 +49,4 @@ function ModifierList(modifiers) {
         return false;
     };
 
-};
+}

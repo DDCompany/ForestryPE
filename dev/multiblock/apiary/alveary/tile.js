@@ -1,58 +1,4 @@
-TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
-
-    defaultValues: {
-        time: 0,
-        humidity: 0,
-        climate: 0
-    },
-
-    init: function () {
-        this.liquidStorage.setLimit(null, 10);
-    },
-
-    tick: function () {
-        var slotContainerFull = this.container.getSlot("slotLiquid");
-        if (this.liquidStorage.getAmount("water")) {
-            ContainerHelper.fluidContainerEmpty(["water"], this, {full: "slotLiquid", empty: "slotContainer"});
-        } else if (this.liquidStorage.getAmount("lava")) {
-            ContainerHelper.fluidContainerEmpty(["lava"], this, {full: "slotLiquid", empty: "slotContainer"});
-        } else if (slotContainerFull.id) {
-            ContainerHelper.fluidContainerEmpty(["lava", "water"], this, {full: "slotLiquid", empty: "slotContainer"});
-        }
-
-        this.liquidStorage.updateUiScale("liquidScale", this.liquidStorage.getAmount("water") ? "water" : "lava");
-
-        this.container.validateAll();
-    },
-
-    structureTick: function (tile) {
-        if (this.data.time <= 0) {
-            var liquid = this.liquidStorage.getAmount("water") ? "water" : "lava";
-            if (this.liquidStorage.getAmount(liquid)) {
-                this.liquidStorage.getLiquid(liquid, 0.001);
-                alert("hi");
-                if (liquid === "water") {
-                    this.data.time = 1;
-                    this.data.humidity = 2;
-                    this.data.climate = -1;
-                } else {
-                    this.data.time = 10;
-                    this.data.humidity = -1;
-                    this.data.climate = 2;
-                }
-            }
-        } else {
-            tile.data.humidity = Math.min(BiomeHelper.HUMIDITY_DAMP, tile.data.humidity + this.data.humidity);
-            tile.data.climate = Math.min(BiomeHelper.CLIMATE_HELLISH, tile.data.climate + this.data.climate);
-            this.data.time--;
-        }
-    },
-
-    getGuiScreen: function () {
-        return alvearyHygroregulatorGUI;
-    }
-});
-TileEntity.registerPrototype(BlockID.alveary, {
+/*TileEntity.registerPrototype(BlockID.alveary, {
 
     defaultValues: {
         center: false,
@@ -60,16 +6,18 @@ TileEntity.registerPrototype(BlockID.alveary, {
         dclimate: 0,
         humidity: 0,
         climate: 0,
-        mutate: true
+        mutate: true,
+        structureID: 0
     },
 
     rebuildStructure: function () {
-        World.setBlock(this.x - 1, this.y, this.z, BlockID.alveary);
-        World.setBlock(this.x + 1, this.y, this.z, BlockID.alveary);
-        World.setBlock(this.x, this.y, this.z - 1, BlockID.alveary);
-        World.setBlock(this.x, this.y, this.z + 1, BlockID.alveary);
+        if(World.getBlock(this.x - 1, this.y, this.z).id === BlockID.alveary_misc) World.setBlock(this.x - 1, this.y, this.z, BlockID.alveary);
+        if(World.getBlock(this.x + 1, this.y, this.z).id === BlockID.alveary_misc) World.setBlock(this.x + 1, this.y, this.z, BlockID.alveary);
+        if(World.getBlock(this.x, this.y, this.z - 1).id === BlockID.alveary_misc) World.setBlock(this.x, this.y, this.z - 1, BlockID.alveary);
+        if(World.getBlock(this.x, this.y, this.z + 1).id === BlockID.alveary_misc) World.setBlock(this.x, this.y, this.z + 1, BlockID.alveary);
 
         this.data.center = false;
+        this.data.structureID = 0;
     },
 
     blockTick: function () {
@@ -91,7 +39,7 @@ TileEntity.registerPrototype(BlockID.alveary, {
         }
     },
     tick: function () {
-        if (World.getThreadTime() % 20 === 0) {
+        if (World.getThreadTime() % 40 === 0) {
             if (this.isCenter()) {
                 if (this.checkStructure()) {
                     if (!this.data.center) {
@@ -100,6 +48,20 @@ TileEntity.registerPrototype(BlockID.alveary, {
                         World.setBlock(this.x + 1, this.y, this.z, BlockID.alveary_misc);
                         World.setBlock(this.x, this.y, this.z - 1, BlockID.alveary_misc);
                         World.setBlock(this.x, this.y, this.z + 1, BlockID.alveary_misc);
+
+                        World.addTileEntity(this.x - 1, this.y, this.z);
+                        World.addTileEntity(this.x + 1, this.y, this.z);
+                        World.addTileEntity(this.x, this.y, this.z - 1);
+                        World.addTileEntity(this.x, this.y, this.z + 1);
+
+                        World.getTileEntity(this.x - 1, this.y, this.z).data.center = {x: this.x, y: this.y, z: this.z};
+                        World.getTileEntity(this.x + 1, this.y, this.z).data.center = {x: this.x, y: this.y, z: this.z};
+                        World.getTileEntity(this.x, this.y, this.z - 1).data.center = {x: this.x, y: this.y, z: this.z};
+                        World.getTileEntity(this.x, this.y, this.z + 1).data.center = {x: this.x, y: this.y, z: this.z};
+                    }
+
+                    if(!this.data.structureID){
+                        this.data.structureID = ApiaryRegistry.getNextUnique();
                     }
                 } else if (this.data.center) {
                     this.rebuildStructure();
@@ -133,10 +95,10 @@ TileEntity.registerPrototype(BlockID.alveary, {
             }
         }
 
-        if (this.isStructureBlock(World.getBlock(this.x + 2, this.y, this.z))) return false;
-        if (this.isStructureBlock(World.getBlock(this.x - 2, this.y, this.z))) return false;
-        if (this.isStructureBlock(World.getBlock(this.x, this.y, this.z + 2))) return false;
-        if (this.isStructureBlock(World.getBlock(this.x, this.y, this.z - 2))) return false;
+        if (this.isStructureBlock(World.getBlock(this.x + 2, this.y - 2, this.z).id)) return false;
+        if (this.isStructureBlock(World.getBlock(this.x - 2, this.y - 2, this.z).id)) return false;
+        if (this.isStructureBlock(World.getBlock(this.x, this.y - 2, this.z + 2).id)) return false;
+        if (this.isStructureBlock(World.getBlock(this.x, this.y - 2, this.z - 2).id)) return false;
 
         return true;
     },
@@ -167,11 +129,6 @@ TileEntity.registerPrototype(BlockID.alveary, {
     },
 
     isStructureBlock: function (id) {
-        for (var key in multiblock_apiary) {
-            if (multiblock_apiary[key] === id) {
-                return true;
-            }
-        }
-        return false
+        return ApiaryRegistry.isApiaryComponent() || id === BlockID.alveary || id === BlockID.alveary_misc
     }
-});
+});*/

@@ -28,7 +28,7 @@ var MachineRegistry = {
         ICRenderLib.addConnectionBlock("machineForestry", id);
         ToolAPI.registerBlockMaterial(id, "stone");
         TileEntity.registerPrototype(id, prototype);
-        EnergyTileRegistry.addEnergyTypeForId(id, RF)
+        EnergyTileRegistry.addEnergyTypeForId(id, EU)
     }
 
 };

@@ -21,6 +21,7 @@ var BeeEffects = {
         if (inv.getSlot("arm3").id === ItemID.bootsApiarist) count++;
         return count;
     },
+
     doAggress: function (coords, range) {
         var all = Entity.getAllInRange(coords, range.x);
         var damage = 4 - this.getApiaristArmorWearValue();

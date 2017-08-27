@@ -1,3 +1,10 @@
+/**
+ * @param species вид пчелы
+ * @param beetype тип пчелы
+ * @param save сохранять ли данные о ней
+ * @param inactive_species неактивный вид
+ * @constructor
+ */
 function Bee(species, beetype, save, inactive_species) {
     this.type = species;
     this.beetype = beetype;
@@ -9,6 +16,9 @@ function Bee(species, beetype, save, inactive_species) {
     this.pristine = true;
     this.generation = 0;
 
+    /**
+     * Добавляет пчелу в список сохранения
+     */
     this.save = function () {
         if (this.isSaved()) return;
         this.unique = BeeRegistry.getBeeNextUniqueID();
@@ -16,6 +26,10 @@ function Bee(species, beetype, save, inactive_species) {
         this.item.data = this.unique;
     };
 
+    /**
+     * Возвращает продукцию пчелы
+     * @return {Array}
+     */
     this.getProduce = function () {
         var arr = this.getBeeType().produce;
         var arr2 = this.getInactiveBeeType().produce;
@@ -34,70 +48,123 @@ function Bee(species, beetype, save, inactive_species) {
         return arr;
     };
 
+    /**
+     * @return {Array} Массив цветов для активного вида
+     */
     this.getFlowers = function () {
         return this.getBeeType().flowers;
     };
 
+    /**
+     * @return {Array} Массив цветов для неактивного вида
+     */
     this.getInactiveFlowers = function () {
         return this.getInactiveBeeType().flowers;
     };
 
+    /**
+     * @return {number} Необходимую влажность для активного вида
+     */
     this.getHumidity = function () {
         return this.getBeeType().humidity;
     };
 
+    /**
+     * @return {number} Необходимую влажность для неактивного вида
+     */
     this.getInactiveHumidity = function () {
         return this.getInactiveBeeType().humidity;
     };
 
+    /**
+     * @return {number} Необходимую температуру для активного вида
+     */
     this.getClimate = function () {
         return this.getBeeType().climate;
     };
 
+    /**
+     * @return {number} Необходимую температуру для неактивного вида
+     */
     this.getInactiveClimate = function () {
         return this.getInactiveBeeType().climate;
     };
 
+    /**
+     * @return {number} Устойчивость к температуре для активного вида
+     */
     this.getClimateTolValue = function () {
         return BeeRegistry.getToleranceValue(this.getActiveChromosome("TEMPERATURE_TOLERANCE"));
     };
 
+    /**
+     * @return {number} Устойчивость к температуре для неактивного вида
+     */
     this.getInactiveClimateTolValue = function () {
         return BeeRegistry.getToleranceValue(this.getInactiveChromosome("TEMPERATURE_TOLERANCE"));
     };
 
+    /**
+     * @return {number} Устойчивость к влажности для активного вида
+     */
     this.getHumidityTolValue = function () {
         return BeeRegistry.getToleranceValue(this.getActiveChromosome("HUMIDITY_TOLERANCE"));
     };
 
+    /**
+     * @return {number} Возвращает устойчивость к влажности для неактивного вида
+     */
     this.getInactiveHumidityTolValue = function () {
         return BeeRegistry.getToleranceValue(this.getInactiveChromosome("HUMIDITY_TOLERANCE"));
     };
 
+    /**
+     * @return {BeeType} Тип пчелы для активного вида
+     */
     this.getBeeType = function () {
         return BeeRegistry.getBeeByType(this.type);
     };
 
+    /**
+     * @return {BeeType} Тип пчелы для неактивного вида
+     */
     this.getInactiveBeeType = function () {
         return BeeRegistry.getBeeByType(this.inactive_chromosomes_list["SPECIES"]);
     };
 
+    /**
+     * @return {Array} Спец. продукция
+     */
     this.getSpecialty = function () {
         return this.getBeeType().specialty;
     };
 
+    /**
+     * @return {number} Сохраняются ли данные о пчеле
+     */
     this.isSaved = function () {
         return this.unique;
     };
 
+    /**
+     * @param name Имя хромосомы
+     * @return {*} Значение хромосомы для активного вида
+     */
     this.getActiveChromosome = function (name) {
-        return (typeof this.active_chromosomes_list[name] !== "undefined" && typeof this.active_chromosomes_list[name] !== "null") ? this.active_chromosomes_list[name] : BeeRegistry.bees[this.type].getChromosome(name);
+        return (typeof this.active_chromosomes_list[name] !== "undefined" && this.active_chromosomes_list[name] !== null) ? this.active_chromosomes_list[name] : BeeRegistry.bees[this.type].getChromosome(name);
     };
 
+    /**
+     * @param name Имя хромосомы
+     * @return {*} Значение хромосомы для неактивного вида
+     */
     this.getInactiveChromosome = function (name) {
-        return (typeof this.inactive_chromosomes_list[name] !== "undefined" && typeof this.inactive_chromosomes_list[name] !== "null") ? this.inactive_chromosomes_list[name] : BeeRegistry.bees[this.inactive_chromosomes_list.SPECIES].getChromosome(name);
+        return (typeof this.inactive_chromosomes_list[name] !== "undefined" && this.inactive_chromosomes_list[name] !== null) ? this.inactive_chromosomes_list[name] : BeeRegistry.bees[this.inactive_chromosomes_list.SPECIES].getChromosome(name);
     };
 
+    /**
+     * @return {Object} Данные о пчеле для сохранения
+     */
     this.getSaveScope = function () {
         var scope = {};
         for (var key in this) {
@@ -107,6 +174,11 @@ function Bee(species, beetype, save, inactive_species) {
         return scope;
     };
 
+    /**
+     * Чтение сохранённых данных из scope
+     * @param scope
+     * @return {Bee}
+     */
     this.readSaveScope = function (scope) {
         for (var key in scope) this[key] = scope[key];
 
@@ -114,10 +186,16 @@ function Bee(species, beetype, save, inactive_species) {
         return this;
     };
 
+    /**
+     * @return {number} Продолжительность жизни(В циклах)
+     */
     this.getMaxHealth = function () {
         return this.getActiveChromosome("LIFESPAN");
     };
 
+    /**
+     * Обновляет информацию о предмете в item
+     */
     this.refreshItem = function () {
         if (this.beetype === BeeRegistry.BEETYPE_QUEEN) {
             this.item.id = BeeRegistry.getQueenByType(this.type);
@@ -131,15 +209,21 @@ function Bee(species, beetype, save, inactive_species) {
         }
     };
 
+    /**
+     * Удаляет информацию о пчеле из сохранений
+     */
     this.destroy = function () {
         if (!this.isSaved()) return;
         delete BeeSaver.bees[this.unique];
     };
 
-    this.isValidClimate = function (x, y, biome) {
+    /**
+     * @param value климат
+     * @return {boolean} пригоден ли климат для пчелы
+     */
+    this.isValidClimate = function (value) {
         var up = 0;
         var down = 0;
-        var value = BiomeHelper.getBiomeClimate(!biome ? World.getBiome(x, y) : biome);
         var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["TEMPERATURE_TOLERANCE"]);
         if (tol === BeeRegistry.TOLERANCE_BOTH) {
             up = this.getClimateTolValue();
@@ -150,17 +234,16 @@ function Bee(species, beetype, save, inactive_species) {
             down = this.getClimateTolValue();
         }
 
-        if (this.getBeeType().climate + up >= value && this.getBeeType().climate - down <= value) {
-            return true;
-        }
-
-        return false;
+        return this.getBeeType().climate + up >= value && this.getBeeType().climate - down <= value;
     };
 
-    this.isValidHumidity = function (x, y, biome) {
+    /**
+     * @param value влажность
+     * @return {boolean} пригодна ли влажность для пчелы
+     */
+    this.isValidHumidity = function (value) {
         var up = 0;
         var down = 0;
-        var value = BiomeHelper.getBiomeHumidity(!biome ? World.getBiome(x, y) : biome);
         var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["HUMIDITY_TOLERANCE"]);
         if (tol === BeeRegistry.TOLERANCE_BOTH) {
             up = this.getHumidityTolValue();
@@ -171,11 +254,7 @@ function Bee(species, beetype, save, inactive_species) {
             down = this.getHumidityTolValue();
         }
 
-        if (this.getBeeType().humidity + up >= value && this.getBeeType().humidity - down <= value) {
-            return true;
-        }
-
-        return false;
+        return this.getBeeType().humidity + up >= value && this.getBeeType().humidity - down <= value;
     };
 
     if (species) {
@@ -186,7 +265,6 @@ function Bee(species, beetype, save, inactive_species) {
         }
 
         this.refreshItem();
-
         this.health = this.getMaxHealth();
     }
 

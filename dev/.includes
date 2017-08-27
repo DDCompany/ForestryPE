@@ -9,6 +9,7 @@ api/core/RecipeRegistry.js
 api/core/BackpackRegistry.js
 api/core/MachineRegistry.js
 api/core/Dictionary.js
+api/core/ApiaryRegistry.js
 
 api/apiculture/BeeType.js
 api/apiculture/BeeEffect.js
@@ -35,7 +36,11 @@ items/backpacks.js
 items/crates.js
 items/ingots.js
 
+
+
 items/tools.js
+
+
 
 blocks/storage/apiaristchest/apiaristchest.js
 blocks/storage/apiaristchest/gui.js
@@ -96,9 +101,33 @@ blocks/generators/peat-fired/peat-fired.js
 blocks/generators/peat-fired/tile.js
 blocks/generators/peat-fired/gui.js
 
-multiblock/apiary/blocks.js
-multiblock/apiary/gui.js
-multiblock/apiary/tile.js
+
+
+multiblock/apiary/alveary/alveary.js
+multiblock/apiary/alveary/tile.js
+
+multiblock/apiary/alveary_misc/alveary_misc.js
+multiblock/apiary/alveary_misc/gui.js
+multiblock/apiary/alveary_misc/tile.js
+
+multiblock/apiary/alvearyHygroregulator/alvearyHygroregulator.js
+multiblock/apiary/alvearyHygroregulator/gui.js
+multiblock/apiary/alvearyHygroregulator/tile.js
+
+multiblock/apiary/alvearyFan/alvearyFan.js
+multiblock/apiary/alvearyFan/tile.js
+
+multiblock/apiary/alvearyHeater/alvearyHeater.js
+multiblock/apiary/alvearyHeater/tile.js
+
+multiblock/apiary/alvearyStabiliser/alvearyStabiliser.js
+multiblock/apiary/alvearyStabiliser/tile.js
+
+multiblock/apiary/swarmer/swarmer.js
+multiblock/apiary/swarmer/gui.js
+multiblock/apiary/swarmer/tile.js
+
+
 
 blocks/soil/humus/humus.js
 blocks/soil/humus/tile.js

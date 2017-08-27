@@ -20,10 +20,6 @@ TileEntity.registerPrototype(BlockID.apiary, {
 
         var content = this.container.getGuiContent();
 
-        if (!this.houseModifierList) {
-            this.houseModifierList = new ModifierList([]);
-        }
-
         if (!this.house) {
             this.house = new BeeHouse(this, {
                 slotPrincess: "slot1",
@@ -31,7 +27,11 @@ TileEntity.registerPrototype(BlockID.apiary, {
                 produceSlots: this.OUTPUT_SLOTS,
                 slotPrincessOut: this.OUTPUT_SLOTS,
                 slotDronesOut: this.OUTPUT_SLOTS
-            }, this.houseModifierList)
+            }, new ModifierList([{
+                getProductionModifier: function () {
+                    return 0.1;
+                }
+            }]));
         }
         var modifiers = new ModifierList([]);
 
@@ -41,7 +41,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
                 if (slot.id && BeeFrame.isFrame(slot.id)) {
                     var frame = BeeFrame.frames[slot.id];
                     modifiers.modifiers.push(frame.modifier);
-                    if (this.data.progressCycle == 0) slot = frame.onFrameUsed(slot, this.house);
+                    if (this.data.progressCycle === 0) slot = frame.onFrameUsed(slot, this.house);
                     if (slot.data > frame.durability) {
                         slot.count = 0;
                     }
@@ -64,14 +64,14 @@ TileEntity.registerPrototype(BlockID.apiary, {
             }
         }
 
-        if (this.house.error && content && (!content.elements["error"] || content.elements["error"].text != this.house.error)) {
+        if (this.house.error && content && (!content.elements["error"] || content.elements["error"].text !== this.house.error)) {
             content.elements["error"] = {type: "text", x: 345, y: 320, width: 500, height: 30, text: this.house.error};
         } else if (!this.house.error && content && content.elements["error"]) {
             content.elements["error"] = null;
         }
 
         this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
-
+        this.container.validateAll();
     },
 
     getGuiScreen: function () {

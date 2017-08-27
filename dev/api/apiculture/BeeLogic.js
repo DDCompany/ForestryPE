@@ -1,4 +1,10 @@
 var BeeLogic = {
+    /**
+     * Спаривает принцессу и дрона
+     * @param {Bee} princess
+     * @param {Bee} drone
+     * @return {Bee} королева
+     */
     mate: function (princess, drone) {
         var queen = new Bee(princess.type, BeeRegistry.BEETYPE_QUEEN);
         queen.active_chromosomes_list = princess.active_chromosomes_list;
@@ -9,6 +15,12 @@ var BeeLogic = {
         return queen;
     },
 
+    /**
+     * @param {Bee} queen
+     * @param {number} productionModifier Модификатор продукции
+     * @param {number} houseModifier Модификатор продукции пасеки
+     * @return {Array} Произведенная продукция
+     */
     produce: function (queen, productionModifier, houseModifier) {
         var produce = queen.getProduce();
         var specialty = queen.getSpecialty();
@@ -30,6 +42,11 @@ var BeeLogic = {
         return result;
     },
 
+    /**
+     * @param {Bee} bee
+     * @param {Object} coords
+     * @return {boolean} Найдены ли подходящие цветы для пчелы
+     */
     findFlowers: function (bee, coords) {
         var flowers = bee.getFlowers();
         var territory = BeeRegistry.rangeToObject(bee.getActiveChromosome("TERRITORY"));
@@ -43,8 +60,17 @@ var BeeLogic = {
             }
         }
 
+        return false;
     },
 
+    /**
+     * Возвращает потомства(принцессы)
+     * @param {Bee} bee королева
+     * @param {ModifierList} modifierList
+     * @param {ModifierList} houseModifierList
+     * @param {BeeHouse} house
+     * @return {Array}
+     */
     spawnPrincess: function (bee, modifierList, houseModifierList, house) {
         var arr = [];
         var count = Math.random() < Config.secondPrincessChance ? 2 : 1;
@@ -54,6 +80,14 @@ var BeeLogic = {
         return arr;
     },
 
+    /**
+     * Возвращает потомства(дроны)
+     * @param {Bee} bee королева
+     * @param {ModifierList} modifierList
+     * @param {ModifierList} houseModifierList
+     * @param {BeeHouse} house
+     * @return {Array}
+     */
     spawnDrones: function (bee, modifierList, houseModifierList, house) {
         var toCreate = parseInt(bee.getActiveChromosome("FERTILITY"));
         var arr = [];

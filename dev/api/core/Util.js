@@ -1,4 +1,9 @@
 var Util = {
+
+    /**
+     * Объединение объектов
+     * @return {{}}
+     */
     objectUnion: function () {
         var obj = {};
         for (var key in arguments) {
@@ -17,8 +22,12 @@ var Util = {
         return obj;
     },
 
+    /**
+     * @param arr
+     * @return {boolean} Массив ли arr
+     */
     isArray: function (arr) {
-        return "length" in arr ? true : false;
+        return "length" in arr;
     },
 
     getBlocksInRange: function (coords, range, block, skip) {
@@ -56,5 +65,9 @@ var Util = {
                 return true;
             }
         }
+    },
+
+    random: function (min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 };

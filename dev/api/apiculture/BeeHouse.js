@@ -1,21 +1,39 @@
+/**
+ *
+ * @param tile TileEntity блока пасеки
+ * @param slots слоты
+ * @param {ModifierList} houseModifierList модификаторы пасеки
+ * @constructor
+ */
 function BeeHouse(tile, slots, houseModifierList) {
     this.tile = tile;
-    this.container = tile.container;
     this.slots = slots;
     this.queen = null;
     this.error = null;
     this.houseModifierList = houseModifierList;
 
+    /**
+     * Время спаривания
+     * @type {number}
+     */
     this.TOTAL_BREEDING_TIME = 100;
-    this.CYCLE_TIME = 10;
+    /**
+     * Время одного цикла
+     * @type {number}
+     */
+    this.CYCLE_TIME = 20;
 
+    /**
+     * Вызывать каждый тик
+     * @param {ModifierList} modifiersList
+     */
     this.tick = function (modifiersList) {
-        var slot1 = this.container.getSlot(this.slots.slotPrincess);
-        var slot2 = this.container.getSlot(this.slots.slotDrone);
+        var slot1 = this.getPrincessSlot(this.slots.slotPrincess);
+        var slot2 = this.getDroneSlot(this.slots.slotDrone);
 
         if (!this.data) this.data = this.tile.data;
         if (slot1.count > 1) {
-            World.drop(this.tile.x, this.tile.y + 1, this.tile.z, slot1.id, slot1.count - 1, slot1.data)
+            World.drop(this.tile.x, this.tile.y + 1, this.tile.z, slot1.id, slot1.count - 1, slot1.data);
             slot1.count = 1;
         }
 
@@ -32,16 +50,15 @@ function BeeHouse(tile, slots, houseModifierList) {
             this.queen = null;
         }
 
-        this.container.validateAll();
+        this.getContainer().validateAll();
     };
 
-    this.getBiome = function () {
-        return World.getBiome(this.tile.x, this.tile.z);
-    };
-
+    /**
+     * Спаривание пчёл
+     */
     this.tickBreeding = function () {
-        var slot1 = this.container.getSlot(this.slots.slotPrincess);
-        var slot2 = this.container.getSlot(this.slots.slotDrone);
+        var slot1 = this.getPrincessSlot(this.slots.slotPrincess);
+        var slot2 = this.getDroneSlot(this.slots.slotDrone);
 
         this.data.progress++;
         this.data.progressMax = this.TOTAL_BREEDING_TIME;
@@ -56,19 +73,23 @@ function BeeHouse(tile, slots, houseModifierList) {
         }
     };
 
+    /**
+     * Процесс работы королевы
+     * @param {ModifierList} modifiersList
+     */
     this.tickQueenWork = function (modifiersList) {
         if (World.getThreadTime() % 128 === 0) {
             if (!BeeLogic.findFlowers(this.queen, {x: this.tile.x, y: this.tile.y, z: this.tile.z})) {
                 this.error = Translation.translate("apiary.error.flowers");
-            } else if (!this.queen.isValidClimate(this.tile.x, this.tile.y, this.getBiome())) {
+            } else if (!this.queen.isValidClimate(this.getClimate())) {
                 this.error = Translation.translate("apiary.error.climate");
-            } else if (!this.queen.isValidHumidity(this.tile.x, this.tile.y, this.getBiome())) {
+            } else if (!this.queen.isValidHumidity(this.getHumidity())) {
                 this.error = Translation.translate("apiary.error.humidity");
             } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
                 this.error = Translation.translate("apiary.error.sky");
             } else if (World.getWeather().rain > 0 && !modifiersList.isSealed() && !houseModifierList.isSealed() && !this.queen.getActiveChromosome("TOLERATES_RAIN")) {
                 this.error = Translation.translate("apiary.error.rain");
-            } else if (!(World.__inworld.getLightLevel(this.tile.x, this.tile.y + 1, this.tile.z) >= 15) && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
+            } else if (!(World.getWorldTime() > 1000 && World.getWorldTime() < 13000) && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
                 this.error = Translation.translate("apiary.error.night");
             } else {
                 this.error = null;
@@ -90,11 +111,11 @@ function BeeHouse(tile, slots, houseModifierList) {
                 y: this.tile.y,
                 z: this.tile.z
             }, BeeRegistry.rangeToObject(this.queen.getActiveChromosome("TERRITORY")));
-            ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.container, this.slots.produceSlots);
+            ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.getContainer(), this.slots.produceSlots);
             if (this.queen.health <= 0) {
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList, this)), this.container, this.slots.slotPrincessOut);
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.container, this.slots.slotDronesOut)
-                this.container.getSlot(this.slots.slotPrincess).count = 0;
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotPrincessOut);
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut)
+                this.setSlot(this.slots.slotPrincess, {id: 0, data: 0, count: 0});
                 Callback.invokeCallback("onQueenDeath", this.house);
                 this.queen.destroy();
                 this.queen = null;
@@ -102,5 +123,33 @@ function BeeHouse(tile, slots, houseModifierList) {
         } else {
             Callback.invokeCallback("onQueenCycle", this.house);
         }
+    };
+
+    //Функции для перегрузки
+
+    this.getPrincessSlot = function (slotname) {
+        return this.getContainer().getSlot(slotname);
+    };
+
+    this.getDroneSlot = function (slotname) {
+        return this.getContainer().getSlot(slotname);
+    };
+
+    this.getContainer = function () {
+        return this.tile.container;
+    };
+
+    this.setSlot = function (name, slot) {
+        this.getContainer().getSlot(name).id = slot.id;
+        this.getContainer().getSlot(name).data = slot.data;
+        this.getContainer().getSlot(name).count = slot.count;
+    };
+
+    this.getHumidity = function () {
+        return BiomeHelper.getBiomeHumidity(World.getBiome(this.tile.x, this.tile.z));
+    };
+
+    this.getClimate = function () {
+        return BiomeHelper.getBiomeClimate(World.getBiome(this.tile.x, this.tile.z));
     };
 }

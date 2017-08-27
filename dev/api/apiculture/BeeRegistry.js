@@ -1,8 +1,3 @@
-/*
-    Callbacks:
-    onQueenDeath
-    onQueenCycle
- */
 var BeeRegistry = {
     bees: {},
 
@@ -294,7 +289,7 @@ var BeeRegistry = {
         if (!BeeSaver.bees[data]) {
             var beetype = BeeRegistry.getBeeTypeByID(id);
             bee = new Bee(BeeRegistry.getTypeByID(id), beetype, false);
-            if (beetype == BeeRegistry.BEETYPE_QUEEN) {
+            if (beetype === BeeRegistry.BEETYPE_QUEEN) {
                 bee.mate = new Bee(BeeRegistry.getTypeByID(id), BeeRegistry.BEETYPE_DRONE, false);
             }
             return bee;
