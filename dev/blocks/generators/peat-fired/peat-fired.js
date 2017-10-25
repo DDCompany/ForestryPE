@@ -3,8 +3,8 @@ Block.setPrototype("enginePeat", {
 
     getVariations: function () {
         return [{
-            name: "Peat-fired generator",
-            texture: [["engine_peat", 1], ["engine_peat", 1], ["engine_peat", 0]],
+            name: "Peat-fired Engine",
+            texture: [["engine_peat", 0], ["engine_peat", 2], ["engine_peat", 1]],
             inCreative: true
         }];
     }
@@ -18,4 +18,5 @@ Callback.addCallback("PostLoaded", function () {
     ], ['b', ItemID.ingotCopper, 0, 'g', ItemID.gearCopper, 0, 'm', ItemID.sturdyMachine, 0, 'p', 33, 0, 's', 20, 0]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.enginePeat);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.enginePeat);
+ModelHelper.createEngineModel(BlockID.enginePeat);

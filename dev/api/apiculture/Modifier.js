@@ -2,37 +2,28 @@ function ModifierList(modifiers) {
 
     this.modifiers = modifiers;
 
-    //Модификатор продолжительности жизни
-    this.getLifespanModifier = function (house, currect) {
-        var value = currect;
-        for (var key in this.modifiers) {
-            if (this.modifiers[key].getLifespanModifier) value *= this.modifiers[key].getLifespanModifier(house, value);
-        }
-        return value;
-    };
-
     //Модификатор шанса продукции
-    this.getProductionModifier = function (house, currect) {
-        var value = currect;
+    this.getProductionModifier = function (house) {
+        var value = 1;
         for (var key in this.modifiers) {
-            if (this.modifiers[key].getProductionModifier) value *= this.modifiers[key].getProductionModifier(house, value);
+            if (this.modifiers[key].getProductionModifier) value *= this.modifiers[key].getProductionModifier(house);
         }
         return value;
     };
 
     //Модификатор шанса мутации
-    this.getMutationModifier = function (house, currect) {
-        var value = currect;
+    this.getMutationModifier = function (house) {
+        var value = 1;
         for (var key in this.modifiers) {
-            if (this.modifiers[key].getMutationModifier) value *= this.modifiers[key].getMutationModifier(house, value);
+            if (this.modifiers[key].getMutationModifier) value *= this.modifiers[key].getMutationModifier(house);
         }
         return value;
     };
 
     //Игнорировать ли дождь
-    this.isSealed = function (house, currect) {
+    this.isSealed = function (house) {
         for (var key in this.modifiers) {
-            if (this.modifiers[key].isSealed && this.modifiers[key].isSealed(house, currect)) {
+            if (this.modifiers[key].isSealed && this.modifiers[key].isSealed(house)) {
                 return true;
             }
         }
@@ -40,13 +31,30 @@ function ModifierList(modifiers) {
     };
 
     //Игнорировать ли отсутствие неба
-    this.isSelfLighted = function (house, currect) {
+    this.isSelfLighted = function (house) {
         for (var key in this.modifiers) {
-            if (this.modifiers[key].isSelfLighted && this.modifiers[key].isSelfLighted(house, currect)) {
+            if (this.modifiers[key].isSelfLighted && this.modifiers[key].isSelfLighted(house)) {
                 return true;
             }
         }
         return false;
     };
 
+    //Модификатор шанса смерти Ignoble пчелы
+    this.getGeneticDecay = function (house) {
+        var value = 1;
+        for (var key in this.modifiers) {
+            if (this.modifiers[key].getGeneticDecay) value *= this.modifiers[key].getGeneticDecay(house);
+        }
+        return value;
+    };
+
+    //Модификатор времени цикла
+    this.getLifespanModifier = function (house) {
+        var value = 1;
+        for (var key in this.modifiers) {
+            if (this.modifiers[key].getLifespanModifier) value *= this.modifiers[key].getLifespanModifier(house);
+        }
+        return value;
+    };
 }

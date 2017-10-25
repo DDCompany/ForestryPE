@@ -14,7 +14,7 @@ TileEntity.registerPrototype(BlockID.raintank, {
 
         ContainerHelper.fluidContainerFilling("water", this, {empty: "slotContainer", full: "slotFullContainer"});
 
-        if (!(World.getThreadTime() % 20) && World.canSeeSky(this.x, this.y + 1, this.z) && World.getWeather().rain) {
+        if (!(World.getThreadTime() % 20) && GenerationUtils.canSeeSky(this.x, this.y + 1, this.z) && World.getWeather().rain) {
             this.liquidStorage.addLiquid("water", 0.01);
         }
     },

@@ -1,19 +1,28 @@
 /* ----- MACHINES LOCALIZE ----- */
 Translation.addTranslation("Apiary", {ru: "Пасека"});
+Translation.addTranslation("Bee house", {ru: "Пчелиный домик"});
 Translation.addTranslation("Carpenter", {ru: "Плотник"});
 Translation.addTranslation("Centrifuge", {ru: "Центрифуга"});
 Translation.addTranslation("Thermionic Fabricator", {ru: "Электроламповый завод"});
 Translation.addTranslation("Fermenter", {ru: "Бродильный аппарат"});
 Translation.addTranslation("Squeezer", {ru: "Соковыжималка"});
 Translation.addTranslation("Moistener", {ru: "Увлажнитель"});
-Translation.addTranslation("Peat-fired generator", {ru: "Торфяной генератор"});
-Translation.addTranslation("Biogas generator", {ru: "Биотопливный генератор"});
+Translation.addTranslation("Peat-fired Engine", {ru: "Торфяной двигатель"});
+Translation.addTranslation("Biogas Engine", {ru: "Биотопливный двигатель"});
+Translation.addTranslation("Clockwork Engine", {ru: "Часовой двигатель"});
 Translation.addTranslation("Still", {ru: "Дистиллятор"});
 Translation.addTranslation("Bio Generator", {ru: "Биогенератор"});
 Translation.addTranslation("Rain tank", {ru: "Сборщик дождя"});
 Translation.addTranslation("Rain Maker", {ru: "Вызыватель дождя"});
 
 Translation.addTranslation("Apiarist chest", {ru: "Сундук пчеловода"});
+
+Translation.addTranslation("Alveary", {ru: "Пчелиный улей"});
+Translation.addTranslation("Alveary Fan", {ru: "Вентилятор улья"});
+Translation.addTranslation("Alveary Heater", {ru: "Обогреватель улья"});
+Translation.addTranslation("Alveary Hygroregulator", {ru: "Кондиционер улья"});
+Translation.addTranslation("Alveary Stabiliser", {ru: "Стабилизатор улья"});
+Translation.addTranslation("Alveary Controller", {ru: "Котроллер Огромного Улья"});
 
 /* ----- BEEHIVES LOCALIZE ----- */
 Translation.addTranslation("Forest hive", {ru: "Лесной улей"});
@@ -127,8 +136,8 @@ Translation.addTranslation("Fertilizer", {ru: "Минеральное удобр
 Translation.addTranslation("Honeyed slice", {ru: "Бутерброд с мёдом"});
 Translation.addTranslation("Apatite", {ru: "Апатит"});
 Translation.addTranslation("Impregnated Stick", {ru: "Полированная палка"});
-Translation.addTranslation("mouldyWheat", {ru: "Плесневелая пшеница"});
-Translation.addTranslation("decayingWheat", {ru: "Загнивающая пшеница"});
+Translation.addTranslation("Mouldy wheat", {ru: "Плесневелая пшеница"});
+Translation.addTranslation("Decaying wheat", {ru: "Загнивающая пшеница"});
 Translation.addTranslation("Bog Earth", {ru: "Болотная земля"});
 Translation.addTranslation("Humus", {ru: "Гумус"});
 Translation.addTranslation("Peat", {ru: "Торф"});
@@ -141,6 +150,11 @@ Translation.addTranslation("Intricate Circuit Board", {ru: "Усовершенс
 Translation.addTranslation("Refined Circuit Board", {ru: "Усложнённая печатная плата"});
 Translation.addTranslation("Iodine Capsule", {ru: "Капсула с йодом"});
 Translation.addTranslation("Dissipation charge", {ru: "Рассеивающий заряд"});
+Translation.addTranslation("Scented paneling", {ru: "Пропитанная обшивка"});
+Translation.addTranslation("Bronze pickaxe", {ru: "Бронзовая кирка"});
+Translation.addTranslation("Bronze shovel", {ru: "Бронзовая лопата"});
+Translation.addTranslation("Ambrosia", {ru: "Амброзия"});
+Translation.addTranslation("Honey pot", {ru: "Горшочек мёда"});
 
 /* ------ BACKPACKS ----- */
 Translation.addTranslation("Miner's backpack", {ru: "Рюкзак шахтера"});

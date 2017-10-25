@@ -115,4 +115,3 @@ Callback.addCallback("PostLoaded", function () {
         "sws"
     ], ['s', 287, 0, 'w', 35, -1, 'c', BlockID.apiaristchest, 0, 'i', 280, 0]);
 });
-

@@ -18,4 +18,4 @@ Callback.addCallback("PostLoaded", function () {
     ], ['c', 331, -1, 'g', 20, -1, 'b', ItemID.sturdyMachine, -1]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.still);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.still);

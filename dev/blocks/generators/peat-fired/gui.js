@@ -12,7 +12,15 @@ var guiPeatFiredEngine = new UI.StandartWindow({
 
     elements: {
         "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry_energy_bar", scale: 3.2},
-        "burnScale": {type: "scale", x: 394.6, y: 142, direction: 1, bitmap: "engine_peat_scale", scale: 3.2},
+        "burnScale": {
+            type: "scale",
+            x: 394.6,
+            y: 142,
+            direction: 1,
+            bitmap: "engine_peat_scale",
+            scale: 3.2,
+            invert: true
+        },
 
         "slotFuel": {type: "slot", x: 385, y: 196.4},
 

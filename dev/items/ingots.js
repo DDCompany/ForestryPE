@@ -8,8 +8,10 @@ IDRegistry.genItemID("ingotBronze");
 Item.createItem("ingotBronze", "Bronze ingot", {name: "ingotBronze", meta: 0}, {});
 
 Callback.addCallback("PostLoaded", function () {
-    Recipes.addShapeless({id: ItemID.ingotBronze, count: 4, data: 0}, [{
-        id: ItemID.ingotCopper,
-        data: 0
-    }, {id: ItemID.ingotCopper, data: 0}, {id: ItemID.ingotCopper, data: 0}, {id: ItemID.ingotTin, data: 0}]);
+    if (Config.recipeBronzeIngot) {
+        Recipes.addShapeless({id: ItemID.ingotBronze, count: 4, data: 0}, [{
+            id: ItemID.ingotCopper,
+            data: 0
+        }, {id: ItemID.ingotCopper, data: 0}, {id: ItemID.ingotCopper, data: 0}, {id: ItemID.ingotTin, data: 0}]);
+    }
 });

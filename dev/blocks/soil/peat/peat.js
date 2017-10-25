@@ -44,6 +44,9 @@ Callback.addCallback("PostLoaded", function () {
 
     Recipes.addFurnace(ItemID.peat, ItemID.ash, 0);
 
+    Recipes.addFurnaceFuel(ItemID.peat, 0, 2000);
+    Recipes.addFurnaceFuel(ItemID.bituminousPeat, 0, 4200);
+
     Recipes.addShaped({id: ItemID.bituminousPeat, count: 1, data: 0}, [
         " a ",
         "pgp",

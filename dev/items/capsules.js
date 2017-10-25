@@ -10,12 +10,21 @@ Item.createItem("waxCapsuleEmpty", "Wax Capsule", {name: "waxCapsuleEmpty", meta
 
 IDRegistry.genItemID("waxCapsuleWater");
 Item.createItem("waxCapsuleWater", "Water wax Capsule", {name: "waxCapsuleWater", meta: 0});
+Item.setLiquidClip(ItemID.waxCapsuleEmpty, true);
+Item.registerUseFunction("waxCapsuleEmpty", function (coords, item, block) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
+        var pos = Player.getPosition();
+        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.waxCapsuleWater, 1, 0);
+        World.setBlock(coords.x, coords.y, coords.z);
+        Player.decreaseCarriedItem(1);
+    }
+});
 
 IDRegistry.genItemID("waxCapsuleJuice");
-Item.createItem("waxCapsuleJuice", "Juice wax Capsule", {name: "waxCapsuleJuice", meta: 0});
+Item.createFoodItem("waxCapsuleJuice", "Juice wax Capsule", {name: "waxCapsuleJuice", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("waxCapsuleHoney");
-Item.createItem("waxCapsuleHoney", "Honey wax Capsule", {name: "waxCapsuleHoney", meta: 0});
+Item.createFoodItem("waxCapsuleHoney", "Honey wax Capsule", {name: "waxCapsuleHoney", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("waxCapsuleSeedoil");
 Item.createItem("waxCapsuleSeedoil", "Seedoil wax Capsule", {name: "waxCapsuleSeedoil", meta: 0});
@@ -32,15 +41,32 @@ Item.createItem("canEmpty", "Can", {name: "canEmpty", meta: 0});
 
 IDRegistry.genItemID("canWater");
 Item.createItem("canWater", "Water Can", {name: "canWater", meta: 0});
+Item.setLiquidClip(ItemID.canEmpty, true);
+Item.registerUseFunction("canEmpty", function (coords, item, block) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
+        var pos = Player.getPosition();
+        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canWater, 1, 0);
+        World.setBlock(coords.x, coords.y, coords.z);
+        Player.decreaseCarriedItem(1);
+    }
+});
 
 IDRegistry.genItemID("canLava");
 Item.createItem("canLava", "Lava Can", {name: "canLava", meta: 0});
+Item.registerUseFunction("canEmpty", function (coords, item, block) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 11) {
+        var pos = Player.getPosition();
+        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canLava, 1, 0);
+        World.setBlock(coords.x, coords.y, coords.z);
+        Player.decreaseCarriedItem(1);
+    }
+});
 
 IDRegistry.genItemID("canJuice");
-Item.createItem("canJuice", "Juice Can", {name: "canJuice", meta: 0});
+Item.createFoodItem("canJuice", "Juice Can", {name: "canJuice", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("canHoney");
-Item.createItem("canHoney", "Honey Can", {name: "canHoney", meta: 0});
+Item.createFoodItem("canHoney", "Honey Can", {name: "canHoney", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("canSeedoil");
 Item.createItem("canSeedoil", "Seedoil Can", {name: "canSeedoil", meta: 0});
@@ -57,15 +83,32 @@ Item.createItem("refractoryEmpty", "Refractory Capsule", {name: "refractoryEmpty
 
 IDRegistry.genItemID("refractoryWater");
 Item.createItem("refractoryWater", "Water Capsule", {name: "refractoryWater", meta: 0});
+Item.setLiquidClip(ItemID.refractoryEmpty, true);
+Item.registerUseFunction("refractoryEmpty", function (coords, item, block) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
+        var pos = Player.getPosition();
+        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.refractoryWater, 1, 0);
+        World.setBlock(coords.x, coords.y, coords.z);
+        Player.decreaseCarriedItem(1);
+    }
+});
 
 IDRegistry.genItemID("refractoryLava");
 Item.createItem("refractoryLava", "Lava Capsule", {name: "refractoryLava", meta: 0});
+Item.registerUseFunction("refractoryEmpty", function (coords, item, block) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 11) {
+        var pos = Player.getPosition();
+        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.refractoryLava, 1, 0);
+        World.setBlock(coords.x, coords.y, coords.z);
+        Player.decreaseCarriedItem(1);
+    }
+});
 
 IDRegistry.genItemID("refractoryJuice");
-Item.createItem("refractoryJuice", "Juice Capsule", {name: "refractoryJuice", meta: 0});
+Item.createFoodItem("refractoryJuice", "Juice Capsule", {name: "refractoryJuice", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("refractoryHoney");
-Item.createItem("refractoryHoney", "Honey Capsule", {name: "refractoryHoney", meta: 0});
+Item.createFoodItem("refractoryHoney", "Honey Capsule", {name: "refractoryHoney", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("refractorySeedoil");
 Item.createItem("refractorySeedoil", "Seedoil Capsule", {name: "refractorySeedoil", meta: 0});

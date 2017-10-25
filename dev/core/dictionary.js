@@ -1,4 +1,3 @@
-//backpacks
 
 Dictionary.add("backpackMiners", {id: 263, data: 0});
 Dictionary.add("backpackMiners", {id: 15, data: 0});
@@ -15,7 +14,12 @@ Dictionary.add("backpackMiners", {id: 56, data: 0});
 Dictionary.add("backpackMiners", {id: 153, data: 0});
 Dictionary.add("backpackMiners", {id: 265, data: 0});
 Dictionary.add("backpackMiners", {id: 266, data: 0});
-Dictionary.add("backpackMiners", {id: BlockID.oreApatite, data: 0});
+Dictionary.add("backpackMiners", {id: BlockID.oreCopper, data: 0});
+Dictionary.add("backpackMiners", {id: BlockID.oreTin, data: 0});
+Dictionary.add("backpackMiners", {id: ItemID.apatite, data: 0});
+Dictionary.add("backpackMiners", {id: ItemID.ingotTin, data: 0});
+Dictionary.add("backpackMiners", {id: ItemID.ingotCopper, data: 0});
+Dictionary.add("backpackMiners", {id: ItemID.ingotBronze, data: 0});
 
 Dictionary.add("backpackDiggers", {id: 3, data: 0});
 Dictionary.add("backpackDiggers", {id: 4, data: 0});

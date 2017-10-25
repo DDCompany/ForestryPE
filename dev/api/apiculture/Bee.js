@@ -10,7 +10,6 @@ function Bee(species, beetype, save, inactive_species) {
     this.beetype = beetype;
     this.analyzed = false;
     this.unique = 0;
-    this.item = {};
     this.active_chromosomes_list = {};
     this.inactive_chromosomes_list = {};
     this.pristine = true;
@@ -22,8 +21,7 @@ function Bee(species, beetype, save, inactive_species) {
     this.save = function () {
         if (this.isSaved()) return;
         this.unique = BeeRegistry.getBeeNextUniqueID();
-        BeeSaver.bees[this.unique] = this;
-        this.item.data = this.unique;
+        BeeSaver.bees["b" + this.unique] = this;
     };
 
     /**
@@ -34,15 +32,19 @@ function Bee(species, beetype, save, inactive_species) {
         var arr = this.getBeeType().produce;
         var arr2 = this.getInactiveBeeType().produce;
         for (var key in arr2) {
-            var skip = false;
-            for (var key2 in arr) {
-                if (arr[key][0] == arr2[key2][0] && arr[key][1] == arr2[key2][1]) {
-                    skip = true;
+            if (arr2[key]) {
+                var skip = false;
+                for (var key2 in arr) {
+                    if (arr[key2]) {
+                        if (arr[key2][0] == arr2[key][0] && arr[key2][1] == arr2[key][1]) {
+                            skip = true;
+                        }
+                    }
                 }
-            }
 
-            if (!skip) {
-                arr.push(arr2[key]);
+                if (!skip) {
+                    arr.push(arr2[key]);
+                }
             }
         }
         return arr;
@@ -143,7 +145,7 @@ function Bee(species, beetype, save, inactive_species) {
      * @return {number} Сохраняются ли данные о пчеле
      */
     this.isSaved = function () {
-        return this.unique;
+        return this.unique !== 0;
     };
 
     /**
@@ -163,50 +165,39 @@ function Bee(species, beetype, save, inactive_species) {
     };
 
     /**
-     * @return {Object} Данные о пчеле для сохранения
-     */
-    this.getSaveScope = function () {
-        var scope = {};
-        for (var key in this) {
-            typeof this[key] === "function" || (scope[key] = this[key]);
-        }
-
-        return scope;
-    };
-
-    /**
-     * Чтение сохранённых данных из scope
-     * @param scope
-     * @return {Bee}
-     */
-    this.readSaveScope = function (scope) {
-        for (var key in scope) this[key] = scope[key];
-
-        BeeSaver.bees[this.unique] = this;
-        return this;
-    };
-
-    /**
      * @return {number} Продолжительность жизни(В циклах)
      */
     this.getMaxHealth = function () {
         return this.getActiveChromosome("LIFESPAN");
     };
 
-    /**
-     * Обновляет информацию о предмете в item
-     */
-    this.refreshItem = function () {
-        if (this.beetype === BeeRegistry.BEETYPE_QUEEN) {
-            this.item.id = BeeRegistry.getQueenByType(this.type);
-            this.item.data = this.unique;
-        } else if (this.beetype === BeeRegistry.BEETYPE_DRONE) {
-            this.item.id = BeeRegistry.getDroneByType(this.type);
-            this.item.data = this.unique;
-        } else if (this.beetype === BeeRegistry.BEETYPE_PRINCESS) {
-            this.item.id = BeeRegistry.getPrincessByType(this.type);
-            this.item.data = this.unique;
+    this.getItemID = function () {
+        switch (this.beetype) {
+            case BeeRegistry.BEETYPE_QUEEN:
+                return BeeRegistry.getQueenByType(this.type);
+            case BeeRegistry.BEETYPE_DRONE:
+                return BeeRegistry.getDroneByType(this.type);
+            case BeeRegistry.BEETYPE_PRINCESS:
+                return BeeRegistry.getPrincessByType(this.type);
         }
+    };
+
+    this.getSaveScope = function () {
+        var scope = {};
+        scope["type"] = this.type;
+        scope["beetype"] = this.beetype;
+        scope["analyzed"] = this.analyzed;
+        scope["unique"] = this.unique;
+        scope["active_chromosomes_list"] = this.active_chromosomes_list;
+        scope["inactive_chromosomes_list"] = this.inactive_chromosomes_list;
+        scope["pristine"] = this.pristine;
+        scope["generation"] = this.generation;
+        scope["health"] = this.health;
+        if (this.mate) {
+            scope["mate"] = this.mate;
+        }
+
+        return scope;
     };
 
     /**
@@ -214,7 +205,7 @@ function Bee(species, beetype, save, inactive_species) {
      */
     this.destroy = function () {
         if (!this.isSaved()) return;
-        delete BeeSaver.bees[this.unique];
+        delete BeeSaver.bees["b" + this.unique];
     };
 
     /**
@@ -263,9 +254,6 @@ function Bee(species, beetype, save, inactive_species) {
         if (save || typeof save === "undefined") {
             this.save();
         }
-
-        this.refreshItem();
         this.health = this.getMaxHealth();
     }
-
 }

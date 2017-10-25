@@ -14,25 +14,6 @@ Callback.addCallback("LevelLoaded", function () {
     Updatable.addUpdatable(updatableBackpacks);
 });
 
-var backpackGUIObj = {
-    standart: {
-        header: {
-            text: {
-                text: Translation.translate("Backpack")
-            }
-        },
-        inventory: {
-            standart: true
-        },
-        background: {
-            standart: true
-        }
-    },
-    drawing: [],
-    elements: {}
-};
-var backpackGUI = new UI.StandartWindow(backpackGUIObj);
-
 Saver.addSavesScope("BackpacksScope",
     function read(scope) {
         BackpackRegistry.save = scope;
@@ -46,40 +27,19 @@ Saver.addSavesScope("BackpacksScope",
 var BackpackRegistry = {
     save: {
         uniqueID: 0,
-        backpacks: {}
+        containers: {}
     },
     prototypes: {},
     temp: false,
     openedUI: null,
-    openedBackpack: null,
-
-    getPrototypeByID: function (id) {
-
-        for (key in this.prototypes) {
-            if (this.prototypes[key].id == id || this.prototypes[key].id_locked == id) {
-                return this.prototypes[key];
-            }
-        }
-
-    },
-
-    getItemIDFromMode: function (id, mode) {
-        var proto = this.getPrototypeByID(id);
-        switch (mode) {
-            case 0:
-                return proto.id;
-                break;
-            case 1:
-                return proto.id_locked;
-                break;
-        }
-    },
+    guis: {},
 
     checkBackpacksSlots: function () {
 
         var pos = Player.getPosition();
+        var proto = this.prototypes[this.openedBackpack];
         for (var i in this.openedUI.slots) {
-            if (this.openedUI.slots[i].id && !this.getPrototypeByID(this.openedBackpack.id).isValidItem(this.getPrototypeByID(this.openedBackpack.id), this.openedUI.getSlot(i))) {
+            if (this.openedUI.slots[i].id && !proto.isValidItem(proto, this.openedUI.getSlot(i))) {
                 this.openedUI.dropSlot(i, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
             }
         }
@@ -87,41 +47,22 @@ var BackpackRegistry = {
     },
 
     onBackpackUse: function (item) {
-        if (!this.save["backpacks"]) {
-            this.save["backpacks"] = {};
+        if (!this.save["containers"]) {
+            this.save["containers"] = {};
         }
         if (typeof this.save.uniqueID === 'undefined') {
             this.save.uniqueID = 0;
         }
-        if (item.data === 0 || !this.save["backpacks"][item.data]) {
-            item.data = ++this.save.uniqueID;
-            this.save["backpacks"][this.save.uniqueID] = {};
-            this.save["backpacks"][this.save.uniqueID]["container"] = new UI.Container().save();
-            Player.setCarriedItem(item.id, 1, item.data);
+
+        if (item.data === 0 || !this.save["containers"]["b" + item.data]) {
+            var u = ++this.save.uniqueID;
+            this.save["containers"]["b" + u] = new UI.Container();
+            Player.setCarriedItem(item.id, 1, u);
+            item.data = u;
             this.onBackpackUse(item);
         } else {
-            this.openedUI = new UI.Container();
-            this.openedUI.read(this.save["backpacks"][item.data]["container"]);
-
-            backpackGUIObj.elements = {};
-            var slotsInRow = 0;
-            var xp = 320;
-            var yp = 40;
-            for (var i = 0; i < this.getPrototypeByID(item.id).slots; i++) {
-                backpackGUIObj.elements["slot" + i] = {type: "slot", x: xp, y: yp};
-                xp += 61;
-                slotsInRow++;
-                if (slotsInRow === 10) {
-                    xp = 320;
-                    yp += 61;
-                    slotsInRow = 0;
-                }
-            }
-
-            backpackGUIObj.standart.minHeight = yp + 60;
-
-            this.openedUI.openAs(backpackGUI);
-            this.openedBackpack = item;
+            this.openedUI = this.save["containers"]["b" + item.data];
+            this.openedUI.openAs(this.guis[this.prototypes[item.id].slots]);
             this.temp = true;
         }
 
@@ -131,6 +72,103 @@ var BackpackRegistry = {
 
         IDRegistry.genItemID(arg.codeName);
         Item.createItem(arg.codeName, arg.name, {name: arg.codeName, meta: 0}, {stack: 1});
+
+        if (!this.guis[arg.slots]) {
+            var obj = new UI.StandartWindow({
+                standart: {
+                    header: {
+                        text: {
+                            text: Translation.translate("Backpack")
+                        }
+                    },
+                    inventory: {
+                        standart: true
+                    },
+                    background: {
+                        standart: true
+                    },
+                    minHeight: 90 + (arg.slots / 10 * 61) + 70
+                },
+                drawing: [],
+                elements: {}
+            });
+
+            var xp = 345;
+            var yp = 90;
+
+            obj.content.elements["addBtn"] = {
+                type: "button", x: 345, y: 40, bitmap: "backpack_0", scale: 3, clicker: {
+                    onClick: function (container) {
+                        var proto = BackpackRegistry.prototypes[BackpackRegistry.openedBackpack];
+                        for (var i = 0; i < 36; i++) {
+                            var invs = Player.getInventorySlot(i);
+                            if (invs.id && proto.isValidItem(proto, invs)) {
+                                for (var k = 1; k <= arg.slots; k++) {
+                                    var slot = container.getSlot("slot" + k);
+                                    if (!slot.id) {
+                                        slot.id = invs.id;
+                                        slot.data = invs.data;
+                                        slot.count = invs.count;
+
+                                        Player.setInventorySlot(i, 0, 0, 0);
+                                        break;
+                                    } else if (slot.id === invs.id && slot.data === invs.data) {
+                                        var consume = Math.min(Item.getMaxStack(slot.id) - slot.count, invs.count);
+                                        slot.count += consume;
+                                        invs.count -= consume;
+                                        Player.setInventorySlot(i, invs.id, invs.count, invs.data);
+                                        if (invs.count === 0) break;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            obj.content.elements["consumeBtn"] = {
+                type: "button", x: 395, y: 40, bitmap: "backpack_1", scale: 3, clicker: {
+                    onClick: function (container) {
+
+                        for (var i = 1; i <= arg.slots; i++) {
+                            var slot = container.getSlot("slot" + i);
+                            if (slot.id) {
+                                for (var k = 0; k < 36; k++) {
+                                    var invs = Player.getInventorySlot(k);
+                                    if (!invs.id) {
+                                        Player.setInventorySlot(k, slot.id, slot.count, slot.data);
+                                        container.clearSlot("slot" + i);
+                                    } else if (slot.id === invs.id && slot.data === invs.data) {
+                                        var consume = Math.min(Item.getMaxStack(invs.id) - invs.count, slot.count);
+
+                                        Player.setInventorySlot(k, invs.id, invs.count + consume, invs.data);
+                                        slot.count -= consume;
+                                        if (slot.count === 0) {
+                                            container.validateSlot("slot" + i);
+                                            break;
+                                        }
+
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            for (var i = 1; i <= arg.slots; i++) {
+                obj.content.elements["slot" + i] = {type: "slot", x: xp, y: yp};
+                xp += 61;
+                if (i % 10 === 0) {
+                    xp = 345;
+                    yp += 61;
+                }
+            }
+
+            this.guis[arg.slots] = obj;
+        }
 
         arg.id = ItemID[arg.codeName];
         arg.isValidItem || (arg.isValidItem = function (b, item) {
@@ -143,12 +181,40 @@ var BackpackRegistry = {
             return false;
         });
 
-        Item.registerUseFunctionForID(ItemID[arg.codeName], this.__func1);
+        Item.registerUseFunctionForID(arg.id, function (coords, item) {
+            if (World.getBlockID(coords.x, coords.y, coords.z) === 54) {
+                var container = World.getContainer(coords.x, coords.y, coords.z);
+                var bcontainer = BackpackRegistry.save["containers"]["b" + item.data];
 
-        this.prototypes[arg.codeName] = arg;
-    },
+                for (var i = 1; i <= BackpackRegistry.prototypes[item.id].slots; i++) {
+                    var slot = bcontainer.getSlot("slot" + i);
+                    if (slot.id) {
+                        for (var k = 0; k < container.getSize(); k++) {
+                            var conts = container.getSlot(k);
+                            if (!conts.id) {
+                                container.setSlot(k, slot.id, slot.count, slot.data);
+                                bcontainer.clearSlot("slot" + i);
+                                break;
+                            } else if (conts.id === slot.id && conts.data === slot.data) {
+                                var consume = Math.min(Item.getMaxStack(conts.id) - conts.count, slot.count);
+                                slot.count -= consume;
+                                container.setSlot(k, conts.id, conts.count + consume, conts.data);
+                                if (slot.count === 0) {
+                                    bcontainer.validateSlot("slot" + i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
 
-    __func1: function (coords, item, block) {
-        BackpackRegistry.onBackpackUse(item);
+                }
+
+            } else {
+                BackpackRegistry.openedBackpack = item.id;
+                BackpackRegistry.onBackpackUse(item);
+            }
+        });
+
+        this.prototypes[arg.id] = arg;
     }
 };

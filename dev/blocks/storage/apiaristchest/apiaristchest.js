@@ -23,4 +23,4 @@ Callback.addCallback("PostLoaded", function () {
 
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.apiaristchest);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.apiaristchest);

@@ -1,7 +1,7 @@
 TileEntity.registerPrototype(BlockID.bog, {
 
     defaultValues: {
-        CYCLE: 28 * 20,
+        CYCLE: 25 * 20,
         cyclen: 0,
         commmonTime: 0,
         counter: 0
@@ -21,7 +21,7 @@ TileEntity.registerPrototype(BlockID.bog, {
                 if (Math.random() < 0.07) {
                     this.data.counter++;
                 }
-                if (this.data.counter == 3 || this.data.commmonTime >= 39200) {
+                if (this.data.counter == 3 || this.data.commmonTime >= 19700) {
                     World.setBlock(this.x, this.y, this.z, BlockID.blockPeat)
                 }
             }

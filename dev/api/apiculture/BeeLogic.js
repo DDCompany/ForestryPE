@@ -9,8 +9,13 @@ var BeeLogic = {
         var queen = new Bee(princess.type, BeeRegistry.BEETYPE_QUEEN);
         queen.active_chromosomes_list = princess.active_chromosomes_list;
         queen.inactive_chromosomes_list = princess.inactive_chromosomes_list;
-        queen.mate = drone;
+        queen.mate = {
+            type: drone.type,
+            active_chromosomes_list: drone.active_chromosomes_list,
+            inactive_chromosomes_list: drone.inactive_chromosomes_list
+        };
         queen.generation = princess.generation;
+        queen.pristine = princess.pristine || drone.pristine;
 
         return queen;
     },
@@ -55,7 +60,7 @@ var BeeLogic = {
             for (var yy = coords.y - territory.y; yy < coords.y + territory.y; yy++) {
                 for (var zz = coords.z - territory.z; zz < coords.z + territory.z; zz++) {
                     var block = World.getBlock(xx, yy, zz);
-                    if (flowers.indexOf(block.id + ":" + block.data) > -1) return true;
+                    if (flowers.indexOf(block.id + ":" + block.data) > -1 || flowers.indexOf(block.id + ":-1") > -1) return true;
                 }
             }
         }
@@ -72,6 +77,7 @@ var BeeLogic = {
      * @return {Array}
      */
     spawnPrincess: function (bee, modifierList, houseModifierList, house) {
+        if (!bee.pristine && bee.generation > 96 + Util.random(0, 6) + Util.random(0, 6) && Math.random() < 0.02 * houseModifierList.getGeneticDecay(house) * modifierList.getGeneticDecay(house)) return [];
         var arr = [];
         var count = Math.random() < Config.secondPrincessChance ? 2 : 1;
         for (var i = 0; i < count; i++) {
@@ -145,7 +151,7 @@ var BeeLogic = {
 
         princess.generation = bee.generation;
         princess.generation++;
-        princess.refreshItem();
+        princess.pristine = bee.pristine;
 
         return princess;
     },
@@ -175,7 +181,7 @@ var BeeLogic = {
     mutateSpecies: function (parent1, parent2, modifierList, houseModifierList, house) {
         var combinations = BeeRegistry.getMutations(parent1.type, parent2.type);
         for (var key in combinations) {
-            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house, combinations[key].chance) * houseModifierList.getMutationModifier(house, combinations[key].chance && combinations[key].onMutate(house))) {
+            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house) * houseModifierList.getMutationModifier(house) && combinations[key].onMutate(house)) {
                 var mut = BeeRegistry.getBeeByType(combinations[key].result);
                 return {type: mut.type, chromosomes: Util.objectUnion(mut.chromosomes_list, {SPECIES: mut.type})};
             }

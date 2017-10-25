@@ -15,6 +15,7 @@ for (var i = 0; i < 16; i++) {
     });
 }
 
+if (Config.glassEnabled) {
 for (var i = 0; i < 16; i++) {
     RecipeRegistry.addFabricatorRecipe({
         input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
@@ -33,23 +34,24 @@ for (var i = 0; i < 16; i++) {
 
 }
 
-for (var i = 0; i < 16; i++) {
+    for (var i = 0; i < 16; i++) {
 
-    RecipeRegistry.addFabricatorRecipe({
-        input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisPulse, data: 0}},
-        dop: {
-            id: ItemID.waxCast,
-            data: 0,
-            count: 1,
-            dec: false
-        },
-        output: {
-            id: BlockID.forestryGlass,
-            count: 1,
-            data: i
-        }
-    });
+        RecipeRegistry.addFabricatorRecipe({
+            input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisPulse, data: 0}},
+            dop: {
+                id: ItemID.waxCast,
+                data: 0,
+                count: 1,
+                dec: false
+            },
+            output: {
+                id: BlockID.forestryGlass,
+                count: 1,
+                data: i
+            }
+        });
 
+    }
 }
 
 RecipeRegistry.addFabricatorRecipe({

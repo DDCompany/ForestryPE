@@ -1,4 +1,4 @@
-function icIntegrationBiogenerator() {
+
     var textures_biogenerator = [["biogenerator_top", 0], ["biogenerator_top", 0], ["biogenerator", 0], ["biogenerator", 0], ["biogenerator_side", 0], ["biogenerator_side", 0]];
     Block.setPrototype("biogenerator", {
         type: Block.TYPE_ROTATION,
@@ -18,5 +18,4 @@ function icIntegrationBiogenerator() {
         ], ['g', 266, 0, 'h', 20, 0, 'm', ItemID.sturdyMachine, 0,]);
     });
 
-    ICRenderLib.addConnectionBlock("bc-container", BlockID.biogenerator);
-}
+    //ICRenderLib.addConnectionBlock("bc-container", BlockID.biogenerator);

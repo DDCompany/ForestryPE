@@ -15,9 +15,9 @@ Block.setPrototype("fabricator", {
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.fabricator, count: 1, data: 0}, [
         "cgc",
-        "gmg",
+        "g g",
         "cbc"
     ], ['c', 266, -1, 'g', 20, -1, 'b', 54, -1]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.fabricator);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.fabricator);

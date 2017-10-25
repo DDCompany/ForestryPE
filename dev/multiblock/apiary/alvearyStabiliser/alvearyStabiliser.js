@@ -3,7 +3,7 @@ Block.createBlock("alvearyStabiliser", [
     {name: "Alveary Stabiliser", texture: [["alveary_stabiliser", 0]], inCreative: true}
 ]);
 
-ToolAPI.registerBlockMaterial(BlockID.alvearyHygroregulator, "wood");
+ToolAPI.registerBlockMaterial(BlockID.alvearyStabiliser, "wood");
 ApiaryRegistry.register(BlockID.alvearyStabiliser);
 
 Callback.addCallback("PostLoaded", function () {

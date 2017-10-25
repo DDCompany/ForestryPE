@@ -90,7 +90,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
             for (var i = 0; i < 3; i++) {
                 var slot = this.container.getSlot("slotOutput_b" + i);
                 if (slotProcessing.id === slot.id && slotProcessing.data === slot.data) {
-                    var to = Item.getMaxStack(slotProcessing.id) - slotProcessing.count;
+                    var to = Math.min(Item.getMaxStack(slotProcessing.id), slot.count);
                     slotProcessing.count += to;
                     slot.count -= to;
                 }

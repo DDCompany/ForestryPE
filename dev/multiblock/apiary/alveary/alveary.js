@@ -12,6 +12,6 @@ Callback.addCallback("PostLoaded", function () {
         "ddd",
         "dmd",
         "ddd"
-    ], ['d', BlockID.impregnatedCasing, 0, 'm', ItemID.scentedPaneling, 0]);
+    ], ['m', ItemID.impregnatedCasing, 0, 'd', ItemID.scentedPaneling, 0]);
 
 });

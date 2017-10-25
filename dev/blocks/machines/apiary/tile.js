@@ -21,6 +21,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
         var content = this.container.getGuiContent();
 
         if (!this.house) {
+            var self = this;
             this.house = new BeeHouse(this, {
                 slotPrincess: "slot1",
                 slotDrone: "slot2",
@@ -32,9 +33,16 @@ TileEntity.registerPrototype(BlockID.apiary, {
                     return 0.1;
                 }
             }]));
+
+            this.house.getHumidity = function () {
+                return BiomeHelper.getBiomeHumidity(self.data.biome_override);
+            };
+
+            this.house.getClimate = function () {
+                return BiomeHelper.getBiomeClimate(self.data.biome_override);
+            };
         }
         var modifiers = new ModifierList([]);
-
         if (this.house.queen) {
             for (var i = 0; i < 3; i++) {
                 var slot = this.container.getSlot("slotFrame" + i);

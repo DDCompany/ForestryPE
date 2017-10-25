@@ -66,8 +66,6 @@ BeeRegistry.registerBee({
     chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
 
-var chhhh = 1;
-
 BeeRegistry.registerBee({
     localize: {
         princess: {

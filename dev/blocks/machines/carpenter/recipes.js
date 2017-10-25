@@ -124,6 +124,25 @@ for (var i = 0; i < 2; i++) {
 
 RecipeRegistry.addCarpenterRecipe({
     input: {
+        "slot0": {id: ItemID.ingotTin, data: 0},
+        "slot1": {id: 102, data: 0},
+        "slot2": {id: ItemID.ingotTin, data: 0},
+        "slot3": {id: ItemID.ingotTin, data: 0},
+        "slot4": {id: 102, data: 0},
+        "slot5": {id: ItemID.ingotTin, data: 0},
+        "slot6": {id: 331, data: 0},
+        "slot7": {id: 264, data: 0},
+        "slot8": {id: 331, data: 0}
+    },
+    output: {
+        id: ItemID.analyzer,
+        count: 1,
+        data: 0
+    }
+});
+
+RecipeRegistry.addCarpenterRecipe({
+    input: {
         "slot0": {id: 331, data: 0}, "slot2": {id: 331, data: 0},
         "slot3": {id: 331, data: 0}, "slot4": {id: ItemID.ingotTin, data: 0}, "slot5": {id: 331, data: 0},
         "slot6": {id: 331, data: 0}, "slot8": {id: 331, data: 0}

@@ -21,7 +21,7 @@ function BeeHouse(tile, slots, houseModifierList) {
      * Время одного цикла
      * @type {number}
      */
-    this.CYCLE_TIME = 20;
+    this.CYCLE_TIME = 560;
 
     /**
      * Вызывать каждый тик
@@ -65,10 +65,8 @@ function BeeHouse(tile, slots, houseModifierList) {
 
         if (this.data.progress >= this.data.progressMax) {
             this.queen = BeeLogic.mate(BeeRegistry.getBeeFromItem(slot1.id, slot1.data), BeeRegistry.getBeeFromItem(slot2.id, slot2.data));
-            this.data.progressMax = this.queen.getActiveChromosome("LIFESPAN") * this.CYCLE_TIME;
-            this.data.progress = this.data.progressMax;
-            slot1.id = this.queen.item.id;
-            slot1.data = this.queen.item.data;
+            slot1.id = this.queen.getItemID();
+            slot1.data = this.queen.unique;
             slot2.count--;
         }
     };
@@ -85,11 +83,11 @@ function BeeHouse(tile, slots, houseModifierList) {
                 this.error = Translation.translate("apiary.error.climate");
             } else if (!this.queen.isValidHumidity(this.getHumidity())) {
                 this.error = Translation.translate("apiary.error.humidity");
-            } else if (!World.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
+            } else if (!GenerationUtils.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
                 this.error = Translation.translate("apiary.error.sky");
             } else if (World.getWeather().rain > 0 && !modifiersList.isSealed() && !houseModifierList.isSealed() && !this.queen.getActiveChromosome("TOLERATES_RAIN")) {
                 this.error = Translation.translate("apiary.error.rain");
-            } else if (!(World.getWorldTime() > 1000 && World.getWorldTime() < 13000) && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
+            } else if (!World.__inworld.getLightLevel(this.tile.x, this.tile.y, this.tile.z) >= 15 && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
                 this.error = Translation.translate("apiary.error.night");
             } else {
                 this.error = null;
@@ -98,12 +96,15 @@ function BeeHouse(tile, slots, houseModifierList) {
 
         if (this.error) return;
         if (!this.data.progressMax) this.data.progressMax = this.queen.getMaxHealth() * this.CYCLE_TIME;
-        if (!this.queen.isSaved()) this.queen.save();
+        if (!this.queen.isSaved()) {
+            this.queen.save();
+            this.setSlot(this.slots.slotPrincess, {id: this.queen.getItemID(), data: this.queen.unique, count: 1});
+        }
 
         this.data.progress = this.queen.health * this.CYCLE_TIME;
         this.data.progressCycle++;
 
-        if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this, 1) * this.houseModifierList.getLifespanModifier(this, 1)) {
+        if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this) * this.houseModifierList.getLifespanModifier(this)) {
             this.queen.health--;
             this.data.progressCycle = 0;
             BeeEffects.doEffect(this.queen.getActiveChromosome("EFFECT"), {
@@ -111,11 +112,12 @@ function BeeHouse(tile, slots, houseModifierList) {
                 y: this.tile.y,
                 z: this.tile.z
             }, BeeRegistry.rangeToObject(this.queen.getActiveChromosome("TERRITORY")));
-            ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this, 1), this.houseModifierList.getProductionModifier(this, 1)), this.getContainer(), this.slots.produceSlots);
+            ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this), this.houseModifierList.getProductionModifier(this)), this.getContainer(), this.slots.produceSlots);
             if (this.queen.health <= 0) {
                 ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotPrincessOut);
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut)
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut);
                 this.setSlot(this.slots.slotPrincess, {id: 0, data: 0, count: 0});
+                this.data.progressMax = 0;
                 Callback.invokeCallback("onQueenDeath", this.house);
                 this.queen.destroy();
                 this.queen = null;
@@ -140,9 +142,10 @@ function BeeHouse(tile, slots, houseModifierList) {
     };
 
     this.setSlot = function (name, slot) {
-        this.getContainer().getSlot(name).id = slot.id;
-        this.getContainer().getSlot(name).data = slot.data;
-        this.getContainer().getSlot(name).count = slot.count;
+        var slot = this.getContainer().getSlot(name);
+        slot.id = slot.id;
+        slot.data = slot.data;
+        slot.count = slot.count;
     };
 
     this.getHumidity = function () {

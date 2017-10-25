@@ -10,6 +10,10 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
         this.liquidStorage.setLimit(null, 10);
     },
 
+    getTransportSlots: function () {
+        return {input: ["slotLiquid"], output: ["slotContainer"]};
+    },
+
     tick: function () {
         var slotContainerFull = this.container.getSlot("slotLiquid");
 
@@ -44,18 +48,14 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
         this.container.validateAll();
     },
 
-    changeHumidity: function (tile) {
+    alvearyTick: function (tile) {
         if (this.data.time && tile.humidity !== undefined) {
-            return Math.min(BiomeHelper.HUMIDITY_DAMP, tile.humidity + this.data.humidity);
+            tile.humidity = Math.min(BiomeHelper.HUMIDITY_DAMP, tile.humidity + this.data.humidity);
         }
-        return tile.humidity;
-    },
 
-    changeClimate: function (tile) {
         if (this.data.time && tile.climate !== undefined) {
-            return Math.min(BiomeHelper.CLIMATE_HELLISH, tile.climate + this.data.climate);
+            tile.climate = Math.min(BiomeHelper.CLIMATE_HELLISH, tile.climate + this.data.climate);
         }
-        return tile.climate
     },
 
     getGuiScreen: function () {

@@ -1,7 +1,4 @@
-var biogeneratorGUI = null;
-
-function icIntegrationBiogeneratorGUI() {
-    biogeneratorGUI = new UI.StandartWindow({
+var biogeneratorGUI = new UI.StandartWindow({
         standart: {
             header: {
                 text: {
@@ -26,4 +23,3 @@ function icIntegrationBiogeneratorGUI() {
             "slotEmptyContainer": {type: "slot", x: 385, y: 234.8, bitmap: "slot_container"},
         }
     });
-}

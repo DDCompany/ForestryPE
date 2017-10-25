@@ -18,4 +18,4 @@ Callback.addCallback("PostLoaded", function () {
     ], ['b', BlockID.fermenter, -1, 'g', ItemID.gearCopper, -1, 's', 20, -1]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.moistener);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.moistener);

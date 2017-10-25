@@ -1,5 +1,4 @@
-function icIntegrationBiogeneratorTile(ICore) {
-    ICore.Machine.registerPrototype(BlockID.biogenerator, {
+MachineRegistry.register(BlockID.biogenerator, {
         defaultValues: {
             progress: 0
         },
@@ -72,4 +71,3 @@ function icIntegrationBiogeneratorTile(ICore) {
             this.data.energy += src.add(out) - out;
         }
     });
-}

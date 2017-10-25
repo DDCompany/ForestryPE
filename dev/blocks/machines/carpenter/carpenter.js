@@ -19,4 +19,4 @@ Callback.addCallback("PostLoaded", function () {
     ], ['b', ItemID.ingotBronze, 0, 'g', 20, 0, 'f', ItemID.sturdyMachine, 0]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.carpenter);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.carpenter);

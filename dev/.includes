@@ -26,19 +26,17 @@ core/bees.js
 core/fluids.js
 core/dictionary.js
 
-items/apiculture/analyzer.js
+items/analyzer.js
+items/armor.js
 items/apiculture/armor.js
-items/apiculture/combs.js
-items/apiculture/items.js
-items/apiculture/frames.js
+items/combs.js
+items/items.js
+items/frames.js
 items/capsules.js
 items/backpacks.js
 items/crates.js
 items/ingots.js
 
-
-
-items/tools.js
 
 
 
@@ -49,6 +47,9 @@ blocks/storage/apiaristchest/tile.js
 blocks/machines/apiary/apiary.js
 blocks/machines/apiary/tile.js
 blocks/machines/apiary/gui.js
+
+blocks/machines/bee_house/bee_house.js
+blocks/machines/bee_house/tile.js
 
 blocks/machines/centrifuge/centrifuge.js
 blocks/machines/centrifuge/tile.js
@@ -101,6 +102,9 @@ blocks/generators/peat-fired/peat-fired.js
 blocks/generators/peat-fired/tile.js
 blocks/generators/peat-fired/gui.js
 
+blocks/generators/clockwork/clockwork.js
+blocks/generators/clockwork/tile.js
+
 
 
 multiblock/apiary/alveary/alveary.js
@@ -123,10 +127,6 @@ multiblock/apiary/alvearyHeater/tile.js
 multiblock/apiary/alvearyStabiliser/alvearyStabiliser.js
 multiblock/apiary/alvearyStabiliser/tile.js
 
-multiblock/apiary/swarmer/swarmer.js
-multiblock/apiary/swarmer/gui.js
-multiblock/apiary/swarmer/tile.js
-
 
 
 blocks/soil/humus/humus.js
@@ -138,6 +138,8 @@ blocks/soil/peat/tile.js
 blocks/ores.js
 blocks/beehives.js
 blocks/glass.js
+
+items/tools.js
 
 integration/ic.js
 

@@ -2,16 +2,11 @@ MachineRegistry.register(BlockID.alvearyHeater, {
 
     defaultValues: {},
 
-    tick: function () {
-
-    },
-
-    changeClimate: function () {
+    alvearyTick: function (tile) {
         if (this.data.energy >= 10 && tile.climate !== undefined) {
             this.data.energy -= 10;
-            return Math.max(BiomeHelper.CLIMATE_HELLISH, parseInt(tile.climate + (tile.climate * 0.2)));
+            tile.climate = Math.max(BiomeHelper.CLIMATE_HELLISH, parseInt(tile.climate + (tile.climate * 0.2)));
         }
-        return tile.climate;
     },
 
     getEnergyStorage: function () {

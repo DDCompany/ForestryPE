@@ -1,3 +1,4 @@
+if (Config.glassEnabled) {
 Block.setPrototype("forestryGlass", {
     type: Block.TYPE_BASE,
 
@@ -90,7 +91,4 @@ Block.setPrototype("forestryGlass", {
         return [];
     }
 });
-
-for (var i = 0; i < 16; i++) {
-    Block.setShape(BlockID.forestryGlass, 0.001, 0.001, 0.001, 0.999, 0.999, 0.999, i);
 }

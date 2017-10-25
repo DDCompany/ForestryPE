@@ -15,3 +15,5 @@ Callback.addCallback("PostLoaded", function () {
     ], ['i', 265, 0, 'm', BlockID.alveary, 0, 'g', 20, 0]);
 
 });
+
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.alvearyHygroregulator);

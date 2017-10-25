@@ -1,14 +1,14 @@
 RecipeRegistry.registerCentrifugeRecipe({
 
     input: {id: ItemID.propolisSilky, data: 0},
-    output: [[ItemID.propolis, 0, 0.1], [ItemID.silkWisp, 0, 0.6]]
+    result: [[ItemID.propolis, 0, 0.1], [ItemID.silkWisp, 0, 0.6]]
 
 });
 
 RecipeRegistry.registerCentrifugeRecipe({
 
     input: {id: ItemID.propolis, data: 0},
-    output: [[ItemID.latex, 0, 1]]
+    result: [[ItemID.latex, 0, 1]]
 
 });
 

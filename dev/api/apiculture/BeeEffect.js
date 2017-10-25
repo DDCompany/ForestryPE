@@ -14,11 +14,10 @@ var BeeEffects = {
 
     getApiaristArmorWearValue: function () {
         var count = 0;
-        var inv = Player.getInventory("armor");
-        if (inv.getSlot("arm0").id === ItemID.helmetApiarist) count++;
-        if (inv.getSlot("arm1").id === ItemID.chestApiarist) count++;
-        if (inv.getSlot("arm2").id === ItemID.leggingsApiarist) count++;
-        if (inv.getSlot("arm3").id === ItemID.bootsApiarist) count++;
+        if (Player.getArmorSlot(0).id === ItemID.helmetApiarist) count++;
+        if (Player.getArmorSlot(1).id === ItemID.chestApiarist) count++;
+        if (Player.getArmorSlot(2).id === ItemID.leggingsApiarist) count++;
+        if (Player.getArmorSlot(3).id === ItemID.bootsApiarist) count++;
         return count;
     },
 

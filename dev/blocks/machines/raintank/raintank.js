@@ -12,7 +12,7 @@ Callback.addCallback("PostLoaded", function () {
         "igi",
         "isi",
         "igi"
-    ], ['s', 265, 0, 'g', 20, 0, 's', ItemID.sturdyCasing, 0]);
+    ], ['i', 265, 0, 'g', 20, 0, 's', ItemID.sturdyMachine, 0]);
 });
 
-ICRenderLib.addConnectionBlock("bc-container", BlockID.raintank);
+//ICRenderLib.addConnectionBlock("bc-container", BlockID.raintank);

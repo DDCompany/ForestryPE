@@ -1,4 +1,4 @@
-if (Config.crateEnabled) {
+if (Config.crateEnabled === true) {
     IDRegistry.genItemID("crate");
     Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
 

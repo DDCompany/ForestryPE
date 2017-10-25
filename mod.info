@@ -1,3 +1,6 @@
 {
-	"name": "ForestryForMinecraftPE"
+	"name":"Forestry",
+	"author":"Dmitriy Medvedev",
+	"version": "preRelease 5-2",
+	"description": ""
 }

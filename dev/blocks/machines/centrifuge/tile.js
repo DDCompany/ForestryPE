@@ -30,7 +30,6 @@ MachineRegistry.register(BlockID.centrifuge, {
                 ContainerHelper.putInSlotsChance(this.data.outputIDs, this.container, this.OUTPUT_SLOTS)
 
             }
-            this.container.setScale("progressScale", this.data.progress / 100);
 
         } else if (this.data.progress === 0 && this.data.energy >= energyDec) {
             var output = RecipeRegistry.getCentrifugeRecipe(slotInput.id, slotInput.data);
@@ -40,13 +39,13 @@ MachineRegistry.register(BlockID.centrifuge, {
                 this.data.outputIDs = output.result;
                 this.data.energy -= energyDec;
                 slotInput.count--;
-
+                this.container.validateAll();
             }
 
         }
 
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-        this.container.validateAll();
+        this.container.setScale("progressScale", this.data.progress / 100);
     },
 
     getEnergyStorage: function () {
