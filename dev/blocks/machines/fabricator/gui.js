@@ -1,4 +1,4 @@
-var fabricatorGUI = new UI.StandartWindow({
+const fabricatorGUIObj = {
     standart: {
         header: {
             text: {
@@ -51,4 +51,19 @@ var fabricatorGUI = new UI.StandartWindow({
         "slotInput7": {type: "slot", x: 603, y: 248},
         "slotInput8": {type: "slot", x: 663, y: 248}
     }
-});
+};
+
+
+function initFabricatorSlots() {
+    let temp = 0;
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 9; j++) {
+            fabricatorGUIObj.elements["slotResources" + temp] = {type: "slot", x: 353 + j * 60, y: 321.8 + i * 60};
+            temp++;
+        }
+    }
+}
+
+initFabricatorSlots();
+
+const fabricatorGUI = new UI.StandartWindow(fabricatorGUIObj);

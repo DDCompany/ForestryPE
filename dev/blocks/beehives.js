@@ -44,15 +44,15 @@ Block.setPrototype("beehive", {
 
     getDrop: function (a, b, data, g) {
         if (g) {
-            var drop = [];
-            var rand = Math.random();
+            let drop = [];
+            let rand = Math.random();
             if (rand < 0.2) {
                 drop.push([ItemID.princessValiant, 1, 0]);
             } else {
                 switch (parseInt(data)) {
                     case 0:
                         if (Math.random() < 0.05) {
-                            var bee = new Bee("Forest", BeeRegistry.BEETYPE_PRINCESS, true);
+                            let bee = new Bee("Forest", BeeRegistry.BEETYPE_PRINCESS, true);
                             bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
                             bee.inactive_chromosomes_list["NEVER_SLEEPS"] = true;
                             drop.push([bee.getItemID(), 1, bee.unique]);
@@ -105,11 +105,11 @@ Block.setPrototype("beehive", {
             if (rand < 0.022) {
                 drop.push([ItemID.droneValiant, 1, 0]);
             } else if (rand < 0.8) {
-                var droneCount = Math.floor(1 + Math.random() * 2);
+                let droneCount = Math.floor(1 + Math.random() * 2);
                 switch (parseInt(data)) {
                     case 0:
                         if (Math.random() < 0.05) {
-                            var bee = new Bee("Forest", BeeRegistry.BEETYPE_DRONE, true);
+                            let bee = new Bee("Forest", BeeRegistry.BEETYPE_DRONE, true);
                             bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
                             bee.inactive_chromosomes_list["NEVER_SLEEPS"] = true;
                             drop.push([bee.getItemID(), 1, bee.unique]);
@@ -178,76 +178,73 @@ TileEntity.registerPrototype(BlockID.beehiveSwarm, {
 
 });*/
 
-var beehives_b = [2, 12, 121];
+const BEEHIVES_GEN_BLOCKS = [2, 12, 121];
 
 function generateBeehive(data, coords) {
-    if (World.getBlock(coords.x, coords.y + 1, coords.z).id == 0 && beehives_b.indexOf(World.getBlock(coords.x, coords.y, coords.z).id) > -1 && GenerationUtils.canSeeSky(coords.x, coords.y + 1, coords.z)) {
+    if (World.getBlock(coords.x, coords.y + 1, coords.z).id === 0 && BEEHIVES_GEN_BLOCKS.indexOf(World.getBlock(coords.x, coords.y, coords.z).id) > -1 && GenerationUtils.canSeeSky(coords.x, coords.y + 1, coords.z)) {
         World.setBlock(coords.x, coords.y + 1, coords.z, BlockID.beehive, data);
     }
 }
 
-Callback.addCallback("PostLoaded", function () {
-    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-        var coords = GenerationUtils.randomCoords(chunkX, chunkZ, 64, 128);
-        coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
+Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
 
-        if (World.getBiome(coords.x, coords.z) === 1) {
-            if (Math.random() <= Config.genMeadowsChance) {
-                generateBeehive(1, coords);
+    let coords = GenerationUtils.randomCoords(chunkX, chunkZ);
+    coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
 
-            }
+    if (Math.random() <= Config.genEnderChance) {
+        generateBeehive(6, coords);
+    }
 
-        } else if (World.getBiome(coords.x, coords.z) === 4 ||
-            World.getBiome(coords.x, coords.z) === 132 ||
-            World.getBiome(coords.x, coords.z) === 27 ||
-            World.getBiome(coords.x, coords.z) === 155 ||
-            World.getBiome(coords.x, coords.z) === 29 ||
-            World.getBiome(coords.x, coords.z) === 157) {
+});
 
-            if (Math.random() <= Config.genForestChance) {
-                generateBeehive(0, coords);
+Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 64, 128);
+    coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
 
-            }
-
-        } else if (World.getBiome(coords.x, coords.z) === 2) {
-            if (Math.random() <= Config.genModestChance) {
-                generateBeehive(2, coords);
-            }
-
-        } else if (World.getBiome(coords.x, coords.z) === 6 ||
-            World.getBiome(coords.x, coords.z) === 134) {
-            if (Math.random() <= Config.genMarshyChance) {
-                generateBeehive(5, coords);
-            }
-
-        } else if (World.getBiome(coords.x, coords.z) === 21 ||
-            World.getBiome(coords.x, coords.z) === 149) {
-            if (Math.random() <= Config.genTropicalChance) {
-                generateBeehive(3, coords);
-            }
-
-        } else if (World.getBiome(coords.x, coords.z) === 12 ||
-            World.getBiome(coords.x, coords.z) === 140 ||
-            World.getBiome(coords.x, coords.z) === 30 ||
-            World.getBiome(coords.x, coords.z) === 26) {
-            if (Math.random() <= Config.genWintryChance) {
-                generateBeehive(4, coords);
-            }
+    if (World.getBiome(coords.x, coords.z) === 1) {
+        if (Math.random() <= Config.genMeadowsChance) {
+            generateBeehive(1, coords);
 
         }
 
-    });
+    } else if (World.getBiome(coords.x, coords.z) === 4 ||
+        World.getBiome(coords.x, coords.z) === 132 ||
+        World.getBiome(coords.x, coords.z) === 27 ||
+        World.getBiome(coords.x, coords.z) === 155 ||
+        World.getBiome(coords.x, coords.z) === 29 ||
+        World.getBiome(coords.x, coords.z) === 157) {
 
-    Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
+        if (Math.random() <= Config.genForestChance) {
+            generateBeehive(0, coords);
 
-        var coords = GenerationUtils.randomCoords(chunkX, chunkZ);
-        coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
-
-        if (Math.random() <= Config.genEnderChance) {
-            generateBeehive(6, coords);
         }
 
-    });
+    } else if (World.getBiome(coords.x, coords.z) === 2) {
+        if (Math.random() <= Config.genModestChance) {
+            generateBeehive(2, coords);
+        }
+
+    } else if (World.getBiome(coords.x, coords.z) === 6 ||
+        World.getBiome(coords.x, coords.z) === 134) {
+        if (Math.random() <= Config.genMarshyChance) {
+            generateBeehive(5, coords);
+        }
+
+    } else if (World.getBiome(coords.x, coords.z) === 21 ||
+        World.getBiome(coords.x, coords.z) === 149) {
+        if (Math.random() <= Config.genTropicalChance) {
+            generateBeehive(3, coords);
+        }
+
+    } else if (World.getBiome(coords.x, coords.z) === 12 ||
+        World.getBiome(coords.x, coords.z) === 140 ||
+        World.getBiome(coords.x, coords.z) === 30 ||
+        World.getBiome(coords.x, coords.z) === 26) {
+        if (Math.random() <= Config.genWintryChance) {
+            generateBeehive(4, coords);
+        }
+
+    }
 
 });
 

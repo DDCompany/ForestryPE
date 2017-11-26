@@ -7,7 +7,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
     },
 
     getTime: function () {
-        var light = World.__inworld.getLightLevel(this.x, this.y + 1, this.z);
+        let light = World.__inworld.getLightLevel(this.x, this.y + 1, this.z);
         return light > 11 ? -1 : (light === 0 ? 25 : light * 10);
     },
 
@@ -16,12 +16,12 @@ TileEntity.registerPrototype(BlockID.moistener, {
     },
 
     tick: function () {
-        var time = this.getTime();
-        var slotContainer = this.container.getSlot("slotContainer");
-        var slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
-        var slotProcessing = this.container.getSlot("slotProcessing");
-        var slotRecipe = this.container.getSlot("slotRecipe");
-        var slotResult = this.container.getSlot("slotResult");
+        let time = this.getTime();
+        let slotContainer = this.container.getSlot("slotContainer");
+        let slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
+        let slotProcessing = this.container.getSlot("slotProcessing");
+        let slotRecipe = this.container.getSlot("slotRecipe");
+        let slotResult = this.container.getSlot("slotResult");
 
         this.liquidStorage.updateUiScale("liquidScale", "water");
 

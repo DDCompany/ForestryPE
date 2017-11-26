@@ -92,6 +92,84 @@ var ContainerHelper = {
         }
 
         return false;
+    },
+
+    emptyContainer: function (liquid, tile, slot) {
+        let slotContainer = tile.container.getSlot(slot);
+        let empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
+        let liquidStorage = tile.liquidStorage;
+
+        if (empty && (!liquidStorage.getLiquidStored() || liquidStorage.getAmount(empty.liquid) > 0) && (liquid === null || liquid.indexOf(empty.liquid)) > -1 && liquidStorage.getAmount(empty.liquid) + 1 <= liquidStorage.getLimit(empty.liquid)) {
+            if (empty.id === ItemID.waxCapsuleEmpty || empty.id === ItemID.canEmpty || empty.id === ItemID.refractoryEmpty) {
+                slotContainer.count--;
+            } else {
+                if (slotContainer.count === 1) {
+                    slotContainer.id = empty.id;
+                    slotContainer.data = empty.data;
+                } else {
+                    slotContainer.count--;
+                }
+            }
+
+            liquidStorage.addLiquid(empty.liquid, 1);
+
+            return true;
+        }
+
+        return false;
+    },
+
+    fillContainer: function (liquids, tile, slots) {
+        let liquid = null;
+        let liquidStorage = tile.liquidStorage;
+
+        if (liquids === null) {
+            liquid = liquidStorage.getLiquidStored();
+            if (!liquid) {
+                return false;
+            }
+        } else {
+            for (let i in liquids) {
+                if (liquidStorage.getAmount(liquids[i]) >= 1) {
+                    liquid = liquids[i];
+                    break;
+                }
+            }
+        }
+
+        if (liquid) {
+            let slotContainerFull = tile.container.getSlot(slots.full);
+            let slotContainerEmpty = tile.container.getSlot(slots.empty);
+            let full = LiquidRegistry.getFullItem(slotContainerEmpty.id, slotContainerEmpty.data, liquid);
+
+            if (full) {
+
+                if (ContainerHelper.putInSlot(slotContainerFull, full)) {
+                    slotContainerEmpty.count--;
+                    liquidStorage.getLiquid(liquid, 1);
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
+    },
+
+    putInSlot: function (slot, item) {
+        let count = item.count || 1;
+
+        if (slot.id === 0) {
+            slot.id = item.id;
+            slot.data = item.data;
+            slot.count = count;
+            return true;
+        } else if (slot.id === item.id && slot.data === item.data && slot.count + count <= Item.getMaxStack(item.id)) {
+            slot.count += count;
+            return true;
+        }
+
+        return false;
     }
 
 };

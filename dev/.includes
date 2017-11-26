@@ -44,6 +44,9 @@ blocks/storage/apiaristchest/apiaristchest.js
 blocks/storage/apiaristchest/gui.js
 blocks/storage/apiaristchest/tile.js
 
+blocks/storage/combs.js
+blocks/storage/ores.js
+
 blocks/machines/apiary/apiary.js
 blocks/machines/apiary/tile.js
 blocks/machines/apiary/gui.js
@@ -138,6 +141,7 @@ blocks/soil/peat/tile.js
 blocks/ores.js
 blocks/beehives.js
 blocks/glass.js
+blocks/storage/block.js
 
 items/tools.js
 

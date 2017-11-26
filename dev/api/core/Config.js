@@ -3,7 +3,7 @@ var Config = {
 
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),
     genMeadowsChance: __config__.getNumber("gen.beehivesMeadowsChance"),
-    genModesChancet: __config__.getNumber("gen.beehivesModestChance"),
+    genModestChance: __config__.getNumber("gen.beehivesModestChance"),
     genTropicalChance: __config__.getNumber("gen.beehivesTropicalChance"),
     genWintryChance: __config__.getNumber("gen.beehivesWintryChance"),
     genMarshyChance: __config__.getNumber("gen.beehivesMarshyChance"),
@@ -29,6 +29,8 @@ var Config = {
     /* ----- OTHER ----- */
     crateEnabled: __config__.getBool("crateEnabled"),
     glassEnabled: __config__.getBool("glassEnabled"),
+    combsBlocksEnabled: __config__.getBool("combBlocksEnabled"),
+    oresBlocksEnabled: __config__.getBool("oresBlocksEnabled"),
 
     /* ----- RECIPES ----- */
     recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot")

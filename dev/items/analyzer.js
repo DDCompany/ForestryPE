@@ -4,35 +4,35 @@ Item.createItem("honeyDrop", "Honey drop", {name: "honeyDrop", meta: 0}, {});
 IDRegistry.genItemID("honeydew");
 Item.createItem("honeydew", "Honeydew", {name: "honeydew", meta: 0}, {});
 
-var COLUMN_0 = 340;
-var COLUMN_1 = 535;
-var COLUMN_2 = 735;
-var LINE = 50;
-var ANALYZER_FONT = {color: android.graphics.Color.WHITE, size: 20, shadow: 0.5};
-var ANALYZER_FONT_BLUE = {color: android.graphics.Color.rgb(40, 133, 226), size: 20, shadow: 0.5};
-var ANALYZER_FONT_RED = {color: android.graphics.Color.rgb(241, 58, 104), size: 20, shadow: 0.5};
-var ANALYZER_FONT_GREEN = {color: android.graphics.Color.GREEN, size: 20, shadow: 0.5};
-var temp = false;
-var analyzerContainer = null;
-var drawedBee = 0;
-var drawedElements = {};
-
 IDRegistry.genItemID("analyzer");
 Item.createItem("analyzer", "Portable Analyzer", {name: "analyzer", meta: 0}, {stack: 1});
 
-var updatableAnalyzer = {
+let COLUMN_0 = 340;
+let COLUMN_1 = 535;
+let COLUMN_2 = 735;
+let LINE = 50;
+let ANALYZER_FONT = {color: android.graphics.Color.WHITE, size: 20, shadow: 0.5};
+let ANALYZER_FONT_BLUE = {color: android.graphics.Color.rgb(40, 133, 226), size: 20, shadow: 0.5};
+let ANALYZER_FONT_RED = {color: android.graphics.Color.rgb(241, 58, 104), size: 20, shadow: 0.5};
+let ANALYZER_FONT_GREEN = {color: android.graphics.Color.GREEN, size: 20, shadow: 0.5};
+let temp = false;
+let analyzerContainer = null;
+let drawedBee = 0;
+let drawedElements = {};
+
+const updatableAnalyzer = {
 
     update: function () {
         if (analyzerContainer && temp) {
             if (analyzerContainer.isOpened()) {
-                var slotHoney = analyzerContainer.getSlot("slotHoney");
-                var slotScanning = analyzerContainer.getSlot("slotScanning");
-                var slotPhase1 = analyzerContainer.getSlot("slotPhase1");
-                var slotPhase2 = analyzerContainer.getSlot("slotPhase2");
-                var slotPhase3 = analyzerContainer.getSlot("slotPhase3");
+                let slotHoney = analyzerContainer.getSlot("slotHoney");
+                let slotScanning = analyzerContainer.getSlot("slotScanning");
+                let slotPhase1 = analyzerContainer.getSlot("slotPhase1");
+                let slotPhase2 = analyzerContainer.getSlot("slotPhase2");
+                let slotPhase3 = analyzerContainer.getSlot("slotPhase3");
 
                 if (slotScanning.id && !slotPhase1.id && !slotPhase2.id && !slotPhase3.id && drawedBee !== slotScanning.id && BeeRegistry.isBee(slotScanning.id)) {
-                    var bee = BeeRegistry.getBeeFromItem(slotScanning.id, slotScanning.data);
+                    let bee = BeeRegistry.getBeeFromItem(slotScanning.id, slotScanning.data);
                     if (!bee.analyzed && (slotHoney.id === ItemID.honeyDrop || slotHoney.id === ItemID.honeydew)) {
                         slotHoney.count--;
                     } else if (!bee.analyzed) {
@@ -42,7 +42,7 @@ var updatableAnalyzer = {
                         bee.save();
                     }
                     bee.analyzed = true;
-                    var f = true;
+                    let f = true;
                     if (slotPhase1.id === 0 && slotPhase2.id === 0 && slotPhase3.id === 0) {
                         f = false;
                     }
@@ -52,11 +52,11 @@ var updatableAnalyzer = {
                         slotPhase1.count = 1;
                         slotScanning.count = 0;
                     }
-                } else if (slotPhase1.id && drawedBee != slotPhase1.id && BeeRegistry.isBee(slotPhase1.id)) {
-                    var bee = BeeRegistry.getBeeFromItem(slotPhase1.id, slotPhase1.data);
+                } else if (slotPhase1.id && drawedBee !== slotPhase1.id && BeeRegistry.isBee(slotPhase1.id)) {
+                    let bee = BeeRegistry.getBeeFromItem(slotPhase1.id, slotPhase1.data);
                     if (bee.analyzed) {
                         if (slotPhase2.id || slotPhase3.id) {
-                            var pos = Player.getPosition();
+                            let pos = Player.getPosition();
                             World.drop(pos.x, pos.y, pos.z, slotPhase1.id, slotPhase1.count, slotPhase1.data);
                             slotPhase1.count = 0;
                             return;
@@ -66,10 +66,10 @@ var updatableAnalyzer = {
                         }
                     }
                 } else if (slotPhase2.id && drawedBee !== slotPhase2.id && BeeRegistry.isBee(slotPhase2.id)) {
-                    var bee = BeeRegistry.getBeeFromItem(slotPhase2.id, slotPhase2.data);
+                    let bee = BeeRegistry.getBeeFromItem(slotPhase2.id, slotPhase2.data);
                     if (bee.analyzed) {
                         if (slotPhase1.id || slotPhase3.id) {
-                            var pos = Player.getPosition();
+                            let pos = Player.getPosition();
                             World.drop(pos.x, pos.y, pos.z, slotPhase2.id, slotPhase2.count, slotPhase2.data);
                             slotPhase2.count = 0;
                             return;
@@ -79,10 +79,10 @@ var updatableAnalyzer = {
                         }
                     }
                 } else if (slotPhase3.id && drawedBee !== slotPhase3.id && BeeRegistry.isBee(slotPhase3.id)) {
-                    var bee = BeeRegistry.getBeeFromItem(slotPhase3.id, slotPhase3.data);
+                    let bee = BeeRegistry.getBeeFromItem(slotPhase3.id, slotPhase3.data);
                     if (bee.analyzed) {
                         if (slotPhase2.id || slotPhase1.id) {
-                            var pos = Player.getPosition();
+                            let pos = Player.getPosition();
                             World.drop(pos.x, pos.y, pos.z, slotPhase3.id, slotPhase3.count, slotPhase3.data);
                             slotPhase3.count = 0;
                             return;
@@ -99,7 +99,7 @@ var updatableAnalyzer = {
                     drawedBee = 0;
                 }
             } else if (temp) {
-                var pos = Player.getPosition();
+                let pos = Player.getPosition();
 
                 analyzerContainer.dropSlot("slotHoney", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
                 analyzerContainer.dropSlot("slotScanning", pos.x + 0.5, pos.y + 0.5, pos.z + 0.5);
@@ -122,10 +122,10 @@ Callback.addCallback("LevelLoaded", function () {
 });
 
 function drawPage1(bee) {
-    var content = analyzerContainer.getGuiContent();
+    let content = analyzerContainer.getGuiContent();
 
-    var active = Translation.translate("analyzer.active");
-    var inactive = Translation.translate("analyzer.inactive");
+    let active = Translation.translate("analyzer.active");
+    let inactive = Translation.translate("analyzer.inactive");
 
     drawedElements["textActive"] = {
         type: "text",
@@ -385,8 +385,8 @@ function drawPage1(bee) {
     for (key in drawedElements) {
         content.elements[key] = drawedElements[key];
     }
-    var slotSpeciesActive = analyzerContainer.getSlot("slotActiveSpecies");
-    var slotSpeciesInactive = analyzerContainer.getSlot("slotInactiveSpecies");
+    let slotSpeciesActive = analyzerContainer.getSlot("slotActiveSpecies");
+    let slotSpeciesInactive = analyzerContainer.getSlot("slotInactiveSpecies");
 
     slotSpeciesActive.id = bee.getBeeType().droneID;
     slotSpeciesActive.count = 1;
@@ -398,7 +398,7 @@ function drawPage1(bee) {
 
 
 function drawPage2(bee) {
-    var content = analyzerContainer.getGuiContent();
+    let content = analyzerContainer.getGuiContent();
 
     drawedElements["textActive"] = {
         type: "text",
@@ -476,7 +476,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_1,
         y: LINE,
-        bitmap: bee.getActiveChromosome("TEMPERATURE_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getActiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
         scale: 2.5
     };
 
@@ -494,7 +494,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_2,
         y: LINE,
-        bitmap: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
         scale: 2.5
     };
 
@@ -553,7 +553,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_1,
         y: LINE,
-        bitmap: bee.getActiveChromosome("HUMIDITY_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getActiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
         scale: 2.5
     };
 
@@ -571,7 +571,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_2,
         y: LINE,
-        bitmap: bee.getInactiveChromosome("HUMIDITY_TOLERANCE") == 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getInactiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
         scale: 2.5
     };
 
@@ -697,8 +697,8 @@ function drawPage2(bee) {
 
     LINE += 32;
 
-    var stock = bee.pristine ? Translation.translate("analyzer.pristine") : Translation.translate("analyzer.ignoble");
-    var generation = bee.generation + " " + Translation.translate("analyzer.generation");
+    let stock = bee.pristine ? Translation.translate("analyzer.pristine") : Translation.translate("analyzer.ignoble");
+    let generation = bee.generation + " " + Translation.translate("analyzer.generation");
     drawedElements["textStock"] = {
         type: "text",
         x: 335 + ((590 - stock.length * (ANALYZER_FONT_GREEN.size / 2)) / 2),
@@ -727,7 +727,7 @@ function drawPage2(bee) {
 }
 
 function drawPage3(bee) {
-    var content = analyzerContainer.getGuiContent();
+    let content = analyzerContainer.getGuiContent();
 
     drawedElements["textProduce"] = {
         type: "text",
@@ -741,9 +741,9 @@ function drawPage3(bee) {
 
     LINE += 32;
 
-    var produce = bee.getProduce();
-    var t = 0;
-    for (var key in produce) {
+    let produce = bee.getProduce();
+    let t = 0;
+    for (let key in produce) {
         drawedElements["slotProduce" + t] = {
             type: "slot",
             x: COLUMN_0 + (t * 60),
@@ -769,9 +769,9 @@ function drawPage3(bee) {
 
     LINE += 32;
 
-    var specialty = bee.getSpecialty();
+    let specialty = bee.getSpecialty();
     t = 0;
-    for (var key in specialty) {
+    for (let key in specialty) {
         drawedElements["slotSpecialty" + t] = {
             type: "slot",
             x: COLUMN_0 + (t * 60),
@@ -783,12 +783,12 @@ function drawPage3(bee) {
         t++;
     }
 
-    for (key in drawedElements) {
+    for (let key in drawedElements) {
         content.elements[key] = drawedElements[key];
     }
     t = 0;
-    for (var key in produce) {
-        var slot = analyzerContainer.getSlot("slotProduce" + t);
+    for (let key in produce) {
+        let slot = analyzerContainer.getSlot("slotProduce" + t);
         slot.id = produce[key][0];
         slot.data = produce[key][1];
         slot.count = 1;
@@ -796,8 +796,8 @@ function drawPage3(bee) {
     }
 
     t = 0;
-    for (var key in specialty) {
-        var slot = analyzerContainer.getSlot("slotSpecialty" + t);
+    for (let key in specialty) {
+        let slot = analyzerContainer.getSlot("slotSpecialty" + t);
         slot.id = specialty[key][0];
         slot.data = specialty[key][1];
         slot.count = 1;
@@ -807,7 +807,7 @@ function drawPage3(bee) {
     LINE = 50;
 }
 
-var analyzerObj = {
+const analyzerObj = {
     standart: {
         header: {
             text: {
@@ -829,12 +829,11 @@ var analyzerObj = {
         "slotScanning": {type: "slot", x: 938, y: 91, size: 51, bitmap: "slot_q"},
 
         "slotPhase1": {type: "slot", x: 938, y: 178.4, size: 51, bitmap: "slot_p1"},
-        "slotPhase2": {type: "slot", x: 938, y: 178.4 + 1 * 51, size: 51, bitmap: "slot_p2"},
+        "slotPhase2": {type: "slot", x: 938, y: 178.4 + 51, size: 51, bitmap: "slot_p2"},
         "slotPhase3": {type: "slot", x: 938, y: 178.4 + 2 * 51, size: 51, bitmap: "slot_p3"},
     }
 };
-var analyzerGUI = new UI.StandartWindow(analyzerObj);
-
+const analyzerGUI = new UI.StandartWindow(analyzerObj);
 
 Item.registerUseFunction("analyzer", function () {
     analyzerContainer = new UI.Container();

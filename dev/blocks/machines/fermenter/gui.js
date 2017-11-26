@@ -1,8 +1,8 @@
-var fermenterGUI = new UI.StandartWindow({
+const fermenterGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Fermenter")
+                text: "Fermenter"
             }
         },
         inventory: {
@@ -64,11 +64,10 @@ var fermenterGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slotLiquidInput": {type: "slot", x: 385, y: 131.6, bitmap: "slot_liquid"},
-        "slotLiquidInputEmpty": {type: "slot", x: 385, y: 246.8, bitmap: "slot_container"},
+        "slotInputContainer": {type: "slot", x: 385, y: 186, bitmap: "slot_liquid"},
         "slotPlant": {type: "slot", x: 567.4, y: 138, bitmap: "slot_gray", size: 51.2},
         "slotReagent": {type: "slot", x: 535.4, y: 246.8, bitmap: "slot_gray", size: 51.2},
-        "slotContainer": {type: "slot", x: 711.4, y: 131.6, bitmap: "slot_container"},
+        "slotContainer": {type: "slot", x: 711.4, y: 131, bitmap: "slot_container"},
         "slotFilledContainer": {type: "slot", x: 711.4, y: 246.8},
     }
 });

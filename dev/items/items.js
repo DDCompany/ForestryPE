@@ -1,3 +1,6 @@
+IDRegistry.genItemID("apatite");
+Item.createItem("apatite", "Apatite", {name: "apatite", meta: 0}, {});
+
 IDRegistry.genItemID("scentedPaneling");
 Item.createItem("scentedPaneling", "Scented paneling", {name: "scentedPaneling", meta: 0}, {});
 
@@ -150,9 +153,6 @@ Item.createItem("chipsetRefined", "Refined Circuit Board", {name: "chipsetRefine
 
 IDRegistry.genItemID("ambrosia");
 Item.createFoodItem("ambrosia", "Ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
-Callback.addCallback("FoodEaten", function () {
-    if (Player.getCarriedItem().id === ItemID.ambrosia) Entity.addEffect(Player.get(), Native.PotionEffect.regeneration, 40, 1, true, true);
-});
 
 IDRegistry.genItemID("kitPickaxe");
 Item.createItem("kitPickaxe", "Pickaxe kit", {name: "kitPickaxe", meta: 0}, {stack: 24});
@@ -160,12 +160,16 @@ Item.createItem("kitPickaxe", "Pickaxe kit", {name: "kitPickaxe", meta: 0}, {sta
 IDRegistry.genItemID("kitShovel");
 Item.createItem("kitShovel", "Shovel kit", {name: "kitShovel", meta: 0}, {stack: 24});
 
-Item.registerUseFunction("kitPickaxe", function (coords, item, block) {
+Callback.addCallback("FoodEaten", function () {
+    if (Player.getCarriedItem().id === ItemID.ambrosia) Entity.addEffect(Player.get(), Native.PotionEffect.regeneration, 40, 1, true, true);
+});
+
+Item.registerUseFunction("kitPickaxe", function (coords) {
     World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, ItemID.bronzePickaxe, 1, 0);
     Player.decreaseCarriedItem(1);
 });
 
-Item.registerUseFunction("kitShovel", function (coords, item, block) {
+Item.registerUseFunction("kitShovel", function (coords) {
     World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, ItemID.bronzeShovel, 1, 0);
     Player.decreaseCarriedItem(1);
 });

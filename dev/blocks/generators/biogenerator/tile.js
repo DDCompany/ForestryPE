@@ -14,44 +14,25 @@ MachineRegistry.register(BlockID.biogenerator, {
         getGuiScreen: function () {
             return biogeneratorGUI;
         },
-        addEmptyContainer: function (empty) {
-            var slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
 
-            if (slotEmptyContainer.id == 0) {
-                slotEmptyContainer.id = empty.id;
-                slotEmptyContainer.data = empty.data;
-                slotEmptyContainer.count = 1;
-                return true;
-            } else if (slotEmptyContainer.id == empty.id && slotEmptyContainer.data == empty.data && slotEmptyContainer.count + 1 != Item.getMaxStack(slotEmptyContainer.id)) {
-                slotEmptyContainer.count++;
-                return true;
-            }
-
-            return false;
-        },
         tick: function () {
-            var slotContainer = this.container.getSlot("slotContainer");
-            if (slotContainer.id) {
-                var empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
+            ContainerHelper.emptyContainer(null, this, "slotContainer");
 
-                if (empty && (empty.liquid == "forestryEthanol" && this.liquidStorage.getAmount("forestryEthanol") + 1 <= 10)) {
-                    if (this.addEmptyContainer(empty)) {
-                        slotContainer.count--;
-                        this.liquidStorage.addLiquid("forestryEthanol", 1);
+            let stored = this.liquidStorage.getLiquidStored();
+            let fuel = RecipeRegistry.getBiogeneratorFuel(stored);
+            if (fuel && this.liquidStorage.getAmount(stored) >= 0.001) {
+
+                if (this.data.energy + fuel.energy <= this.getEnergyStorage()) {
+                    this.data.energy += fuel.energy;
+                    this.data.progress++;
+                    if (this.data.progress > fuel.ticks) {
+                        this.data.progress = 0;
+                        this.liquidStorage.getLiquid(stored, 0.001);
                     }
                 }
             }
 
-            if (this.liquidStorage.getAmount("forestryEthanol") >= 0.001 && this.data.energy + 16 <= this.getEnergyStorage()) {
-                this.data.energy += 16;
-                this.data.progress++;
-                if (this.data.progress > 4) {
-                    this.data.progress = 0;
-                    this.liquidStorage.getLiquid("forestryEthanol", 0.001);
-                }
-            }
-
-            this.liquidStorage.updateUiScale("liquidScale", "forestryEthanol");
+            this.liquidStorage.updateUiScale("liquidScale", stored);
             this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
 
             this.container.validateAll();
@@ -67,7 +48,7 @@ MachineRegistry.register(BlockID.biogenerator, {
         },
 
         energyTick: function (type, src) {
-            var out = Math.min(32, this.data.energy);
+            let out = Math.min(32, this.data.energy);
             this.data.energy += src.add(out) - out;
         }
-    });
+}, true);

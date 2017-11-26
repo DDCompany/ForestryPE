@@ -13,7 +13,7 @@ var alvearyHygroregulatorGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 40, bitmap: "liqued_background", scale: 3.2},
+        {type: "bitmap", x: 335, y: 40, bitmap: "liquid_background", scale: 3.2},
     ],
     elements: {
         "liquidScale": {

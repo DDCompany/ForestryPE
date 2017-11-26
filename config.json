@@ -3,6 +3,8 @@
   "show_resource_errors": true,
   "crateEnabled": true,
   "glassEnabled": true,
+  "combBlocksEnabled": true,
+  "oresBlocksEnabled": true,
   "recipes": {
     "bronzeIngot": true
   },

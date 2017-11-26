@@ -1,8 +1,9 @@
-for (var i = 0; i < 4; i++) {
+for (let i = 0; i < 4; i++) {
     RecipeRegistry.addCarpenterRecipe({
         input: {"slot4": {id: 17, data: i}},
         liquid: "water",
         liquidAmount: 0.25,
+        time: 5,
         output: {
             id: ItemID.woodPulp,
             count: 4,
@@ -20,6 +21,7 @@ for (var i = 0; i < 4; i++) {
             },
             liquid: "water",
             liquidAmount: 1,
+            time: 5,
             output: {
                 id: ItemID.crate,
                 count: 24,
@@ -39,8 +41,9 @@ for (var i = 0; i < 4; i++) {
             "slot7": {id: 17, data: i},
             "slot8": {id: 17, data: i}
         },
-        liquid: "forestrySeedoil",
+        liquid: "seedOil",
         liquidAmount: 1,
+        time: 50,
         output: {
             id: ItemID.impregnatedCasing,
             count: 1,
@@ -50,8 +53,9 @@ for (var i = 0; i < 4; i++) {
 
     RecipeRegistry.addCarpenterRecipe({
         input: {"slot4": {id: 17, data: i}, "slot7": {id: 17, data: i}},
-        liquid: "forestrySeedoil",
+        liquid: "seedOil",
         liquidAmount: 0.01,
+        time: 10,
         output: {
             id: ItemID.stickImpregnated,
             count: 2,
@@ -60,7 +64,7 @@ for (var i = 0; i < 4; i++) {
     });
 }
 
-for (var i = 0; i < 2; i++) {
+for (let i = 0; i < 2; i++) {
 
     if (Config.crateEnabled) {
         RecipeRegistry.addCarpenterRecipe({
@@ -72,6 +76,7 @@ for (var i = 0; i < 2; i++) {
             },
             liquid: "water",
             liquidAmount: 1,
+            time: 5,
             output: {
                 id: ItemID.crate,
                 count: 24,
@@ -84,6 +89,7 @@ for (var i = 0; i < 2; i++) {
         input: {"slot4": {id: 162, data: i}},
         liquid: "water",
         liquidAmount: 0.25,
+        time: 5,
         output: {
             id: ItemID.woodPulp,
             count: 4,
@@ -111,8 +117,9 @@ for (var i = 0; i < 2; i++) {
 
     RecipeRegistry.addCarpenterRecipe({
         input: {"slot4": {id: 162, data: i}, "slot7": {id: 162, data: i}},
-        liquid: "forestrySeedoil",
+        liquid: "seedOil",
         liquidAmount: 0.01,
+        time: 10,
         output: {
             id: ItemID.stickImpregnated,
             count: 2,
@@ -474,7 +481,7 @@ RecipeRegistry.addCarpenterRecipe({
         "slot7": {id: ItemID.pollen1, data: 0},
         "slot8": {id: ItemID.beeswax, data: 0}
     },
-    liquid: "forestryHoney",
+    liquid: "honey",
     liquidAmount: 0.5,
     output: {
         id: ItemID.scentedPaneling,

@@ -3,8 +3,8 @@ if (Config.crateEnabled === true) {
     Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
 
     function registerCrate(id, n, texture, d) {
-        var name = id;
-        var data = d ? d : 0;
+        let name = id;
+        let data = d ? d : 0;
         IDRegistry.genItemID("crate" + name);
         Item.createItem("crate" + name, "Crate (" + n + ")", {name: texture, meta: 0}, {});
 
@@ -37,13 +37,9 @@ if (Config.crateEnabled === true) {
             }
         });
 
-        Item.registerUseFunction("crate" + name, function (coords, item, block) {
+        Item.registerUseFunction("crate" + name, function (coords, item) {
             World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, id, 9, 0);
-            item.count--;
-            if (!item.count) {
-                item.id = 0;
-            }
-            Player.setCarriedItem(item.id, item.count, 0);
+            Player.decreaseCarriedItem(1);
         });
     }
 

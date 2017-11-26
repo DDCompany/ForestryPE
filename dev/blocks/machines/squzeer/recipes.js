@@ -15,7 +15,7 @@ RecipeRegistry.registerSqueezerRecipe({
         count: 1,
         chance: 0.4
     },
-    liquid: "forestryJuice",
+    liquid: "appleJuice",
     liquidCount: 0.2
 });
 
@@ -36,7 +36,7 @@ RecipeRegistry.registerSqueezerRecipe({
         count: 1,
         chance: 0.5
     },
-    liquid: "forestryHoney",
+    liquid: "honey",
     liquidCount: 0.1
 });
 
@@ -51,7 +51,7 @@ RecipeRegistry.registerSqueezerRecipe({
         data: 0,
         count: 0
     },
-    liquid: "forestryHoney",
+    liquid: "honey",
     liquidCount: 0.1
 });
 
@@ -66,7 +66,7 @@ RecipeRegistry.registerSqueezerRecipe({
         data: 0,
         count: 0
     },
-    liquid: "forestrySeedoil",
+    liquid: "seedOil",
     liquidCount: 0.01
 });
 
@@ -81,7 +81,7 @@ RecipeRegistry.registerSqueezerRecipe({
         data: 0,
         count: 0
     },
-    liquid: "forestrySeedoil",
+    liquid: "seedOil",
     liquidCount: 0.01
 });
 
@@ -96,7 +96,7 @@ RecipeRegistry.registerSqueezerRecipe({
         data: 0,
         count: 0
     },
-    liquid: "forestrySeedoil",
+    liquid: "seedOil",
     liquidCount: 0.01
 });
 

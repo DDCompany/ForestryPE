@@ -1,4 +1,4 @@
-var carpenterGUI = new UI.StandartWindow({
+const carpenterGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
@@ -37,7 +37,7 @@ var carpenterGUI = new UI.StandartWindow({
         },
         "liquidScale": {
             type: "scale",
-            x: 781.8,
+            x: 780,
             y: 113.2,
             direction: 1,
             value: 0,
@@ -48,7 +48,27 @@ var carpenterGUI = new UI.StandartWindow({
         "slotOutput": {type: "slot", x: 612.2, y: 222, size: 51},
         "slotSpecial": {type: "slot", x: 618.6, y: 119.6},
         "slotContainer": {type: "slot", x: 705, y: 119.6, bitmap: "slot_liquid"},
-        "slotEmptyContainer": {type: "slot", x: 705, y: 222, bitmap: "slot_container"}
 
     }
 });
+
+function initCarpenterSlots() {
+    let tmp = 0;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            carpenterGUI.content.elements["slotInput" + tmp] = {type: "slot", x: 385 + j * 60, y: 115 + i * 60};
+            tmp++;
+        }
+    }
+
+    tmp = 0;
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 9; j++) {
+            carpenterGUI.content.elements["slotResources" + tmp] = {type: "slot", x: 353 + j * 60, y: 321.8 + i * 60};
+            tmp++;
+        }
+    }
+}
+
+initCarpenterSlots();
+

@@ -46,11 +46,10 @@ var stillGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slotBiomassContainer": {type: "slot", x: 385, y: 119.6, bitmap: "slot_liquid"},
-        "slotBiomassEmptyContainer": {type: "slot", x: 385, y: 234.8, bitmap: "slot_container"},
+        "slotBiomassContainer": {type: "slot", x: 385, y: 165, bitmap: "slot_liquid"},
 
-        "slotEthanolEmptyContainer": {type: "slot", x: 833, y: 119.6, bitmap: "slot_container"},
-        "slotEthanolContainer": {type: "slot", x: 833, y: 234.8, bitmap: "slot_liquid"},
+        "slotEthanolContainer": {type: "slot", x: 833, y: 119.6, bitmap: "slot_container"},
+        "slotEthanolContainerFilled": {type: "slot", x: 833, y: 234.8, bitmap: "slot_liquid"},
 
     }
 });

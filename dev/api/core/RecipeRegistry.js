@@ -1,10 +1,20 @@
-var RecipeRegistry = {
+const RecipeRegistry = {
 
     recipesCentrifuge: [],
     recipesCarpenter: [],
     recipesFabricator: [],
     bioItems: [],
     recipesSqueezer: [],
+
+    biogeneratorFuel: {},
+
+    registerBiogeneratorFuel: function (fluid, fuel) {
+        this.biogeneratorFuel[fluid] = fuel;
+    },
+
+    getBiogeneratorFuel: function (fluid) {
+        return this.biogeneratorFuel[fluid];
+    },
 
     registerSqueezerRecipe: function (recipe) {
         this.recipesSqueezer.push(recipe);

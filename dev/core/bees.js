@@ -3,14 +3,17 @@ BeeRegistry.registerBee({
         princess: {
             ru: "Суровая принцесса",
             en: "Austere princess"
+            , zh: "[FR]苦行公主蜂"
         },
         drone: {
             ru: "Суровый трутень",
             en: "Austere drone"
+            , zh: "[FR]苦行雄蜂"
         },
         queen: {
             ru: "Суровая королева",
             en: "Austere queen"
+            , zh: "[FR]苦行蜂后"
         }
     },
     mutations: [
@@ -43,15 +46,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Карающая принцесса",
-            en: "Avenging princess"
+            en: "Avenging princess",
+            zh: "[FR]复仇公主蜂"
         },
         drone: {
             ru: "Карающий трутень",
-            en: "Avenging drone"
+            en: "Avenging drone",
+            zh: "[FR]复仇雄蜂"
         },
         queen: {
             ru: "Карающая королева",
-            en: "Avenging queen"
+            en: "Avenging queen",
+            zh: "[FR]复仇蜂后"
         }
     },
     mutations: [
@@ -66,19 +72,21 @@ BeeRegistry.registerBee({
     chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
 
+var chhhh = 1;
+
 BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Обычная принцесса",
-            en: "Common princess"
+            en: "Common princess", zh: "[FR]寻常公主蜂"
         },
         drone: {
             ru: "Обычный трутень",
-            en: "Common drone"
+            en: "Common drone", zh: "[FR]寻常雄蜂"
         },
         queen: {
             ru: "Обычная королева",
-            en: "Common queen"
+            en: "Common queen", zh: "[FR]寻常蜂后"
         }
     },
     species: "Common",
@@ -104,15 +112,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Культивируемая принцесса",
-            en: "Cultivated princess"
+            en: "Cultivated princess",
+            zh: "[FR]田野公主蜂"
         },
         drone: {
             ru: "Культивируемый трутень",
-            en: "Cultivated drone"
+            en: "Cultivated drone",
+            zh: "[FR]田野雄蜂"
         },
         queen: {
             ru: "Культивируемая королева",
-            en: "Cultivated queen"
+            en: "Cultivated queen",
+            zh: "[FR]田野蜂后"
         }
     },
     species: "Cultivated",
@@ -133,15 +144,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Демоническая принцесса",
-            en: "Demonic princess"
+            en: "Demonic princess",
+            zh: "[FR]恶魔公主蜂"
         },
         drone: {
             ru: "Демонический трутень",
-            en: "Demonic drone"
+            en: "Demonic drone",
+            zh: "[FR]恶魔雄蜂"
         },
         queen: {
             ru: "Демоническая королева",
-            en: "Demonic queen"
+            en: "Demonic queen",
+            zh: "[FR]恶魔蜂后"
         }
     },
     species: "Demonic",
@@ -176,15 +190,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Добросовестная принцесса",
-            en: "Diligent princess"
+            en: "Diligent princess",
+            zh: "[FR]勤奋公主蜂"
         },
         drone: {
             ru: "Добросовестный трутень",
-            en: "Diligent drone"
+            en: "Diligent drone",
+            zh: "[FR]勤奋雄蜂"
         },
         queen: {
             ru: "Добросовестная королева",
-            en: "Diligent queen"
+            en: "Diligent queen",
+            zh: "[FR]勤奋蜂后"
         }
     },
     species: "Diligent",
@@ -203,15 +220,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Райская принцесса",
-            en: "Edenic princess"
+            en: "Edenic princess",
+            zh: "[FR]伊甸公主蜂"
         },
         drone: {
             ru: "Райский трутень",
-            en: "Edenic drone"
+            en: "Edenic drone",
+            zh: "[FR]伊甸雄蜂"
         },
         queen: {
             ru: "Райская королева",
-            en: "Edenic queen"
+            en: "Edenic queen",
+            zh: "[FR]伊甸蜂后"
         }
     },
     species: "Edenic",
@@ -240,15 +260,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Принцесса края",
-            en: "Ender princess"
+            en: "Ender princess",
+            zh: "[FR]末影公主蜂"
         },
         drone: {
             ru: "Трутень края",
-            en: "Ender drone"
+            en: "Ender drone",
+            zh: "[FR]末影雄蜂"
         },
         queen: {
             ru: "Королева края",
-            en: "Ender queen"
+            en: "Ender queen",
+            zh: "[FR]末影蜂后"
         }
     },
     species: "Ender",
@@ -266,15 +289,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Экзотическая принцесса",
-            en: "Exotic princess"
+            en: "Exotic princess",
+            zh: "[FR]异国公主蜂"
         },
         drone: {
             ru: "Экзотический трутень",
-            en: "Exotic drone"
+            en: "Exotic drone",
+            zh: "[FR]异国雄蜂"
         },
         queen: {
             ru: "Экзотическая королева",
-            en: "Exotic queen"
+            en: "Exotic queen",
+            zh: "[FR]异国蜂后"
         }
     },
     species: "Exotic",
@@ -300,15 +326,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Дьявольская принцесса",
-            en: "Fiendish princess"
+            en: "Fiendish princess",
+            zh: "[FR]残忍公主蜂"
         },
         drone: {
             ru: "Дьявольский трутень",
-            en: "Fiendish drone"
+            en: "Fiendish drone",
+            zh: "[FR]残忍雄蜂"
         },
         queen: {
             ru: "Дьявольская королева",
-            en: "Fiendish queen"
+            en: "Fiendish queen",
+            zh: "[FR]残忍蜂后"
         }
     },
     species: "Fiendish",
@@ -363,15 +392,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Лесная принцесса",
-            en: "Forest princess"
+            en: "Forest princess",
+            zh: "[FR]森林公主蜂"
         },
         drone: {
             ru: "Лесной трутень",
-            en: "Forest drone"
+            en: "Forest drone",
+            zh: "[FR]森林雄蜂"
         },
         queen: {
             ru: "Лесная королева",
-            en: "Forest queen"
+            en: "Forest queen",
+            zh: "[FR]森林蜂后"
         }
     },
     species: "Forest",
@@ -383,15 +415,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Умеренная принцесса",
-            en: "Frugal princess"
+            en: "Frugal princess",
+            zh: "[FR]节俭公主蜂"
         },
         drone: {
             ru: "Умеренный трутень",
-            en: "Frugal drone"
+            en: "Frugal drone",
+            zh: "[FR]节俭雄蜂"
         },
         queen: {
             ru: "Умеренная королева",
-            en: "Frugal queen"
+            en: "Frugal queen",
+            zh: "[FR]节俭蜂后"
         }
     },
     species: "Frugal",
@@ -430,15 +465,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Ледниковая принцесса",
-            en: "Glacial princess"
+            en: "Glacial princess",
+            zh: "[FR]冰河公主蜂"
         },
         drone: {
             ru: "Ледниковый трутень",
-            en: "Glacial drone"
+            en: "Glacial drone",
+            zh: "[FR]冰河雄蜂"
         },
         queen: {
             ru: "Ледниковая королева",
-            en: "Glacial queen"
+            en: "Glacial queen",
+            zh: "[FR]冰河蜂后"
         }
     },
     species: "Glacial",
@@ -462,15 +500,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Отшельническая принцесса",
-            en: "Hermitic princess"
+            en: "Hermitic princess",
+            zh: "[FR]遁世公主蜂"
         },
         drone: {
             ru: "Отшельнический трутень",
-            en: "Hermitic drone"
+            en: "Hermitic drone",
+            zh: "[FR]遁世雄蜂"
         },
         queen: {
             ru: "Отшельническая королева",
-            en: "Hermitic queen"
+            en: "Hermitic queen",
+            zh: "[FR]遁世蜂后"
         }
     },
     species: "Hermitic",
@@ -483,15 +524,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Ледяная принцесса",
-            en: "Icy princess"
+            en: "Icy princess",
+            zh: "[FR]严寒公主蜂"
         },
         drone: {
             ru: "Ледяной трутень",
-            en: "Icy drone"
+            en: "Icy drone",
+            zh: "[FR]严寒雄蜂"
         },
         queen: {
             ru: "Ледяная королева",
-            en: "Icy queen"
+            en: "Icy queen",
+            zh: "[FR]严寒蜂后"
         }
     },
     species: "Icy",
@@ -515,15 +559,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Трудолюбивая принцесса",
-            en: "Industrious princess"
+            en: "Industrious princess",
+            zh: "[FR]敬业公主蜂"
         },
         drone: {
             ru: "Трудолюбивый трутень",
-            en: "Industrious drone"
+            en: "Industrious drone",
+            zh: "[FR]敬业雄蜂"
         },
         queen: {
             ru: "Трудолюбивая королева",
-            en: "Industrious queen"
+            en: "Industrious queen",
+            zh: "[FR]敬业蜂后"
         }
     },
     species: "Industrious",
@@ -542,15 +589,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Заячья принцесса",
-            en: "Leporine princess"
+            en: "Leporine princess",
+            zh: "[FR]狂野公主蜂"
         },
         drone: {
             ru: "Заячий трутень",
-            en: "Leporine drone"
+            en: "Leporine drone",
+            zh: "[FR]狂野雄蜂"
         },
         queen: {
             ru: "Заячья королева",
-            en: "Leporine queen"
+            en: "Leporine queen",
+            zh: "[FR]狂野蜂后"
         }
     },
     species: "Leporine",
@@ -569,15 +619,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Величественная принцесса",
-            en: "Majestic princess"
+            en: "Majestic princess",
+            zh: "[FR]庄严公主蜂"
         },
         drone: {
             ru: "Величественный трутень",
-            en: "Majestic drone"
+            en: "Majestic drone",
+            zh: "[FR]庄严雄蜂"
         },
         queen: {
             ru: "Величественная королева",
-            en: "Majestic queen"
+            en: "Majestic queen",
+            zh: "[FR]庄严蜂后"
         }
     },
     species: "Majestic",
@@ -596,15 +649,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Болотная принцесса",
-            en: "Marshy princess"
+            en: "Marshy princess",
+            zh: "[FR]沼泽公主蜂"
         },
         drone: {
             ru: "Болотный трутень",
-            en: "Marshy drone"
+            en: "Marshy drone",
+            zh: "[FR]沼泽雄蜂"
         },
         queen: {
             ru: "Болотная королева",
-            en: "Marshy queen"
+            en: "Marshy queen",
+            zh: "[FR]沼泽蜂后"
         }
     },
     species: "Marshy",
@@ -618,15 +674,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Луговая принцесса",
-            en: "Meadows princess"
+            en: "Meadows princess",
+            zh: "[FR]草原公主蜂"
         },
         drone: {
             ru: "Луговой трутень",
-            en: "Meadows drone"
+            en: "Meadows drone",
+            zh: "[FR]草原雄蜂"
         },
         queen: {
             ru: "Луговая королева",
-            en: "Meadows queen"
+            en: "Meadows queen",
+            zh: "[FR]草原蜂后"
         }
     },
     species: "Meadows",
@@ -639,15 +698,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Веселенькая принцесса",
-            en: "Merry princess"
+            en: "Merry princess",
+            zh: "[FR]欢乐公主蜂"
         },
         drone: {
             ru: "Веселенький трутень",
-            en: "Merry drone"
+            en: "Merry drone",
+            zh: "[FR]欢乐雄蜂"
         },
         queen: {
             ru: "Веселенькая королева",
-            en: "Merry queen"
+            en: "Merry queen",
+            zh: "[FR]欢乐蜂后"
         }
     },
     species: "Merry",
@@ -665,15 +727,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Скромная принцесса",
-            en: "Modest princess"
+            en: "Modest princess",
+            zh: "[FR]温和公主蜂"
         },
         drone: {
             ru: "Скромный трутень",
-            en: "Modest drone"
+            en: "Modest drone",
+            zh: "[FR]温和雄蜂"
         },
         queen: {
             ru: "Скромная королева",
-            en: "Modest queen"
+            en: "Modest queen",
+            zh: "[FR]温和蜂后"
         }
     },
     species: "Modest",
@@ -694,15 +759,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Монашеская принцесса",
-            en: "Monastic princess"
+            en: "Monastic princess",
+            zh: "[FR]僧侣公主蜂"
         },
         drone: {
             ru: "Монашеский трутень",
-            en: "Monastic drone"
+            en: "Monastic drone",
+            zh: "[FR]僧侣雄蜂"
         },
         queen: {
             ru: "Монашеская королева",
-            en: "Monastic queen"
+            en: "Monastic queen",
+            zh: "[FR]僧侣蜂后"
         }
     },
     species: "Monastic",
@@ -716,15 +784,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Благородная принцесса",
-            en: "Noble princess"
+            en: "Noble princess",
+            zh: "[FR]高尚公主蜂"
         },
         drone: {
             ru: "Благородный трутень",
-            en: "Noble drone"
+            en: "Noble drone",
+            zh: "[FR]高尚雄蜂"
         },
         queen: {
             ru: "Благородная королева",
-            en: "Noble queen"
+            en: "Noble queen",
+            zh: "[FR]高尚蜂后"
         }
     },
     species: "Noble",
@@ -743,15 +814,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Призрачная принцесса",
-            en: "Phantasmal princess"
+            en: "Phantasmal princess",
+            zh: "[FR]幻影公主蜂"
         },
         drone: {
             ru: "Призрачный трутень",
-            en: "Phantasmal drone"
+            en: "Phantasmal drone",
+            zh: "[FR]幻影雄蜂"
         },
         queen: {
             ru: "Призрачная королева",
-            en: "Phantasmal queen"
+            en: "Phantasmal queen",
+            zh: "[FR]幻影蜂后"
         }
     },
     species: "Phantasmal",
@@ -765,15 +839,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Сельская принцесса",
-            en: "Rural princess"
+            en: "Rural princess",
+            zh: "[FR]田园公主蜂"
         },
         drone: {
             ru: "Сельский трутень",
-            en: "Rural drone"
+            en: "Rural drone",
+            zh: "[FR]田园雄蜂"
         },
         queen: {
             ru: "Сельская королева",
-            en: "Rural queen"
+            en: "Rural queen",
+            zh: "[FR]田园蜂后"
         }
     },
     species: "Rural",
@@ -793,15 +870,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Укромная принцесса",
-            en: "Secluded princess"
+            en: "Secluded princess",
+            zh: "[FR]归隐公主蜂"
         },
         drone: {
             ru: "Укромный трутень",
-            en: "Secluded drone"
+            en: "Secluded drone",
+            zh: "[FR]归隐雄蜂"
         },
         queen: {
             ru: "Укромная королева",
-            en: "Secluded queen"
+            en: "Secluded queen",
+            zh: "[FR]归隐蜂后"
         }
     },
     species: "Secluded",
@@ -814,15 +894,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Зловещая принцесса",
-            en: "Sinister princess"
+            en: "Sinister princess",
+            zh: "[FR]邪恶公主蜂"
         },
         drone: {
             ru: "Зловещий трутень",
-            en: "Sinister drone"
+            en: "Sinister drone",
+            zh: "[FR]邪恶雄蜂"
         },
         queen: {
             ru: "Зловещая королева",
-            en: "Sinister queen"
+            en: "Sinister queen",
+            zh: "[FR]邪恶蜂后"
         }
     },
     species: "Sinister",
@@ -866,15 +949,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Спектральная принцесса",
-            en: "Spectral princess"
+            en: "Spectral princess",
+            zh: "[FR]幽灵公主蜂"
         },
         drone: {
             ru: "Спектральный трутень",
-            en: "Spectral drone"
+            en: "Spectral drone",
+            zh: "[FR]幽灵雄蜂"
         },
         queen: {
             ru: "Спектральная королева",
-            en: "Spectral queen"
+            en: "Spectral queen",
+            zh: "[FR]幽灵蜂后"
         }
     },
     species: "Spectral",
@@ -888,15 +974,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Пьяная принцесса",
-            en: "Tipsy princess"
+            en: "Tipsy princess",
+            zh: "[FR]醉酒公主蜂"
         },
         drone: {
             ru: "Пьяный трутень",
-            en: "Tipsy drone"
+            en: "Tipsy drone",
+            zh: "[FR]醉酒雄蜂"
         },
         queen: {
             ru: "Пьяная королева",
-            en: "Tipsy queen"
+            en: "Tipsy queen",
+            zh: "[FR]醉酒蜂后"
         }
     },
     species: "Tipsy",
@@ -915,15 +1004,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Тропическая принцесса",
-            en: "Tropical princess"
+            en: "Tropical princess",
+            zh: "[FR]热带公主蜂"
         },
         drone: {
             ru: "Тропический трутень",
-            en: "Tropical drone"
+            en: "Tropical drone",
+            zh: "[FR]热带雄蜂"
         },
         queen: {
             ru: "Тропическая королева",
-            en: "Tropical queen"
+            en: "Tropical queen",
+            zh: "[FR]热带蜂后"
         }
     },
     species: "Tropical",
@@ -943,15 +1035,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Неутомимая принцесса",
-            en: "Unweary princess"
+            en: "Unweary princess",
+            zh: "[FR]不倦公主蜂"
         },
         drone: {
             ru: "Неутомимый трутень",
-            en: "Unweary drone"
+            en: "Unweary drone",
+            zh: "[FR]不倦雄蜂"
         },
         queen: {
             ru: "Неутомимая королева",
-            en: "Unweary queen"
+            en: "Unweary queen",
+            zh: "[FR]不倦蜂后"
         }
     },
     species: "Unweary",
@@ -970,15 +1065,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Доблестная принцесса",
-            en: "Valiant princess"
+            en: "Valiant princess",
+            zh: "[FR]勇者公主蜂"
         },
         drone: {
             ru: "Доблестный трутень",
-            en: "Valiant drone"
+            en: "Valiant drone",
+            zh: "[FR]勇者雄蜂"
         },
         queen: {
             ru: "Доблестная королева",
-            en: "Valiant queen"
+            en: "Valiant queen",
+            zh: "[FR]勇者蜂后"
         }
     },
     species: "Valiant",
@@ -996,15 +1094,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Мстительная принцесса",
-            en: "Vengeful princess"
+            en: "Vengeful princess",
+            zh: "[FR]报仇公主蜂"
         },
         drone: {
             ru: "Мстительный трутень",
-            en: "Vengeful drone"
+            en: "Vengeful drone",
+            zh: "[FR]报仇雄蜂"
         },
         queen: {
             ru: "Мстительная королева",
-            en: "Vengeful queen"
+            en: "Vengeful queen",
+            zh: "[FR]报仇蜂后"
         }
     },
     species: "Vengeful",
@@ -1016,15 +1117,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Злопамятная принцесса",
-            en: "Vindictive princess"
+            en: "Vindictive princess",
+            zh: "[FR]记恨公主蜂"
         },
         drone: {
             ru: "Злопамятный трутень",
-            en: "Vindictive drone"
+            en: "Vindictive drone",
+            zh: "[FR]记恨雄蜂"
         },
         queen: {
             ru: "Злопамятная королева",
-            en: "Vindictive queen"
+            en: "Vindictive queen",
+            zh: "[FR]记恨蜂后"
         }
     },
     species: "Vindictive",
@@ -1036,15 +1140,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Зимняя принцесса",
-            en: "Wintry princess"
+            en: "Wintry princess",
+            zh: "[FR]凛冬公主蜂"
         },
         drone: {
             ru: "Зимний трутень",
-            en: "Wintry drone"
+            en: "Wintry drone",
+            zh: "[FR]凛冬雄蜂"
         },
         queen: {
             ru: "Зимняя королева",
-            en: "Wintry queen"
+            en: "Wintry queen",
+            zh: "[FR]凛冬蜂后"
         }
     },
     species: "Wintry",
@@ -1063,15 +1170,18 @@ BeeRegistry.registerBee({
     localize: {
         princess: {
             ru: "Императорская принцесса",
-            en: "Imperial princess"
+            en: "Imperial princess",
+            zh: "[FR]帝皇公主蜂"
         },
         drone: {
             ru: "Императорский трутень",
-            en: "Imperial drone"
+            en: "Imperial drone",
+            zh: "[FR]帝皇雄蜂"
         },
         queen: {
             ru: "Императорская королева",
-            en: "Imperial queen"
+            en: "Imperial queen",
+            zh: "[FR]帝皇蜂后"
         }
     },
     species: "Imperial",

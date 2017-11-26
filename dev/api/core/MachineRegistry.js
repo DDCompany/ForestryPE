@@ -1,7 +1,7 @@
-var MachineRegistry = {
+const MachineRegistry = {
     machines: {},
 
-    register: function (id, prototype) {
+    register: function (id, prototype, isEU) {
         this.machines[id] = prototype;
 
         if (prototype.defaultValues) {
@@ -25,10 +25,15 @@ var MachineRegistry = {
         }
 
 
-        ICRender.getGroup("ic-wire").add(id, -1);
         ToolAPI.registerBlockMaterial(id, "stone");
         TileEntity.registerPrototype(id, prototype);
-        EnergyTileRegistry.addEnergyTypeForId(id, EU)
+        if (isEU) {
+            EnergyTileRegistry.addEnergyTypeForId(id, EU);
+            ICRender.getGroup("ic-wire").add(id, -1);
+        } else {
+            EnergyTileRegistry.addEnergyTypeForId(id, RF);
+            ICRender.getGroup("rf-wire").add(id, -1);
+        }
     }
 
 };

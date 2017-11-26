@@ -1,4 +1,4 @@
-var textures_carpenter = [["carpenter_top", 0], ["carpenter_top", 0], ["carpenter", 0], ["carpenter", 0], ["carpenter_side", 0], ["carpenter_side", 0]];
+const textures_carpenter = [["carpenter_top", 0], ["carpenter_top", 0], ["carpenter", 0], ["carpenter", 0], ["carpenter_side", 0], ["carpenter_side", 0]];
 
 Block.setPrototype("carpenter", {
     type: Block.TYPE_ROTATION,

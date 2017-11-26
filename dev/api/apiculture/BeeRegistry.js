@@ -238,15 +238,18 @@ var BeeRegistry = {
         }
 
         IDRegistry.genItemID("princess" + arg.species);
-        Item.createItem("princess" + arg.species, arg.localize.princess.en, {name: arg.textures.princess, meta: 0}, {});
+        Item.createItem("princess" + arg.species, arg.localize.princess.en, {
+            name: arg.textures.princess,
+            meta: 0
+        }, {stack: 1});
         Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
 
         IDRegistry.genItemID("drone" + arg.species);
-        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone, meta: 0}, {});
+        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone, meta: 0}, {stack: 1});
         Translation.addTranslation(arg.localize.drone.en, arg.localize.drone);
 
         IDRegistry.genItemID("queen" + arg.species);
-        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {});
+        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {stack: 1});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
         var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);

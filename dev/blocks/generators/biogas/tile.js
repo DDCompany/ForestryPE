@@ -26,23 +26,23 @@ MachineRegistry.register(BlockID.engineBiogas, {
     },
 
     getBurnTimeForLiquid: function (liq) {
-        return liq == "forestryBiomass" ? 1250 :
-            (liq == "forestrySeedoil" ? 2500 :
-                (liq == "forestryJuice" ? 2500 :
-                    (liq == "forestryHoney" ? 2500 : 0)));
+        return liq === "biomass" ? 1250 :
+            (liq === "seedOil" ? 2500 :
+                (liq === "appleJuice" ? 2500 :
+                    (liq === "honey" ? 2500 : 0)));
     },
 
     getEnergyOutForLiquid: function (liq) {
-        return liq == "forestryBiomass" ? 12 :
-            (liq == "forestrySeedoil" ? 8 :
-                (liq == "forestryJuice" ? 3 :
-                    (liq == "forestryHoney" ? 3 : 0)));
+        return liq === "biomass" ? 50 :
+            (liq === "seedOil" ? 30 :
+                (liq === "appleJuice" ? 10 :
+                    (liq === "honey" ? 20 : 0)));
     },
 
     addEmptyContainer: function (empty) {
-        var slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
+        let slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
 
-        if (slotEmptyContainer.id == 0) {
+        if (slotEmptyContainer.id === 0) {
             slotEmptyContainer.id = empty.id;
             slotEmptyContainer.data = empty.data;
             slotEmptyContainer.count = 1;
@@ -75,30 +75,30 @@ MachineRegistry.register(BlockID.engineBiogas, {
         }
 
         if (slotContainer.id && this.liquidStorage.getAmount("lava") + 1 <= 10) {
-            var empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
+            let empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
 
-            if (empty && empty.liquid == "lava" && this.addEmptyContainer(empty)) {
+            if (empty && empty.liquid === "lava" && this.addEmptyContainer(empty)) {
                 this.liquidStorage.addLiquid("lava", 1);
                 slotContainer.count--;
             }
         }
 
         if (!this.data.liquidStored || (this.data.liquidStored && this.liquidStorage.getAmount(this.data.liquidStored) + 1 <= 10)) {
-            var empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
+            let empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
 
             if (empty) {
-                var liq = 0;
-                if (empty.liquid == "forestryBiomass") {
-                    liq = "forestryBiomass";
-                } else if (empty.liquid == "forestrySeedoil") {
-                    liq = "forestrySeedoil";
-                } else if (empty.liquid == "forestryJuice") {
-                    liq = "forestryJuice";
-                } else if (empty.liquid == "forestryHoney") {
-                    liq = "forestryHoney";
+                let liq = 0;
+                if (empty.liquid === "biomass") {
+                    liq = "biomass";
+                } else if (empty.liquid === "seedOil") {
+                    liq = "seedOil";
+                } else if (empty.liquid === "appleJuice") {
+                    liq = "appleJuice";
+                } else if (empty.liquid === "honey") {
+                    liq = "honey";
                 }
 
-                if (liq && (!this.data.liquidStored || this.data.liquidStored == liq)) {
+                if (liq && (!this.data.liquidStored || this.data.liquidStored === liq)) {
                     if (this.addEmptyContainer(empty)) {
                         this.liquidStorage.addLiquid(liq, 1);
                         this.data.liquidStored = liq;
@@ -116,7 +116,7 @@ MachineRegistry.register(BlockID.engineBiogas, {
                 } else {
                     if (this.data.energy + this.data.energyOut <= this.getEnergyStorage()) {
                         this.data.energy += this.data.energyOut;
-                    } else if (this.data.energy != this.getEnergyStorage()) {
+                    } else if (this.data.energy !== this.getEnergyStorage()) {
                         this.data.energy = this.getEnergyStorage() - this.data.energy;
                     }
                     this.data.burnTime--;
@@ -141,11 +141,11 @@ MachineRegistry.register(BlockID.engineBiogas, {
     },
 
     getEnergyStorage: function () {
-        return 5000;
+        return 300000;
     },
 
     energyTick: function (type, src) {
-        var out = Math.min(32, this.data.energy);
+        let out = Math.min(32, this.data.energy);
         this.data.energy -= out;
         this.data.energy += src.add(out);
     }

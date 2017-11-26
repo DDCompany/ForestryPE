@@ -15,8 +15,8 @@ var squeezerGUI = new UI.StandartWindow({
     drawing: [
         {type: "bitmap", x: 335, y: 140, bitmap: "forestry_energy_bar_background", scale: 3.2},
         {type: "bitmap", x: 527, y: 180, bitmap: "furnace_bar_background", scale: 3.2},
-        {type: "bitmap", x: 602, y: 105, bitmap: "liqued_background", scale: 3.2},
-        {type: "bitmap", x: 732, y: 251, bitmap: "squeezer_fill", scale: 3.2},
+        {type: "bitmap", x: 602, y: 105, bitmap: "liquid_background", scale: 3.2},
+        {type: "bitmap", x: 732, y: 241, bitmap: "squeezer_fill", scale: 3.2},
     ],
     elements: {
         "progressEnergyScale": {
@@ -30,8 +30,8 @@ var squeezerGUI = new UI.StandartWindow({
         },
         "liquidScale": {
             type: "scale",
-            x: 604.2,
-            y: 107.2,
+            x: 605,
+            y: 108,
             direction: 1,
             value: 0,
             bitmap: "liqued_background_2",
@@ -52,6 +52,6 @@ var squeezerGUI = new UI.StandartWindow({
 
         "slotSpecial": {type: "slot", x: 667, y: 177},
         "slotContainer": {type: "slot", x: 667, y: 237, bitmap: "slot_container"},
-        "slotContainerFilled": {type: "slot", x: 776, y: 231}
+        "slotContainerFilled": {type: "slot", x: 776, y: 235}
     }
 });

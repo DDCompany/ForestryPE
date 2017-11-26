@@ -13,9 +13,9 @@ Block.setPrototype("engineBiogas", {
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.engineBiogas, count: 1, data: 0}, [
         "bbb",
-        "gmg",
-        "sps"
-    ], ['b', ItemID.ingotBronze, 0, 'g', ItemID.gearBronze, 0, 'm', ItemID.sturdyMachine, 0, 'p', 33, 0, 's', 20, 0]);
+        "0s0",
+        "gpg"
+    ], ['b', ItemID.ingotBronze, 0, 'g', ItemID.gearBronze, 0, 'p', 33, 0, 's', 20, 0]);
 });
 
 //ICRenderLib.addConnectionBlock("bc-container", BlockID.engineBiogas);

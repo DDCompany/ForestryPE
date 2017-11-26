@@ -1,6 +1,6 @@
-var guiPeatFiredEngine = new UI.StandartWindow({
+const guiPeatFiredEngine = new UI.StandartWindow({
     standart: {
-        header: {text: {text: Translation.translate("Peat-fired generator")}},
+        header: {text: {text: "Peat-fired generator"}},
         inventory: {standart: true},
         background: {standart: true}
     },
@@ -18,8 +18,7 @@ var guiPeatFiredEngine = new UI.StandartWindow({
             y: 142,
             direction: 1,
             bitmap: "engine_peat_scale",
-            scale: 3.2,
-            invert: true
+            scale: 3.2
         },
 
         "slotFuel": {type: "slot", x: 385, y: 196.4},

@@ -1,21 +1,9 @@
-IDRegistry.genItemID("scoop");
-Item.createItem("scoop", "Scoop", {name: "scoop", meta: 0}, {stack: 1});
-
-ToolAPI.addToolMaterial("scoop", {durability: 10, level: 4, efficiency: 12, damage: 0, enchantability: 0});
 ToolAPI.addToolMaterial("bronze", {durability: 201, level: 3, efficiency: 6, damage: 0, enchantability: 0});
-Item.setToolRender(ItemID.scoop, true);
-ToolAPI.registerTool(ItemID.scoop, "scoop", ["beehive"], {damage: 0});
+ToolAPI.addToolMaterial("scoop", {durability: 10, level: 4, efficiency: 12, damage: 0, enchantability: 0});
 
-IDRegistry.genItemID("bronzePickaxe");
-Item.createItem("bronzePickaxe", "Bronze pickaxe", {name: "bronzePickaxe", meta: 0}, {stack: 1});
-Item.setToolRender(ItemID.bronzePickaxe, true);
-ToolAPI.registerTool(ItemID.bronzePickaxe, "bronze", ["stone"], {damage: 0});
-
-IDRegistry.genItemID("bronzeShovel");
-Item.createItem("bronzeShovel", "Bronze shovel", {name: "bronzeShovel", meta: 0}, {stack: 1});
-Item.setToolRender(ItemID.bronzeShovel, true);
-ToolAPI.registerTool(ItemID.bronzeShovel, "bronze", ["dirt"], {damage: 0});
-
+ToolType.scoop = {
+    blockTypes: ["beehive"]
+};
 
 IDRegistry.genItemID("brokenBronzePickaxe");
 Item.createItem("brokenBronzePickaxe", "Broken bronze pickaxe", {name: "brokenBronzePickaxe", meta: 0}, {stack: 1});
@@ -23,15 +11,17 @@ Item.createItem("brokenBronzePickaxe", "Broken bronze pickaxe", {name: "brokenBr
 IDRegistry.genItemID("brokenBronzeShovel");
 Item.createItem("brokenBronzeShovel", "Broken bronze shovel", {name: "brokenBronzeShovel", meta: 0}, {stack: 1});
 
-Callback.addCallback("DestroyBlock", function (a, b, c) {
-    if (Player.getCarriedItem().id == ItemID.bronzePickaxe && Player.getCarriedItem().data == 223) {
-        World.drop(a.x + 0.5, a.y + 0.1, a.z + 0.5, ItemID.brokenBronzePickaxe, 1, 0);
-        Player.setCarriedItem(0, 0, 0);
-    } else if (Player.getCarriedItem().id == ItemID.bronzeShovel && Player.getCarriedItem().data == 223) {
-        World.drop(a.x + 0.5, a.y + 0.1, a.z + 0.5, ItemID.brokenBronzeShovel, 1, 0);
-        Player.setCarriedItem(0, 0, 0);
-    }
-});
+IDRegistry.genItemID("bronzePickaxe");
+Item.createItem("bronzePickaxe", "Bronze pickaxe", {name: "bronzePickaxe", meta: 0}, {stack: 1});
+ToolAPI.setTool(ItemID.bronzePickaxe, "bronze", ToolType.pickaxe, ItemID.brokenBronzePickaxe);
+
+IDRegistry.genItemID("bronzeShovel");
+Item.createItem("bronzeShovel", "Bronze shovel", {name: "bronzeShovel", meta: 0}, {stack: 1});
+ToolAPI.setTool(ItemID.bronzeShovel, "bronze", ToolType.shovel, ItemID.brokenBronzeShovel);
+
+IDRegistry.genItemID("scoop");
+Item.createItem("scoop", "Scoop", {name: "scoop", meta: 0}, {stack: 1});
+ToolAPI.setTool(ItemID.scoop, "scoop", ToolType.scoop);
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.scoop, count: 1, data: 0}, [

@@ -8,8 +8,7 @@ MachineRegistry.register(BlockID.fermenter, {
     },
 
     getTransportSlots: function () {
-        var inp = ["slotPlant"];
-        return {input: inp, output: []};
+        return {input: ["slotPlant"], output: []};
     },
 
     getGuiScreen: function () {
@@ -21,89 +20,22 @@ MachineRegistry.register(BlockID.fermenter, {
     },
     tick: function () {
 
-        var slotLiquidInput = this.container.getSlot("slotLiquidInput");
-        var slotPlant = this.container.getSlot("slotPlant");
-        var slotReagent = this.container.getSlot("slotReagent");
-        var slotContainer = this.container.getSlot("slotContainer");
-        var slotFilledContainer = this.container.getSlot("slotFilledContainer");
-        var slotLiquidInputEmpty = this.container.getSlot("slotLiquidInputEmpty");
-        var energyDec = 5;
-
-        if (this.liquidStorage.hasDataFor("water") && this.liquidStorage.getAmount("water") > 0) {
+        if (this.liquidStorage.getAmount("water") > 0) {
             this.liquidStorage.updateUiScale("liquidInputScale", "water");
-        } else if (this.liquidStorage.hasDataFor("forestryHoney") && this.liquidStorage.getAmount("forestryHoney") > 0) {
-            this.liquidStorage.updateUiScale("liquidInputScale", "forestryHoney");
-        } else if (this.liquidStorage.hasDataFor("forestryJuice") && this.liquidStorage.getAmount("forestryJuice") > 0) {
-            this.liquidStorage.updateUiScale("liquidInputScale", "forestryJuice");
+        } else if (this.liquidStorage.getAmount("honey") > 0) {
+            this.liquidStorage.updateUiScale("liquidInputScale", "honey");
+        } else if (this.liquidStorage.getAmount("appleJuice") > 0) {
+            this.liquidStorage.updateUiScale("liquidInputScale", "appleJuice");
+        } else {
+            this.liquidStorage.updateUiScale("liquidInputScale", null);
         }
 
-        if (this.liquidStorage.hasDataFor("forestryBiomass") && this.liquidStorage.getAmount("forestryBiomass") > 0) {
-            this.liquidStorage.updateUiScale("liquidOutputScale", "forestryBiomass");
-        }
-
-        if (slotLiquidInput.id > 0) {
-            var liquid = LiquidRegistry.getItemLiquid(slotLiquidInput.id, slotLiquidInput.data);
-            var empty = LiquidRegistry.getEmptyItem(slotLiquidInput.id, slotLiquidInput.data);
-            var f = false;
-
-            if (liquid === "water") {
-                if ((this.liquidStorage.getAmount("water") > 0 && this.liquidStorage.getAmount("water") + 1 <= 10) || (this.liquidStorage.getAmount("forestryHoney") === 0 && this.liquidStorage.getAmount("forestryJuice") === 0 && this.liquidStorage.getAmount("water") + 1 <= 10)) {
-                    f = true;
-                }
-
-            }
-
-            if (liquid === "forestryHoney") {
-                if ((this.liquidStorage.getAmount("forestryHoney") > 0 && this.liquidStorage.getAmount("forestryHoney") + 1 <= 10) || (this.liquidStorage.getAmount("water") === 0 && this.liquidStorage.getAmount("forestryJuice") === 0 && this.liquidStorage.getAmount("forestryHoney") + 1 <= 10)) {
-                    f = true;
-                }
-            }
-
-            if (liquid === "forestryJuice") {
-                if ((this.liquidStorage.getAmount("forestryJuice") > 0 && this.liquidStorage.getAmount("forestryJuice") + 1 <= 10) || (this.liquidStorage.getAmount("water") === 0 && this.liquidStorage.getAmount("forestryHoney") === 0 && this.liquidStorage.getAmount("forestryJuice") + 1 <= 10)) {
-                    f = true;
-                }
-            }
-
-            if (f) {
-                if (slotLiquidInputEmpty.id === 0) {
-                    this.liquidStorage.addLiquid(liquid, 1);
-                    this.container.setSlot("slotLiquidInputEmpty", empty.id, 1, empty.data);
-                    slotLiquidInput.count--;
-                } else if (slotLiquidInputEmpty.id === empty.id) {
-                    if (slotLiquidInputEmpty.count < Item.getMaxStack(slotLiquidInputEmpty.id)) {
-                        slotLiquidInputEmpty.count++;
-                        slotLiquidInput.count--;
-                        this.liquidStorage.addLiquid(liquid, 1);
-                    }
-                }
-
-            }
-
-        }
-
-        if (slotContainer.id > 0 && this.liquidStorage.getAmount("forestryBiomass") >= 1) {
-
-            var full = LiquidRegistry.getFullItem(slotContainer.id, slotContainer.data, "forestryBiomass");
-
-            if (slotFilledContainer.id === 0) {
-                this.container.setSlot("slotFilledContainer", full.id, 1, full.data);
-                this.liquidStorage.getLiquid("forestryBiomass", 1);
-                slotContainer.count--;
-            } else if (slotFilledContainer.id === full.id) {
-                if (slotFilledContainer.count < Item.getMaxStack(slotFilledContainer.id)) {
-                    this.liquidStorage.getLiquid("forestryBiomass", 1);
-                    slotContainer.count--;
-                    slotFilledContainer.count++;
-                }
-
-            }
-            this.liquidStorage.updateUiScale("liquidOutputScale", "forestryBiomass");
-
-        }
+        ContainerHelper.emptyContainer(["water", "honey", "appleJuice"], this, "slotInputContainer");
+        ContainerHelper.fillContainer(["biomass"], this, {empty: "slotContainer", full: "slotFilledContainer"});
 
         if (this.data.reagentRemain === 0) {
 
+            let slotReagent = this.container.getSlot("slotReagent");
             if (slotReagent.id === ItemID.mulch) {
 
                 this.data.reagentRemain = 250;
@@ -120,34 +52,38 @@ MachineRegistry.register(BlockID.fermenter, {
 
         }
 
-        if (this.data.progress > 0 && this.data.energy >= energyDec && this.liquidStorage.getAmount("forestryBiomass") + 1 <= 10) {
-            this.data.progress++;
-            this.data.energy -= energyDec;
+        if (this.data.progress > 0) {
 
-            if (this.data.progress >= 160) {
+            if (this.data.energy >= 40 && this.liquidStorage.getAmount("biomass") + 1 <= 10) {
+                this.data.progress++;
+                this.data.energy -= 40;
 
-                if (this.data.liquidUsed === "forestryHoney" || this.data.liquidUsed === "forestryJuice") {
-                    this.liquidStorage.addLiquid("forestryBiomass", this.data.liquidAmount / 1.5);
-                } else {
-                    this.liquidStorage.addLiquid("forestryBiomass", this.data.liquidAmount);
+                if (this.data.progress >= 160) {
+
+                    if (this.data.liquidUsed === "honey" || this.data.liquidUsed === "appleJuice") {
+                        this.liquidStorage.addLiquid("biomass", this.data.liquidAmount / 1.5);
+                    } else {
+                        this.liquidStorage.addLiquid("biomass", this.data.liquidAmount);
+                    }
+                    this.data.progress = 0;
+                    this.data.reagentRemain--;
+
                 }
-                this.data.progress = 0;
-                this.data.reagentRemain--;
-
             }
 
         } else if (this.data.reagentRemain > 0) {
-            var recipe = RecipeRegistry.getBioItem(slotPlant.id);
+            let slotPlant = this.container.getSlot("slotPlant");
+            let recipe = RecipeRegistry.getBioItem(slotPlant.id);
 
             if (recipe) {
-                var liquid = false;
+                let liquid = false;
 
                 if (this.liquidStorage.getAmount("water") >= recipe.liquidAmount) {
                     liquid = "water";
-                } else if (this.liquidStorage.getAmount("forestryHoney") >= recipe.liquidAmount) {
-                    liquid = "forestryHoney";
-                } else if (this.liquidStorage.getAmount("forestryJuice") >= recipe.liquidAmount) {
-                    liquid = "forestryJuice";
+                } else if (this.liquidStorage.getAmount("honey") >= recipe.liquidAmount) {
+                    liquid = "honey";
+                } else if (this.liquidStorage.getAmount("appleJuice") >= recipe.liquidAmount) {
+                    liquid = "appleJuice";
                 }
 
                 if (liquid) {
@@ -161,6 +97,7 @@ MachineRegistry.register(BlockID.fermenter, {
             }
         }
 
+        this.liquidStorage.updateUiScale("liquidOutputScale", "biomass");
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
         this.container.setScale("reagentScale", this.data.reagentRemain / this.data.reagentMax);
         this.container.setScale("progressScale", this.data.progress / 160);

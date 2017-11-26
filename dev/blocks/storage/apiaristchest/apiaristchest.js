@@ -11,7 +11,6 @@ Block.setPrototype("apiaristchest", {
 });
 
 ModelHelper.createChestModel(BlockID.apiaristchest);
-Block.setBlockShape(BlockID.apiaristchest, {x: 0.07, y: 0, z: 0.07}, {x: 0.93, y: 0.87, z: 0.93});
 
 Callback.addCallback("PostLoaded", function () {
 
