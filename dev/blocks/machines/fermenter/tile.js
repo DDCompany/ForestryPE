@@ -73,7 +73,7 @@ MachineRegistry.register(BlockID.fermenter, {
 
         } else if (this.data.reagentRemain > 0) {
             let slotPlant = this.container.getSlot("slotPlant");
-            let recipe = RecipeRegistry.getBioItem(slotPlant.id);
+            let recipe = FermenterManager.getBioItem(slotPlant.id);
 
             if (recipe) {
                 let liquid = false;

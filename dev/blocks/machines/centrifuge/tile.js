@@ -30,7 +30,7 @@ MachineRegistry.register(BlockID.centrifuge, {
 
             } else if (this.data.progress === 0) {
                 let slotInput = this.container.getSlot("slotInput");
-                let output = RecipeRegistry.getCentrifugeRecipe(slotInput.id, slotInput.data);
+                let output = CentrifugeManager.getRecipe(slotInput.id, slotInput.data);
                 if (output) {
                     this.data.progress = 1;
                     this.data.outputIDs = output.result;

@@ -8,7 +8,7 @@ if (Config.crateEnabled === true) {
         IDRegistry.genItemID("crate" + name);
         Item.createItem("crate" + name, "Crate (" + n + ")", {name: texture, meta: 0}, {});
 
-        RecipeRegistry.addCarpenterRecipe({
+        CarpenterManager.registerRecipe({
             input: {
                 "slot0": {id: id, data: data}, "slot1": {id: id, data: data}, "slot2": {id: id, data: data},
                 "slot3": {id: id, data: data}, "slot4": {id: id, data: data}, "slot5": {id: id, data: data},
@@ -28,7 +28,7 @@ if (Config.crateEnabled === true) {
             }
         });
 
-        RecipeRegistry.addCarpenterRecipe({
+        CarpenterManager.registerRecipe({
             input: {"slot4": {id: ItemID["crate" + name], data: 0}},
             output: {
                 id: id,
