@@ -1,3 +1,9 @@
+function attackByBeehive() {
+    if (Util.random(0, 4) >= BeeEffects.getApiaristArmorWearValue()) {
+        Entity.damageEntity(Player.get(), (Math.random() / 2.0 + 0.5) * 10)
+    }
+}
+
 ToolAPI.addBlockMaterial("beehive", 1.5);
 Block.setPrototype("beehive", {
     type: Block.TYPE_BASE,
@@ -40,108 +46,110 @@ Block.setPrototype("beehive", {
                 inCreative: true
             }
         ];
-    },
-
-    getDrop: function (a, b, data, g) {
-        if (g) {
-            let drop = [];
-            let rand = Math.random();
-            if (rand < 0.2) {
-                drop.push([ItemID.princessValiant, 1, 0]);
-            } else {
-                switch (parseInt(data)) {
-                    case 0:
-                        if (Math.random() < 0.05) {
-                            let bee = new Bee("Forest", BeeRegistry.BEETYPE_PRINCESS, true);
-                            bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
-                            bee.inactive_chromosomes_list["NEVER_SLEEPS"] = true;
-                            drop.push([bee.getItemID(), 1, bee.unique]);
-                        } else {
-                            drop.push([ItemID.princessForest, 1, 0]);
-                        }
-                        if (Math.random() < 0.82) {
-                            drop.push([ItemID.combHoney, 1, 0]);
-                        }
-                        break;
-                    case 1:
-                        drop.push([ItemID.princessMeadows, 1, 0]);
-                        if (Math.random() < 0.80) {
-                            drop.push([ItemID.combHoney, 1, 0]);
-                        }
-                        break;
-                    case 2:
-                        drop.push([ItemID.princessModest, 1, 0]);
-                        if (Math.random() < 0.80) {
-                            drop.push([ItemID.combParched, 1, 0]);
-                        }
-                        break;
-                    case 3:
-                        drop.push([ItemID.princessTropical, 1, 0]);
-                        if (Math.random() < 0.80) {
-                            drop.push([ItemID.combSilky, 1, 0]);
-                        }
-                        break;
-                    case 4:
-                        drop.push([ItemID.princessWintry, 1, 0]);
-                        if (Math.random() < 0.80) {
-                            drop.push([ItemID.combFrozen, 1, 0]);
-                        }
-                        break;
-                    case 5:
-                        drop.push([ItemID.princessMarshy, 1, 0]);
-                        if (Math.random() < 0.80) {
-                            drop.push([ItemID.combMossy, 1, 0]);
-                        }
-                        break;
-                    case 6:
-                        drop.push([ItemID.princessEnder, 1, 0]);
-                        if (Math.random() < 0.90) {
-                            drop.push([ItemID.combMysterious, 1, 0]);
-                        }
-                        break;
-                }
-            }
-
-            if (rand < 0.022) {
-                drop.push([ItemID.droneValiant, 1, 0]);
-            } else if (rand < 0.8) {
-                let droneCount = Math.floor(1 + Math.random() * 2);
-                switch (parseInt(data)) {
-                    case 0:
-                        if (Math.random() < 0.05) {
-                            let bee = new Bee("Forest", BeeRegistry.BEETYPE_DRONE, true);
-                            bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
-                            bee.inactive_chromosomes_list["NEVER_SLEEPS"] = true;
-                            drop.push([bee.getItemID(), 1, bee.unique]);
-                        } else {
-                            drop.push([ItemID.droneForest, droneCount, 0]);
-                            break;
-                        }
-                    case 1:
-                        drop.push([ItemID.droneMeadows, droneCount, 0]);
-                        break;
-                    case 2:
-                        drop.push([ItemID.droneModest, droneCount, 0]);
-                        break;
-                    case 3:
-                        drop.push([ItemID.droneTropical, droneCount, 0]);
-                        break;
-                    case 4:
-                        drop.push([ItemID.droneWintry, droneCount, 0]);
-                        break;
-                    case 5:
-                        drop.push([ItemID.droneMarshy, droneCount, 0]);
-                        break;
-                    case 6:
-                        drop.push([ItemID.droneEnder, droneCount, 0]);
-                        break;
-                }
-            }
-
-            return drop;
-        }
-        return [];
     }
+});
+
+Block.registerDropFunction("beehive", function (coords, id, data, diggingLevel) {
+    attackByBeehive();
+    if (diggingLevel) {
+        let drop = [];
+        let rand = Math.random();
+        if (rand < 0.2) {
+            drop.push([ItemID.princessValiant, 1, 0]);
+        } else {
+            switch (parseInt(data)) {
+                case 0:
+                    if (Math.random() < 0.05) {
+                        let bee = new Bee("Forest", BeeRegistry.BEETYPE_PRINCESS, true);
+                        bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
+                        bee.inactive_chromosomes_list["TOLERATES_RAIN"] = true;
+                        drop.push([bee.getItemID(), 1, bee.unique]);
+                    } else {
+                        drop.push([ItemID.princessForest, 1, 0]);
+                    }
+                    if (Math.random() < 0.82) {
+                        drop.push([ItemID.combHoney, 1, 0]);
+                    }
+                    break;
+                case 1:
+                    drop.push([ItemID.princessMeadows, 1, 0]);
+                    if (Math.random() < 0.80) {
+                        drop.push([ItemID.combHoney, 1, 0]);
+                    }
+                    break;
+                case 2:
+                    drop.push([ItemID.princessModest, 1, 0]);
+                    if (Math.random() < 0.80) {
+                        drop.push([ItemID.combParched, 1, 0]);
+                    }
+                    break;
+                case 3:
+                    drop.push([ItemID.princessTropical, 1, 0]);
+                    if (Math.random() < 0.80) {
+                        drop.push([ItemID.combSilky, 1, 0]);
+                    }
+                    break;
+                case 4:
+                    drop.push([ItemID.princessWintry, 1, 0]);
+                    if (Math.random() < 0.80) {
+                        drop.push([ItemID.combFrozen, 1, 0]);
+                    }
+                    break;
+                case 5:
+                    drop.push([ItemID.princessMarshy, 1, 0]);
+                    if (Math.random() < 0.80) {
+                        drop.push([ItemID.combMossy, 1, 0]);
+                    }
+                    break;
+                case 6:
+                    drop.push([ItemID.princessEnder, 1, 0]);
+                    if (Math.random() < 0.90) {
+                        drop.push([ItemID.combMysterious, 1, 0]);
+                    }
+                    break;
+            }
+        }
+
+        if (rand < 0.022) {
+            drop.push([ItemID.droneValiant, 1, 0]);
+        } else if (rand < 0.8) {
+            let droneCount = Math.floor(1 + Math.random() * 2);
+            switch (parseInt(data)) {
+                case 0:
+                    if (Math.random() < 0.05) {
+                        let bee = new Bee("Forest", BeeRegistry.BEETYPE_DRONE, true);
+                        bee.active_chromosomes_list["NEVER_SLEEPS"] = true;
+                        bee.inactive_chromosomes_list["NEVER_SLEEPS"] = true;
+                        drop.push([bee.getItemID(), 1, bee.unique]);
+                    } else {
+                        drop.push([ItemID.droneForest, droneCount, 0]);
+                        break;
+                    }
+                case 1:
+                    drop.push([ItemID.droneMeadows, droneCount, 0]);
+                    break;
+                case 2:
+                    drop.push([ItemID.droneModest, droneCount, 0]);
+                    break;
+                case 3:
+                    drop.push([ItemID.droneTropical, droneCount, 0]);
+                    break;
+                case 4:
+                    drop.push([ItemID.droneWintry, droneCount, 0]);
+                    break;
+                case 5:
+                    drop.push([ItemID.droneMarshy, droneCount, 0]);
+                    break;
+                case 6:
+                    drop.push([ItemID.droneEnder, droneCount, 0]);
+                    break;
+            }
+        }
+
+        return drop;
+    }
+
+    return [];
 });
 
 Block.setBlockMaterial(BlockID.beehive, "beehive", 1);
@@ -179,6 +187,7 @@ TileEntity.registerPrototype(BlockID.beehiveSwarm, {
 });*/
 
 const BEEHIVES_GEN_BLOCKS = [2, 12, 121];
+const TREE_LEAVES = [18, 161];
 
 function generateBeehive(data, coords) {
     if (World.getBlock(coords.x, coords.y + 1, coords.z).id === 0 && BEEHIVES_GEN_BLOCKS.indexOf(World.getBlock(coords.x, coords.y, coords.z).id) > -1 && GenerationUtils.canSeeSky(coords.x, coords.y + 1, coords.z)) {

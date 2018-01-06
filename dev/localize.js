@@ -158,6 +158,7 @@ Translation.addTranslation("Honey pot", {ru: "Горшочек мёда"});
 
 /* ------ BACKPACKS ----- */
 Translation.addTranslation("Miner's backpack", {ru: "Рюкзак шахтера"});
+Translation.addTranslation("Adventurer's backpack", {ru: "Рюкзак авантюриста"});
 Translation.addTranslation("Digger's backpack", {ru: "Рюкзак землекопа"});
 Translation.addTranslation("Forester's backpack", {ru: "Рюкзак лесника"});
 Translation.addTranslation("Hunter's backpack", {ru: "Рюкзак охотника"});
@@ -167,6 +168,7 @@ Translation.addTranslation("Digger's woven backpack", {ru: "Сотканный �
 Translation.addTranslation("Forester's woven backpack", {ru: "Сотканный рюкзак лесника"});
 Translation.addTranslation("Hunter's woven backpack", {ru: "Сотканный рюкзак охотника"});
 Translation.addTranslation("Builder's woven backpack", {ru: "Сотканный рюкзак строителя"});
+Translation.addTranslation("Adventurer's woven backpack", {ru: "Сотканный рюкзак авантюриста"});
 Translation.addTranslation("Apiarist backpack", {ru: "Рюкзак пчеловода"});
 
 /* ------ TOOLS ----- */

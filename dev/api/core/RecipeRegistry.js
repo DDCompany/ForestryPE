@@ -22,7 +22,7 @@ const RecipeRegistry = {
 
     getSqueezerRecipe: function (input) {
 
-        for (var i = 0; i < this.recipesSqueezer.length; i++) {
+        for (let i = 0; i < this.recipesSqueezer.length; i++) {
 
             if (input[0].id == this.recipesSqueezer[i].input0.id) {
                 if (input[0].data == this.recipesSqueezer[i].input0.data) {
@@ -59,10 +59,10 @@ const RecipeRegistry = {
     },
 
     getFabricatorRecipe: function (input) {
-        for (var recipe in this.recipesFabricator) {
-            var comp = 0;
-            for (var i = 0; i < 9; i++) {
-                var item = this.recipesFabricator[recipe].input["slot" + i];
+        for (let recipe in this.recipesFabricator) {
+            let comp = 0;
+            for (let i = 0; i < 9; i++) {
+                let item = this.recipesFabricator[recipe].input["slot" + i];
 
                 if ((!item && input["slot" + i].id === 0) || (item && item.id === 0 && input["slot" + i].id === 0)) {
                     comp++;
@@ -86,10 +86,10 @@ const RecipeRegistry = {
     },
 
     getCarpenterRecipe: function (input) {
-        for (var recipe in this.recipesCarpenter) {
-            var comp = 0;
-            for (var i = 0; i < 9; i++) {
-                var item = this.recipesCarpenter[recipe].input["slot" + i];
+        for (let recipe in this.recipesCarpenter) {
+            let comp = 0;
+            for (let i = 0; i < 9; i++) {
+                let item = this.recipesCarpenter[recipe].input["slot" + i];
 
                 if ((!item && input["slot" + i].id === 0) || (item && item.id === 0 && input["slot" + i].id === 0)) {
                     comp++;
@@ -113,8 +113,8 @@ const RecipeRegistry = {
     },
 
     getCentrifugeRecipe: function (id, data) {
-        for (var key in this.recipesCentrifuge) {
-            var recipe = this.recipesCentrifuge[key];
+        for (let key in this.recipesCentrifuge) {
+            let recipe = this.recipesCentrifuge[key];
             if (recipe.input.id === id && recipe.input.data === data) {
                 return recipe;
             }

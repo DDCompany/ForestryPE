@@ -321,6 +321,27 @@ RecipeRegistry.addCarpenterRecipe({
         "slot1": {id: 264, data: 0},
         "slot2": {id: ItemID.wovenSilk, data: 0},
         "slot3": {id: ItemID.wovenSilk, data: 0},
+        "slot4": {id: ItemID.backpackAdventurer, data: 0},
+        "slot5": {id: ItemID.wovenSilk, data: 0},
+        "slot6": {id: ItemID.wovenSilk, data: 0},
+        "slot7": {id: ItemID.wovenSilk, data: 0},
+        "slot8": {id: ItemID.wovenSilk, data: 0}
+    },
+    liquid: "water",
+    liquidAmount: 1,
+    output: {
+        id: BlockID.backpackAdventurerT2,
+        count: 8,
+        data: 0
+    }
+});
+
+RecipeRegistry.addCarpenterRecipe({
+    input: {
+        "slot0": {id: ItemID.wovenSilk, data: 0},
+        "slot1": {id: 264, data: 0},
+        "slot2": {id: ItemID.wovenSilk, data: 0},
+        "slot3": {id: ItemID.wovenSilk, data: 0},
         "slot4": {id: ItemID.backpackMiners, data: 0},
         "slot5": {id: ItemID.wovenSilk, data: 0},
         "slot6": {id: ItemID.wovenSilk, data: 0},

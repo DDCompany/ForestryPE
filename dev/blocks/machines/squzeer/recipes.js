@@ -72,6 +72,21 @@ RecipeRegistry.registerSqueezerRecipe({
 
 RecipeRegistry.registerSqueezerRecipe({
     input0: {
+        id: 458,
+        data: 0,
+        count: 1
+    },
+    input1: {
+        id: 0,
+        data: 0,
+        count: 0
+    },
+    liquid: "seedOil",
+    liquidCount: 0.01
+});
+
+RecipeRegistry.registerSqueezerRecipe({
+    input0: {
         id: 361,
         data: 0,
         count: 1

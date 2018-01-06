@@ -1,3 +1,18 @@
+if (Config.backpackAdventurerDictionary.length) {
+    BackpackRegistry.register({
+        codeName: "backpackAdventurer",
+        name: "Adventurer's backpack",
+        slots: 15,
+        blocks: Config.backpackAdventurerDictionary
+    });
+
+    BackpackRegistry.register({
+        codeName: "backpackAdventurerT2",
+        name: "Adventurer's woven backpack",
+        slots: 45,
+        blocks: Config.backpackAdventurerDictionary
+    });
+}
 BackpackRegistry.register({
     codeName: "backpackMiners",
     name: "Miner's backpack",
@@ -114,4 +129,10 @@ Callback.addCallback("PostLoaded", function () {
         "ici",
         "sws"
     ], ['s', 287, 0, 'w', 35, -1, 'c', BlockID.apiaristchest, 0, 'i', 280, 0]);
+
+    Recipes.addShaped({id: ItemID.backpackApiarist, count: 1, data: 0}, [
+        "sws",
+        "ici",
+        "sws"
+    ], ['s', 287, 0, 'w', 35, -1, 'c', BlockID.apiaristchest, 0, 'i', 352, 0]);
 });

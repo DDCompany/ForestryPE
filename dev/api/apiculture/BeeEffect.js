@@ -1,4 +1,4 @@
-var BeeEffects = {
+const BeeEffects = {
     EFFECT_NONE: 0,
     EFFECT_AGGRESS: 1,
     EFFECT_BEATIFIC: 2,
@@ -13,7 +13,7 @@ var BeeEffects = {
     EFFECT_DRUNKARD: 11,
 
     getApiaristArmorWearValue: function () {
-        var count = 0;
+        let count = 0;
         if (Player.getArmorSlot(0).id === ItemID.helmetApiarist) count++;
         if (Player.getArmorSlot(1).id === ItemID.chestApiarist) count++;
         if (Player.getArmorSlot(2).id === ItemID.leggingsApiarist) count++;
@@ -22,12 +22,14 @@ var BeeEffects = {
     },
 
     doAggress: function (coords, range) {
-        var all = Entity.getAllInRange(coords, range.x);
-        var damage = 4 - this.getApiaristArmorWearValue();
+        let all = Entity.getAllInRange(coords, range.x);
+        let damage = 4 - this.getApiaristArmorWearValue();
+
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.damageEntity(Player.get(), damage);
         }
-        for (var key in all) {
+
+        for (let key in all) {
             Entity.damageEntity(all[key], 4);
             if (Entity.getHealth(all[key]) <= 0) {
                 Entity.remove(all[key]);
@@ -41,21 +43,10 @@ var BeeEffects = {
     },
     doCreeper: function (coords, range) {
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
-            var value = this.getApiaristArmorWearValue();
-            var damage = 0;
+            let value = this.getApiaristArmorWearValue();
+            let damage = 0;
 
-            if (value == 3) {
-                damage = 5;
-            } else if (value == 2) {
-                damage = 10;
-            } else if (value == 1) {
-                damage = 15;
-            } else if (value == 0) {
-                damage = 20;
-            }
-
-            World.playSoundAtEntity(Player.get(), "random.explode", 1, 1);
-            Entity.damageEntity(Player.get(), damage);
+            World.explode(coords.x, coords.y, coords.z, 3, false);
         }
     },
     doExplorer: function (coords, range) {
@@ -64,15 +55,15 @@ var BeeEffects = {
         }
     },
     doFreezing: function (coords, range) {
-        var blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0});
-        for (var key in blocks) {
-            var block = blocks[key];
+        let blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0});
+        for (let key in blocks) {
+            let block = blocks[key];
             World.setBlock(block.x, block.y, block.z, 79);
         }
     },
     doHeroic: function (coords, range) {
-        var all = Entity.getAllInRange(coords, range.x);
-        for (var key in all) {
+        let all = Entity.getAllInRange(coords, range.x);
+        for (let key in all) {
             Entity.damageEntity(all[key], 2);
             if (Entity.getHealth(all[key]) <= 0) {
                 Entity.remove(all[key]);
@@ -80,63 +71,73 @@ var BeeEffects = {
         }
     },
     doFlammable: function (coords, range) {
-        var all = Entity.getAllInRange(coords, range.x);
-        var duration = 500;
-        var chance = .5;
-        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
-            var wear = this.getApiaristArmorWearValue();
+        let all = Entity.getAllInRange(coords, range.x);
 
-            if (wear == 3) {
-                chance = .05;
-                duration = 50;
-            } else if (wear == 2) {
-                chance = .2;
-                duration = 200;
-            } else if (wear == 1) {
-                chance = .35;
-                duration = 350;
+        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
+            let duration = 500;
+            let chance = .5;
+
+            switch (this.getApiaristArmorWearValue()) {
+                case 3:
+                    chance = .05;
+                    duration = 50;
+                    break;
+                case 2:
+                    chance = .2;
+                    duration = 200;
+                    break;
+                case 1:
+                    chance = .35;
+                    duration = 350;
+                    break;
             }
 
             if (Math.random() < chance) Entity.setFire(Player.get(), duration);
         }
-        for (var key in all) {
+        for (let key in all) {
             if (Math.random() < .5) Entity.setFire(all[key], 500);
         }
     },
     doPoison: function (coords, range) {
-        var all = Entity.getAllInRange(coords, range.x);
-        var duration = 600;
-        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
-            var wear = this.getApiaristArmorWearValue();
+        let all = Entity.getAllInRange(coords, range.x);
 
-            if (wear == 3) {
-                duration = parseInt(600 / 4);
-            } else if (wear == 2) {
-                duration = parseInt(600 / 2);
-            } else if (wear == 1) {
-                duration = parseInt(600 * 3 / 4);
+        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
+            let duration = 600;
+
+            switch (this.getApiaristArmorWearValue()) {
+                case 3:
+                    duration = parseInt(600 / 4);
+                    break;
+                case 2:
+                    duration = parseInt(600 / 2);
+                    break;
+                case 1:
+                    duration = parseInt(600 * 3 / 4);
+                    break;
             }
 
             Entity.addEffect(Player.get(), Native.PotionEffect.poison, duration, 1, true, true);
         }
-        for (var key in all) {
+        for (let key in all) {
             Entity.addEffect(all[key], Native.PotionEffect.poison, duration, 1, true, true);
         }
     },
     doEnds: function (coords, range) {
-        var damage = 4 - this.getApiaristArmorWearValue();
+        let damage = 4 - this.getApiaristArmorWearValue();
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.damageEntity(Player.get(), damage);
         }
     },
     doRadiact: function (coords, range) {
-        var damage = 8 - (this.getApiaristArmorWearValue() * 2);
-        var blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0});
+        let damage = 8 - (this.getApiaristArmorWearValue() * 2);
+        let blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0});
+
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.damageEntity(Player.get(), damage);
         }
-        for (var key in blocks) {
-            var block = blocks[key];
+
+        for (let key in blocks) {
+            let block = blocks[key];
             World.setBlock(block.x, block.y, block.z, 0);
         }
     },

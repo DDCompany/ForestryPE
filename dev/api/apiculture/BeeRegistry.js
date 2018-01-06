@@ -259,6 +259,29 @@ var BeeRegistry = {
         bee_type.specialty = arg.specialty;
 
         this.bees[arg.species] = bee_type;
+
+        let NAME_OVERRIDE = function (item, name) {
+            let beeType = BeeRegistry.getBeeTypeByID(item.id);
+            let bee = BeeSaver.bees["b" + item.data];
+            if (beeType !== BeeRegistry.BEETYPE_DRONE) {
+                name += "§e\n" + (!bee ? "Pristine Stock" : "Ignoble Stock");
+            }
+            if (bee && bee.analyzed) {
+                let climateTol = bee.getActiveChromosome("TEMPERATURE_TOLERANCE");
+                let humidityTol = bee.getActiveChromosome("HUMIDITY_TOLERANCE");
+                name += "§7\n" + BeeRegistry.getChromosomeValueName("LIFESPAN", bee.getActiveChromosome("LIFESPAN")) + " Life";
+                name += "\n" + BeeRegistry.getChromosomeValueName("SPEED", bee.getActiveChromosome("SPEED")) + " Worker";
+                name += "§a\nT: " + BeeRegistry.getChromosomeValueName("CLIMATE", bee.getClimate()) + "/" + bee.getClimateTolValue() + (climateTol === 0 ? "" : (climateTol < 6 ? " B" : (climateTol < 11 ? " U" : " D")));
+                name += "\nH: " + BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getHumidity()) + "/" + bee.getClimateTolValue() + (humidityTol === 0 ? "" : (humidityTol < 6 ? " B" : (humidityTol < 11 ? " U" : " D")));
+                name += "§7\n" + BeeRegistry.getChromosomeValueName("FLOWERS", bee.getFlowers());
+            } else name += "§7\n<unknown genome>";
+
+            return name;
+        };
+
+        Item.registerNameOverrideFunction(ItemID["princess" + arg.species], NAME_OVERRIDE);
+        Item.registerNameOverrideFunction(ItemID["drone" + arg.species], NAME_OVERRIDE);
+        Item.registerNameOverrideFunction(ItemID["queen" + arg.species], NAME_OVERRIDE);
     },
 
     getBeeTypeByID: function (id) {

@@ -21,15 +21,15 @@ function BeeHouse(tile, slots, houseModifierList) {
      * Время одного цикла
      * @type {number}
      */
-    this.CYCLE_TIME = 560;
+    this.CYCLE_TIME = 550;
 
     /**
      * Вызывать каждый тик
      * @param {ModifierList} modifiersList
      */
     this.tick = function (modifiersList) {
-        var slot1 = this.getPrincessSlot(this.slots.slotPrincess);
-        var slot2 = this.getDroneSlot(this.slots.slotDrone);
+        let slot1 = this.getPrincessSlot(this.slots.slotPrincess);
+        let slot2 = this.getDroneSlot(this.slots.slotDrone);
 
         if (!this.data) this.data = this.tile.data;
         if (slot1.count > 1) {
@@ -57,8 +57,8 @@ function BeeHouse(tile, slots, houseModifierList) {
      * Спаривание пчёл
      */
     this.tickBreeding = function () {
-        var slot1 = this.getPrincessSlot(this.slots.slotPrincess);
-        var slot2 = this.getDroneSlot(this.slots.slotDrone);
+        let slot1 = this.getPrincessSlot(this.slots.slotPrincess);
+        let slot2 = this.getDroneSlot(this.slots.slotDrone);
 
         this.data.progress++;
         this.data.progressMax = this.TOTAL_BREEDING_TIME;
@@ -118,12 +118,12 @@ function BeeHouse(tile, slots, houseModifierList) {
                 ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut);
                 this.setSlot(this.slots.slotPrincess, {id: 0, data: 0, count: 0});
                 this.data.progressMax = 0;
-                Callback.invokeCallback("onQueenDeath", this.house);
+                Callback.invokeCallback("onQueenDeath", this);
                 this.queen.destroy();
                 this.queen = null;
             }
         } else {
-            Callback.invokeCallback("onQueenCycle", this.house);
+            Callback.invokeCallback("onQueenCycle", this);
         }
     };
 
@@ -141,11 +141,11 @@ function BeeHouse(tile, slots, houseModifierList) {
         return this.tile.container;
     };
 
-    this.setSlot = function (name, slot) {
-        var slot = this.getContainer().getSlot(name);
-        slot.id = slot.id;
-        slot.data = slot.data;
-        slot.count = slot.count;
+    this.setSlot = function (name, item) {
+        let slot = this.getContainer().getSlot(name);
+        slot.id = item.id;
+        slot.data = item.data;
+        slot.count = item.count;
     };
 
     this.getHumidity = function () {

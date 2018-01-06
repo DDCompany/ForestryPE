@@ -1,4 +1,4 @@
-var Config = {
+const Config = {
     /* ----- BEEHIVES GEN ----- */
 
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),
@@ -31,6 +31,7 @@ var Config = {
     glassEnabled: __config__.getBool("glassEnabled"),
     combsBlocksEnabled: __config__.getBool("combBlocksEnabled"),
     oresBlocksEnabled: __config__.getBool("oresBlocksEnabled"),
+    backpackAdventurerDictionary: __config__.access("backpackAdventurer"),
 
     /* ----- RECIPES ----- */
     recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot")
