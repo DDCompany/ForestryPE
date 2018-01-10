@@ -22,10 +22,8 @@ BeeRegistry.registerBee({
             species2: "Frugal",
             chance: 0.08,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if ((climate === BiomeHelper.CLIMATE_HOT || climate === BiomeHelper.CLIMATE_HELLISH) && BiomeHelper.getBiomeHumidity(World.getBiome(house.tile.x, house.tile.z)) === BiomeHelper.HUMIDITY_ARID) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return (climate === BiomeHelper.CLIMATE_HOT || climate === BiomeHelper.CLIMATE_HELLISH) && BiomeHelper.getBiomeHumidity(World.getBiome(house.tile.x, house.tile.z)) === BiomeHelper.HUMIDITY_ARID;
             }
         }
     ],
@@ -35,7 +33,7 @@ BeeRegistry.registerBee({
     flowers: BeeRegistry.FLOWERS_CACTI,
     produce: [[ItemID.combParched, 0, 0.2], [ItemID.combPowdery, 0, 0.5]],
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_CREEPER,
+        EFFECT: "creeper",
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         NEVER_SLEEPS: true
@@ -69,10 +67,8 @@ BeeRegistry.registerBee({
     ],
     species: "Avenging",
     produce: [[ItemID.combIrradiated, 0, 0.4]],
-    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
+    chromosomes: {EFFECT: "radiactive", TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
-
-var chhhh = 1;
 
 BeeRegistry.registerBee({
     localize: {
@@ -94,10 +90,10 @@ BeeRegistry.registerBee({
     chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORTER}
 });
 
-var mut1 = ["Forest", "Meadows", "Modest", "Tropical", "Wintry", "Marshy"];
+let mut1 = ["Forest", "Meadows", "Modest", "Tropical", "Wintry", "Marshy"];
 
-for (var key in mut1) {
-    for (var key2 in mut1) {
+for (let key in mut1) {
+    for (let key2 in mut1) {
         if (mut1[key] !== mut1[key2]) {
             BeeRegistry.addMutation({
                 species1: mut1[key],
@@ -131,7 +127,7 @@ BeeRegistry.registerBee({
     chromosomes: {LIFESPAN: BeeRegistry.LIFESPAN_SHORTEST, TOLERATES_RAIN: true}
 });
 
-for (var key in mut1) {
+for (let key in mut1) {
     BeeRegistry.addMutation({
         species1: mut1[key],
         species2: "Common",
@@ -169,17 +165,15 @@ BeeRegistry.registerBee({
             species2: "Fiendish",
             chance: 0.25,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
     chromosomes: {
         NEVER_SLEEPS: true,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
-        EFFECT: BeeEffects.EFFECT_FLAMMABLE,
+        EFFECT: "ignition",
         LIFESPAN: BeeRegistry.LIFESPAN_LONGER,
         TOLERATES_RAIN: true,
         SPEED: BeeRegistry.SPEED_SLOWER
@@ -248,11 +242,10 @@ BeeRegistry.registerBee({
     flowers: BeeRegistry.FLOWERS_JUNGLE,
     chromosomes: {
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
-        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         SPEED: BeeRegistry.SPEED_SLOWEST,
         LIFESPAN: BeeRegistry.LIFESPAN_LONGER,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_2,
-        EFFECT: BeeEffects.EFFECT_EXPLORER
+        EFFECT: "exploration"
     }
 });
 
@@ -279,7 +272,7 @@ BeeRegistry.registerBee({
     climate: BiomeHelper.CLIMATE_COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_ENDS,
+        EFFECT: "misanthrope",
         TERRITORY: "11x8x11",
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1
     }
@@ -351,10 +344,8 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
@@ -362,10 +353,8 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
@@ -373,10 +362,8 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
@@ -384,7 +371,7 @@ BeeRegistry.registerBee({
         NEVER_SLEEPS: true,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         LIFESPAN: BeeRegistry.LIFESPAN_LONG,
-        EFFECT: BeeEffects.EFFECT_AGGRESS
+        EFFECT: "aggress"
     }
 });
 
@@ -440,10 +427,8 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.16,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HOT) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HOT;
             }
         },
         {
@@ -451,10 +436,8 @@ BeeRegistry.registerBee({
             species2: "Fiendish",
             chance: 0.1,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HOT) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HOT;
             }
         }
     ],
@@ -490,7 +473,7 @@ BeeRegistry.registerBee({
         }
     ],
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_FREEZING,
+        EFFECT: "glacial",
         LIFESPAN: BeeRegistry.LIFESPAN_SHORT,
         SPEED: BeeRegistry.SPEED_SLOWER
     }
@@ -549,7 +532,7 @@ BeeRegistry.registerBee({
         }
     ],
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_FREEZING,
+        EFFECT: "glacial",
         SPEED: BeeRegistry.SPEED_SLOW,
         LIFESPAN: BeeRegistry.LIFESPAN_SHORT
     }
@@ -716,7 +699,7 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_FREEZING,
+        EFFECT: "glacial",
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         NEVER_SLEEPS: true
@@ -919,10 +902,8 @@ BeeRegistry.registerBee({
             species2: "Cultivated",
             chance: 0.6,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
@@ -930,10 +911,8 @@ BeeRegistry.registerBee({
             species2: "Cultivated",
             chance: 0.6,
             onMutate: function (house) {
-                var climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                if (climate === BiomeHelper.CLIMATE_HELLISH) return true;
-
-                return false;
+                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
+                return climate === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
@@ -941,7 +920,7 @@ BeeRegistry.registerBee({
         NEVER_SLEEPS: true,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         SPEED: BeeRegistry.SPEED_SLOWER,
-        EFFECT: BeeEffects.EFFECT_AGGRESS
+        EFFECT: "aggress"
     }
 });
 
@@ -967,7 +946,7 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combMysterious, 0, 0.5]],
     climate: BiomeHelper.CLIMATE_COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
-    chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_AGGRESS}
+    chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: "aggress"}
 });
 
 BeeRegistry.registerBee({
@@ -992,11 +971,10 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
     chromosomes: {
-        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
         NEVER_SLEEPS: true,
-        EFFECT: BeeEffects.EFFECT_DRUNKARD
+        EFFECT: "drunkard"
     }
 });
 
@@ -1110,7 +1088,7 @@ BeeRegistry.registerBee({
     },
     species: "Vengeful",
     produce: [[ItemID.combIrradiated, 0, 0.4]],
-    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGER}
+    chromosomes: {EFFECT: "radiactive", TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGER}
 });
 
 BeeRegistry.registerBee({
@@ -1133,7 +1111,7 @@ BeeRegistry.registerBee({
     },
     species: "Vindictive",
     produce: [[ItemID.combIrradiated, 0, 0.25]],
-    chromosomes: {EFFECT: BeeEffects.EFFECT_RADIOACT, TERRITORY: "15x13x15", SPEED: BeeRegistry.SPEED_SLOWER}
+    chromosomes: {EFFECT: "radiactive", TERRITORY: "15x13x15", SPEED: BeeRegistry.SPEED_SLOWER}
 });
 
 BeeRegistry.registerBee({
@@ -1158,7 +1136,7 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combFrozen, 0, 0.3]],
     climate: BiomeHelper.CLIMATE_ICY,
     chromosomes: {
-        EFFECT: BeeEffects.EFFECT_FREEZING,
+        EFFECT: "glacial",
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
         SPEED: BeeRegistry.SPEED_SLOWER,
         LIFESPAN: BeeRegistry.LIFESPAN_SHORT,
@@ -1193,5 +1171,5 @@ BeeRegistry.registerBee({
             chance: 0.08
         }
     ],
-    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: BeeEffects.EFFECT_BEATIFIC}
+    chromosomes: {SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: "beatific"}
 });

@@ -1,4 +1,4 @@
-const Config = {
+var Config = {
     /* ----- BEEHIVES GEN ----- */
 
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),

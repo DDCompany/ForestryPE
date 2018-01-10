@@ -28,6 +28,7 @@ api/apiculture/Modifier.js
 api/apiculture/BeeFrame.js
 
 localize.js
+core/effects.js
 core/bees.js
 core/fluids.js
 core/dictionary.js
