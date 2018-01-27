@@ -7,7 +7,7 @@ const BeeRegistry = {
     FLOWERS_ENDS: ["Ends", "122:0"],
     FLOWERS_CACTI: ["Cacti", "81:0"],
     FLOWERS_MUSHROOMS: ["Mushrooms", "39:0", "40:0"],
-    FLOWERS_JUNGLE: ["Jungle", "106:0", "31:0"],
+    FLOWERS_JUNGLE: ["Jungle", "106:-1", "175:2"],
     FLOWERS_GOURD: ["Gourd", "104:0", "105:0"],
 
     BEETYPE_NONE: -1,
