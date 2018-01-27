@@ -83,11 +83,12 @@ BeeEffects.registerEffect("ignition", {
     doEffect: function (beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
-        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
+        for (let key in all) {
             let duration = 500;
             let chance = .5;
+            let ent = all[key];
 
-            switch (BeeEffects.getApiaristArmorWearValue()) {
+            switch (BeeEffects.getApiaristArmorWearValue(ent)) {
                 case 3:
                     chance = .05;
                     duration = 50;
@@ -102,10 +103,7 @@ BeeEffects.registerEffect("ignition", {
                     break;
             }
 
-            if (Math.random() < chance) Entity.setFire(Player.get(), duration);
-        }
-        for (let key in all) {
-            if (Math.random() < .5) Entity.setFire(all[key], 500);
+            if (Math.random() < chance) Entity.setFire(ent, duration);
         }
     }
 });
@@ -116,10 +114,11 @@ BeeEffects.registerEffect("miasmic", {
     doEffect: function (beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
-        if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
+        for (let key in all) {
             let duration = 600;
+            let ent = all[key];
 
-            switch (BeeEffects.getApiaristArmorWearValue()) {
+            switch (BeeEffects.getApiaristArmorWearValue(ent)) {
                 case 3:
                     duration = parseInt(600 / 4);
                     break;
@@ -131,10 +130,7 @@ BeeEffects.registerEffect("miasmic", {
                     break;
             }
 
-            Entity.addEffect(Player.get(), Native.PotionEffect.poison, duration, 1, true, true);
-        }
-        for (let key in all) {
-            Entity.addEffect(all[key], Native.PotionEffect.poison, duration, 1, true, true);
+            Entity.addEffect(ent, Native.PotionEffect.poison, duration, 1, true, true);
         }
     }
 });
@@ -144,7 +140,7 @@ BeeEffects.registerEffect("misanthrope", {
     requireWorking: false,
 
     doEffect: function (beeHouse, coords, range) {
-        let damage = 4 - BeeEffects.getApiaristArmorWearValue();
+        let damage = 4 - BeeEffects.getApiaristArmorWearValue(Player.get());
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.damageEntity(Player.get(), damage);
         }
@@ -156,8 +152,6 @@ BeeEffects.registerEffect("radiactive", {
     requireWorking: false,
 
     doEffect: function (beeHouse, coords, range) {
-        let damage = 8 - (BeeEffects.getApiaristArmorWearValue() * 2);
-        let blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0});
         let all = Entity.getAllInRange(coords, range.x);
 
         for (let key in all) {
@@ -173,6 +167,7 @@ BeeEffects.registerEffect("radiactive", {
             let block = Util.getBlocksInRange(coords, range, {id: 9, data: 0}, true);
             if (World.getTileEntity(block.x, block.y, block.z) === null) {
                 World.setBlock(block.x, block.y, block.z, 0);
+                return;
             }
         }
     }
