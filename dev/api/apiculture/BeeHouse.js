@@ -112,13 +112,12 @@ function BeeHouse(tile, slots, houseModifierList) {
         this.data.progress = this.queen.health * this.CYCLE_TIME;
         this.data.progressCycle++;
 
-        if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this) * this.houseModifierList.getLifespanModifier(this)) {
+        if (this.data.progressCycle >= this.CYCLE_TIME * modifiersList.getLifespanModifier(this) * this.houseModifierList.getLifespanModifier(this) * BM_LIFESPAN_MODIFIER) {
             this.queen.health--;
             this.data.progressCycle = 0;
             ContainerHelper.putInSlots(BeeLogic.produce(this.queen, modifiersList.getProductionModifier(this), this.houseModifierList.getProductionModifier(this)), this.getContainer(), this.slots.produceSlots);
             if (this.queen.health <= 0) {
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnPrincess(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotPrincessOut);
-                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnDrones(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut);
+                ContainerHelper.putInSlots(BeeRegistry.convertToItemArray(BeeLogic.spawnAll(this.queen, modifiersList, this.houseModifierList, this)), this.getContainer(), this.slots.slotDronesOut);
                 this.setSlot(this.slots.slotPrincess, {id: 0, data: 0, count: 0});
                 this.data.progressMax = 0;
                 Callback.invokeCallback("onQueenDeath", this);

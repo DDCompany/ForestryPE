@@ -33,6 +33,7 @@
     "tinSize": 6
   },
   "beekeeping": {
-    "secondPrincessChance": 0
+    "secondPrincessChance": 0,
+    "mode": 0
   }
 }
