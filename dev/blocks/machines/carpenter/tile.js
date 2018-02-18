@@ -31,7 +31,7 @@ MachineRegistry.register(BlockID.carpenter, {
                 input["slot" + i] = this.container.getSlot("slotInput" + i)
             }
 
-            let recipe = RecipeRegistry.getCarpenterRecipe(input);
+            let recipe = CarpenterManager.getRecipe(input);
 
             if (recipe) {
                 let liquidStorage = this.liquidStorage;

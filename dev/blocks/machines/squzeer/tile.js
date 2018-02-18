@@ -55,7 +55,7 @@ MachineRegistry.register(BlockID.squeezer, {
         } else {
             let slotInput0 = this.container.getSlot("slotInput0");
             let slotInput1 = this.container.getSlot("slotInput1");
-            let recipe = RecipeRegistry.getSqueezerRecipe([slotInput0, slotInput1]);
+            let recipe = SqueezerManager.getRecipe([slotInput0, slotInput1]);
 
             if (recipe && (this.liquidStorage.isEmpty() || this.liquidStorage.getLiquidStored() === recipe.liquid )) {
 

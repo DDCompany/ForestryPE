@@ -1,4 +1,3 @@
-
 Dictionary.add("backpackMiners", {id: 263, data: 0});
 Dictionary.add("backpackMiners", {id: 15, data: 0});
 Dictionary.add("backpackMiners", {id: 14, data: 0});

@@ -8,6 +8,12 @@
   "recipes": {
     "bronzeIngot": true
   },
+  "backpackAdventurer": [
+    {
+      "id": 1,
+      "data": 0
+    }
+  ],
   "gen": {
     "beehivesForestChance": 0.2,
     "beehivesMeadowsChance": 0.2,
@@ -27,6 +33,7 @@
     "tinSize": 6
   },
   "beekeeping": {
-    "secondPrincessChance": 0
+    "secondPrincessChance": 0,
+    "mode": 0
   }
 }

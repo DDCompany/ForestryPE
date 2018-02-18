@@ -1,4 +1,4 @@
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: 260,
         data: 0,
@@ -19,7 +19,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.2
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: ItemID.honeyDrop,
         data: 0,
@@ -40,7 +40,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.1
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: ItemID.honeydew,
         data: 0,
@@ -55,7 +55,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.1
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: 295,
         data: 0,
@@ -70,7 +70,22 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.01
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
+    input0: {
+        id: 458,
+        data: 0,
+        count: 1
+    },
+    input1: {
+        id: 0,
+        data: 0,
+        count: 0
+    },
+    liquid: "seedOil",
+    liquidCount: 0.01
+});
+
+SqueezerManager.registerRecipe({
     input0: {
         id: 361,
         data: 0,
@@ -85,7 +100,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.01
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: 362,
         data: 0,
@@ -100,7 +115,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 0.01
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: ItemID.phosphor,
         data: 0,
@@ -115,7 +130,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 1.6
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: ItemID.phosphor,
         data: 0,
@@ -130,7 +145,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 1.6
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: ItemID.phosphor,
         data: 0,
@@ -145,7 +160,7 @@ RecipeRegistry.registerSqueezerRecipe({
     liquidCount: 2
 });
 
-RecipeRegistry.registerSqueezerRecipe({
+SqueezerManager.registerRecipe({
     input0: {
         id: 81,
         data: 0,

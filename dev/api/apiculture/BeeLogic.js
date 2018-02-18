@@ -29,7 +29,7 @@ var BeeLogic = {
     produce: function (queen, productionModifier, houseModifier) {
         var produce = queen.getProduce();
         var specialty = queen.getSpecialty();
-        var speed = queen.getActiveChromosome("SPEED") * productionModifier * houseModifier;
+        var speed = queen.getActiveChromosome("SPEED") * productionModifier * houseModifier * BM_SPEED_MODIFIER;
         var result = [];
 
         for (var key in produce) {
@@ -68,6 +68,19 @@ var BeeLogic = {
         return false;
     },
 
+    spawnAll: function (bee, modifierList, houseModifierList, house) {
+        let arr = [];
+
+        if (BM_CAN_FATIGUE) {
+            if (!bee.pristine && bee.generation > 96 + Util.random(0, 6) + Util.random(0, 6) && Math.random() < 0.02 * houseModifierList.getGeneticDecay(house) * modifierList.getGeneticDecay(house)) return [];
+        }
+
+        this.spawnPrincess(bee, modifierList, houseModifierList, house, arr);
+        this.spawnDrones(bee, modifierList, houseModifierList, house, arr);
+
+        return arr;
+    },
+
     /**
      * Возвращает потомства(принцессы)
      * @param {Bee} bee королева
@@ -76,14 +89,11 @@ var BeeLogic = {
      * @param {BeeHouse} house
      * @return {Array}
      */
-    spawnPrincess: function (bee, modifierList, houseModifierList, house) {
-        if (!bee.pristine && bee.generation > 96 + Util.random(0, 6) + Util.random(0, 6) && Math.random() < 0.02 * houseModifierList.getGeneticDecay(house) * modifierList.getGeneticDecay(house)) return [];
-        var arr = [];
+    spawnPrincess: function (bee, modifierList, houseModifierList, house, arr) {
         var count = Math.random() < Config.secondPrincessChance ? 2 : 1;
         for (var i = 0; i < count; i++) {
             arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_PRINCESS, modifierList, houseModifierList, house));
         }
-        return arr;
     },
 
     /**
@@ -94,14 +104,16 @@ var BeeLogic = {
      * @param {BeeHouse} house
      * @return {Array}
      */
-    spawnDrones: function (bee, modifierList, houseModifierList, house) {
+    spawnDrones: function (bee, modifierList, houseModifierList, house, arr) {
         var toCreate = parseInt(bee.getActiveChromosome("FERTILITY"));
-        var arr = [];
+
+        if (BM_REDUCES_FERTILITY)
+            toCreate = Util.random(1, toCreate);
+
         for (var i = 0; i < toCreate; i++) {
             arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_DRONE, modifierList, houseModifierList, house));
         }
 
-        return arr;
     },
 
     createOffspring: function (bee, bee_type, modifierList, houseModifierList, house) {
@@ -181,7 +193,7 @@ var BeeLogic = {
     mutateSpecies: function (parent1, parent2, modifierList, houseModifierList, house) {
         var combinations = BeeRegistry.getMutations(parent1.type, parent2.type);
         for (var key in combinations) {
-            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house) * houseModifierList.getMutationModifier(house) && combinations[key].onMutate(house)) {
+            if (Math.random() < combinations[key].chance * modifierList.getMutationModifier(house) * houseModifierList.getMutationModifier(house) * BM_MUTATION_MODIFIER && combinations[key].onMutate(house)) {
                 var mut = BeeRegistry.getBeeByType(combinations[key].result);
                 return {type: mut.type, chromosomes: Util.objectUnion(mut.chromosomes_list, {SPECIES: mut.type})};
             }

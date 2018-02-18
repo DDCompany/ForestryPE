@@ -13,10 +13,16 @@ ModAPI.registerAPI("ForestryAPI", {
     Config: Config,
     ContainerHelper: ContainerHelper,
     ModelHelper: ModelHelper,
-    RecipeRegistry: RecipeRegistry,
     Util: Util,
     Dictionary: Dictionary,
     ApiaryRegistry: ApiaryRegistry,
+
+    BioGeneratorManager: BioGeneratorManager,
+    CarpenterManager: CarpenterManager,
+    CentrifugeManager: CentrifugeManager,
+    FabricatorManager: FabricatorManager,
+    FermenterManager: FermenterManager,
+    SqueezerManager: SqueezerManager,
 
     requireGlobal: function (command) {
         return eval(command);

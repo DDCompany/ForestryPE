@@ -1,4 +1,4 @@
-var BeeRegistry = {
+const BeeRegistry = {
     bees: {},
 
     FLOWERS_FLOWERS: ["Flowers", "38:-1", "37:-1", " 175:1", "175:4", " 175:5"],
@@ -7,7 +7,7 @@ var BeeRegistry = {
     FLOWERS_ENDS: ["Ends", "122:0"],
     FLOWERS_CACTI: ["Cacti", "81:0"],
     FLOWERS_MUSHROOMS: ["Mushrooms", "39:0", "40:0"],
-    FLOWERS_JUNGLE: ["Jungle", "106:0", "31:0"],
+    FLOWERS_JUNGLE: ["Jungle", "106:-1", "175:2"],
     FLOWERS_GOURD: ["Gourd", "104:0", "105:0"],
 
     BEETYPE_NONE: -1,
@@ -59,8 +59,8 @@ var BeeRegistry = {
 
     init: function () {
 
-        this.chromosomes_list["SPEED"] = this.SPEED_NORMAL;
-        this.chromosomes_list["LIFESPAN"] = this.LIFESPAN_NORMAL;
+        this.chromosomes_list["SPEED"] = this.SPEED_SLOWEST;
+        this.chromosomes_list["LIFESPAN"] = this.LIFESPAN_SHORTER;
         this.chromosomes_list["FERTILITY"] = 2;
         this.chromosomes_list["TEMPERATURE_TOLERANCE"] = this.TOLERANCE_NONE;
         this.chromosomes_list["NEVER_SLEEPS"] = false;
@@ -73,8 +73,8 @@ var BeeRegistry = {
     },
 
     getBeeFromScope: function (scope) {
-        var bee = new Bee();
-        for (var key in scope) {
+        let bee = new Bee();
+        for (let key in scope) {
             bee[key] = scope[key];
         }
 
@@ -90,8 +90,8 @@ var BeeRegistry = {
     },
 
     convertToItemArray: function (bees) {
-        var arr = [];
-        for (var key in bees) {
+        let arr = [];
+        for (let key in bees) {
             arr.push([bees[key].getItemID(), bees[key].unique, 1]);
         }
 
@@ -131,10 +131,10 @@ var BeeRegistry = {
     },
 
     getMutations: function (species1, species2) {
-        var muts = [];
-        for (var key in this.mutations) {
-            for (var key2 in this.mutations[key]) {
-                var mut = this.mutations[key][key2];
+        let muts = [];
+        for (let key in this.mutations) {
+            for (let key2 in this.mutations[key]) {
+                let mut = this.mutations[key][key2];
                 if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
                     muts.push(mut);
                 }
@@ -231,7 +231,7 @@ var BeeRegistry = {
         }
 
         if (arg.mutations) {
-            for (var key in arg.mutations) {
+            for (let key in arg.mutations) {
                 arg.mutations[key]["result"] = arg.species;
                 this.addMutation(arg.mutations[key]);
             }
@@ -252,19 +252,42 @@ var BeeRegistry = {
         Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {stack: 1});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
-        var bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
+        let bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
         bee_type.chromosomes_list = arg.chromosomes;
         bee_type.dominant = arg.dominant;
         bee_type.produce = arg.produce;
         bee_type.specialty = arg.specialty;
 
         this.bees[arg.species] = bee_type;
+
+        let NAME_OVERRIDE = function (item, name) {
+            let beeType = BeeRegistry.getBeeTypeByID(item.id);
+            let bee = BeeSaver.bees["b" + item.data];
+            if (beeType !== BeeRegistry.BEETYPE_DRONE) {
+                name += "§e\n" + (!bee ? "Pristine Stock" : "Ignoble Stock");
+            }
+            if (bee && bee.analyzed) {
+                let climateTol = bee.getActiveChromosome("TEMPERATURE_TOLERANCE");
+                let humidityTol = bee.getActiveChromosome("HUMIDITY_TOLERANCE");
+                name += "§7\n" + BeeRegistry.getChromosomeValueName("LIFESPAN", bee.getActiveChromosome("LIFESPAN")) + " Life";
+                name += "\n" + BeeRegistry.getChromosomeValueName("SPEED", bee.getActiveChromosome("SPEED")) + " Worker";
+                name += "§a\nT: " + BeeRegistry.getChromosomeValueName("CLIMATE", bee.getClimate()) + "/" + bee.getClimateTolValue() + (climateTol === 0 ? "" : (climateTol < 6 ? " B" : (climateTol < 11 ? " U" : " D")));
+                name += "\nH: " + BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getHumidity()) + "/" + bee.getClimateTolValue() + (humidityTol === 0 ? "" : (humidityTol < 6 ? " B" : (humidityTol < 11 ? " U" : " D")));
+                name += "§7\n" + BeeRegistry.getChromosomeValueName("FLOWERS", bee.getFlowers());
+            } else name += "§7\n<unknown genome>";
+
+            return name;
+        };
+
+        Item.registerNameOverrideFunction(ItemID["princess" + arg.species], NAME_OVERRIDE);
+        Item.registerNameOverrideFunction(ItemID["drone" + arg.species], NAME_OVERRIDE);
+        Item.registerNameOverrideFunction(ItemID["queen" + arg.species], NAME_OVERRIDE);
     },
 
     getBeeTypeByID: function (id) {
         if (id > 0) {
-            for (var key in this.bees) {
-                var beetype = this.bees[key];
+            for (let key in this.bees) {
+                let beetype = this.bees[key];
                 switch (id) {
                     case beetype.princessID:
                         return BeeRegistry.BEETYPE_PRINCESS;
@@ -282,8 +305,8 @@ var BeeRegistry = {
     },
 
     getTypeByID: function (id) {
-        for (var key in this.bees) {
-            var beetype = this.bees[key];
+        for (let key in this.bees) {
+            let beetype = this.bees[key];
             if (beetype.princessID === id || beetype.droneID === id || beetype.queenID === id) {
                 return key;
             }
@@ -296,10 +319,10 @@ var BeeRegistry = {
     },
 
     getBeeFromItem: function (id, data) {
-        var bee = null;
+        let bee = null;
         if (!BeeSaver.bees["b" + data]) {
-            var species = BeeRegistry.getTypeByID(id);
-            var beetype = BeeRegistry.getBeeTypeByID(id);
+            let species = BeeRegistry.getTypeByID(id);
+            let beetype = BeeRegistry.getBeeTypeByID(id);
             bee = new Bee(species, beetype, false);
             if (beetype === BeeRegistry.BEETYPE_QUEEN) {
                 bee.mate = {
@@ -326,20 +349,20 @@ var BeeRegistry = {
                 case BeeRegistry.LIFESPAN_SHORTER:
                     return Translation.translate("bees.lifespan.shorted");
                 case BeeRegistry.LIFESPAN_SHORTENED:
-                    return Translation.translate("bees.lifespan.shortened")
+                    return Translation.translate("bees.lifespan.shortened");
                 case BeeRegistry.LIFESPAN_SHORTEST:
-                    return Translation.translate("bees.lifespan.shortest")
+                    return Translation.translate("bees.lifespan.shortest");
                 case BeeRegistry.LIFESPAN_SHORT:
-                    return Translation.translate("bees.lifespan.short")
+                    return Translation.translate("bees.lifespan.short");
                 case BeeRegistry.LIFESPAN_NORMAL:
-                    return Translation.translate("bees.lifespan.normal")
+                    return Translation.translate("bees.lifespan.normal");
                 case BeeRegistry.LIFESPAN_ELONGATED:
-                    return Translation.translate("bees.lifespan.elongated")
+                    return Translation.translate("bees.lifespan.elongated");
                 case BeeRegistry.LIFESPAN_LONG:
-                    return Translation.translate("bees.lifespan.long")
+                    return Translation.translate("bees.lifespan.long");
                 case BeeRegistry.LIFESPAN_LONGER:
-                    return Translation.translate("bees.lifespan.longer")
-                case BeeRegistry.LIFESPAN_LONGER:
+                    return Translation.translate("bees.lifespan.longer");
+                case BeeRegistry.LIFESPAN_LONGEST:
                     return Translation.translate("bees.lifespan.longest")
             }
         
@@ -347,17 +370,17 @@ var BeeRegistry = {
 
             switch (value) {
                 case BeeRegistry.SPEED_FAST:
-                    return Translation.translate("bees.speed.fast")
+                    return Translation.translate("bees.speed.fast");
                 case BeeRegistry.SPEED_FASTER:
-                    return Translation.translate("bees.speed.faster")
+                    return Translation.translate("bees.speed.faster");
                 case BeeRegistry.SPEED_FASTEST:
-                    return Translation.translate("bees.speed.fastest")
+                    return Translation.translate("bees.speed.fastest");
                 case BeeRegistry.SPEED_NORMAL:
-                    return Translation.translate("bees.speed.normal")
+                    return Translation.translate("bees.speed.normal");
                 case BeeRegistry.SPEED_SLOW:
-                    return Translation.translate("bees.speed.slow")
+                    return Translation.translate("bees.speed.slow");
                 case BeeRegistry.SPEED_SLOWER:
-                    return Translation.translate("bees.speed.slower")
+                    return Translation.translate("bees.speed.slower");
                 case BeeRegistry.SPEED_SLOWEST:
                     return Translation.translate("bees.speed.slowest")
             }
@@ -368,31 +391,31 @@ var BeeRegistry = {
 
             switch (value) {
                 case BeeEffects.EFFECT_NONE:
-                    return Translation.translate("bees.effect.none")
+                    return Translation.translate("bees.effect.none");
                 case BeeEffects.EFFECT_AGGRESS:
-                    return Translation.translate("bees.effect.aggress")
+                    return Translation.translate("bees.effect.aggress");
                 case BeeEffects.EFFECT_BEATIFIC:
-                    return Translation.translate("bees.effect.beatific")
+                    return Translation.translate("bees.effect.beatific");
                 case BeeEffects.EFFECT_CREEPER:
-                    return Translation.translate("bees.effect.creeper")
+                    return Translation.translate("bees.effect.creeper");
                 case BeeEffects.EFFECT_DRUNKARD:
-                    return Translation.translate("bees.effect.drunkard")
+                    return Translation.translate("bees.effect.drunkard");
                 case BeeEffects.EFFECT_EXPLORER:
-                    return Translation.translate("bees.effect.explorer")
+                    return Translation.translate("bees.effect.explorer");
                 case BeeEffects.EFFECT_ENDS:
-                    return Translation.translate("bees.effect.ends")
+                    return Translation.translate("bees.effect.ends");
                 case BeeEffects.EFFECT_FLAMMABLE:
-                    return Translation.translate("bees.effect.flammable")
+                    return Translation.translate("bees.effect.flammable");
                 case BeeEffects.EFFECT_FREEZING:
-                    return Translation.translate("bees.effect.freezing")
+                    return Translation.translate("bees.effect.freezing");
                 case BeeEffects.EFFECT_HEROIC:
-                    return Translation.translate("bees.effect.heroic")
+                    return Translation.translate("bees.effect.heroic");
                 case BeeEffects.EFFECT_POISON:
-                    return Translation.translate("bees.effect.poison")
+                    return Translation.translate("bees.effect.poison");
                 case BeeEffects.EFFECT_RADIOACT:
-                    return Translation.translate("bees.effect.radiact")
+                    return Translation.translate("bees.effect.radiact");
                 case BeeEffects.EFFECT_REANIMATION:
-                    return Translation.translate("bees.effect.reanimation")
+                    return Translation.translate("bees.effect.reanimation");
                 case BeeEffects.EFFECT_REPULSION:
                     return Translation.translate("bees.effect.repulsion")
             }
@@ -401,15 +424,15 @@ var BeeRegistry = {
 
             switch (value) {
                 case BiomeHelper.CLIMATE_ICY:
-                    return Translation.translate("climate.icy")
+                    return Translation.translate("climate.icy");
                 case BiomeHelper.CLIMATE_COLD:
-                    return Translation.translate("climate.cold")
+                    return Translation.translate("climate.cold");
                 case BiomeHelper.CLIMATE_NORMAL:
-                    return Translation.translate("climate.normal")
+                    return Translation.translate("climate.normal");
                 case BiomeHelper.CLIMATE_WARM:
-                    return Translation.translate("climate.warm")
+                    return Translation.translate("climate.warm");
                 case BiomeHelper.CLIMATE_HOT:
-                    return Translation.translate("climate.hot")
+                    return Translation.translate("climate.hot");
                 case BiomeHelper.CLIMATE_HELLISH:
                     return Translation.translate("climate.hellish")
             }
@@ -418,9 +441,9 @@ var BeeRegistry = {
 
             switch (value) {
                 case BiomeHelper.HUMIDITY_ARID:
-                    return Translation.translate("humidity.arid")
+                    return Translation.translate("humidity.arid");
                 case BiomeHelper.HUMIDITY_DAMP:
-                    return Translation.translate("humidity.damp")
+                    return Translation.translate("humidity.damp");
                 case BiomeHelper.HUMIDITY_NORMAL:
                     return Translation.translate("humidity.normal")
             }

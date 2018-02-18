@@ -1,5 +1,5 @@
 for (let i = 0; i < 4; i++) {
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {"slot4": {id: 17, data: i}},
         liquid: "water",
         liquidAmount: 0.25,
@@ -12,7 +12,7 @@ for (let i = 0; i < 4; i++) {
     });
 
     if (Config.crateEnabled) {
-        RecipeRegistry.addCarpenterRecipe({
+        CarpenterManager.registerRecipe({
             input: {
                 "slot1": {id: 17, data: i},
                 "slot3": {id: 17, data: i},
@@ -30,7 +30,7 @@ for (let i = 0; i < 4; i++) {
         });
     }
 
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {
             "slot0": {id: 17, data: i},
             "slot1": {id: 17, data: i},
@@ -51,7 +51,7 @@ for (let i = 0; i < 4; i++) {
         }
     });
 
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {"slot4": {id: 17, data: i}, "slot7": {id: 17, data: i}},
         liquid: "seedOil",
         liquidAmount: 0.01,
@@ -67,7 +67,7 @@ for (let i = 0; i < 4; i++) {
 for (let i = 0; i < 2; i++) {
 
     if (Config.crateEnabled) {
-        RecipeRegistry.addCarpenterRecipe({
+        CarpenterManager.registerRecipe({
             input: {
                 "slot1": {id: 162, data: i},
                 "slot3": {id: 162, data: i},
@@ -85,7 +85,7 @@ for (let i = 0; i < 2; i++) {
         });
     }
 
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {"slot4": {id: 162, data: i}},
         liquid: "water",
         liquidAmount: 0.25,
@@ -97,7 +97,7 @@ for (let i = 0; i < 2; i++) {
         }
     });
 
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {
             "slot0": {id: 162, data: i},
             "slot1": {id: 162, data: i},
@@ -115,7 +115,7 @@ for (let i = 0; i < 2; i++) {
         }
     });
 
-    RecipeRegistry.addCarpenterRecipe({
+    CarpenterManager.registerRecipe({
         input: {"slot4": {id: 162, data: i}, "slot7": {id: 162, data: i}},
         liquid: "seedOil",
         liquidAmount: 0.01,
@@ -129,7 +129,7 @@ for (let i = 0; i < 2; i++) {
 
 }
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.ingotTin, data: 0},
         "slot1": {id: 102, data: 0},
@@ -148,7 +148,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 331, data: 0}, "slot2": {id: 331, data: 0},
         "slot3": {id: 331, data: 0}, "slot4": {id: ItemID.ingotTin, data: 0}, "slot5": {id: 331, data: 0},
@@ -163,7 +163,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 331, data: 0}, "slot1": {id: ItemID.ingotBronze, data: 0}, "slot2": {id: 331, data: 0},
         "slot3": {id: 331, data: 0}, "slot4": {id: ItemID.ingotBronze, data: 0}, "slot5": {id: 331, data: 0},
@@ -178,7 +178,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 331, data: 0}, "slot1": {id: 265, data: 0}, "slot2": {id: 331, data: 0},
         "slot3": {id: 331, data: 0}, "slot4": {id: 265, data: 0}, "slot5": {id: 331, data: 0},
@@ -193,7 +193,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 331, data: 0}, "slot1": {id: 266, data: 0}, "slot2": {id: 331, data: 0},
         "slot3": {id: 331, data: 0}, "slot4": {id: 266, data: 0}, "slot5": {id: 331, data: 0},
@@ -208,7 +208,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.woodPulp, data: 0}, "slot7": {id: ItemID.woodPulp, data: 0}},
     liquid: "water",
     liquidAmount: 0.25,
@@ -219,7 +219,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.brokenBronzePickaxe, data: 0}},
     output: {
         id: ItemID.ingotBronze,
@@ -228,7 +228,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.brokenBronzeShovel, data: 0}},
     output: {
         id: ItemID.ingotBronze,
@@ -237,7 +237,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.silkWisp, data: 0},
         "slot1": {id: ItemID.silkWisp, data: 0},
@@ -258,7 +258,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.honeyDrop, data: 0},
         "slot1": {id: ItemID.royalJelly, data: 0},
@@ -279,7 +279,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.honeyDrop, data: 0},
         "slot1": {id: ItemID.pollen1, data: 0},
@@ -300,7 +300,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 3, data: 0}, "slot1": {id: 264, data: 0}, "slot2": {id: 3, data: 0},
         "slot3": {id: 12, data: 0}, "slot4": {id: ItemID.mulch, data: 0}, "slot5": {id: 12, data: 0},
@@ -315,7 +315,28 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
+    input: {
+        "slot0": {id: ItemID.wovenSilk, data: 0},
+        "slot1": {id: 264, data: 0},
+        "slot2": {id: ItemID.wovenSilk, data: 0},
+        "slot3": {id: ItemID.wovenSilk, data: 0},
+        "slot4": {id: ItemID.backpackAdventurer, data: 0},
+        "slot5": {id: ItemID.wovenSilk, data: 0},
+        "slot6": {id: ItemID.wovenSilk, data: 0},
+        "slot7": {id: ItemID.wovenSilk, data: 0},
+        "slot8": {id: ItemID.wovenSilk, data: 0}
+    },
+    liquid: "water",
+    liquidAmount: 1,
+    output: {
+        id: BlockID.backpackAdventurerT2,
+        count: 8,
+        data: 0
+    }
+});
+
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.wovenSilk, data: 0},
         "slot1": {id: 264, data: 0},
@@ -336,7 +357,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.wovenSilk, data: 0},
         "slot1": {id: 264, data: 0},
@@ -357,7 +378,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.wovenSilk, data: 0},
         "slot1": {id: 264, data: 0},
@@ -378,7 +399,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.wovenSilk, data: 0},
         "slot1": {id: 264, data: 0},
@@ -399,7 +420,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.wovenSilk, data: 0},
         "slot1": {id: 264, data: 0},
@@ -420,7 +441,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 3, data: 0}, "slot1": {id: 3, data: 0}, "slot2": {id: 3, data: 0},
         "slot3": {id: 3, data: 0}, "slot4": {id: ItemID.mulch, data: 0}, "slot5": {id: 3, data: 0},
@@ -435,7 +456,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.woodPulp, data: 0},
         "slot3": {id: ItemID.woodPulp, data: 0},
@@ -451,7 +472,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: ItemID.ingotBronze, data: 0},
         "slot1": {id: ItemID.ingotBronze, data: 0},
@@ -471,7 +492,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.royalJelly, data: 0},
         "slot3": {id: 5, data: 0},
@@ -490,7 +511,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {"slot1": {id: ItemID.ingotBronze, data: 0}, "slot4": {id: 280, data: 0}, "slot7": {id: 280, data: 0}},
     dop: {
         id: ItemID.carton,
@@ -504,7 +525,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.pulsatingMesh, data: 0},
         "slot3": {id: ItemID.pulsatingMesh, data: 0},
@@ -519,7 +540,7 @@ RecipeRegistry.addCarpenterRecipe({
     }
 });
 
-RecipeRegistry.addCarpenterRecipe({
+CarpenterManager.registerRecipe({
     input: {
         "slot0": {id: 264, data: 0},
         "slot2": {id: 264, data: 0},

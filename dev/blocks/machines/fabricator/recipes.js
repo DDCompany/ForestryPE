@@ -1,5 +1,5 @@
-for (var i = 0; i < 16; i++) {
-    RecipeRegistry.addFabricatorRecipe({
+for (let i = 0; i < 16; i++) {
+    FabricatorManager.registerRecipe({
         input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolis, data: 0}},
         dop: {
             id: ItemID.waxCast,
@@ -16,8 +16,8 @@ for (var i = 0; i < 16; i++) {
 }
 
 if (Config.glassEnabled) {
-for (var i = 0; i < 16; i++) {
-    RecipeRegistry.addFabricatorRecipe({
+    for (let i = 0; i < 16; i++) {
+        FabricatorManager.registerRecipe({
         input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
         dop: {
             id: ItemID.waxCast,
@@ -34,9 +34,9 @@ for (var i = 0; i < 16; i++) {
 
 }
 
-    for (var i = 0; i < 16; i++) {
+    for (let i = 0; i < 16; i++) {
 
-        RecipeRegistry.addFabricatorRecipe({
+        FabricatorManager.registerRecipe({
             input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisPulse, data: 0}},
             dop: {
                 id: ItemID.waxCast,
@@ -54,7 +54,7 @@ for (var i = 0; i < 16; i++) {
     }
 }
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.ingotCopper, data: 0},
         "slot3": {id: 331, data: 0},
@@ -71,7 +71,7 @@ RecipeRegistry.addFabricatorRecipe({
     }
 });
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.ingotTin, data: 0},
         "slot3": {id: 331, data: 0},
@@ -88,7 +88,7 @@ RecipeRegistry.addFabricatorRecipe({
     }
 });
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: ItemID.ingotBronze, data: 0},
         "slot3": {id: 331, data: 0},
@@ -105,7 +105,7 @@ RecipeRegistry.addFabricatorRecipe({
     }
 });
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: 264, data: 0},
         "slot3": {id: 331, data: 0},
@@ -122,7 +122,7 @@ RecipeRegistry.addFabricatorRecipe({
     }
 });
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: 266, data: 0},
         "slot3": {id: 331, data: 0},
@@ -139,7 +139,7 @@ RecipeRegistry.addFabricatorRecipe({
     }
 });
 
-RecipeRegistry.addFabricatorRecipe({
+FabricatorManager.registerRecipe({
     input: {
         "slot1": {id: 265, data: 0},
         "slot3": {id: 331, data: 0},
