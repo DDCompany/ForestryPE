@@ -43,9 +43,7 @@ MachineRegistry.register(BlockID.carpenter, {
                     if ((!recipe.dop && slotSpecial.id === 0) || (recipe.dop && slotSpecial.id === recipe.dop.id && slotSpecial.data === recipe.dop.data)) {
                         this.data.output = recipe.output;
                         if (recipe.liquid) {
-                            alert(this.liquidStorage.getAmount(liquidStorage.getLiquidStored()));
                             this.liquidStorage.getLiquid(liquidStorage.getLiquidStored(), recipe.liquidAmount);
-                            alert(this.liquidStorage.getAmount(liquidStorage.getLiquidStored()));
                         }
                         this.data.progress = 1;
                         this.data.progressMax = recipe.time || 50;

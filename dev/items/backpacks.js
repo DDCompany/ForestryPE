@@ -1,18 +1,3 @@
-if (Config.backpackAdventurerDictionary.length) {
-    BackpackRegistry.register({
-        codeName: "backpackAdventurer",
-        name: "Adventurer's backpack",
-        slots: 15,
-        blocks: Config.backpackAdventurerDictionary
-    });
-
-    BackpackRegistry.register({
-        codeName: "backpackAdventurerT2",
-        name: "Adventurer's woven backpack",
-        slots: 45,
-        blocks: Config.backpackAdventurerDictionary
-    });
-}
 BackpackRegistry.register({
     codeName: "backpackMiners",
     name: "Miner's backpack",
