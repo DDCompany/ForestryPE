@@ -8,7 +8,6 @@ ModAPI.registerAPI("ForestryAPI", {
     BeeRegistry: BeeRegistry,
     BeeType: BeeType,
     ModifierList: ModifierList,
-    BackpackRegistry: BackpackRegistry,
     BiomeHelper: BiomeHelper,
     Config: Config,
     ContainerHelper: ContainerHelper,
@@ -16,7 +15,7 @@ ModAPI.registerAPI("ForestryAPI", {
     Util: Util,
     Dictionary: Dictionary,
     ApiaryRegistry: ApiaryRegistry,
-
+    BackpackManager: BackpackManager,
     BioGeneratorManager: BioGeneratorManager,
     CarpenterManager: CarpenterManager,
     CentrifugeManager: CentrifugeManager,

@@ -1,79 +1,135 @@
-BackpackRegistry.register({
-    codeName: "backpackMiners",
-    name: "Miner's backpack",
+IDRegistry.genItemID("backpackMiners");
+Item.createItem("backpackMiners", "Miner's backpack", {name: "backpackMiners", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackMiners, {
     slots: 15,
-    blocks: Dictionary.get("backpackMiners")
+    inRow: 5,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("miners", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackDigger",
-    name: "Digger's backpack",
+IDRegistry.genItemID("backpackDigger");
+Item.createItem("backpackDigger", "Digger's backpack", {name: "backpackDigger", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackDigger, {
     slots: 15,
-    blocks: Dictionary.get("backpackDiggers")
+    inRow: 5,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("diggers", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackForester",
-    name: "Forester's backpack",
+IDRegistry.genItemID("backpackForester");
+Item.createItem("backpackForester", "Digger's backpack", {name: "backpackForester", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackForester, {
     slots: 15,
-    blocks: Dictionary.get("backpackForester")
+    inRow: 5,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("foresters", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackHunter",
-    name: "Hunter's backpack",
+IDRegistry.genItemID("backpackHunter");
+Item.createItem("backpackHunter", "Hunter's backpack", {name: "backpackHunter", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackHunter, {
     slots: 15,
-    blocks: Dictionary.get("backpackHunter")
+    inRow: 5,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("hunters", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackBuilder",
-    name: "Builder's backpack",
+IDRegistry.genItemID("backpackBuilder");
+Item.createItem("backpackBuilder", "Builder's backpack", {name: "backpackBuilder", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackBuilder, {
     slots: 15,
-    blocks: Dictionary.get("backpackBuilder")
+    inRow: 5,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("builders", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackMinersT2",
-    name: "Miner's woven backpack",
+//Woven
+
+IDRegistry.genItemID("backpackMinersT2");
+Item.createItem("backpackMinersT2", "Miner's woven backpack", {name: "backpackMinersT2", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackMinersT2, {
     slots: 45,
-    blocks: Dictionary.get("backpackMiners")
+    inRow: 9,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("miners", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackDiggerT2",
-    name: "Digger's woven backpack",
+IDRegistry.genItemID("backpackDiggerT2");
+Item.createItem("backpackDiggerT2", "Digger's woven backpack", {name: "backpackDiggerT2", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackDiggerT2, {
     slots: 45,
-    blocks: Dictionary.get("backpackDiggers")
+    inRow: 9,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("diggers", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackForesterT2",
-    name: "Forester's woven backpack",
+IDRegistry.genItemID("backpackForesterT2");
+Item.createItem("backpackForesterT2", "Digger's woven backpack", {name: "backpackForesterT2", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackForesterT2, {
     slots: 45,
-    blocks: Dictionary.get("backpackForester")
+    inRow: 9,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("foresters", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackHunterT2",
-    name: "Hunter's woven backpack",
+IDRegistry.genItemID("backpackHunterT2");
+Item.createItem("backpackHunterT2", "Hunter's woven backpack", {name: "backpackHunterT2", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackHunterT2, {
     slots: 45,
-    blocks: Dictionary.get("backpackHunter")
+    inRow: 9,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("hunters", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackBuilderT2",
-    name: "Builder's woven backpack",
+IDRegistry.genItemID("backpackBuilderT2");
+Item.createItem("backpackBuilderT2", "Builder's woven backpack", {name: "backpackBuilderT2", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackBuilderT2, {
     slots: 45,
-    blocks: Dictionary.get("backpackBuilder")
+    inRow: 9,
+
+    isValidItem: function (id, count, data) {
+        return BackpackManager.isValidItem("builders", id, data);
+    }
 });
 
-BackpackRegistry.register({
-    codeName: "backpackApiarist",
-    name: "Apiarist backpack",
+
+IDRegistry.genItemID("backpackApiarist");
+Item.createItem("backpackApiarist", "Apiarist backpack", {name: "backpackApiarist", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.backpackApiarist, {
     slots: 125,
-    isValidItem: function (b, item) {
-        return BeeRegistry.isBee(item.id);
+    inRow: 10,
+
+    isValidItem: function (id) {
+        return BeeRegistry.isBee(id);
     }
 });
 

@@ -13,6 +13,7 @@ Forestry PE by Dmitriy Medvedev(https://vk.com/id331953744)
 importLib("energylib", "*");
 importLib("flags", "*");
 importLib("ToolType", "*");
+IMPORT("BackpackAPI");
 
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
