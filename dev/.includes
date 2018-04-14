@@ -6,7 +6,6 @@ api/core/ContainerHelper.js
 api/core/BiomeHelper.js
 api/core/ModelHelper.js
 api/core/MachineRegistry.js
-api/core/Dictionary.js
 api/core/ApiaryRegistry.js
 
 api/core/managers/BioGeneratorManager.js
@@ -31,7 +30,6 @@ localize.js
 core/effects.js
 core/bees.js
 core/fluids.js
-core/dictionary.js
 
 items/analyzer.js
 items/armor.js

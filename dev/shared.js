@@ -13,7 +13,6 @@ ModAPI.registerAPI("ForestryAPI", {
     ContainerHelper: ContainerHelper,
     ModelHelper: ModelHelper,
     Util: Util,
-    Dictionary: Dictionary,
     ApiaryRegistry: ApiaryRegistry,
     BackpackManager: BackpackManager,
     BioGeneratorManager: BioGeneratorManager,
