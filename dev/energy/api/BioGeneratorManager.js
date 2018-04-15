@@ -1,3 +1,5 @@
+setLoadingTip("Energy Module Loading...");
+
 const BioGeneratorManager = {
     fuel: {},
 

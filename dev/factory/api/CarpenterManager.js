@@ -1,3 +1,5 @@
+setLoadingTip("Factory Module Loading...");
+
 const CarpenterManager = {
     recipes: [],
 

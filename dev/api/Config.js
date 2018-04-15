@@ -1,3 +1,5 @@
+setLoadingTip("Common Api Loading...");
+
 var Config = {
     /* ----- BEEHIVES GEN ----- */
 

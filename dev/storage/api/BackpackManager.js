@@ -1,3 +1,5 @@
+setLoadingTip("Storage Module Loading...");
+
 const BackpackManager = {
         regexGroups: {},
 

@@ -27,4 +27,4 @@ ModAPI.registerAPI("ForestryAPI", {
     }
 
 });
-Logger.Log("ForestryAPI shared", "API");
+Logger.Log("Forestry API shared with name ForestryAPI", "API");

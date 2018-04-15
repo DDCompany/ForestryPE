@@ -1,3 +1,5 @@
+setLoadingTip("Core Module Loading...");
+
 Block.setPrototype("humus", {
     type: Block.TYPE_BASE,
 

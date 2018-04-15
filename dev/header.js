@@ -18,6 +18,7 @@ IMPORT("BackpackAPI");
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const AdaptedScriptEntity = ModAPI.requireGlobal("Entity");
+const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
 
 let BM_MUTATION_MODIFIER = 0.2;
 let BM_LIFESPAN_MODIFIER = 10;
