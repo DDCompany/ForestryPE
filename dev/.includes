@@ -166,9 +166,6 @@ factory/blocks/still/tile.js
 
 factory/blocks/rainMaker.js
 
-### INTEGRATION
-integration/ic.js
-
 ### STORAGE
 # API
 storage/api/BackpackManager.js
