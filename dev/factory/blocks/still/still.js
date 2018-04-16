@@ -1,14 +1,6 @@
-var textures_still = [["still_top", 0], ["still_top", 0], ["still", 0], ["still", 0], ["still_side", 0], ["still_side", 0]];
-Block.setPrototype("still", {
-    type: Block.TYPE_ROTATION,
-
-    getVariations: function () {
-        return [{name: "Still", texture: textures_still, inCreative: true}];
-    }
-
-});
-
-ModelHelper.createFactoryModel(BlockID.still, textures_still);
+IDRegistry.genBlockID("still");
+FactoryManager.register("still", "Still",
+    [["still_top", 0], ["still_top", 0], ["still", 0], ["still", 0], ["still_side", 0], ["still_side", 0]], true);
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.still, count: 1, data: 0}, [

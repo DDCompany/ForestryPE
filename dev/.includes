@@ -91,28 +91,9 @@ apiculture/alveary/stabiliser/tile.js
 apiculture/bees.js
 apiculture/effects.js
 
-### ENERGY
-# API
-energy/api/BioGeneratorManager.js
-
-# BLOCKS
-energy/blocks/biogas/biogas.js
-energy/blocks/biogas/gui.js
-energy/blocks/biogas/tile.js
-
-energy/blocks/bioGenerator/bioGenerator.js
-energy/blocks/bioGenerator/gui.js
-energy/blocks/bioGenerator/tile.js
-
-energy/blocks/clockwork/clockwork.js
-energy/blocks/clockwork/tile.js
-
-energy/blocks/peat-fired/peat-fired.js
-energy/blocks/peat-fired/gui.js
-energy/blocks/peat-fired/tile.js
-
 ### FACTORY
 # API
+factory/api/FactoryManager.js
 factory/api/CarpenterManager.js
 factory/api/CentrifugeManager.js
 factory/api/FabricatorManager.js
@@ -164,6 +145,26 @@ factory/blocks/still/gui.js
 factory/blocks/still/tile.js
 
 factory/blocks/rainMaker.js
+
+### ENERGY
+# API
+energy/api/BioGeneratorManager.js
+
+# BLOCKS
+energy/blocks/biogas/biogas.js
+energy/blocks/biogas/gui.js
+energy/blocks/biogas/tile.js
+
+energy/blocks/bioGenerator/bioGenerator.js
+energy/blocks/bioGenerator/gui.js
+energy/blocks/bioGenerator/tile.js
+
+energy/blocks/clockwork/clockwork.js
+energy/blocks/clockwork/tile.js
+
+energy/blocks/peat-fired/peat-fired.js
+energy/blocks/peat-fired/gui.js
+energy/blocks/peat-fired/tile.js
 
 ### STORAGE
 # API

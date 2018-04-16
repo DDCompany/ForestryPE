@@ -1,14 +1,6 @@
-var textures_moistener = [["moistener_top", 0], ["moistener_top", 0], ["moistener", 0], ["moistener", 0], ["moistener_side", 0], ["moistener_side", 0]];
-Block.setPrototype("moistener", {
-    type: Block.TYPE_ROTATION,
-
-    getVariations: function () {
-        return [{name: "Moistener", texture: textures_moistener, inCreative: true}];
-    }
-
-});
-
-ModelHelper.createFactoryModel(BlockID.moistener, textures_moistener);
+IDRegistry.genBlockID("moistener");
+FactoryManager.register("moistener", "Moistener",
+    [["moistener_top", 0], ["moistener_top", 0], ["moistener", 0], ["moistener", 0], ["moistener_side", 0], ["moistener_side", 0]], true);
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.moistener, count: 1, data: 0}, [

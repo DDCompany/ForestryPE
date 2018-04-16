@@ -1,14 +1,6 @@
-var textures_squeezer = [["squeezer_top", 0], ["squeezer_top", 0], ["squeezer", 0], ["squeezer", 0], ["squeezer_side", 0], ["squeezer_side", 0]];
-Block.setPrototype("squeezer", {
-    type: Block.TYPE_ROTATION,
-
-    getVariations: function () {
-        return [{name: "Squeezer", texture: textures_squeezer, inCreative: true}];
-    }
-
-});
-
-ModelHelper.createFactoryModel(BlockID.squeezer, textures_squeezer);
+IDRegistry.genBlockID("squeezer");
+FactoryManager.register("squeezer", "Squeezer",
+    [["squeezer_top", 0], ["squeezer_top", 0], ["squeezer", 0], ["squeezer", 0], ["squeezer_side", 0], ["squeezer_side", 0]], true);
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.squeezer, count: 1, data: 0}, [
