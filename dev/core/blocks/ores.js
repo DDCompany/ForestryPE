@@ -21,6 +21,7 @@ Block.setDestroyLevel("oreApatite", 2);
 
 Block.registerDropFunction("oreApatite", function (coords, id, data, diggingLevel) {
     if (diggingLevel > 1) {
+        ToolAPI.dropOreExp(coords, 1, 4, 1);
         return [[ItemID.apatite, 1 + Math.random() * 5, 0]];
     }
 
