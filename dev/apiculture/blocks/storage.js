@@ -22,7 +22,7 @@ Callback.addCallback("PostLoaded", function () {
     Recipes.addShapeless({id: ItemID.beeswax, count: 9, data: 0}, [{id: BlockID.blockWax, data: 0}]);
 });
 
-if (Config.combsBlocksEnabled) {
+if (ForestryConfig.combsBlocksEnabled) {
     Block.setPrototype("blockComb", {
         type: Block.TYPE_BASE,
 

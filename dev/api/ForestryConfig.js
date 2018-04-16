@@ -1,6 +1,6 @@
 setLoadingTip("Common Api Loading...");
 
-var Config = {
+const ForestryConfig = {
     /* ----- BEEHIVES GEN ----- */
 
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),

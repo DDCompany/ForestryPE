@@ -3,7 +3,7 @@ header.js
 localize.js
 
 ### BASE API
-api/Config.js
+api/ForestryConfig.js
 api/ContainerHelper.js
 api/MachineRegistry.js
 api/ModelHelper.js

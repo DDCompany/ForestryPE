@@ -65,7 +65,7 @@ Callback.addCallback("PostLoaded", function () {
     Recipes.addShapeless({id: 263, count: 9, data: 1}, [{id: BlockID.blockCharcoal, data: 0}]);
 });
 
-if (Config.oresBlocksEnabled) {
+if (ForestryConfig.oresBlocksEnabled) {
     Block.setPrototype("blockCopper", {
         type: Block.TYPE_BASE,
 

@@ -1,4 +1,4 @@
-if (Config.glassEnabled) {
+if (ForestryConfig.glassEnabled) {
     Block.setPrototype("forestryGlass", {
         type: Block.TYPE_BASE,
 

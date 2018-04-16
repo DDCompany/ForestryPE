@@ -11,7 +11,7 @@ for (let i = 0; i < 4; i++) {
         }
     });
 
-    if (Config.crateEnabled) {
+    if (ForestryConfig.crateEnabled) {
         CarpenterManager.registerRecipe({
             input: {
                 "slot1": {id: 17, data: i},
@@ -66,7 +66,7 @@ for (let i = 0; i < 4; i++) {
 
 for (let i = 0; i < 2; i++) {
 
-    if (Config.crateEnabled) {
+    if (ForestryConfig.crateEnabled) {
         CarpenterManager.registerRecipe({
             input: {
                 "slot1": {id: 162, data: i},

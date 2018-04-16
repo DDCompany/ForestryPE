@@ -90,7 +90,7 @@ var BeeLogic = {
      * @return {Array}
      */
     spawnPrincess: function (bee, modifierList, houseModifierList, house, arr) {
-        var count = Math.random() < Config.secondPrincessChance ? 2 : 1;
+        var count = Math.random() < ForestryConfig.secondPrincessChance ? 2 : 1;
         for (var i = 0; i < count; i++) {
             arr.push(this.createOffspring(bee, BeeRegistry.BEETYPE_PRINCESS, modifierList, houseModifierList, house));
         }

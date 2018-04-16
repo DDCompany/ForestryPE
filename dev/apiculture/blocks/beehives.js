@@ -216,7 +216,7 @@ Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
     let coords = GenerationUtils.randomCoords(chunkX, chunkZ);
     coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
 
-    if (Math.random() <= Config.genEnderChance) {
+    if (Math.random() <= ForestryConfig.genEnderChance) {
         generateBeehive(6, coords);
     }
 
@@ -227,7 +227,7 @@ Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
     coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
 
     if (World.getBiome(coords.x, coords.z) === 1) {
-        if (Math.random() <= Config.genMeadowsChance) {
+        if (Math.random() <= ForestryConfig.genMeadowsChance) {
             generateBeehive(1, coords);
 
         }
@@ -239,25 +239,25 @@ Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
         World.getBiome(coords.x, coords.z) === 29 ||
         World.getBiome(coords.x, coords.z) === 157) {
 
-        if (Math.random() <= Config.genForestChance) {
+        if (Math.random() <= ForestryConfig.genForestChance) {
             generateBeehive(0, coords);
 
         }
 
     } else if (World.getBiome(coords.x, coords.z) === 2) {
-        if (Math.random() <= Config.genModestChance) {
+        if (Math.random() <= ForestryConfig.genModestChance) {
             generateBeehive(2, coords);
         }
 
     } else if (World.getBiome(coords.x, coords.z) === 6 ||
         World.getBiome(coords.x, coords.z) === 134) {
-        if (Math.random() <= Config.genMarshyChance) {
+        if (Math.random() <= ForestryConfig.genMarshyChance) {
             generateBeehive(5, coords);
         }
 
     } else if (World.getBiome(coords.x, coords.z) === 21 ||
         World.getBiome(coords.x, coords.z) === 149) {
-        if (Math.random() <= Config.genTropicalChance) {
+        if (Math.random() <= ForestryConfig.genTropicalChance) {
             generateBeehive(3, coords);
         }
 
@@ -265,7 +265,7 @@ Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
         World.getBiome(coords.x, coords.z) === 140 ||
         World.getBiome(coords.x, coords.z) === 30 ||
         World.getBiome(coords.x, coords.z) === 26) {
-        if (Math.random() <= Config.genWintryChance) {
+        if (Math.random() <= ForestryConfig.genWintryChance) {
             generateBeehive(4, coords);
         }
 

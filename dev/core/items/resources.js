@@ -10,7 +10,7 @@ Item.createItem("ingotBronze", "Bronze ingot", {name: "ingotBronze", meta: 0}, {
 IDRegistry.genItemID("apatite");
 Item.createItem("apatite", "Apatite", {name: "apatite", meta: 0}, {});
 
-if (Config.recipeBronzeIngot) {
+if (ForestryConfig.recipeBronzeIngot) {
     Callback.addCallback("PostLoaded", function () {
         Recipes.addShapeless({id: ItemID.ingotBronze, count: 4, data: 0}, [{
             id: ItemID.ingotCopper,

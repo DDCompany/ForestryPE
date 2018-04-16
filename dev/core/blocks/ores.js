@@ -51,34 +51,34 @@ Callback.addCallback("PostLoaded", function () {
 
 });
 
-if (Config.genCopper) {
+if (ForestryConfig.genCopper) {
     Flags.addUniqueAction("oreGenCopper", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            for (let i = 0; i < Config.genCopperInChunk; i++) {
+            for (let i = 0; i < ForestryConfig.genCopperInChunk; i++) {
                 let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 10, 107);
-                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreCopper, 0, Config.genCopperSize);
+                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreCopper, 0, ForestryConfig.genCopperSize);
             }
         });
     });
 }
 
-if (Config.genTin) {
+if (ForestryConfig.genTin) {
     Flags.addUniqueAction("oreGenTin", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            for (let i = 0; i < Config.genTinInChunk; i++) {
+            for (let i = 0; i < ForestryConfig.genTinInChunk; i++) {
                 let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 16, 91);
-                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreTin, 0, Config.genTinSize);
+                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreTin, 0, ForestryConfig.genTinSize);
             }
         });
     });
 }
 
-if (Config.genApatite) {
+if (ForestryConfig.genApatite) {
     Flags.addUniqueAction("oreGenApatite", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            for (let i = 0; i < Config.genApatiteInChunk; i++) {
+            for (let i = 0; i < ForestryConfig.genApatiteInChunk; i++) {
                 let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 10, 64);
-                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreApatite, 0, Config.genApatiteSize);
+                GenerationUtils.generateOre(coords.x, coords.y, coords.z, BlockID.oreApatite, 0, ForestryConfig.genApatiteSize);
             }
         });
     });

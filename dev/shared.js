@@ -9,7 +9,7 @@ ModAPI.registerAPI("ForestryAPI", {
     BeeType: BeeType,
     ModifierList: ModifierList,
     BiomeHelper: BiomeHelper,
-    Config: Config,
+    Config: ForestryConfig,
     ContainerHelper: ContainerHelper,
     ModelHelper: ModelHelper,
     Util: Util,
@@ -21,6 +21,7 @@ ModAPI.registerAPI("ForestryAPI", {
     FabricatorManager: FabricatorManager,
     FermenterManager: FermenterManager,
     SqueezerManager: SqueezerManager,
+    FactoryManager: FactoryManager,
 
     requireGlobal: function (command) {
         return eval(command);
