@@ -23,6 +23,8 @@ ModAPI.registerAPI("ForestryAPI", {
     SqueezerManager: SqueezerManager,
     FactoryManager: FactoryManager,
 
+    generateOre: generateOre,
+
     requireGlobal: function (command) {
         return eval(command);
     }
