@@ -15,6 +15,14 @@ importLib("flags", "*");
 importLib("ToolType", "*");
 IMPORT("BackpackAPI");
 
+const DIRECTIONS = [
+    {x: 1, y: 0, z: 0},
+    {x: -1, y: 0, z: 0},
+    {x: 0, y: 1, z: 0},
+    {x: 0, y: -1, z: 0},
+    {x: 0, y: 0, z: 1},
+    {x: 0, y: 0, z: -1}
+];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const AdaptedScriptEntity = ModAPI.requireGlobal("Entity");

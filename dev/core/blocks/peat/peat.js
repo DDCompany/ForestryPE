@@ -5,16 +5,9 @@ Block.setPrototype("bog", {
         return [
             {name: "Bog Earth", texture: [["bog", 0]], inCreative: true},
         ];
-    },
-
-    getMaterial: function (a) {
-        return "dirt";
-    },
-
-    getDrop: function () {
-        return [[3, 1, 0]];
     }
 });
+ToolAPI.registerBlockMaterial(BlockID.bog, "dirt");
 
 Block.setPrototype("blockPeat", {
     type: Block.TYPE_BASE,
@@ -25,14 +18,11 @@ Block.setPrototype("blockPeat", {
         ];
     },
 
-    getMaterial: function (a) {
-        return "dirt";
-    },
-
     getDrop: function () {
-        return [[ItemID.peat, 1, 0]];
+        return [[ItemID.peat, 2, 0], [3, 1, 0]];
     }
 });
+ToolAPI.registerBlockMaterial(BlockID.blockPeat, "dirt");
 
 IDRegistry.genItemID("peat");
 Item.createItem("peat", "Peat", {name: "peat", meta: 0}, {});
@@ -53,9 +43,9 @@ Callback.addCallback("PostLoaded", function () {
         " a "
     ], ['a', ItemID.ash, 0, 'g', ItemID.propolis, 0, 'p', ItemID.peat, 0]);
 
-    for (key in LiquidRegistry.FullByEmpty) {
-        if (key.split(":")[2] == "water") {
-            var obj = LiquidRegistry.FullByEmpty[key];
+    for (let key in LiquidRegistry.FullByEmpty) {
+        if (key.split(":")[2] === "water") {
+            let obj = LiquidRegistry.FullByEmpty[key];
             Recipes.addShaped({id: BlockID.bog, count: 8, data: 0}, [
                 "dsd",
                 "scs",

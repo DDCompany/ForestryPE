@@ -1,30 +1,35 @@
 TileEntity.registerPrototype(BlockID.bog, {
-
     defaultValues: {
-        CYCLE: 25 * 20,
-        cyclen: 0,
-        commmonTime: 0,
-        counter: 0
+        maturity: 0
     },
 
-    tick: function () {
-        if ((World.getBlockID(this.x + 1, this.y, this.z) == 8 || World.getBlockID(this.x + 1, this.y, this.z) == 9) ||
-            (World.getBlockID(this.x - 1, this.y, this.z) == 8 || World.getBlockID(this.x - 1, this.y, this.z) == 9) ||
-            (World.getBlockID(this.x, this.y, this.z + 1) == 8 || World.getBlockID(this.x, this.y, this.z + 1) == 9) ||
-            (World.getBlockID(this.x, this.y, this.z - 1) == 8 || World.getBlockID(this.x, this.y, this.z - 1) == 9) ||
-            (World.getBlockID(this.x, this.y + 1, this.z) == 8 || World.getBlockID(this.x, this.y + 1, this.z) == 9) ||
-            (World.getBlockID(this.x, this.y - 1, this.z) == 8 || World.getBlockID(this.x, this.y + 1, this.z) == 9)) {
-            this.data.cyclen++;
-            this.data.commmonTime++;
-            if (this.data.cyclen >= this.data.CYCLE) {
-                this.data.cyclen = 0;
-                if (Math.random() < 0.07) {
-                    this.data.counter++;
-                }
-                if (this.data.counter == 3 || this.data.commmonTime >= 19700) {
-                    World.setBlock(this.x, this.y, this.z, BlockID.blockPeat)
-                }
-            }
+    increaseMaturity: function () {
+        if (!this.isMoistened())
+            return;
+
+        this.data.maturity++;
+
+        if (this.data.maturity >= 3)
+            World.setBlock(this.x, this.y, this.z, BlockID.blockPeat);
+
+    },
+
+    isMoistened: function () {
+        for (let index in DIRECTIONS) {
+            let dir = DIRECTIONS[index];
+            let blockId = World.getBlockID(this.x + dir.x, this.y + dir.y, this.z + dir.z);
+
+            if (blockId === 8 || blockId === 9)
+                return true;
         }
     }
+});
+
+Block.setRandomTickCallback(BlockID.bog, function (x, y, z) {
+    let tile = World.getTileEntity(x, y, z);
+
+    if (tile === null)
+        tile = TileEntity.addTileEntity(x, y, z);
+
+    tile.increaseMaturity();
 });
