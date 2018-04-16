@@ -3,6 +3,7 @@ Block.createBlock("oreCopper", [
     {name: "Copper Ore", texture: [["oreCopper", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreCopper, "stone");
+Block.setDestroyTime(BlockID.oreCopper, 3);
 Block.setDestroyLevel("oreCopper", 2);
 
 IDRegistry.genBlockID("oreTin");
@@ -10,6 +11,7 @@ Block.createBlock("oreTin", [
     {name: "Tin Ore", texture: [["oreTin", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreTin, "stone");
+Block.setDestroyTime(BlockID.oreTin, 3);
 Block.setDestroyLevel("oreTin", 2);
 
 IDRegistry.genBlockID("oreApatite");
@@ -17,6 +19,7 @@ Block.createBlock("oreApatite", [
     {name: "Apatite Ore", texture: [["oreApatite", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreApatite, "stone");
+Block.setDestroyTime(BlockID.oreApatite, 3);
 Block.setDestroyLevel("oreApatite", 2);
 
 Block.registerDropFunction("oreApatite", function (coords, id, data, diggingLevel) {
