@@ -20,7 +20,8 @@ const MachineRegistry = {
 
         if (!prototype.energyTick) {
             prototype.energyTick = function (type, src) {
-                this.data.energy += src.get(this.getEnergyStorage() - this.data.energy);
+                let maxTransfer = this.getMaxTransfer ? this.getMaxTransfer() : 1100;
+                this.data.energy += src.get(Math.min(maxTransfer, this.getEnergyStorage() - this.data.energy));
             };
         }
 
