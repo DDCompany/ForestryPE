@@ -13,10 +13,20 @@ Forestry PE by Dmitriy Medvedev(https://vk.com/id331953744)
 importLib("energylib", "*");
 importLib("flags", "*");
 importLib("ToolType", "*");
+IMPORT("BackpackAPI");
 
+const DIRECTIONS = [
+    {x: 1, y: 0, z: 0},
+    {x: -1, y: 0, z: 0},
+    {x: 0, y: 1, z: 0},
+    {x: 0, y: -1, z: 0},
+    {x: 0, y: 0, z: 1},
+    {x: 0, y: 0, z: -1}
+];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const AdaptedScriptEntity = ModAPI.requireGlobal("Entity");
+const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
 
 let BM_MUTATION_MODIFIER = 0.2;
 let BM_LIFESPAN_MODIFIER = 10;
