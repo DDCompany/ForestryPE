@@ -27,7 +27,7 @@ var stillGUI = new UI.StandartWindow({
             scale: 3.2
         },
         "progressScale": {type: "scale", x: 625, y: 119.6, direction: 1, value: 0, bitmap: "still_scale", scale: 3.2},
-        "liquidBiomassScale": {
+        "liquidInputScale": {
             type: "scale",
             x: 467,
             y: 114,
@@ -36,7 +36,7 @@ var stillGUI = new UI.StandartWindow({
             bitmap: "liqued_background_2",
             scale: 3.2
         },
-        "liquidEthanolScale": {
+        "liquidOutputScale": {
             type: "scale",
             x: 755,
             y: 114,
@@ -46,10 +46,10 @@ var stillGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slotBiomassContainer": {type: "slot", x: 385, y: 165, bitmap: "slot_liquid"},
+        "slotInputContainer": {type: "slot", x: 385, y: 165, bitmap: "slot_liquid"},
 
-        "slotEthanolContainer": {type: "slot", x: 833, y: 119.6, bitmap: "slot_container"},
-        "slotEthanolContainerFilled": {type: "slot", x: 833, y: 234.8, bitmap: "slot_liquid"},
+        "slotOutputContainer": {type: "slot", x: 833, y: 119.6, bitmap: "slot_container"},
+        "slotOutputContainerFilled": {type: "slot", x: 833, y: 234.8, bitmap: "slot_liquid"},
 
     }
 });

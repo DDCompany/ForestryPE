@@ -99,6 +99,7 @@ factory/api/CentrifugeManager.js
 factory/api/FabricatorManager.js
 factory/api/FermenterManager.js
 factory/api/SqueezerManager.js
+factory/api/StillManager.js
 
 #ITEMS
 factory/items/gears.js
