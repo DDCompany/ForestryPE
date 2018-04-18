@@ -26,6 +26,8 @@ ModAPI.registerAPI("ForestryAPI", {
     StillManager: StillManager,
 
     generateOre: generateOre,
+    registerLiquidContainer: registerLiquidContainer,
+    pickupLiquidFromWorld: pickupLiquidFromWorld,
 
     requireGlobal: function (command) {
         return eval(command);
