@@ -49,11 +49,11 @@ apiculture/blocks/apiaristChest/block.js
 apiculture/blocks/apiaristChest/gui.js
 apiculture/blocks/apiaristChest/tile.js
 
-apiculture/blocks/apiary/storage.js
+apiculture/blocks/apiary/block.js
 apiculture/blocks/apiary/gui.js
 apiculture/blocks/apiary/tile.js
 
-apiculture/blocks/beeHouse/storage.js
+apiculture/blocks/beeHouse/block.js
 apiculture/blocks/beeHouse/tile.js
 
 apiculture/blocks/beehives.js
