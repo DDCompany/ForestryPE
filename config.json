@@ -9,6 +9,7 @@
     "bronzeIngot": true
   },
   "gen": {
+    "beehivesDebug": false,
     "beehivesForestChance": 0.03,
     "beehivesMeadowsChance": 0.01,
     "beehivesModestChance": 0.01,

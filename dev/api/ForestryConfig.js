@@ -3,6 +3,7 @@ setLoadingTip("Common Api Loading...");
 const ForestryConfig = {
     /* ----- BEEHIVES GEN ----- */
 
+    genBeehivesDebug: __config__.getBool("gen.beehivesDebug"),
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),
     genMeadowsChance: __config__.getNumber("gen.beehivesMeadowsChance"),
     genModestChance: __config__.getNumber("gen.beehivesModestChance"),

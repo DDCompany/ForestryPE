@@ -35,6 +35,29 @@ const HiveGenerator = {
         }
     },
 
+    genChunkDebug: function (chunkX, chunkZ, dimension) {
+        for (let xOffset = 0; xOffset < 16; xOffset++) {
+            for (let zOffset = 0; zOffset < 16; zOffset++) {
+                let x = 16 * chunkX + xOffset;
+                let z = 16 * chunkZ + zOffset;
+                let biome = World.getBiome(x, z);
+
+                for (let key in HiveGenerator.generators) {
+                    let generator = HiveGenerator.generators[key];
+
+                    if (generator.dimension && generator.dimension !== dimension)
+                        continue;
+
+                    if (generator.biomes && generator.biomes.indexOf(biome) === -1)
+                        continue;
+
+                    if (Math.random() <= generator.chance)
+                        generator.generate(x, z, dimension, biome)
+                }
+            }
+        }
+    },
+
     genHive: function (x, z, blockId, blockData, grounds) {
         let y = GenerationUtils.findHighSurface(x, z).y;
 
@@ -62,14 +85,30 @@ const HiveGenerator = {
     }
 };
 
-Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-    HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NORMAL);
-});
+if (ForestryConfig.genBeehivesDebug) {
+    alert("DEBUG MODE");
+    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NORMAL);
+    });
 
-Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
-    HiveGenerator.genChunk(chunkX, chunkZ, Dimension.END);
-});
+    Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.END);
+    });
 
-Callback.addCallback("GenerateNetherChunk", function (chunkX, chunkZ) {
-    HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NETHER);
-});
+    Callback.addCallback("GenerateNetherChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NETHER);
+    });
+} else {
+    alert("NORMAL MODE");
+    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NORMAL);
+    });
+
+    Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.END);
+    });
+
+    Callback.addCallback("GenerateNetherChunk", function (chunkX, chunkZ) {
+        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NETHER);
+    });
+}
