@@ -88,6 +88,7 @@ const HiveGenerator = {
 
     genTreeHive: function (x, z, blockId, blockData) {
         let y = 128;
+        let prevIsTreeBlock = false;
         while (y > 20) {
             let id = World.getBlockID(x, y, z);
             let isTreeBlock = this.isTreeBlock(id);
