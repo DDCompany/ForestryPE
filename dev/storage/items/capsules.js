@@ -51,6 +51,7 @@ registerLiquidContainer("Water", "water", 0, true);
 registerLiquidContainer("Lava", "lava", 0, true, true);
 registerLiquidContainer("Biomass", "biomass");
 registerLiquidContainer("Ethanol", "ethanol");
+registerLiquidContainer("Milk", "milk", 0, true);
 registerLiquidContainer("Juice", "appleJuice", 2, true);
 registerLiquidContainer("Honey", "honey", 2, true);
 registerLiquidContainer("Seedoil", "seedOil", 0, true);
@@ -80,7 +81,6 @@ Item.registerUseFunction("waxCapsuleEmpty", function (coords) {
 });
 
 Callback.addCallback("PostLoaded", function () {
-
     Recipes.addShaped({id: ItemID.waxCapsuleEmpty, count: 4, data: 0}, [
         "xxx",
         "   ",
@@ -98,5 +98,4 @@ Callback.addCallback("PostLoaded", function () {
         "   ",
         "   "
     ], ['x', ItemID.refractoryWax, 0]);
-
 });
