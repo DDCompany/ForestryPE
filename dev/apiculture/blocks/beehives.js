@@ -174,8 +174,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 0, [[2, 0], [3, 0]]);
-        return true;
+        return HiveGenerator.genTreeHive(x, z, BlockID.beehive, 0);
     }
 });
 
@@ -207,8 +206,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 3, [[2, 0], [3, 0]]);
-        return true;
+        return HiveGenerator.genTreeHive(x, z, BlockID.beehive, 3);
     }
 });
 

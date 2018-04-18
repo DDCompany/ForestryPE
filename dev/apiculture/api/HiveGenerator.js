@@ -16,22 +16,24 @@ const HiveGenerator = {
     },
 
     genChunk: function (chunkX, chunkZ, dimension) {
-        let coords = GenerationUtils.randomXZ(chunkX, chunkZ);
-        let biome = World.getBiome(coords.x, coords.z);
-        let climate = BiomeHelper.getBiomeClimate(biome);
-        let humidity = BiomeHelper.getBiomeHumidity(biome);
+        for (let tries = 0; tries < 4; tries++) {
+            let coords = GenerationUtils.randomXZ(chunkX, chunkZ);
+            let biome = World.getBiome(coords.x, coords.z);
+            let climate = BiomeHelper.getBiomeClimate(biome);
+            let humidity = BiomeHelper.getBiomeHumidity(biome);
 
-        for (let key in HiveGenerator.generators) {
-            let generator = HiveGenerator.generators[key];
+            for (let key in HiveGenerator.generators) {
+                let generator = HiveGenerator.generators[key];
 
-            if (generator.dimension && generator.dimension !== dimension)
-                continue;
+                if (generator.dimension && generator.dimension !== dimension)
+                    continue;
 
-            if (generator.biomes && generator.biomes.indexOf(biome) === -1)
-                continue;
+                if (generator.biomes && generator.biomes.indexOf(biome) === -1)
+                    continue;
 
-            if (Math.random() <= generator.chance && generator.generate(coords.x, coords.z, dimension, climate, humidity, biome))
-                return;
+                if (Math.random() <= generator.chance && generator.generate(coords.x, coords.z, dimension, climate, humidity, biome))
+                    return;
+            }
         }
     },
 
@@ -82,11 +84,38 @@ const HiveGenerator = {
         }
 
         World.setBlock(x, y + 1, z, blockId, blockData || 0);
+    },
+
+    genTreeHive: function (x, z, blockId, blockData) {
+        let y = 128;
+        while (y > 20) {
+            let id = World.getBlockID(x, y, z);
+            let isTreeBlock = this.isTreeBlock(id);
+
+            if (prevIsTreeBlock && !isTreeBlock) {
+                World.setBlock(x, y, z, blockId, blockData);
+                return true;
+            } else prevIsTreeBlock = isTreeBlock;
+            y--;
+        }
+
+        return false;
+    },
+
+    isTreeBlock: function (blockId) {
+        switch (blockId) {
+            case 17:
+            case 18:
+            case 161:
+            case 162:
+                return true;
+        }
+
+        return false;
     }
 };
 
 if (ForestryConfig.genBeehivesDebug) {
-    alert("DEBUG MODE");
     Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
         HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NORMAL);
     });
@@ -99,7 +128,6 @@ if (ForestryConfig.genBeehivesDebug) {
         HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NETHER);
     });
 } else {
-    alert("NORMAL MODE");
     Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
         HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NORMAL);
     });
