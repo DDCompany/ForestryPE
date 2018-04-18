@@ -9,13 +9,13 @@
     "bronzeIngot": true
   },
   "gen": {
-    "beehivesForestChance": 0.2,
-    "beehivesMeadowsChance": 0.2,
-    "beehivesModestChance": 0.2,
-    "beehivesTropicalChance": 0.2,
+    "beehivesForestChance": 0.03,
+    "beehivesMeadowsChance": 0.01,
+    "beehivesModestChance": 0.01,
+    "beehivesTropicalChance": 0.06,
     "beehivesWintryChance": 0.2,
     "beehivesMarshyChance": 0.2,
-    "beehivesEnderChance": 0.7,
+    "beehivesEnderChance": 0.02,
     "apatite": true,
     "apatiteInChunk": 12,
     "apatiteSize": 3,
