@@ -166,110 +166,81 @@ Block.registerDropFunction("beehive", function (coords, id, data, diggingLevel) 
 
     return [];
 });
-
 Block.setBlockMaterial(BlockID.beehive, "beehive", 1);
 
-/*Block.setPrototype("beehiveSwarm", {
-    type: Block.TYPE_BASE,
+HiveGenerator.register({
+    chance: ForestryConfig.genForestChance,
+    biomes: [4, 132, 27, 155, 29, 157],
+    dimension: Dimension.NORMAL,
 
-    getVariations: function () {
-        return [
-            {
-                name: "Swarm hive",
-                texture: [["beehiveSwarm", 0], ["beehiveSwarm", 0], ["beehiveSwarm", 1]],
-                inCreative: true
-            }
-        ];
-    },
-
-    getDrop: function () {
-        return [];
-    },
-    getMaterial: function () {
-        return "beehive"
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 0, [[2, 0], [3, 0]]);
+        return true;
     }
 });
 
-TileEntity.registerPrototype(BlockID.beehiveSwarm, {
-    defaultValues: {},
+HiveGenerator.register({
+    chance: ForestryConfig.genMeadowsChance,
+    biomes: [1],
+    dimension: Dimension.NORMAL,
 
-    destroyBlock: function (coords) {
-        if (this.data.bee) {
-            World.drop(coords.x, coords.y, coords.z, this.data.bee.getItemID(), 1, this.data.bee.unique);
-        }
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 1, [[2, 0], [3, 0]]);
+        return true;
     }
-
-});*/
-
-const BEEHIVES_GEN_BLOCKS = [2, 12, 121];
-
-//const TREE_LEAVES = [18, 161];
-
-function generateBeehive(data, coords) {
-    if (World.getBlock(coords.x, coords.y + 1, coords.z).id === 0 && BEEHIVES_GEN_BLOCKS.indexOf(World.getBlock(coords.x, coords.y, coords.z).id) > -1 && GenerationUtils.canSeeSky(coords.x, coords.y + 1, coords.z)) {
-        World.setBlock(coords.x, coords.y + 1, coords.z, BlockID.beehive, data);
-    }
-}
-
-Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
-
-    let coords = GenerationUtils.randomCoords(chunkX, chunkZ);
-    coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
-
-    if (Math.random() <= ForestryConfig.genEnderChance) {
-        generateBeehive(6, coords);
-    }
-
 });
 
-Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-    let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 64, 128);
-    coords = GenerationUtils.findSurface(coords.x, coords.y, coords.z);
+HiveGenerator.register({
+    chance: ForestryConfig.genModestChance,
+    biomes: [2],
+    dimension: Dimension.NORMAL,
 
-    if (World.getBiome(coords.x, coords.z) === 1) {
-        if (Math.random() <= ForestryConfig.genMeadowsChance) {
-            generateBeehive(1, coords);
-
-        }
-
-    } else if (World.getBiome(coords.x, coords.z) === 4 ||
-        World.getBiome(coords.x, coords.z) === 132 ||
-        World.getBiome(coords.x, coords.z) === 27 ||
-        World.getBiome(coords.x, coords.z) === 155 ||
-        World.getBiome(coords.x, coords.z) === 29 ||
-        World.getBiome(coords.x, coords.z) === 157) {
-
-        if (Math.random() <= ForestryConfig.genForestChance) {
-            generateBeehive(0, coords);
-
-        }
-
-    } else if (World.getBiome(coords.x, coords.z) === 2) {
-        if (Math.random() <= ForestryConfig.genModestChance) {
-            generateBeehive(2, coords);
-        }
-
-    } else if (World.getBiome(coords.x, coords.z) === 6 ||
-        World.getBiome(coords.x, coords.z) === 134) {
-        if (Math.random() <= ForestryConfig.genMarshyChance) {
-            generateBeehive(5, coords);
-        }
-
-    } else if (World.getBiome(coords.x, coords.z) === 21 ||
-        World.getBiome(coords.x, coords.z) === 149) {
-        if (Math.random() <= ForestryConfig.genTropicalChance) {
-            generateBeehive(3, coords);
-        }
-
-    } else if (World.getBiome(coords.x, coords.z) === 12 ||
-        World.getBiome(coords.x, coords.z) === 140 ||
-        World.getBiome(coords.x, coords.z) === 30 ||
-        World.getBiome(coords.x, coords.z) === 26) {
-        if (Math.random() <= ForestryConfig.genWintryChance) {
-            generateBeehive(4, coords);
-        }
-
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 2, [[2, 0], [3, 0], [12, -1], [24, -1]]);
+        return true;
     }
+});
 
+HiveGenerator.register({
+    chance: ForestryConfig.genTropicalChance,
+    biomes: [21, 149],
+    dimension: Dimension.NORMAL,
+
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 3, [[2, 0], [3, 0]]);
+        return true;
+    }
+});
+
+HiveGenerator.register({
+    chance: ForestryConfig.genWintryChance,
+    biomes: [12, 140, 30, 26],
+    dimension: Dimension.NORMAL,
+
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 4, [[2, 0], [3, 0]]);
+        return true;
+    }
+});
+
+HiveGenerator.register({
+    chance: ForestryConfig.genMarshyChance,
+    biomes: [6, 134],
+    dimension: Dimension.NORMAL,
+
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 5);
+        return true;
+    }
+});
+
+HiveGenerator.register({
+    chance: ForestryConfig.genEnderChance,
+    dimension: Dimension.END,
+
+    generate: function (x, z) {
+        HiveGenerator.genHive(x, z, BlockID.beehive, 6);
+        return true;
+    }
 });
 

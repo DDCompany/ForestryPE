@@ -42,6 +42,7 @@ apiculture/api/BeeRegistry.js
 apiculture/api/BeeSaver.js
 apiculture/api/BiomeHelper.js
 apiculture/api/Modifier.js
+apiculture/api/HiveGenerator.js
 
 # BLOCKS
 apiculture/blocks/apiaristChest/block.js

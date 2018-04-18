@@ -9,6 +9,7 @@ ModAPI.registerAPI("ForestryAPI", {
     BeeType: BeeType,
     ModifierList: ModifierList,
     BiomeHelper: BiomeHelper,
+    HiveGenerator: HiveGenerator,
     Config: ForestryConfig,
     ContainerHelper: ContainerHelper,
     ModelHelper: ModelHelper,
@@ -22,6 +23,7 @@ ModAPI.registerAPI("ForestryAPI", {
     FermenterManager: FermenterManager,
     SqueezerManager: SqueezerManager,
     FactoryManager: FactoryManager,
+    StillManager: StillManager,
 
     generateOre: generateOre,
 
