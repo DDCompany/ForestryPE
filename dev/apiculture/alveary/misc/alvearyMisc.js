@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("alveary_misc");
 Block.createBlock("alveary_misc", [
-    {name: "misc", texture: [["misc", 0]], inCreative: false}
+    {name: "misc", texture: [["alveary_misc", 0]], inCreative: false}
 ]);
 
 IDRegistry.genBlockID("alveary_misc_center");
