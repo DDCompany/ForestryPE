@@ -1,6 +1,5 @@
 ### HEADER
 header.js
-localize.js
 
 ### BASE API
 api/ForestryConfig.js
@@ -28,6 +27,9 @@ core/items/other.js
 
 # OTHER
 core/fluids.js
+
+# TRANSLATION
+core/translation.js
 
 ### APICULTURE
 #API
@@ -92,6 +94,9 @@ apiculture/alveary/stabiliser/tile.js
 apiculture/bees.js
 apiculture/effects.js
 
+# TRANSLATION
+apiculture/translation.js
+
 ### FACTORY
 # API
 factory/api/FactoryManager.js
@@ -148,6 +153,9 @@ factory/blocks/still/tile.js
 
 factory/blocks/rainMaker.js
 
+# TRANSLATION
+factory/translation.js
+
 ### ENERGY
 # API
 energy/api/BioGeneratorManager.js
@@ -168,6 +176,9 @@ energy/blocks/peat-fired/peat-fired.js
 energy/blocks/peat-fired/gui.js
 energy/blocks/peat-fired/tile.js
 
+# TRANSLATION
+energy/translation.js
+
 ### STORAGE
 # API
 storage/api/BackpackManager.js
@@ -176,6 +187,9 @@ storage/api/BackpackManager.js
 storage/items/backpacks.js
 storage/items/capsules.js
 storage/items/crates.js
+
+# TRANSLATION
+storage/translation.js
 
 ### ALL API SHARE
 shared.js
