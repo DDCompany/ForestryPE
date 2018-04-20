@@ -5,6 +5,7 @@
   "glassEnabled": true,
   "combBlocksEnabled": true,
   "oresBlocksEnabled": true,
+  "hiveDamageOnPeaceful": true,
   "recipes": {
     "bronzeIngot": true
   },

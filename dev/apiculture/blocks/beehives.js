@@ -1,4 +1,7 @@
 function attackByBeehive() {
+    if (!Game.getDifficulty() && !ForestryConfig.hiveDamageOnPeaceful)
+        return;
+
     if (Util.random(0, 4) >= BeeEffects.getApiaristArmorWearValue(Player.get())) {
         Entity.damageEntity(Player.get(), (Math.random() / 2.0 + 0.5) * 10)
     }

@@ -2,7 +2,6 @@ setLoadingTip("Common Api Loading...");
 
 const ForestryConfig = {
     /* ----- BEEHIVES GEN ----- */
-
     genBeehivesDebug: __config__.getBool("gen.beehivesDebug"),
     genForestChance: __config__.getNumber("gen.beehivesForestChance"),
     genMeadowsChance: __config__.getNumber("gen.beehivesMeadowsChance"),
@@ -26,16 +25,16 @@ const ForestryConfig = {
     genTinSize: __config__.getNumber("gen.tinSize"),
 
     /* ----- BEEKEEPING ----- */
-
     secondPrincessChance: __config__.getNumber("beekeeping.secondPrincessChance"),
+
+    /* ----- RECIPES ----- */
+    recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot"),
 
     /* ----- OTHER ----- */
     crateEnabled: __config__.getBool("crateEnabled"),
     glassEnabled: __config__.getBool("glassEnabled"),
     combsBlocksEnabled: __config__.getBool("combBlocksEnabled"),
     oresBlocksEnabled: __config__.getBool("oresBlocksEnabled"),
-    backpackAdventurerDictionary: __config__.access("backpackAdventurer"),
+    hiveDamageOnPeaceful: __config__.getBool("hiveDamageOnPeaceful")
 
-    /* ----- RECIPES ----- */
-    recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot")
 };
