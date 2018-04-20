@@ -70,7 +70,7 @@ Translation.addTranslation("Capsule (Water)", {ru: "Капсула (Вода)"})
 Translation.addTranslation("Capsule (Lava)", {ru: "Капсула (Лава)"});
 Translation.addTranslation("Capsule (Juice)", {ru: "Капсула (Фруктовый сок)"});
 Translation.addTranslation("Capsule (Honey)", {ru: "Капсула (Мёд)"});
-Translation.addTranslation("Capsule (Seedoil)", {ru: "Капсула (Масло)"});
+Translation.addTranslation("Capsule (SeedOil)", {ru: "Капсула (Масло)"});
 Translation.addTranslation("Capsule (Biomass)", {ru: "Капсула (Биомасса)"});
 Translation.addTranslation("Capsule (Ethanol)", {ru: "Капсула (Биотопливо)"});
 Translation.addTranslation("Capsule (Milk)", {ru: "Капсула (Молоко)"});
@@ -79,13 +79,16 @@ Translation.addTranslation("Can (Water)", {ru: "Банка (Вода)"});
 Translation.addTranslation("Can (Lava)", {ru: "Банка (Лава)"});
 Translation.addTranslation("Can (Juice)", {ru: "Банка (Фруктовый сок)"});
 Translation.addTranslation("Can (Honey)", {ru: "Банка (Мёд)"});
-Translation.addTranslation("Can (Seedoil)", {ru: "Банка (Масло)"});
+Translation.addTranslation("Can (SeedOil)", {ru: "Банка (Масло)"});
 Translation.addTranslation("Can (Biomass)", {ru: "Банка (Биомасса)"});
 Translation.addTranslation("Can (Ethanol)", {ru: "Банка (Биотопливо)"});
 Translation.addTranslation("Can (Milk)", {ru: "Банка (Молоко)"});
 
 Translation.addTranslation("Ethanol Bucket", {ru: "Ведро с биотопливом"});
 Translation.addTranslation("Biomass Bucket", {ru: "Ведро с биомассой"});
+Translation.addTranslation("Juice Bucket", {ru: "Ведро с фруктовым соком"});
+Translation.addTranslation("SeedOil Bucket", {ru: "Ведро с маслом"});
+Translation.addTranslation("Honey Bucket", {ru: "Ведро с мёдом"});
 
 /* ----- OTHER ----- */
 Translation.addTranslation("Honey Drop", {ru: "Капля мёда"});

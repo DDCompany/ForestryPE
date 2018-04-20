@@ -67,9 +67,9 @@ registerLiquidContainer("Lava", "lava", 0, true, true);
 registerLiquidContainer("Biomass", "biomass");
 registerLiquidContainer("Ethanol", "ethanol");
 registerLiquidContainer("Milk", "milk", 0, true);
-registerLiquidContainer("Juice", "appleJuice", 2, true);
-registerLiquidContainer("Honey", "honey", 2, true);
-registerLiquidContainer("Seedoil", "seedOil", 0, true);
+registerLiquidContainer("Juice", "appleJuice", 2);
+registerLiquidContainer("Honey", "honey", 2);
+registerLiquidContainer("SeedOil", "seedOil", 0);
 
 LiquidRegistry.registerLiquid("forestryGlass", "Glass", ["liquid_glass_16x16"]);
 
