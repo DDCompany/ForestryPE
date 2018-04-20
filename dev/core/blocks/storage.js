@@ -4,7 +4,7 @@ Block.setPrototype("blockCharcoal", {
     getVariations: function () {
         return [
             {
-                name: "Charcoal Block",
+                name: "Block of Charcoal",
                 texture: [["block_charcoal", 0]],
                 inCreative: true
             }
@@ -72,7 +72,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations: function () {
             return [
                 {
-                    name: "Copper Block",
+                    name: "Block of Copper",
                     texture: [["block_copper", 0]],
                     inCreative: true
                 }
@@ -87,7 +87,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations: function () {
             return [
                 {
-                    name: "Tin Block",
+                    name: "Block of Tin",
                     texture: [["block_tin", 0]],
                     inCreative: true
                 }
@@ -102,7 +102,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations: function () {
             return [
                 {
-                    name: "Bronze Block",
+                    name: "Block of Bronze",
                     texture: [["block_bronze", 0]],
                     inCreative: true
                 }
@@ -117,7 +117,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations: function () {
             return [
                 {
-                    name: "Apatite Block",
+                    name: "Block of Apatite",
                     texture: [["block_apatite", 0]],
                     inCreative: true
                 }
@@ -127,7 +127,6 @@ if (ForestryConfig.oresBlocksEnabled) {
     Block.setBlockMaterial(BlockID.blockApatite, "stone", 1);
 
     Callback.addCallback("PostLoaded", function () {
-
         Recipes.addShaped({id: BlockID.blockCopper, count: 1, data: 0}, [
             "iii",
             "iii",
@@ -156,6 +155,5 @@ if (ForestryConfig.oresBlocksEnabled) {
         Recipes.addShapeless({id: ItemID.ingotTin, count: 9, data: 0}, [{id: BlockID.blockTin, data: 0}]);
         Recipes.addShapeless({id: ItemID.ingotBronze, count: 9, data: 0}, [{id: BlockID.blockBronze, data: 0}]);
         Recipes.addShapeless({id: ItemID.apatite, count: 9, data: 0}, [{id: BlockID.blockApatite, data: 0}]);
-
     });
 }

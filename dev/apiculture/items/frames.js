@@ -1,6 +1,6 @@
 BeeFrame.registerFrame({
     codeName: "frameUntreated",
-    localize: {en: "Untreated frame", ru: "Необработанная рамка"},
+    localize: {en: "Untreated Frame", ru: "Необработанная рамка"},
     modifier: {
         getProductionModifier: function () {
             return 2;
@@ -19,7 +19,7 @@ Item.registerNameOverrideFunction(ItemID.frameUntreated, function (item, name) {
 
 BeeFrame.registerFrame({
     codeName: "frameImpregnated",
-    localize: {en: "Impregnated frame", ru: "Пропитанная рамка"},
+    localize: {en: "Impregnated Frame", ru: "Пропитанная рамка"},
     modifier: {
         getProductionModifier: function () {
             return 2;
@@ -38,7 +38,7 @@ Item.registerNameOverrideFunction(ItemID.frameImpregnated, function (item, name)
 
 BeeFrame.registerFrame({
     codeName: "frameProven",
-    localize: {en: "Proven frame", ru: "Проверенная рамка"},
+    localize: {en: "Proven Frame", ru: "Проверенная рамка"},
     modifier: {
         getProductionModifier: function () {
             return 2;

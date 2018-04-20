@@ -1,11 +1,11 @@
 IDRegistry.genItemID("ingotCopper");
-Item.createItem("ingotCopper", "Copper ingot", {name: "ingotCopper", meta: 0}, {});
+Item.createItem("ingotCopper", "Copper Ingot", {name: "ingotCopper", meta: 0}, {});
 
 IDRegistry.genItemID("ingotTin");
-Item.createItem("ingotTin", "Tin ingot", {name: "ingotTin", meta: 0}, {});
+Item.createItem("ingotTin", "Tin Ingot", {name: "ingotTin", meta: 0}, {});
 
 IDRegistry.genItemID("ingotBronze");
-Item.createItem("ingotBronze", "Bronze ingot", {name: "ingotBronze", meta: 0}, {});
+Item.createItem("ingotBronze", "Bronze Ingot", {name: "ingotBronze", meta: 0}, {});
 
 IDRegistry.genItemID("apatite");
 Item.createItem("apatite", "Apatite", {name: "apatite", meta: 0}, {});

@@ -3,7 +3,7 @@ Block.setPrototype("rainmaker", {
 
     getVariations: function () {
         return [{
-            name: "Rain Maker",
+            name: "Rainmaker",
             texture: [["rainmaker", 1], ["rainmaker", 2], ["rainmaker", 5], ["rainmaker", 5], ["rainmaker", 0]],
             inCreative: true
         }]
@@ -32,7 +32,7 @@ IDRegistry.genItemID("iodineCapsule");
 Item.createItem("iodineCapsule", "Iodine Capsule", {name: "iodineCapsule", meta: 0}, {});
 
 IDRegistry.genItemID("dissipationCharge");
-Item.createItem("dissipationCharge", "Dissipation charge", {name: "dissipationCharge", meta: 0}, {});
+Item.createItem("dissipationCharge", "Dissipation Charge", {name: "dissipationCharge", meta: 0}, {});
 
 Item.registerUseFunction("dissipationCharge", function (coords, item, block) {
     if (block.id === BlockID.rainmaker && World.getWeather().rain > 0) {

@@ -1,8 +1,8 @@
 IDRegistry.genItemID("honeyedSlice");
-Item.createFoodItem("honeyedSlice", "Honeyed slice", {name: "honeyedSlice", meta: 0}, {food: 10});
+Item.createFoodItem("honeyedSlice", "Honeyed Slice", {name: "honeyedSlice", meta: 0}, {food: 10});
 
 IDRegistry.genItemID("honeyPot");
-Item.createFoodItem("honeyPot", "Honey pot", {name: "honeyPot", meta: 0}, {food: 2});
+Item.createFoodItem("honeyPot", "Honey Pot", {name: "honeyPot", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("ambrosia");
 Item.createFoodItem("ambrosia", "Ambrosia", {name: "ambrosia", meta: 0}, {food: 8});

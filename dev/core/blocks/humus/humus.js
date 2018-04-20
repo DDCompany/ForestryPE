@@ -19,7 +19,6 @@ Block.setPrototype("humus", {
 });
 
 Callback.addCallback("PostLoaded", function () {
-
     Recipes.addShaped({id: BlockID.humus, count: 8, data: 0}, [
         "ddd",
         "dmd",
@@ -31,5 +30,4 @@ Callback.addCallback("PostLoaded", function () {
         "dmd",
         "ddd"
     ], ['d', 3, 0, 'm', ItemID.fertilizerBio, 0]);
-
 });

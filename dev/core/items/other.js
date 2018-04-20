@@ -2,16 +2,16 @@ IDRegistry.genItemID("fertilizerBio");
 Item.createItem("fertilizerBio", "Compost", {name: "fertilizerBio", meta: 0}, {});
 
 IDRegistry.genItemID("mouldyWheat");
-Item.createItem("mouldyWheat", "Mouldy wheat", {name: "mouldyWheat", meta: 0}, {});
+Item.createItem("mouldyWheat", "Mouldy Wheat", {name: "mouldyWheat", meta: 0}, {});
 
 IDRegistry.genItemID("decayingWheat");
-Item.createItem("decayingWheat", "Decaying wheat", {name: "decayingWheat", meta: 0}, {});
+Item.createItem("decayingWheat", "Decaying Wheat", {name: "decayingWheat", meta: 0}, {});
 
 IDRegistry.genItemID("mulch");
 Item.createItem("mulch", "Mulch", {name: "mulch", meta: 0}, {});
 
 IDRegistry.genItemID("woodPulp");
-Item.createItem("woodPulp", "Wood pulp", {name: "woodPulp", meta: 0}, {});
+Item.createItem("woodPulp", "Wood Pulp", {name: "woodPulp", meta: 0}, {});
 
 IDRegistry.genItemID("carton");
 Item.createItem("carton", "Carton", {name: "carton", meta: 0}, {});

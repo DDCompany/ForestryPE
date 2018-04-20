@@ -1,9 +1,3 @@
-IDRegistry.genItemID("honeyDrop");
-Item.createItem("honeyDrop", "Honey drop", {name: "honeyDrop", meta: 0}, {});
-
-IDRegistry.genItemID("honeydew");
-Item.createItem("honeydew", "Honeydew", {name: "honeydew", meta: 0}, {});
-
 IDRegistry.genItemID("analyzer");
 Item.createItem("analyzer", "Portable Analyzer", {name: "analyzer", meta: 0}, {stack: 1});
 

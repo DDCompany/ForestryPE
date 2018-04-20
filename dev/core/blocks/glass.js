@@ -5,82 +5,82 @@ if (ForestryConfig.glassEnabled) {
         getVariations: function () {
             return [
                 {
-                    name: "Black glass",
+                    name: "Black Glass",
                     texture: [["black", 0], ["black", 0], ["black", 0], ["black", 0], ["black", 0], ["black", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Red glass",
+                    name: "Red Glass",
                     texture: [["red", 0], ["red", 0], ["red", 0], ["red", 0], ["red", 0], ["red", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Green glass",
+                    name: "Green Glass",
                     texture: [["green", 0], ["green", 0], ["green", 0], ["green", 0], ["green", 0], ["green", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Brown glass",
+                    name: "Brown Glass",
                     texture: [["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Blue glass",
+                    name: "Blue Glass",
                     texture: [["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Purple glass",
+                    name: "Purple Glass",
                     texture: [["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Cyan glass",
+                    name: "Cyan Glass",
                     texture: [["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Light gray glass",
+                    name: "Light Gray glass",
                     texture: [["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Gray glass",
+                    name: "Gray Glass",
                     texture: [["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Pink glass",
+                    name: "Pink Glass",
                     texture: [["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Lime glass",
+                    name: "Lime Glass",
                     texture: [["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Yellow glass",
+                    name: "Yellow Glass",
                     texture: [["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Light blue glass",
+                    name: "Light Blue Glass",
                     texture: [["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Magenta glass",
+                    name: "Magenta Glass",
                     texture: [["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Orange glass",
+                    name: "Orange Glass",
                     texture: [["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0]],
                     inCreative: true
                 },
                 {
-                    name: "White glass",
+                    name: "White Glass",
                     texture: [["white", 0], ["white", 0], ["white", 0], ["white", 0], ["white", 0], ["white", 0]],
                     inCreative: true
                 }

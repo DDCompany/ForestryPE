@@ -28,10 +28,9 @@ IDRegistry.genItemID("peat");
 Item.createItem("peat", "Peat", {name: "peat", meta: 0}, {});
 
 IDRegistry.genItemID("bituminousPeat");
-Item.createItem("bituminousPeat", "Bituminous peat", {name: "bituminousPeat", meta: 0}, {});
+Item.createItem("bituminousPeat", "Bituminous Peat", {name: "bituminousPeat", meta: 0}, {});
 
 Callback.addCallback("PostLoaded", function () {
-
     Recipes.addFurnace(ItemID.peat, ItemID.ash, 0);
 
     Recipes.addFurnaceFuel(ItemID.peat, 0, 2000);

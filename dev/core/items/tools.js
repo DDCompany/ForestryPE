@@ -6,23 +6,23 @@ ToolType.scoop = {
 };
 
 IDRegistry.genItemID("kitPickaxe");
-Item.createItem("kitPickaxe", "Pickaxe kit", {name: "kitPickaxe", meta: 0}, {stack: 24});
+Item.createItem("kitPickaxe", "Pickaxe Kit", {name: "kitPickaxe", meta: 0}, {stack: 24});
 
 IDRegistry.genItemID("kitShovel");
-Item.createItem("kitShovel", "Shovel kit", {name: "kitShovel", meta: 0}, {stack: 24});
+Item.createItem("kitShovel", "Shovel Kit", {name: "kitShovel", meta: 0}, {stack: 24});
 
 IDRegistry.genItemID("brokenBronzePickaxe");
-Item.createItem("brokenBronzePickaxe", "Broken bronze pickaxe", {name: "brokenBronzePickaxe", meta: 0}, {stack: 1});
+Item.createItem("brokenBronzePickaxe", "Broken Pickaxe", {name: "brokenBronzePickaxe", meta: 0}, {stack: 1});
 
 IDRegistry.genItemID("brokenBronzeShovel");
-Item.createItem("brokenBronzeShovel", "Broken bronze shovel", {name: "brokenBronzeShovel", meta: 0}, {stack: 1});
+Item.createItem("brokenBronzeShovel", "Broken Shovel", {name: "brokenBronzeShovel", meta: 0}, {stack: 1});
 
 IDRegistry.genItemID("bronzePickaxe");
-Item.createItem("bronzePickaxe", "Bronze pickaxe", {name: "bronzePickaxe", meta: 0}, {stack: 1});
+Item.createItem("bronzePickaxe", "Survivalist's Pickaxe", {name: "bronzePickaxe", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.bronzePickaxe, "bronze", ToolType.pickaxe, ItemID.brokenBronzePickaxe);
 
 IDRegistry.genItemID("bronzeShovel");
-Item.createItem("bronzeShovel", "Bronze shovel", {name: "bronzeShovel", meta: 0}, {stack: 1});
+Item.createItem("bronzeShovel", "Survivalist's Shovel", {name: "bronzeShovel", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.bronzeShovel, "bronze", ToolType.shovel, ItemID.brokenBronzeShovel);
 
 IDRegistry.genItemID("scoop");

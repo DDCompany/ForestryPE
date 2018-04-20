@@ -3,7 +3,7 @@ Block.setPrototype("beeHouse", {
 
     getVariations: function () {
         return [{
-            name: "Bee house",
+            name: "Bee House",
             texture: [["bee_house", 0], ["bee_house", 0], ["bee_house", 1], ["bee_house", 1], ["bee_house", 1], ["bee_house", 1]],
             inCreative: true
         }];

@@ -1,11 +1,11 @@
 IDRegistry.genItemID("gearCopper");
-Item.createItem("gearCopper", "Copper gear", {name: "gearCopper", meta: 0}, {});
+Item.createItem("gearCopper", "Copper Gear", {name: "gearCopper", meta: 0}, {});
 
 IDRegistry.genItemID("gearTin");
-Item.createItem("gearTin", "Tin gear", {name: "gearTin", meta: 0}, {});
+Item.createItem("gearTin", "Tin Gear", {name: "gearTin", meta: 0}, {});
 
 IDRegistry.genItemID("gearBronze");
-Item.createItem("gearBronze", "Bronze gear", {name: "gearBronze", meta: 0}, {});
+Item.createItem("gearBronze", "Bronze Gear", {name: "gearBronze", meta: 0}, {});
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.gearCopper, count: 1, data: 0}, [

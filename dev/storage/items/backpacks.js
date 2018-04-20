@@ -1,5 +1,5 @@
 IDRegistry.genItemID("backpackMiners");
-Item.createItem("backpackMiners", "Miner's backpack", {name: "backpackMiners", meta: 0}, {stack: 1});
+Item.createItem("backpackMiners", "Mining Backpack", {name: "backpackMiners", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackMiners, {
     slots: 15,
@@ -11,7 +11,7 @@ BackpackRegistry.register(ItemID.backpackMiners, {
 });
 
 IDRegistry.genItemID("backpackDigger");
-Item.createItem("backpackDigger", "Digger's backpack", {name: "backpackDigger", meta: 0}, {stack: 1});
+Item.createItem("backpackDigger", "Digging Backpack", {name: "backpackDigger", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackDigger, {
     slots: 15,
@@ -23,7 +23,7 @@ BackpackRegistry.register(ItemID.backpackDigger, {
 });
 
 IDRegistry.genItemID("backpackForester");
-Item.createItem("backpackForester", "Digger's backpack", {name: "backpackForester", meta: 0}, {stack: 1});
+Item.createItem("backpackForester", "Foresting Backpack", {name: "backpackForester", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackForester, {
     slots: 15,
@@ -35,7 +35,7 @@ BackpackRegistry.register(ItemID.backpackForester, {
 });
 
 IDRegistry.genItemID("backpackHunter");
-Item.createItem("backpackHunter", "Hunter's backpack", {name: "backpackHunter", meta: 0}, {stack: 1});
+Item.createItem("backpackHunter", "Hunting Backpack", {name: "backpackHunter", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackHunter, {
     slots: 15,
@@ -47,7 +47,7 @@ BackpackRegistry.register(ItemID.backpackHunter, {
 });
 
 IDRegistry.genItemID("backpackBuilder");
-Item.createItem("backpackBuilder", "Builder's backpack", {name: "backpackBuilder", meta: 0}, {stack: 1});
+Item.createItem("backpackBuilder", "Building Backpack", {name: "backpackBuilder", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackBuilder, {
     slots: 15,
@@ -61,7 +61,7 @@ BackpackRegistry.register(ItemID.backpackBuilder, {
 //Woven
 
 IDRegistry.genItemID("backpackMinersT2");
-Item.createItem("backpackMinersT2", "Miner's woven backpack", {name: "backpackMinersT2", meta: 0}, {stack: 1});
+Item.createItem("backpackMinersT2", "Woven Mining Backpack", {name: "backpackMinersT2", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackMinersT2, {
     slots: 45,
@@ -73,7 +73,7 @@ BackpackRegistry.register(ItemID.backpackMinersT2, {
 });
 
 IDRegistry.genItemID("backpackDiggerT2");
-Item.createItem("backpackDiggerT2", "Digger's woven backpack", {name: "backpackDiggerT2", meta: 0}, {stack: 1});
+Item.createItem("backpackDiggerT2", "Woven Digging Backpack", {name: "backpackDiggerT2", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackDiggerT2, {
     slots: 45,
@@ -85,7 +85,7 @@ BackpackRegistry.register(ItemID.backpackDiggerT2, {
 });
 
 IDRegistry.genItemID("backpackForesterT2");
-Item.createItem("backpackForesterT2", "Digger's woven backpack", {name: "backpackForesterT2", meta: 0}, {stack: 1});
+Item.createItem("backpackForesterT2", "Woven Foresting Backpack", {name: "backpackForesterT2", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackForesterT2, {
     slots: 45,
@@ -97,7 +97,7 @@ BackpackRegistry.register(ItemID.backpackForesterT2, {
 });
 
 IDRegistry.genItemID("backpackHunterT2");
-Item.createItem("backpackHunterT2", "Hunter's woven backpack", {name: "backpackHunterT2", meta: 0}, {stack: 1});
+Item.createItem("backpackHunterT2", "Woven Hunting Backpack", {name: "backpackHunterT2", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackHunterT2, {
     slots: 45,
@@ -109,7 +109,7 @@ BackpackRegistry.register(ItemID.backpackHunterT2, {
 });
 
 IDRegistry.genItemID("backpackBuilderT2");
-Item.createItem("backpackBuilderT2", "Builder's woven backpack", {name: "backpackBuilderT2", meta: 0}, {stack: 1});
+Item.createItem("backpackBuilderT2", "Woven Building Backpack", {name: "backpackBuilderT2", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackBuilderT2, {
     slots: 45,
@@ -122,7 +122,7 @@ BackpackRegistry.register(ItemID.backpackBuilderT2, {
 
 
 IDRegistry.genItemID("backpackApiarist");
-Item.createItem("backpackApiarist", "Apiarist backpack", {name: "backpackApiarist", meta: 0}, {stack: 1});
+Item.createItem("backpackApiarist", "Apiarist's Backpack", {name: "backpackApiarist", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackApiarist, {
     slots: 125,

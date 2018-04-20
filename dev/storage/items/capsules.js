@@ -13,14 +13,14 @@ Item.setLiquidClip(ItemID.refractoryEmpty, true);
 function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
     if (!isNative) {
         IDRegistry.genItemID("bucket" + suffix);
-        Item.createItem("bucket" + suffix, suffix + " bucket", {name: "bucket" + suffix, meta: 0}, {stack: 1});
+        Item.createItem("bucket" + suffix, suffix + " Bucket", {name: "bucket" + suffix, meta: 0}, {stack: 1});
         LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID["bucket" + suffix], data: 0});
     }
 
     if (food) {
         if (!isHot) {
             IDRegistry.genItemID("waxCapsule" + suffix);
-            Item.createFoodItem("waxCapsule" + suffix, suffix + " wax Capsule", {
+            Item.createFoodItem("waxCapsule" + suffix, "Capsule (" + suffix + ")", {
                 name: "waxCapsule" + suffix,
                 meta: 0
             }, {food: food});
@@ -31,17 +31,17 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
         }
 
         IDRegistry.genItemID("can" + suffix);
-        Item.createFoodItem("can" + suffix, suffix + " Can", {name: "can" + suffix, meta: 0});
+        Item.createFoodItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0});
 
         IDRegistry.genItemID("refractory" + suffix);
-        Item.createFoodItem("refractory" + suffix, suffix + " Capsule", {
+        Item.createFoodItem("refractory" + suffix, "Capsule (" + suffix + ")", {
             name: "refractory" + suffix,
             meta: 0
         }, {food: food});
     } else {
         if (!isHot) {
             IDRegistry.genItemID("waxCapsule" + suffix);
-            Item.createItem("waxCapsule" + suffix, suffix + " wax Capsule", {name: "waxCapsule" + suffix, meta: 0});
+            Item.createItem("waxCapsule" + suffix, "Capsule (" + suffix + ")", {name: "waxCapsule" + suffix, meta: 0});
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
@@ -49,10 +49,10 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
         }
 
         IDRegistry.genItemID("can" + suffix);
-        Item.createItem("can" + suffix, suffix + " Can", {name: "can" + suffix, meta: 0});
+        Item.createItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0});
 
         IDRegistry.genItemID("refractory" + suffix);
-        Item.createItem("refractory" + suffix, suffix + " Capsule", {name: "refractory" + suffix, meta: 0});
+        Item.createItem("refractory" + suffix, "Capsule (" + suffix + ")", {name: "refractory" + suffix, meta: 0});
     }
 
     LiquidRegistry.registerItem(liquid, {id: ItemID.canEmpty, data: 0}, {id: ItemID["can" + suffix], data: 0});
@@ -70,6 +70,8 @@ registerLiquidContainer("Milk", "milk", 0, true);
 registerLiquidContainer("Juice", "appleJuice", 2, true);
 registerLiquidContainer("Honey", "honey", 2, true);
 registerLiquidContainer("Seedoil", "seedOil", 0, true);
+
+LiquidRegistry.registerLiquid("forestryGlass", "Glass", ["liquid_glass_16x16"]);
 
 function pickupLiquidFromWorld(coords) {
     let pos = Player.getPosition();

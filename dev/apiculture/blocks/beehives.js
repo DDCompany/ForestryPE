@@ -11,37 +11,37 @@ Block.setPrototype("beehive", {
     getVariations: function () {
         return [
             {
-                name: "Forest hive",
+                name: "Forest Hive",
                 texture: [["beehiveForest", 0], ["beehiveForest", 0], ["beehiveForest", 1]],
                 inCreative: true
             },
             {
-                name: "Meadows hive",
+                name: "Meadows Hive",
                 texture: [["beehiveMeadows", 0], ["beehiveMeadows", 0], ["beehiveMeadows", 1]],
                 inCreative: true
             },
             {
-                name: "Modest hive",
+                name: "Modest Hive",
                 texture: [["beehiveModest", 0], ["beehiveModest", 0], ["beehiveModest", 1]],
                 inCreative: true
             },
             {
-                name: "Tropical hive",
+                name: "Tropical Hive",
                 texture: [["beehiveTropical", 0], ["beehiveTropical", 0], ["beehiveTropical", 1]],
                 inCreative: true
             },
             {
-                name: "Wintry hive",
+                name: "Wintry Hive",
                 texture: [["beehiveWintry", 0], ["beehiveWintry", 0], ["beehiveWintry", 1]],
                 inCreative: true
             },
             {
-                name: "Marshy hive",
+                name: "Marshy Hive",
                 texture: [["beehiveMarshy", 0], ["beehiveMarshy", 0], ["beehiveMarshy", 1]],
                 inCreative: true
             },
             {
-                name: "Ender hive",
+                name: "Ender Hive",
                 texture: [["beehiveEnder", 0], ["beehiveEnder", 0], ["beehiveEnder", 1]],
                 inCreative: true
             }

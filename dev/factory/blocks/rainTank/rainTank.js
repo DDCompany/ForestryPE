@@ -2,7 +2,7 @@ Block.setPrototype("rainTank", {
     type: Block.TYPE_BASE,
 
     getVariations: function () {
-        return [{name: "Rain tank", texture: [["rainTank", 0], ["rainTank", 0], ["rainTank", 1]], inCreative: true}];
+        return [{name: "Rain Tank", texture: [["rainTank", 0], ["rainTank", 0], ["rainTank", 1]], inCreative: true}];
     }
 
 });

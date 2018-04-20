@@ -3,7 +3,7 @@ Block.setPrototype("apiaristChest", {
 
     getVariations: function () {
         return [{
-            name: "Apiarist chest",
+            name: "Apiarist's Chest",
             texture: [["apiaristchest", 1], ["apiaristchest", 0], ["apiaristchest", 2], ["apiaristchest", 3], ["apiaristchest", 2], ["apiaristchest", 2]],
             inCreative: true
         }];
