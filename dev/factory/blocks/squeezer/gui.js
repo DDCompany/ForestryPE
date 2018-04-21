@@ -34,7 +34,7 @@ var squeezerGUI = new UI.StandartWindow({
             y: 108,
             direction: 1,
             value: 0,
-            bitmap: "liqued_background_2",
+            bitmap: "liquid_background_2",
             scale: 3.2
         },
         "progressScale": {

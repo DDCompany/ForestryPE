@@ -33,7 +33,7 @@ var stillGUI = new UI.StandartWindow({
             y: 114,
             direction: 1,
             value: 0,
-            bitmap: "liqued_background_2",
+            bitmap: "liquid_background_2",
             scale: 3.2
         },
         "liquidOutputScale": {
@@ -42,7 +42,7 @@ var stillGUI = new UI.StandartWindow({
             y: 114,
             direction: 1,
             value: 0,
-            bitmap: "liqued_background_2",
+            bitmap: "liquid_background_2",
             scale: 3.2
         },
 

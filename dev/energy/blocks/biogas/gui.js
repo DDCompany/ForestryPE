@@ -12,14 +12,14 @@ const guiBiogasEngine = new UI.StandartWindow({
 
     elements: {
         "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry_energy_bar", scale: 3.2},
-        "lavaScale": {type: "scale", x: 650, y: 113, direction: 1, value: 0, bitmap: "liqued_background_2", scale: 3.2},
+        "lavaScale": {type: "scale", x: 650, y: 113, direction: 1, value: 0, bitmap: "liquid_background_2", scale: 3.2},
         "liquidScale": {
             type: "scale",
             x: 593,
             y: 112,
             direction: 1,
             value: 0,
-            bitmap: "liqued_background_2",
+            bitmap: "liquid_background_2",
             scale: 3.2
         },
         "burnScale": {
