@@ -30,6 +30,9 @@ const ForestryConfig = {
     /* ----- RECIPES ----- */
     recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot"),
 
+    /* ----- PARTICLES ----- */
+    particlesBeeHives: __config__.getBool("particles.beeHives"),
+
     /* ----- OTHER ----- */
     crateEnabled: __config__.getBool("crateEnabled"),
     glassEnabled: __config__.getBool("glassEnabled"),

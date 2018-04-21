@@ -58,8 +58,10 @@ apiculture/blocks/apiary/tile.js
 apiculture/blocks/beeHouse/block.js
 apiculture/blocks/beeHouse/tile.js
 
-apiculture/blocks/beehives.js
 apiculture/blocks/storage.js
+
+apiculture/blocks/beehives/beehives.js
+apiculture/blocks/beehives/particles.js
 
 # ITEMS
 apiculture/items/analyzer.js

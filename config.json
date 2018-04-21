@@ -31,5 +31,8 @@
   "beekeeping": {
     "secondPrincessChance": 0,
     "mode": 1
+  },
+  "particles": {
+    "beeHives": true
   }
 }
