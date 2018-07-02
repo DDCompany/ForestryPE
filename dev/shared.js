@@ -16,6 +16,7 @@ ModAPI.registerAPI("ForestryAPI", {
     Util: Util,
     ApiaryRegistry: ApiaryRegistry,
     BackpackManager: BackpackManager,
+    ChestManager: ChestManager,
     BioGeneratorManager: BioGeneratorManager,
     CarpenterManager: CarpenterManager,
     CentrifugeManager: CentrifugeManager,
@@ -24,6 +25,7 @@ ModAPI.registerAPI("ForestryAPI", {
     SqueezerManager: SqueezerManager,
     FactoryManager: FactoryManager,
     StillManager: StillManager,
+    MoistenerManager: MoistenerManager,
 
     generateOre: generateOre,
     registerLiquidContainer: registerLiquidContainer,

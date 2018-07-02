@@ -7,6 +7,7 @@ api/ContainerHelper.js
 api/MachineRegistry.js
 api/ModelHelper.js
 api/Util.js
+api/ChestManager.js
 
 ### CORE
 # BLOCKS
@@ -47,9 +48,7 @@ apiculture/api/Modifier.js
 apiculture/api/HiveGenerator.js
 
 # BLOCKS
-apiculture/blocks/apiaristChest/block.js
-apiculture/blocks/apiaristChest/gui.js
-apiculture/blocks/apiaristChest/tile.js
+apiculture/blocks/apiaristChest.js
 
 apiculture/blocks/apiary/block.js
 apiculture/blocks/apiary/gui.js
