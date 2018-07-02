@@ -1,172 +1,166 @@
-TileEntity.registerPrototype(BlockID.moistener, {
+const MOISTENER_SLOTS = [
+    {
+        prefix: "slotOutput_0",
+        amount: 5
+    },
+    {
+        prefix: "slotOutput_1",
+        amount: 2
+    },
+    {
+        prefix: "slotOutput_2",
+        amount: 0
+    }
 
+];
+
+TileEntity.registerPrototype(BlockID.moistener, {
     defaultValues: {
         progress: 0,
-        outputID: 0,
-        tprogress: 0
-    },
-
-    getTime: function () {
-        let light = World.__inworld.getLightLevel(this.x, this.y + 1, this.z);
-        return light > 11 ? -1 : (light === 0 ? 25 : light * 10);
+        progressMax: 0,
+        progressRecipe: 0,
+        progressRecipeMax: 0,
+        outputBurn: null,
+        outputRecipe: null,
+        slots: null,
+        recipeSlot: 0
     },
 
     init: function () {
         this.liquidStorage.setLimit("water", 10);
     },
 
+    getSpeed: function () {
+        let light = World.getLightLevel(this.x, this.y + 1, this.z);
+        return light >= 9 ? 1 : (light >= 7 ? 2 : (light >= 5 ? 3 : 4));
+    },
+
+    enoughSpace: function(prefix, amount, id, data) {
+        for (; amount >= 0; amount--) {
+            let slot = this.container.getSlot(prefix + amount);
+
+            if(!slot.id)
+                return true;
+
+            if(slot.id === id && slot.data === data && slot.count < Item.getMaxStack(id))
+                return true;
+        }
+
+        return false;
+    },
+
+    findRecipe: function() {
+        if(!this.data.progressRecipe) {
+            let slot = this.container.getSlot("slotRecipe");
+            let recipe = MoistenerManager.getRecipe(slot.id, slot.data);
+
+            if(recipe) {
+                this.data.progressRecipe = 1;
+                this.data.progressRecipeMax = recipe.time;
+                this.data.outputRecipe = recipe.outputItem;
+                slot.count--;
+                this.container.validateSlot("slotRecipe");
+            }else return false;
+        }
+
+        return true;
+    },
+
+    startBurning: function () {
+        let length = MOISTENER_SLOTS.length;
+        for(let i = 0; i < length; i++) {
+            let slots = MOISTENER_SLOTS[i];
+            let nextSlots;
+
+            if (i === length - 1)
+                nextSlots = MOISTENER_SLOTS[0];
+            else nextSlots = MOISTENER_SLOTS[i + 1];
+
+            let data = this.getForGroup(slots.prefix, slots.amount, nextSlots.prefix, nextSlots.amount);
+            if(data) {
+                let fuelData = data.fuelData;
+
+                this.data.progress = 1;
+                this.data.progressMax = fuelData.time;
+                this.data.slots = {prefix: nextSlots.prefix, amount: nextSlots.amount};
+                this.data.outputBurn = fuelData.outputItem;
+                this.data.recipeSlot = slots.prefix + data.slot;
+            }
+        }
+    },
+
+    getForGroup: function (prefix, amount, outPrefix, outAmount) {
+        for (; amount >= 0; amount--) {
+            let slot = this.container.getSlot(prefix + amount);
+            let fuelData = MoistenerManager.getFuelInfo(slot.id, slot.data);
+
+            if (fuelData) {
+                let output = fuelData.outputItem;
+                if(this.enoughSpace(outPrefix, outAmount, output.id, output.data))
+                    return {fuelData: fuelData, slot: amount};
+            }
+        }
+
+        return null;
+    },
+
+    putToSlots: function (amount, prefix, item) {
+        for (; amount >= 0; amount--) {
+            let slot = this.container.getSlot(prefix + amount);
+            if (ContainerHelper.putInSlot(slot, item))
+                return true;
+        }
+
+        return false;
+    },
+
     tick: function () {
-        let time = this.getTime();
-        let slotContainer = this.container.getSlot("slotContainer");
-        let slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
-        let slotProcessing = this.container.getSlot("slotProcessing");
-        let slotRecipe = this.container.getSlot("slotRecipe");
-        let slotResult = this.container.getSlot("slotResult");
+        if(World.getThreadTime() % 20 === 0)
+            ContainerHelper.drainContainer2("water", this, "slotContainer", "slotEmptyContainer");
 
+        if (this.findRecipe()) {
+            if(this.data.progressRecipe >= this.data.progressRecipeMax) {
+                let slot = this.container.getSlot("slotResult");
+                if(ContainerHelper.putInSlot(slot, this.data.outputRecipe)) {
+                    this.data.progressRecipe = 0;
+                }
+            }else if (this.data.progress) {
+                let slot = this.container.getSlot(this.data.recipeSlot);
+                if (!MoistenerManager.getFuelInfo(slot.id, slot.data)) {
+                    this.data.progress = 0;
+                    return;
+                }
+
+                if (this.data.progress >= this.data.progressMax) {
+                    let output = this.data.outputBurn;
+                    let slots = this.data.slots;
+
+                    if (this.putToSlots(slots.amount, slots.prefix, output)) {
+                        slot.count--;
+                        this.container.validateSlot(this.data.recipeSlot);
+                    }
+                    this.data.progress = 0;
+                } else {
+                    if(this.liquidStorage.getAmount("water") >= 0.001) {
+                        let speed = this.getSpeed();
+                        this.data.progress += speed;
+                        this.data.progressRecipe += speed;
+                        this.liquidStorage.getLiquid("water", 0.001);
+                    }
+                }
+            } else {
+                this.startBurning()
+            }
+        }
+
+        let progress = (this.data.progress / this.data.progressMax) || 0;
+        this.container.setScale("progressScale2", progress);
+        this.container.setScale("progressScale", progress);
+        this.container.setScale("progressScale3", this.data.progressRecipe / this.data.progressRecipeMax);
         this.liquidStorage.updateUiScale("liquidScale", "water");
-
-        if (slotContainer.id !== 0 && this.liquidStorage.getAmount("water") + 1 <= 10) {
-            var empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
-            if (empty && empty.liquid === "water") {
-                var f = false;
-
-                if (slotEmptyContainer.id === 0) {
-                    slotEmptyContainer.id = empty.id;
-                    slotEmptyContainer.data = empty.data;
-                    slotEmptyContainer.count = 1;
-                    f = true;
-                } else if (slotEmptyContainer.id !== 0 && slotEmptyContainer.id === empty.id && slotEmptyContainer.data === empty.data && slotEmptyContainer.count + 1 <= Item.getMaxStack(slotEmptyContainer.id)) {
-                    slotEmptyContainer.count++;
-                    f = true;
-                }
-
-                if (f) {
-                    this.liquidStorage.addLiquid("water", 1);
-                    slotContainer.count--;
-                }
-            }
-        }
-
-        for (var i = 0; i < 6; i++) {
-            var slot = this.container.getSlot("slotOutput_t" + i);
-            if (slot.id === ItemID.mouldyWheat || slot.id === ItemID.decayingWheat || slot.id === 296) {
-                for (var j = 0; j < 3; j++) {
-                    var slot2 = this.container.getSlot("slotOutput_b" + j);
-                    if (slot2.id === 0) {
-                        slot2.id = slot.id;
-                        slot2.data = slot.data;
-                        slot2.count = slot.count;
-
-                        this.container.clearSlot("slotOutput_t" + i);
-                        break;
-                    } else if (slot2.id === slot.id && slot2.data === slot.data && slot2.count < Item.getMaxStack(slot2.id)) {
-                        if (slot2.count + slot.count <= Item.getMaxStack(slot2.id)) {
-                            slot2.count += slot.count;
-                            this.container.clearSlot("slotOutput_t" + i);
-                            break;
-                        } else {
-                            var to = Item.getMaxStack(slot2.id) - slot2.count;
-                            slot2.count += to;
-                            slot.count -= to;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (slotProcessing.id === 0) {
-            for (var i = 0; i < 3; i++) {
-                var slot = this.container.getSlot("slotOutput_b" + i);
-                if (slot.id === 296 || slot.id === ItemID.mouldyWheat || slot.id === ItemID.decayingWheat) {
-                    slotProcessing.id = slot.id;
-                    slotProcessing.data = slot.data;
-                    slotProcessing.count = slot.count;
-
-                    this.container.clearSlot("slotOutput_b" + i);
-                }
-            }
-        } else if (slotProcessing.count < Item.getMaxStack(slotProcessing.id)) {
-            for (var i = 0; i < 3; i++) {
-                var slot = this.container.getSlot("slotOutput_b" + i);
-                if (slotProcessing.id === slot.id && slotProcessing.data === slot.data) {
-                    var to = Math.min(Item.getMaxStack(slotProcessing.id), slot.count);
-                    slotProcessing.count += to;
-                    slot.count -= to;
-                }
-            }
-        }
-
-        if (this.data.progress > 0 && time !== -1) {
-            this.data.progress++;
-            if (this.data.progress >= time) {
-                for (var i = 0; i < 6; i++) {
-                    var slot = this.container.getSlot("slotOutput_t" + i);
-                    var g = false;
-                    if (slot.id === 0) {
-                        slot.id = this.data.outputID;
-                        slot.data = 0;
-                        slot.count = 1;
-                        g = true;
-                    } else if (slot.id === this.data.outputID && slot.count < Item.getMaxStack(slot.id)) {
-                        slot.count++;
-                        g = true;
-                    }
-                    if (g) {
-                        this.data.tprogress++;
-                        if (this.data.tprogress >= 16) {
-                            var out = 0;
-                            var outData = 0;
-                            if (slotRecipe.id === 295) {
-                                out = 110;
-                            } else if (slotRecipe.id === 4) {
-                                out = 48;
-                            } else if (slotRecipe.id === 98) {
-                                out = 98;
-                                outData = 1;
-                            }
-                            if (out) {
-                                var p = false;
-                                if (slotResult.id === 0) {
-                                    slotResult.id = out;
-                                    slotResult.data = outData;
-                                    slotResult.count = 1;
-                                    slotRecipe.count--;
-                                } else if (slotResult.id === out && slotResult.data === outData && slotRecipe.count < Item.getMaxStack(slotResult.id)) {
-                                    slotResult.count++;
-                                    slotRecipe.count--;
-                                }
-                            }
-                            this.data.tprogress = 0;
-                        }
-                        this.data.progress = 0;
-                        break;
-                    }
-                }
-            }
-        } else if ((slotProcessing.id === 296 || slotProcessing.id === ItemID.mouldyWheat || slotProcessing.id === ItemID.decayingWheat)
-            && this.liquidStorage.getAmount("water") >= 0.5 && time !== -1) {
-            if (slotProcessing.id === 296) {
-                this.data.outputID = ItemID.mouldyWheat;
-            } else if (slotProcessing.id === ItemID.mouldyWheat) {
-                this.data.outputID = ItemID.decayingWheat;
-            } else if (slotProcessing.id === ItemID.decayingWheat) {
-                this.data.outputID = ItemID.mulch;
-            }
-            this.liquidStorage.getLiquid("water", 0.5);
-            this.data.progress = 1;
-            slotProcessing.count--;
-        }
-
-        this.container.setScale("progressScale2", this.data.progress / time);
-        this.container.setScale("progressScale", this.data.progress / time);
-        this.container.setScale("progressScale3", this.data.tprogress / 16);
-
-        this.container.validateAll();
     },
 
     getGuiScreen: function () {
         return moistenerGUI;
     }
-
 });

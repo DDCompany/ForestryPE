@@ -30,10 +30,6 @@ var ContainerHelper = {
         this.putInSlots(arr, container, slots)
     },
 
-    putInSlotsObj: function (toPut, container, slots) {
-        this.putInSlots([[toPut.id, toPut.data, toPut.count || 1]], container, slots);
-    },
-
     fluidContainerFilling: function (liquid, tile, slots) {
         var slotContainerFull = tile.container.getSlot(slots.full);
         var slotContainer = tile.container.getSlot(slots.empty);
@@ -119,7 +115,7 @@ var ContainerHelper = {
         return false;
     },
 
-    fillContainer: function (liquids, tile, slots) {
+    _fillContainer: function (liquids, tile, slots) {
         let liquid = null;
         let liquidStorage = tile.liquidStorage;
 
@@ -170,6 +166,87 @@ var ContainerHelper = {
         }
 
         return false;
-    }
+    },
 
+    /**
+     * Наполнение предмета определённой жидкостью из TileEntity
+     * @param liquid жидкость, которой необходимо наполнить предмет
+     * @param tile TileEntity
+     * @param slotEmptyName идентификатор слота для пустых контейнеров
+     * @param slotFullName идентификатор слота для заполненных контейнеров
+     */
+    fillContainer: function (liquid, tile, slotEmptyName, slotFullName) {
+        if (!liquid)
+            return;
+
+        if (tile.liquidStorage.getAmount(liquid) < 1)
+            return;
+
+        let slotEmpty = tile.container.getSlot(slotEmptyName);
+        let slotFull = tile.container.getSlot(slotFullName);
+        let full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
+
+        if (full) {
+            if (!ContainerHelper.putInSlot(slotFull, full))
+                return;
+
+            slotEmpty.count--;
+            tile.liquidStorage.getLiquid(liquid, 1);
+            return liquid;
+        }
+    },
+
+    /**
+     * Извлечение жидкости из контейнера и перемещение ёё в TileEntity
+     * @param liquid жидкость, которую необходимо извлечь
+     * @param tile TileEntity
+     * @param slotFullName идентификатор слота с наполненными контейнерами
+     */
+    drainContainer: function (liquid, tile, slotFullName) {
+        let slot = tile.container.getSlot(slotFullName);
+        let empty = LiquidRegistry.getEmptyItem(slot.id, slot.data);
+
+        if (!empty)
+            return;
+
+        let _liquid = empty.liquid;
+        if (!liquid || liquid === _liquid) {
+            if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
+                return;
+
+            if (--slot.count === 0) {
+                slot.id = empty.id;
+                slot.data = empty.data;
+                slot.count = 1;
+            }
+
+            tile.liquidStorage.addLiquid(_liquid, 1);
+            return _liquid;
+        }
+    },
+
+    drainContainer2: function (liquid, tile, slotFullName, slotEmptyName) {
+        let container = tile.container;
+        let slotFull = container.getSlot(slotFullName);
+        let slotEmpty = container.getSlot(slotEmptyName);
+        let empty = LiquidRegistry.getEmptyItem(slotFull.id, slotFull.data);
+
+        if (!empty)
+            return;
+
+        let _liquid = empty.liquid;
+        if (!liquid || liquid === _liquid) {
+            if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
+                return;
+
+            if(this.putInSlot(slotEmpty, empty)) {
+                slotFull.count--;
+                tile.liquidStorage.addLiquid(_liquid, 1);
+                container.validateSlot(slotFullName);
+                return _liquid;
+            }
+        }
+
+        return null;
+    },
 };

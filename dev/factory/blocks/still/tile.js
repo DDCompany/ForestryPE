@@ -8,10 +8,6 @@ MachineRegistry.register(BlockID.still, {
         outputLiquid: null
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotBiomassContainer"], output: ["slotBiomassEmptyContainer", "slotEthanolContainer"]};
-    },
-
     init: function () {
         this.liquidStorage.setLimit(null, 10);
     },
@@ -20,51 +16,6 @@ MachineRegistry.register(BlockID.still, {
         return stillGUI;
     },
 
-    drainContainer: function () {
-        let slot = this.container.getSlot("slotInputContainer");
-        let empty = LiquidRegistry.getEmptyItem(slot.id, slot.data);
-
-        if (!empty)
-            return;
-
-        let liquid = empty.liquid;
-        if (!this.data.inputLiquid || this.data.inputLiquid === liquid) {
-            if (this.liquidStorage.getAmount(liquid) + 1 > 10)
-                return;
-
-            if (--slot.count === 0) {
-                slot.id = empty.id;
-                slot.data = empty.data;
-                slot.count = 1;
-            }
-
-            this.liquidStorage.addLiquid(liquid, 1);
-            this.data.inputLiquid = liquid;
-        }
-    },
-
-    fillContainer: function () {
-        let liquid = this.data.outputLiquid;
-
-        if (!liquid)
-            return;
-
-        if (this.liquidStorage.getAmount(liquid) < 1)
-            return;
-
-        let slotEmpty = this.container.getSlot("slotOutputContainer");
-        let slotFull = this.container.getSlot("slotOutputContainerFilled");
-        let full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
-
-        if (full) {
-            if (!ContainerHelper.putInSlot(slotFull, full))
-                return;
-
-            slotEmpty.count--;
-            this.liquidStorage.getLiquid(liquid, 1);
-            this.container.validateSlot("slotOutputContainer");
-        }
-    },
 
     findWork: function () {
         let liquid = this.data.inputLiquid;
@@ -79,7 +30,7 @@ MachineRegistry.register(BlockID.still, {
 
         let outputLiquid = this.data.outputLiquid;
         if (!outputLiquid ||
-            (outputLiquid === recipe.outputLiquid && this.liquidStorage.getAmount(outputLiquid) + (recipe.outputAmount * recipe.cycles) <= 10)){
+            (outputLiquid === recipe.outputLiquid && this.liquidStorage.getAmount(outputLiquid) + (recipe.outputAmount * recipe.cycles) <= 10)) {
             this.liquidStorage.getLiquid(liquid, required);
 
             this.data.outputAmount = recipe.outputAmount || 1;
@@ -94,12 +45,22 @@ MachineRegistry.register(BlockID.still, {
     tick: function () {
         let threadTime = World.getThreadTime();
         if (threadTime % 20 === 0) {
-            this.drainContainer();
-            this.fillContainer();
+            let inputLiquid = ContainerHelper.drainContainer(this.data.inputLiquid, this, "slotInputContainer");
+            let outputLiquid =
+                ContainerHelper.fillContainer(this.data.outputLiquid, this, "slotOutputContainer", "slotOutputContainerFilled");
+
+            if (inputLiquid)
+                this.data.inputLiquid = inputLiquid;
+
+            if (outputLiquid)
+                this.data.outputLiquid = outputLiquid;
+
+            this.container.validateSlot("slotInputContainer");
+            this.container.validateSlot("slotOutputContainer");
         }
 
         if (threadTime % 5 === 0) {
-            if(this.data.progressMax || this.findWork()) {
+            if (this.data.progressMax || this.findWork()) {
                 if (this.data.progress <= 0) {
                     this.liquidStorage.addLiquid(this.data.outputLiquid, this.data.outputAmount * this.data.progressMax);
                     this.data.progressMax = 1;

@@ -31,7 +31,7 @@ MachineRegistry.register(BlockID.fermenter, {
         }
 
         ContainerHelper.emptyContainer(["water", "honey", "appleJuice"], this, "slotInputContainer");
-        ContainerHelper.fillContainer(["biomass"], this, {empty: "slotContainer", full: "slotFilledContainer"});
+        ContainerHelper._fillContainer(["biomass"], this, {empty: "slotContainer", full: "slotFilledContainer"});
 
         if (this.data.reagentRemain === 0) {
 

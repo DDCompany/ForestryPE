@@ -108,6 +108,7 @@ factory/api/FabricatorManager.js
 factory/api/FermenterManager.js
 factory/api/SqueezerManager.js
 factory/api/StillManager.js
+factory/api/MoistenerManager.js
 
 #ITEMS
 factory/items/gears.js
@@ -138,6 +139,7 @@ factory/blocks/fermenter/tile.js
 
 factory/blocks/moistener/moistener.js
 factory/blocks/moistener/gui.js
+factory/blocks/moistener/recipes.js
 factory/blocks/moistener/tile.js
 
 factory/blocks/rainTank/rainTank.js

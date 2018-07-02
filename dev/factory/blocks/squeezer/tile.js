@@ -18,7 +18,7 @@ MachineRegistry.register(BlockID.squeezer, {
 
     tick: function () {
 
-        ContainerHelper.fillContainer(null, this, {empty: "slotContainer", full: "slotContainerFilled"});
+        ContainerHelper._fillContainer(null, this, {empty: "slotContainer", full: "slotContainerFilled"});
 
         if (this.data.progress > 0) {
 

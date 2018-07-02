@@ -1,8 +1,8 @@
-var moistenerGUI = new UI.StandartWindow({
+const moistenerGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Moistener")
+                text: "Moistener"
             }
         },
         inventory: {
@@ -13,7 +13,9 @@ var moistenerGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 90, bitmap: "moistener_background", scale: 3.2},
+        {type: "bitmap", x: 418, y: 90, bitmap: "moistener_background", scale: 3.2},
+        {type: "bitmap", x: 335, y: 90, bitmap: "liquid_background_1", scale: 3.2}
+
     ],
     elements: {
         "liquidScale": {
@@ -27,7 +29,7 @@ var moistenerGUI = new UI.StandartWindow({
         },
         "progressScale": {
             type: "scale",
-            x: 645,
+            x: 655,
             y: 215,
             direction: 1,
             value: 0,
@@ -36,31 +38,32 @@ var moistenerGUI = new UI.StandartWindow({
         },
         "progressScale2": {
             type: "scale",
-            x: 646,
+            x: 656,
             y: 99,
             direction: 1,
             value: 0,
             bitmap: "moistener_arrow_1",
             scale: 3.2
         },
-        "progressScale3": {type: "scale", x: 735, y: 160, value: 0, bitmap: "moistener_arrow_2", scale: 3.2},
+        "progressScale3": {type: "scale", x: 745, y: 160, value: 0, bitmap: "moistener_arrow_2", scale: 3.2},
 
-        "slotOutput_t0": {type: "slot", x: 459, y: 90, size: 59},
-        "slotOutput_t1": {type: "slot", x: 519, y: 90, size: 59},
-        "slotOutput_t2": {type: "slot", x: 579, y: 90, size: 59},
-        "slotOutput_t3": {type: "slot", x: 459, y: 150, size: 59},
-        "slotOutput_t4": {type: "slot", x: 519, y: 150, size: 59},
-        "slotOutput_t5": {type: "slot", x: 579, y: 150, size: 59},
+        "slotOutput_00": {type: "slot", x: 469, y: 90, size: 59},
+        "slotOutput_01": {type: "slot", x: 529, y: 90, size: 59},
+        "slotOutput_02": {type: "slot", x: 589, y: 90, size: 59},
+        "slotOutput_03": {type: "slot", x: 469, y: 150, size: 59},
+        "slotOutput_04": {type: "slot", x: 529, y: 150, size: 59},
+        "slotOutput_05": {type: "slot", x: 589, y: 150, size: 59},
 
-        "slotOutput_b0": {type: "slot", x: 459, y: 224, size: 59},
-        "slotOutput_b1": {type: "slot", x: 519, y: 224, size: 59},
-        "slotOutput_b2": {type: "slot", x: 579, y: 224, size: 59},
+        "slotOutput_10": {type: "slot", x: 469, y: 224, size: 59},
+        "slotOutput_11": {type: "slot", x: 529, y: 224, size: 59},
+        "slotOutput_12": {type: "slot", x: 589, y: 224, size: 59},
 
-        "slotContainer": {type: "slot", x: 395, y: 102, size: 59, bitmap: "slot_liquid"},
-        "slotEmptyContainer": {type: "slot", x: 395, y: 218, size: 59, bitmap: "slot_container"},
+        "slotOutput_20": {type: "slot", x: 681, y: 157, size: 59},
 
-        "slotProcessing": {type: "slot", x: 671, y: 157, size: 59},
-        "slotRecipe": {type: "slot", x: 789, y: 99, size: 59},
-        "slotResult": {type: "slot", x: 789, y: 214, size: 59}
+        "slotContainer": {type: "slot", x: 402, y: 102, size: 59, bitmap: "slot_liquid"},
+        "slotEmptyContainer": {type: "slot", x: 402, y: 218, size: 59, bitmap: "slot_container"},
+
+        "slotRecipe": {type: "slot", x: 799, y: 99, size: 59},
+        "slotResult": {type: "slot", x: 799, y: 214, size: 59}
     }
 });
