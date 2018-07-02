@@ -6,6 +6,7 @@
   "combBlocksEnabled": true,
   "oresBlocksEnabled": true,
   "hiveDamageOnPeaceful": true,
+  "reusableCapsules": true,
   "recipes": {
     "bronzeIngot": true
   },

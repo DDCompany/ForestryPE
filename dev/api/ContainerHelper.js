@@ -1,5 +1,4 @@
 var ContainerHelper = {
-
     putInSlots: function (toPut, container, slots) {
         for (var key in toPut) {
             var count = toPut[key][2];
@@ -239,7 +238,7 @@ var ContainerHelper = {
             if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
                 return;
 
-            if(this.putInSlot(slotEmpty, empty)) {
+            if(!this.isReusable(empty.id) || this.putInSlot(slotEmpty, empty)) {
                 slotFull.count--;
                 tile.liquidStorage.addLiquid(_liquid, 1);
                 container.validateSlot(slotFullName);
@@ -249,4 +248,18 @@ var ContainerHelper = {
 
         return null;
     },
+
+    isReusable: function (id) {
+        if(ForestryConfig.reusableCapsules)
+            return true;
+
+        switch (id) {
+            case ItemID.waxCapsuleEmpty:
+            case ItemID.canEmpty:
+            case ItemID.refractoryEmpty:
+                return false;
+            default:
+                return true;
+        }
+    }
 };
