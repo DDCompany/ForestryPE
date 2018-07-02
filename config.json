@@ -22,8 +22,7 @@
     "apatiteInChunk": 12,
     "apatiteSize": 3,
     "copper": true,
-    "copperInChunk": 20,
-    "copperSize": 6,
+    "copperSize": 126,
     "tin": true,
     "tinInChunk": 18,
     "tinSize": 6

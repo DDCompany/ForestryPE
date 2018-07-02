@@ -36,10 +36,14 @@ Callback.addCallback("PostLoaded", function () {
     Recipes.addFurnace(BlockID.oreTin, ItemID.ingotTin, 0);
 });
 
-function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY) {
+let hh = false;
+
+function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY, biomes) {
     for (let i = 0; i < inChunk; i++) {
         let coords = GenerationUtils.randomCoords(chunkX, chunkZ, minY, maxY);
-        GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, Util.random(1, size));
+        if(!biomes || biomes.indexOf(World.getBiome(coords.x, coords.z)) > -1) {
+            GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, Util.random(1, size));
+        }
     }
 }
 
@@ -62,7 +66,8 @@ if (ForestryConfig.genTin) {
 if (ForestryConfig.genApatite) {
     Flags.addUniqueAction("oreGenApatite", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            generateOre(BlockID.oreApatite, chunkX, chunkZ, ForestryConfig.genApatiteInChunk, ForestryConfig.genApatiteSize, 10, 64);
+            if(Math.random() < 0.8)
+            generateOre(BlockID.oreApatite, chunkX, chunkZ, 1, ForestryConfig.genApatiteSize, 50, 247, APATITE_GEN_BIOMES);
         });
     });
 }

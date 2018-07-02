@@ -13,7 +13,6 @@ const ForestryConfig = {
 
     /* ----- ORE GEN ----- */
     genApatite: __config__.getBool("gen.apatite"),
-    genApatiteInChunk: __config__.getNumber("gen.apatiteInChunk"),
     genApatiteSize: __config__.getNumber("gen.apatiteSize"),
 
     genCopper: __config__.getBool("gen.copper"),
