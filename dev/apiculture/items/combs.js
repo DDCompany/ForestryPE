@@ -39,3 +39,18 @@ Item.createItem("combWheaten", "Wheaten Comb", {name: "combWheaten", meta: 0}, {
 
 IDRegistry.genItemID("combIrradiated");
 Item.createItem("combIrradiated", "Irradiated Comb", {name: "combIrradiated", meta: 0}, {});
+
+COMBS.push(ItemID.combCocoa);
+COMBS.push(ItemID.combDripping);
+COMBS.push(ItemID.combHoney);
+COMBS.push(ItemID.combFrozen);
+COMBS.push(ItemID.combMellow);
+COMBS.push(ItemID.combMossy);
+COMBS.push(ItemID.combMysterious);
+COMBS.push(ItemID.combParched);
+COMBS.push(ItemID.combPowdery);
+COMBS.push(ItemID.combSilky);
+COMBS.push(ItemID.combSimmering);
+COMBS.push(ItemID.combStringy);
+COMBS.push(ItemID.combWheaten);
+COMBS.push(ItemID.combIrradiated);

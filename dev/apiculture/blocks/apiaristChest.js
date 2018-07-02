@@ -8,9 +8,11 @@ ChestManager.register("apiaristChest", "Apiarist's Chest",
     });
 
 Callback.addCallback("PostLoaded", function () {
-    Recipes.addShaped({id: BlockID.apiaristChest, count: 1, data: 0}, [
-        " g ",
-        "cbc",
-        "ccc"
-    ], ['g', 20, 0, 'c', ItemID.combHoney, 0, 'b', 54, 0]);
+    for(let i in COMBS) {
+        Recipes.addShaped({id: BlockID.apiaristChest, count: 1, data: 0}, [
+            " g ",
+            "cbc",
+            "ccc"
+        ], ['g', 20, 0, 'c', COMBS[i], 0, 'b', 54, 0]);
+    }
 });

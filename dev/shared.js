@@ -26,6 +26,7 @@ ModAPI.registerAPI("ForestryAPI", {
     FactoryManager: FactoryManager,
     StillManager: StillManager,
     MoistenerManager: MoistenerManager,
+    Combs: COMBS,
 
     generateOre: generateOre,
     registerLiquidContainer: registerLiquidContainer,

@@ -29,6 +29,7 @@ const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const AdaptedScriptEntity = ModAPI.requireGlobal("Entity");
 const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
 const Dimension = Native.Dimension;
+const COMBS = [];
 
 let BM_MUTATION_MODIFIER = 0.2;
 let BM_LIFESPAN_MODIFIER = 10;
