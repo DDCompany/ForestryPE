@@ -181,8 +181,9 @@ var ContainerHelper = {
         if (tile.liquidStorage.getAmount(liquid) < 1)
             return;
 
-        let slotEmpty = tile.container.getSlot(slotEmptyName);
-        let slotFull = tile.container.getSlot(slotFullName);
+        let container = tile.container;
+        let slotEmpty = container.getSlot(slotEmptyName);
+        let slotFull = container.getSlot(slotFullName);
         let full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
 
         if (full) {
@@ -191,6 +192,7 @@ var ContainerHelper = {
 
             slotEmpty.count--;
             tile.liquidStorage.getLiquid(liquid, 1);
+            container.validateSlot(slotEmptyName);
             return liquid;
         }
     },
@@ -261,5 +263,9 @@ var ContainerHelper = {
             default:
                 return true;
         }
+    },
+
+    equals: function (item1, item2) {
+        return item1.id === item2.id && (item1.data === item2.data || item1.data === -1 || item2.data === -1);
     }
 };
