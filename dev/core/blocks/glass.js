@@ -91,4 +91,25 @@ if (ForestryConfig.glassEnabled) {
             return [];
         }
     });
+
+    ModAPI.addAPICallback("FancyGlass", function (api) {
+       let fancyGlass = api.bakeModel;
+
+        fancyGlass(BlockID.forestryGlass, 0, "black");
+        fancyGlass(BlockID.forestryGlass, 1, "red");
+        fancyGlass(BlockID.forestryGlass, 2, "green");
+        fancyGlass(BlockID.forestryGlass, 3, "brown");
+        fancyGlass(BlockID.forestryGlass, 4, "blue");
+        fancyGlass(BlockID.forestryGlass, 5, "purple");
+        fancyGlass(BlockID.forestryGlass, 6, "cyan");
+        fancyGlass(BlockID.forestryGlass, 7, "lightgray");
+        fancyGlass(BlockID.forestryGlass, 8, "gray");
+        fancyGlass(BlockID.forestryGlass, 9, "pink");
+        fancyGlass(BlockID.forestryGlass, 10, "lime");
+        fancyGlass(BlockID.forestryGlass, 11, "yellow");
+        fancyGlass(BlockID.forestryGlass, 12, "lightblue");
+        fancyGlass(BlockID.forestryGlass, 13, "magenta");
+        fancyGlass(BlockID.forestryGlass, 14, "orange");
+        fancyGlass(BlockID.forestryGlass, 15, "white");
+    });
 }
