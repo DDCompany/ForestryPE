@@ -22,7 +22,7 @@ MachineRegistry.register(BlockID.carpenter, {
     },
 
     tick: function () {
-        ContainerHelper.emptyContainer(null, this, "slotContainer");
+        ContainerHelper.drainContainer(null, this, "slotContainer");
 
         if (this.data.progress <= 0) {
             let input = {};

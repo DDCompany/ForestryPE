@@ -16,12 +16,12 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
 
     tick: function () {
         var slotContainerFull = this.container.getSlot("slotLiquid");
+        let liquidStored = this.liquidStorage.getLiquidStored();
 
         if (this.data.time <= 0) {
-            var liquid = this.liquidStorage.getAmount("water") ? "water" : "lava";
-            if (this.liquidStorage.getAmount(liquid)) {
-                this.liquidStorage.getLiquid(liquid, 0.001);
-                if (liquid === "water") {
+            if (this.liquidStorage.getAmount(liquidStored)) {
+                this.liquidStorage.getLiquid(liquidStored, 0.001);
+                if (liquidStored === "water") {
                     this.data.time = 1;
                     this.data.humidity = 2;
                     this.data.climate = -1;
@@ -35,16 +35,10 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
             this.data.time--;
         }
 
-        if (this.liquidStorage.getAmount("water")) {
-            ContainerHelper.fluidContainerEmpty(["water"], this, {full: "slotLiquid", empty: "slotContainer"});
-        } else if (this.liquidStorage.getAmount("lava")) {
-            ContainerHelper.fluidContainerEmpty(["lava"], this, {full: "slotLiquid", empty: "slotContainer"});
-        } else if (slotContainerFull.id) {
-            ContainerHelper.fluidContainerEmpty(["lava", "water"], this, {full: "slotLiquid", empty: "slotContainer"});
-        }
+        if (slotContainerFull.id)
+            ContainerHelper.drainContainer2(liquidStored, this, "slotLiquid", "slotContainer");
 
-        this.liquidStorage.updateUiScale("liquidScale", this.liquidStorage.getAmount("water") ? "water" : "lava");
-
+        this.liquidStorage.updateUiScale("liquidScale", liquidStored);
         this.container.validateAll();
     },
 

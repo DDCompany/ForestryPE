@@ -16,7 +16,7 @@ MachineRegistry.register(BlockID.biogenerator, {
         },
 
         tick: function () {
-            ContainerHelper.emptyContainer(null, this, "slotContainer");
+            ContainerHelper.drainContainer(null, this, "slotContainer");
 
             let stored = this.liquidStorage.getLiquidStored();
             let fuel = BioGeneratorManager.getBiogeneratorFuel(stored);

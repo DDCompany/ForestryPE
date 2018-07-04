@@ -12,7 +12,7 @@ TileEntity.registerPrototype(BlockID.rainTank, {
     tick: function () {
         this.liquidStorage.updateUiScale("liquidScale", "water");
 
-        ContainerHelper.fluidContainerFilling("water", this, {empty: "slotContainer", full: "slotFullContainer"});
+        ContainerHelper.fillContainer("water", this, "slotContainer", "slotFullContainer");
 
         if (!(World.getThreadTime() % 20) && GenerationUtils.canSeeSky(this.x, this.y + 1, this.z) && World.getWeather().rain) {
             this.liquidStorage.addLiquid("water", 0.01);

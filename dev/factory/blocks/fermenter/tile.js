@@ -30,8 +30,8 @@ MachineRegistry.register(BlockID.fermenter, {
             this.liquidStorage.updateUiScale("liquidInputScale", null);
         }
 
-        ContainerHelper.emptyContainer(["water", "honey", "appleJuice"], this, "slotInputContainer");
-        ContainerHelper._fillContainer(["biomass"], this, {empty: "slotContainer", full: "slotFilledContainer"});
+        ContainerHelper.drainContainer(null, this, "slotInputContainer");
+        ContainerHelper.fillContainer("biomass", this, "slotContainer", "slotFilledContainer");
 
         if (this.data.reagentRemain === 0) {
 
