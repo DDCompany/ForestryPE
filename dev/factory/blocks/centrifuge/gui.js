@@ -1,8 +1,8 @@
-var centrifugeGUI = new UI.StandartWindow({
+const centrifugeGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Centrifuge")
+                text: "Centrifuge"
             }
         },
         inventory: {
@@ -19,14 +19,23 @@ var centrifugeGUI = new UI.StandartWindow({
     elements: {
         "progressScale": {
             type: "scale",
-            x: 490,
-            y: 177,
+            x: 487,
+            y: 178,
             direction: 1,
             value: 0,
             bitmap: "centrifuge_background_scale",
             scale: 3.2
         },
-        "progressEnergyScale": {
+        "progressScale2": {
+            type: "scale",
+            x: 564,
+            y: 178,
+            direction: 1,
+            value: 0,
+            bitmap: "centrifuge_background_scale",
+            scale: 3.2
+        },
+        "energyScale": {
             type: "scale",
             x: 335,
             y: 140,
@@ -36,16 +45,21 @@ var centrifugeGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slotInput": {type: "slot", x: 398, y: 178},
-
-        "slotOutput0": {type: "slot", x: 600, y: 116},
-        "slotOutput1": {type: "slot", x: 661, y: 116},
-        "slotOutput2": {type: "slot", x: 722, y: 116},
-        "slotOutput3": {type: "slot", x: 600, y: 177},
-        "slotOutput4": {type: "slot", x: 661, y: 177},
-        "slotOutput5": {type: "slot", x: 722, y: 177},
-        "slotOutput6": {type: "slot", x: 600, y: 238},
-        "slotOutput7": {type: "slot", x: 661, y: 238},
-        "slotOutput8": {type: "slot", x: 722, y: 238}
+        "slotInput": {type: "slot", x: 398, y: 181, size: 52},
+        "slotRecipe": {type: "slot", x: 505, y: 181, size: 52, visual: true}
     }
 });
+
+{
+    let content = centrifugeGUI.getContent();
+    let x = 620;
+    let y = 116;
+    for (let i = 0; i < 9; i++) {
+        content.elements["slotOutput" + i] = {type: "slot", x: x, y: y};
+        x += 61;
+        if(x >= 800) {
+            x = 620;
+            y += 61;
+        }
+    }
+}

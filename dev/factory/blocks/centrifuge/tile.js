@@ -1,53 +1,109 @@
 MachineRegistry.register(BlockID.centrifuge, {
-
-    OUTPUT_SLOTS: ["slotOutput0", "slotOutput1", "slotOutput2", "slotOutput3", "slotOutput4", "slotOutput5", "slotOutput6", "slotOutput7", "slotOutput8"],
-
     defaultValues: {
         progress: 0,
+        progressMax: 0,
         outputIDs: []
     },
 
     getTransportSlots: function () {
-        return {input: ["slotInput"], output: this.OUTPUT_SLOTS};
+        return {
+            input: ["slotInput"],
+            output: ["slotOutput0", "slotOutput1", "slotOutput2", "slotOutput3", "slotOutput4", "slotOutput5", "slotOutput6", "slotOutput7", "slotOutput8"]
+        };
     },
 
-    getGuiScreen: function () {
-        return centrifugeGUI;
+    findWork: function () {
+        let slot = this.container.getSlot("slotInput");
+        let recipe = CentrifugeManager.getRecipe(slot.id, slot.data);
+
+        if (recipe) {
+            let slotRecipe = this.container.getSlot("slotRecipe");
+            slotRecipe.id = slot.id;
+            slotRecipe.data = slot.data;
+            slotRecipe.count = 1;
+
+            this.data.progress = 1;
+            this.data.progressMax = recipe.time || 20;
+
+            let result = recipe.result;
+            let newResult = [];
+
+            for (let i in result) {
+                let item = result[i];
+                if (!item.chance || Math.random() < item.chance)
+                    newResult.push(item);
+            }
+            this.data.outputIDs = newResult;
+
+            slot.count--;
+            this.container.validateSlot("slotInput");
+        }
+    },
+
+    putResult: function() {
+        let result = this.data.outputIDs;
+        let notAdded = [];
+
+        for (let i in result) {
+            let item = result[i];
+            let added = false;
+
+            for (let j = 0; j < 9; j++) {
+                let slot = this.container.getSlot("slotOutput" + j);
+
+                if(!slot.id) {
+                    slot.id = item.id;
+                    slot.data = item.data;
+                    slot.count = 1;
+                    added = true;
+                    break;
+                }else if (slot.id === item.id && slot.data === item.data && slot.count < Item.getMaxStack(slot.id)) {
+                    slot.count++;
+                    added = true;
+                    break;
+                }
+            }
+
+            if(!added)
+                notAdded.push(item);
+        }
+
+        this.data.outputIDs = notAdded;
+        return !notAdded.length;
     },
 
     tick: function () {
+        if (World.getThreadTime() % 5 !== 0)
+            return;
 
-        if (World.getThreadTime() % 5 === 0) {
-            if (this.data.progress > 0 && this.data.energy >= 160) {
+        if (this.data.energy >= 160) {
+            if (this.data.progress) {
+                if (this.data.progress >= this.data.progressMax) {
+                    if(this.putResult()) {
+                        let slotRecipe = this.container.getSlot("slotRecipe");
+                        slotRecipe.id = 0;
+                        slotRecipe.data = 0;
 
-                if (this.data.progress >= 20) {
-                    this.data.progress = 0;
-                    ContainerHelper.putInSlotsChance(this.data.outputIDs, this.container, this.OUTPUT_SLOTS)
+                        this.data.progress = 0;
+                    }
                 } else {
                     this.data.progress++;
                     this.data.energy -= 160;
                 }
-
-            } else if (this.data.progress === 0) {
-                let slotInput = this.container.getSlot("slotInput");
-                let output = CentrifugeManager.getRecipe(slotInput.id, slotInput.data);
-                if (output) {
-                    this.data.progress = 1;
-                    this.data.outputIDs = output.result;
-                    slotInput.count--;
-                    this.container.validateAll();
-                }
-
-            }
+            } else this.findWork();
         }
 
-        this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-        this.container.setScale("progressScale", this.data.progress / 20);
+        let progress = (this.data.progress / this.data.progressMax) || 0;
+        this.container.setScale("progressScale", progress);
+        this.container.setScale("progressScale2", progress);
+        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
     },
 
     getEnergyStorage: function () {
         return 5000;
     },
 
-
+    getGuiScreen: function () {
+        return centrifugeGUI;
+    }
 });

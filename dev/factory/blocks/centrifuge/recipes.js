@@ -1,104 +1,235 @@
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.propolisSilky, data: 0},
-    result: [[ItemID.propolis, 0, 0.1], [ItemID.silkWisp, 0, 0.6]]
-
+    input: {
+        id: ItemID.propolisSilky
+    },
+    result: [
+        {
+            id: ItemID.propolis,
+            chance: 0.8
+        },
+        {
+            id: ItemID.silkWisp,
+            chance: 0.6
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.propolis, data: 0},
-    result: [[ItemID.latex, 0, 1]]
-
+    input: {
+        id: ItemID.combCocoa
+    },
+    result: [
+        {
+            id: ItemID.beeswax
+        },
+        {
+            id: 351,
+            data: 3,
+            chance: 0.9
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combCocoa, data: 0},
-    result: [[ItemID.beeswax, 0, 1], [351, 3, 0.9]]
-
+    input: {
+        id: ItemID.combDripping
+    },
+    result: [
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.4
+        },
+        {
+            id: ItemID.honeydew
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combDripping, data: 0},
-    result: [[ItemID.honeyDrop, 0, 0.4], [ItemID.honeydew, 0, 1]]
-
+    input: {
+        id: ItemID.combHoney
+    },
+    result: [
+        {
+            id: ItemID.beeswax
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.9
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combHoney, data: 0},
-    result: [[ItemID.beeswax, 0, 1], [ItemID.honeyDrop, 0, 0.9]]
-
+    input: {
+        id: ItemID.combFrozen
+    },
+    result: [
+        {
+            id: ItemID.beeswax,
+            chance: 0.8
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.7
+        },
+        {
+            id: 332,
+            chance: 0.2
+        },
+        {
+            id: ItemID.pollen,
+            chance: 0.2
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combFrozen, data: 0},
-    result: [[ItemID.beeswax, 0, 0.8], [ItemID.honeyDrop, 0, 0.7], [332, 0, 0.2], [ItemID.pollen, 0, 0.2]]
-
+    input: {
+        id: ItemID.combMellow
+    },
+    result: [
+        {
+            id: ItemID.beeswax,
+            chance: 0.2
+        },
+        {
+            id: 406,
+            chance: 0.3
+        },
+        {
+            id: ItemID.honeydew,
+            chance: 0.6
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combMellow, data: 0},
-    result: [[ItemID.beeswax, 0, 0.2], [406, 0, 0.3], [ItemID.honeydew, 0, 0.6]]
-
+    input: {
+        id: ItemID.combMossy
+    },
+    result: [
+        {
+            id: ItemID.beeswax
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.9
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combMossy, data: 0},
-    result: [[ItemID.beeswax, 0, 1], [ItemID.honeyDrop, 0, 0.9]]
-
+    input: {
+        id: ItemID.combMysterious
+    },
+    result: [
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.4
+        },
+        {
+            id: ItemID.propolisPulse
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combMysterious, data: 0},
-    result: [[ItemID.honeyDrop, 0, 0.4], [ItemID.propolisPulse, 0, 1]]
-
+    input: {
+        id: ItemID.combParched
+    },
+    result: [
+        {
+            id: ItemID.beeswax
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.9
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combParched, data: 0},
-    result: [[ItemID.beeswax, 0, 1], [ItemID.honeyDrop, 0, 0.9]]
-
+    input: {
+        id: ItemID.combPowdery
+    },
+    result: [
+        {
+            id: 289,
+            chance: 0.9
+        },
+        {
+            id: ItemID.beeswax,
+            chance: 0.2
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.2
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combPowdery, data: 0},
-    result: [[289, 0, 0.9], [ItemID.beeswax, 0, 0.2], [ItemID.honeyDrop, 0, 0.2]]
-
+    input: {
+        id: ItemID.combSilky
+    },
+    result: [
+        {
+            id: ItemID.honeyDrop
+        },
+        {
+            id: ItemID.propolisSilky,
+            chance: 0.8
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combSilky, data: 0},
-    result: [[ItemID.honeyDrop, 0, 1], [ItemID.propolisSilky, 0, 0.8]]
-
+    input: {
+        id: ItemID.combSimmering
+    },
+    result: [
+        {
+            id: ItemID.refractoryWax
+        },
+        {
+            id: ItemID.phosphor,
+            chance: 0.9
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combSimmering, data: 0},
-    result: [[ItemID.refractoryWax, 0, 1], [ItemID.phosphor, 0, 0.9]]
-
+    input: {
+        id: ItemID.combStringy
+    },
+    result: [
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.4
+        },
+        {
+            id: ItemID.propolis
+        }
+    ]
 });
 
 CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combStringy, data: 0},
-    result: [[ItemID.honeyDrop, 0, 0.4], [ItemID.propolis, 0, 1]]
-
-});
-
-CentrifugeManager.registerRecipe({
-
-    input: {id: ItemID.combWheaten, data: 0},
-    result: [[296, 0, 0.8], [ItemID.honeyDrop, 0, 0.2], [ItemID.beeswax, 0, 0.2]]
-
+    input: {
+        id: ItemID.combWheaten
+    },
+    result: [
+        {
+            id: 296,
+            chance: 0.8
+        },
+        {
+            id: ItemID.honeyDrop,
+            chance: 0.2
+        },
+        {
+            id: ItemID.beeswax,
+            chance: 0.2
+        }
+    ]
 });

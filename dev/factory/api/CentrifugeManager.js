@@ -2,6 +2,22 @@ const CentrifugeManager = {
     recipes: [],
 
     registerRecipe: function (recipe) {
+        let input = recipe.input;
+        let result = recipe.result;
+
+        if(!result)
+            return;
+
+        if (!input)
+            return;
+
+        input.data = input.data || 0;
+
+        for(let i in result) {
+            let item = result[i];
+            item.data = item.data || 0;
+        }
+
         this.recipes.push(recipe);
     },
 
@@ -13,5 +29,4 @@ const CentrifugeManager = {
             }
         }
     }
-
 };

@@ -19,16 +19,6 @@ const ContainerHelper = {
         }
     },
 
-    putInSlotsChance: function (toPut, container, slots) {
-        let arr = [];
-        for (key in toPut) {
-            if (Math.random() < toPut[key][2]) {
-                arr.push([toPut[key][0], toPut[key][1], 1]);
-            }
-        }
-        this.putInSlots(arr, container, slots)
-    },
-
     putInSlot: function (slot, item) {
         let count = item.count || 1;
 
