@@ -6,82 +6,82 @@ if (ForestryConfig.glassEnabled) {
             return [
                 {
                     name: "Black Glass",
-                    texture: [["black", 0], ["black", 0], ["black", 0], ["black", 0], ["black", 0], ["black", 0]],
+                    texture: [["glass_black", 0], ["glass_black", 0], ["glass_black", 0], ["glass_black", 0], ["glass_black", 0], ["glass_black", 0]],
                     inCreative: true
                 },
                 {
                     name: "Red Glass",
-                    texture: [["red", 0], ["red", 0], ["red", 0], ["red", 0], ["red", 0], ["red", 0]],
+                    texture: [["glass_red", 0], ["glass_red", 0], ["glass_red", 0], ["glass_red", 0], ["glass_red", 0], ["glass_red", 0]],
                     inCreative: true
                 },
                 {
                     name: "Green Glass",
-                    texture: [["green", 0], ["green", 0], ["green", 0], ["green", 0], ["green", 0], ["green", 0]],
+                    texture: [["glass_green", 0], ["glass_green", 0], ["glass_green", 0], ["glass_green", 0], ["glass_green", 0], ["glass_green", 0]],
                     inCreative: true
                 },
                 {
                     name: "Brown Glass",
-                    texture: [["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0], ["brown", 0]],
+                    texture: [["glass_brown", 0], ["glass_brown", 0], ["glass_brown", 0], ["glass_brown", 0], ["glass_brown", 0], ["glass_brown", 0]],
                     inCreative: true
                 },
                 {
                     name: "Blue Glass",
-                    texture: [["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0], ["blue", 0]],
+                    texture: [["glass_blue", 0], ["glass_blue", 0], ["glass_blue", 0], ["glass_blue", 0], ["glass_blue", 0], ["glass_blue", 0]],
                     inCreative: true
                 },
                 {
                     name: "Purple Glass",
-                    texture: [["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0], ["purple", 0]],
+                    texture: [["glass_purple", 0], ["glass_purple", 0], ["glass_purple", 0], ["glass_purple", 0], ["glass_purple", 0], ["glass_purple", 0]],
                     inCreative: true
                 },
                 {
                     name: "Cyan Glass",
-                    texture: [["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0], ["cyan", 0]],
+                    texture: [["glass_cyan", 0], ["glass_cyan", 0], ["glass_cyan", 0], ["glass_cyan", 0], ["glass_cyan", 0], ["glass_cyan", 0]],
                     inCreative: true
                 },
                 {
                     name: "Light Gray glass",
-                    texture: [["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0], ["lightgray", 0]],
+                    texture: [["glass_lightgray", 0], ["glass_lightgray", 0], ["glass_lightgray", 0], ["glass_lightgray", 0], ["glass_lightgray", 0], ["glass_lightgray", 0]],
                     inCreative: true
                 },
                 {
                     name: "Gray Glass",
-                    texture: [["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0], ["gray", 0]],
+                    texture: [["glass_gray", 0], ["glass_gray", 0], ["glass_gray", 0], ["glass_gray", 0], ["glass_gray", 0], ["glass_gray", 0]],
                     inCreative: true
                 },
                 {
                     name: "Pink Glass",
-                    texture: [["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0], ["pink", 0]],
+                    texture: [["glass_pink", 0], ["glass_pink", 0], ["glass_pink", 0], ["glass_pink", 0], ["glass_pink", 0], ["glass_pink", 0]],
                     inCreative: true
                 },
                 {
                     name: "Lime Glass",
-                    texture: [["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0], ["lime", 0]],
+                    texture: [["glass_lime", 0], ["glass_lime", 0], ["glass_lime", 0], ["glass_lime", 0], ["glass_lime", 0], ["glass_lime", 0]],
                     inCreative: true
                 },
                 {
                     name: "Yellow Glass",
-                    texture: [["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0], ["yellow", 0]],
+                    texture: [["glass_yellow", 0], ["glass_yellow", 0], ["glass_yellow", 0], ["glass_yellow", 0], ["glass_yellow", 0], ["glass_yellow", 0]],
                     inCreative: true
                 },
                 {
                     name: "Light Blue Glass",
-                    texture: [["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0], ["lightblue", 0]],
+                    texture: [["glass_lightblue", 0], ["glass_lightblue", 0], ["glass_lightblue", 0], ["glass_lightblue", 0], ["glass_lightblue", 0], ["glass_lightblue", 0]],
                     inCreative: true
                 },
                 {
                     name: "Magenta Glass",
-                    texture: [["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0], ["magenta", 0]],
+                    texture: [["glass_magenta", 0], ["glass_magenta", 0], ["glass_magenta", 0], ["glass_magenta", 0], ["glass_magenta", 0], ["glass_magenta", 0]],
                     inCreative: true
                 },
                 {
                     name: "Orange Glass",
-                    texture: [["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0], ["orange", 0]],
+                    texture: [["glass_orange", 0], ["glass_orange", 0], ["glass_orange", 0], ["glass_orange", 0], ["glass_orange", 0], ["glass_orange", 0]],
                     inCreative: true
                 },
                 {
                     name: "White Glass",
-                    texture: [["white", 0], ["white", 0], ["white", 0], ["white", 0], ["white", 0], ["white", 0]],
+                    texture: [["glass_white", 0], ["glass_white", 0], ["glass_white", 0], ["glass_white", 0], ["glass_white", 0], ["glass_white", 0]],
                     inCreative: true
                 }
             ];
@@ -95,21 +95,21 @@ if (ForestryConfig.glassEnabled) {
     ModAPI.addAPICallback("FancyGlass", function (api) {
        let fancyGlass = api.bakeModel;
 
-        fancyGlass(BlockID.forestryGlass, 0, "black");
-        fancyGlass(BlockID.forestryGlass, 1, "red");
-        fancyGlass(BlockID.forestryGlass, 2, "green");
-        fancyGlass(BlockID.forestryGlass, 3, "brown");
-        fancyGlass(BlockID.forestryGlass, 4, "blue");
-        fancyGlass(BlockID.forestryGlass, 5, "purple");
-        fancyGlass(BlockID.forestryGlass, 6, "cyan");
-        fancyGlass(BlockID.forestryGlass, 7, "lightgray");
-        fancyGlass(BlockID.forestryGlass, 8, "gray");
-        fancyGlass(BlockID.forestryGlass, 9, "pink");
-        fancyGlass(BlockID.forestryGlass, 10, "lime");
-        fancyGlass(BlockID.forestryGlass, 11, "yellow");
-        fancyGlass(BlockID.forestryGlass, 12, "lightblue");
-        fancyGlass(BlockID.forestryGlass, 13, "magenta");
-        fancyGlass(BlockID.forestryGlass, 14, "orange");
-        fancyGlass(BlockID.forestryGlass, 15, "white");
+        fancyGlass(BlockID.forestryGlass, 0, "glass_black");
+        fancyGlass(BlockID.forestryGlass, 1, "glass_red");
+        fancyGlass(BlockID.forestryGlass, 2, "glass_green");
+        fancyGlass(BlockID.forestryGlass, 3, "glass_brown");
+        fancyGlass(BlockID.forestryGlass, 4, "glass_blue");
+        fancyGlass(BlockID.forestryGlass, 5, "glass_purple");
+        fancyGlass(BlockID.forestryGlass, 6, "glass_cyan");
+        fancyGlass(BlockID.forestryGlass, 7, "glass_lightgray");
+        fancyGlass(BlockID.forestryGlass, 8, "glass_gray");
+        fancyGlass(BlockID.forestryGlass, 9, "glass_pink");
+        fancyGlass(BlockID.forestryGlass, 10, "glass_lime");
+        fancyGlass(BlockID.forestryGlass, 11, "glass_yellow");
+        fancyGlass(BlockID.forestryGlass, 12, "glass_lightblue");
+        fancyGlass(BlockID.forestryGlass, 13, "glass_magenta");
+        fancyGlass(BlockID.forestryGlass, 14, "glass_orange");
+        fancyGlass(BlockID.forestryGlass, 15, "glass_white");
     });
 }
