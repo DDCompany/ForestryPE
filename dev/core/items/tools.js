@@ -53,20 +53,16 @@ Callback.addCallback("PostLoaded", function () {
     ], ['s', 280, 0, 'b', ItemID.ingotBronze, 0]);
 
     Recipes.addShaped({id: ItemID.bronzeShovel, count: 1, data: 0}, [
-        " s ",
-        " s ",
-        " b "
+        "s",
+        "s",
+        "b"
     ], ['s', 280, 0, 'b', ItemID.ingotBronze, 0]);
 
     Recipes.addShaped({id: ItemID.kitPickaxe, count: 1, data: 0}, [
-        "   ",
-        "pc ",
-        "   "
+        "pc",
     ], ['p', ItemID.bronzePickaxe, 0, 'c', ItemID.carton, -1]);
 
     Recipes.addShaped({id: ItemID.kitShovel, count: 1, data: 0}, [
-        "   ",
-        "pc ",
-        "   "
+        "pc",
     ], ['p', ItemID.bronzeShovel, 0, 'c', ItemID.carton, -1]);
 });

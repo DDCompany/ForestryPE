@@ -100,20 +100,15 @@ Item.registerUseFunction("waxCapsuleEmpty", function (coords) {
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.waxCapsuleEmpty, count: 4, data: 0}, [
         "xxx",
-        "   ",
-        "   "
     ], ['x', ItemID.beeswax, 0]);
 
     Recipes.addShaped({id: ItemID.canEmpty, count: 12, data: 0}, [
         " x ",
         "x x",
-        "   "
     ], ['x', ItemID.ingotTin, 0]);
 
     Recipes.addShaped({id: ItemID.refractoryEmpty, count: 4, data: 0}, [
         "xxx",
-        "   ",
-        "   "
     ], ['x', ItemID.refractoryWax, 0]);
 
     let milkCapsules = [ItemID.canMilk, ItemID.refractoryMilk, ItemID.waxCapsuleMilk];
