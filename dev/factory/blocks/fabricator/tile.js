@@ -16,7 +16,7 @@ MachineRegistry.register(BlockID.fabricator, {
     },
 
     init: function () {
-        this.liquidStorage.setLimit(null, 2);
+        this.liquidStorage.setLimit(null, 8);
     },
 
     decreaseTemperature: function () {
