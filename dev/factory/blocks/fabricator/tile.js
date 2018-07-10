@@ -3,7 +3,8 @@ MachineRegistry.register(BlockID.fabricator, {
 
     defaultValues: {
         temperature: 0,
-        workCounter: 0
+        glassAmount: 0,
+        output: null
     },
 
     getTransportSlots: function () {
@@ -15,129 +16,139 @@ MachineRegistry.register(BlockID.fabricator, {
     },
 
     init: function () {
-        this.liquidStorage.setLimit("forestryGlass", 2);
+        this.liquidStorage.setLimit(null, 2);
     },
 
-    getGuiScreen: function () {
-        return fabricatorGUI;
+    decreaseTemperature: function () {
+        let temperature = this.data.temperature;
+
+        if (temperature > 2500)
+            this.data.temperature -= 2;
+        else this.data.temperature--;
     },
 
-    tick: function () {
-        let slotGlass = this.container.getSlot("slotGlass");
+    findWork: function () {
+        let pattern = {};
 
-        if (slotGlass.id > 0) {
-            let add = false;
-
-            if (slotGlass.id === 20 && this.data.temperature >= 1000) {
-                add = 1;
-            } else if (slotGlass.id === 102 && this.data.temperature >= 1000) {
-                add = 0.375;
-            } else if (slotGlass.id === 12 && this.data.temperature >= 3000) {
-                add = 1;
-            }
-
-            if (add && this.liquidStorage.getAmount("forestryGlass") + add <= 2) {
-                this.liquidStorage.addLiquid("forestryGlass", add);
-                slotGlass.count--;
-            }
+        for (let i = 0; i < 9; i++) {
+            let item = this.container.getSlot("slotInput" + i);
+            pattern["slot" + i] = item;
         }
 
-        if (this.data.temperature >= 0) {
-            if (this.data.temperature > 2500)
-                this.data.temperature -= 2;
-            else
-                this.data.temperature--;
+        let recipe = FabricatorManager.getRecipe(pattern);
 
-            let input = {};
-
-            for (let i = 0; i < 9; i++) {
-                let slot = this.container.getSlot("slotInput" + i);
-                input["slot" + i] = {
-                    id: slot.id,
-                    data: slot.data,
-                    count: slot.count
-                };
+        if (recipe) {
+            let slotSpecial = this.container.getSlot("slotSpecial");
+            let special = recipe.special;
+            if (special) {
+                // noinspection EqualityComparisonWithCoercionJS
+                if (slotSpecial.id !== special.id || slotSpecial.data != (special.data || 0))
+                    return;
             }
 
-            let recipe = FabricatorManager.registerRecipe(input);
-            if (recipe) {
-                let glassRequired = !recipe.glassRequired ? 1 : recipe.glassRequired;
+            let slots = {};
 
-                if (this.liquidStorage.getAmount("forestryGlass") >= glassRequired) {
-                    let f = false;
-                    let slotDop = this.container.getSlot("slotDop");
-                    if (((!recipe.dop || recipe.dop.id === 0) && slotDop.id === 0) ||
-                        (recipe.dop && recipe.dop.id === slotDop.id && recipe.dop.data === slotDop.data && recipe.dop.count <= slotDop.count)) {
-                        if (recipe.dop && recipe.dop.dec) {
-                            slotDop.count -= recipe.dop.count;
-                        }
+            for (let i = 0; i < 9; i++) {
+                let item = this.container.getSlot("slotInput" + i);
 
-                        let slotResult = this.container.getSlot("slotResult");
+                if (!item.id)
+                    continue;
 
-                        if (!slotResult || slotResult.id === 0) {
-                            f = true;
-                            slotResult.id = recipe.output.id;
-                            slotResult.data = recipe.output.data;
-                            slotResult.count = recipe.output.count;
-                        } else if (slotResult && slotResult.id === recipe.output.id && slotResult.data === recipe.output.data && recipe.output.count + slotResult.count <= Item.getMaxStack(slotResult.id)) {
-                            f = true;
-                            slotResult.count += recipe.output.count;
-                        }
+                for (let k = 0; k < 18; k++) {
+                    let slot = this.container.getSlot("slotResources" + k);
 
-                        if (f) {
-                            this.liquidStorage.getLiquid("forestryGlass", glassRequired);
-                            for (let i = 0; i < 9; i++) {
-                                let g = true;
-                                let slot = this.container.getSlot("slotInput" + i);
-                                if (slot.id) {
-                                    for (let j = 0; j < 19; j++) {
-                                        let res_slot = this.container.getSlot("slotResources" + j);
-                                        if (res_slot && res_slot.id && res_slot.id === slot.id && res_slot.data === slot.data) {
-                                            res_slot.count--;
-                                            g = false;
-                                            break;
-                                        }
-                                    }
-                                    if (g) {
-                                        slot.count--;
-                                    } else {
-                                        g = true;
-                                    }
-                                }
+                    if (slot.id && ContainerHelper.equals(slot, item)) {
+                        let count = slots[k];
+
+                        if (!count) {
+                            slots[k] = 1;
+                        } else {
+                            if (slot.count < count + 1) {
+                                if (k === 17)
+                                    return;
+
+                                continue
                             }
+
+                            slots[k] = count + 1;
                         }
+                        break;
+                    } else if (k === 17) {
+                        return;
                     }
                 }
             }
-        } else if (this.liquidStorage.getAmount("forestryGlass")) {
-            this.liquidStorage.getLiquid("forestryGlass", 0.005);
-        }
 
-        if (World.getThreadTime() % 5 === 0) {
-
-            if (this.data.workCounter < 4) {
-
-                if (this.data.energy >= 50) {
-                    this.data.energy -= 50;
-                    this.data.workCounter++;
-                }
-
-            } else {
-                this.data.temperature += 100;
-                this.data.workCounter = 0;
+            for (let i in slots) {
+                let slot = this.container.getSlot("slotResources" + i);
+                slot.count -= slots[i];
             }
 
+            if (special && special.dec) {
+                slotSpecial.count -= 1;
+            }
+
+            this.data.output = recipe.output;
+            this.data.glassAmount = recipe.amount;
+            this.container.validateAll();
+        }
+    },
+
+    trySmelt: function () {
+        let slot = this.container.getSlot("slotGlass");
+        let smelting = FabricatorManager.getSmelting(slot.id, slot.data);
+
+        if (smelting && this.data.temperature >= smelting.temperature) {
+            if (this.liquidStorage.getAmount("forestryGlass") + smelting.amount <= 2) {
+                this.liquidStorage.addLiquid("forestryGlass", smelting.amount);
+                slot.count--;
+                this.container.validateSlot("slotGlass");
+            }
+        }
+    },
+
+    heat: function () {
+        this.data.temperature = Math.min(this.TEMPERATURE_MAX, this.data.temperature + 10);
+    },
+
+    tick: function () {
+        if(World.getThreadTime() % 5 !== 0)
+            return;
+
+        if(this.data.energy >= 200) {
+            if (this.data.output) {
+                this.heat();
+                this.trySmelt();
+
+                let slot = this.container.getSlot("slotResult");
+
+                if (this.liquidStorage.getAmount("forestryGlass") >= this.data.glassAmount
+                    && ContainerHelper.putInSlot(slot, this.data.output)) {
+                    this.liquidStorage.getLiquid("forestryGlass", this.data.glassAmount);
+                    this.data.output = null;
+                }
+                this.data.energy -= 200;
+            } else {
+                this.findWork();
+            }
+        }
+
+        if(this.data.temperature > 0) {
+            this.decreaseTemperature();
+        }else if(this.liquidStorage.getAmount("forestryGlass")){
+            this.liquidStorage.getLiquid("forestryGlass", 0.05)
         }
 
         this.container.setScale("temperatureScale", this.data.temperature / this.TEMPERATURE_MAX);
-        this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-        this.liquidStorage.updateUiScale("liquedGlassScale", "forestryGlass");
-
-        this.container.validateAll();
+        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
+        this.liquidStorage.updateUiScale("smeltingScale", "forestryGlass");
     },
 
     getEnergyStorage: function () {
         return 3300;
-    }
+    },
 
+    getGuiScreen: function () {
+        return fabricatorGUI;
+    }
 });

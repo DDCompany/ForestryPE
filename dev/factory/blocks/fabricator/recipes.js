@@ -1,7 +1,33 @@
+//Smelting
+FabricatorManager.addSmelting({
+    input: {
+        id: 20
+    },
+    amount: 1,
+    temperature: 1000
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 102
+    },
+    amount: 0.375,
+    temperature: 1000
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 24
+    },
+    amount: 1,
+    temperature: 3000
+});
+
+//Recipes
 for (let i = 0; i < 16; i++) {
     FabricatorManager.registerRecipe({
         input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolis, data: 0}},
-        dop: {
+        special: {
             id: ItemID.waxCast,
             data: 0,
             count: 1,
@@ -19,7 +45,7 @@ if (ForestryConfig.glassEnabled) {
     for (let i = 0; i < 16; i++) {
         FabricatorManager.registerRecipe({
         input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
-        dop: {
+        special: {
             id: ItemID.waxCast,
             data: 0,
             count: 1,
@@ -35,10 +61,9 @@ if (ForestryConfig.glassEnabled) {
 }
 
     for (let i = 0; i < 16; i++) {
-
         FabricatorManager.registerRecipe({
             input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisPulse, data: 0}},
-            dop: {
+            special: {
                 id: ItemID.waxCast,
                 data: 0,
                 count: 1,

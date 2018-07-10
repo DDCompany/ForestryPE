@@ -1,31 +1,45 @@
 const FabricatorManager = {
     recipes: [],
+    smeltingList: {},
 
     registerRecipe: function (recipe) {
+        recipe.amount = recipe.amount || 0.5;
+
         this.recipes.push(recipe);
     },
 
-    getRecipe: function (input) {
-        for (let recipe in this.recipes) {
-            let comp = 0;
-            for (let i = 0; i < 9; i++) {
-                let item = this.recipes[recipe].input["slot" + i];
+    addSmelting: function (smelting) {
+        let input = smelting.input;
+        if(!input)
+            return;
 
-                if ((!item && input["slot" + i].id === 0) || (item && item.id === 0 && input["slot" + i].id === 0)) {
-                    comp++;
-                } else if (item && input["slot" + i] && item.id === input["slot" + i].id && item.data === input["slot" + i].data) {
-                    comp++;
-                } else {
+        smelting.temperature = smelting.temperature || 0;
+
+        this.smeltingList[input.id + ":" + (input.data || 0)] = smelting;
+    },
+
+    getSmelting: function(id, data) {
+        return this.smeltingList[id + ":" + data];
+    },
+
+    getRecipe: function (pattern) {
+        for (let i in this.recipes) {
+            let recipe = this.recipes[i];
+            let isOk = true;
+
+            for (let i = 0; i < 9; i++) {
+                let name = "slot" + i;
+                let recipePattern = recipe.input[name];
+                let input = pattern[name];
+
+                if (!ContainerHelper.equals(recipePattern, input)) {
+                    isOk = false;
                     break;
                 }
             }
-            if (comp === 9) {
-                return this.recipes[recipe];
-            } else {
-                comp = 0;
-            }
-        }
-        return null;
-    }
 
+            if (isOk)
+                return recipe;
+        }
+    }
 };
