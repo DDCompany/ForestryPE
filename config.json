@@ -20,10 +20,10 @@
     "beehivesMarshyChance": 0.2,
     "beehivesEnderChance": 0.02,
     "apatite": true,
-    "apatiteInChunk": 12,
-    "apatiteSize": 3,
+    "apatiteSize": 126,
     "copper": true,
-    "copperSize": 126,
+    "copperInChunk": 20,
+    "copperSize": 6,
     "tin": true,
     "tinInChunk": 18,
     "tinSize": 6
