@@ -1,16 +1,10 @@
 MachineRegistry.register(BlockID.carpenter, {
-
     defaultValues: {
         progress: 0,
-        progressMax: 0,
-        output: 0
+        progressMax: 0
     },
     init: function () {
         this.liquidStorage.setLimit(null, 10);
-    },
-
-    getGuiScreen: function () {
-        return carpenterGUI;
     },
 
     getTransportSlots: function () {
@@ -21,81 +15,117 @@ MachineRegistry.register(BlockID.carpenter, {
         return {input: inp, output: ["slotOutput"]};
     },
 
-    tick: function () {
-        ContainerHelper.drainContainer(null, this, "slotContainer");
+    findWork: function () {
+        let pattern = {};
 
-        if (this.data.progress <= 0) {
-            let input = {};
+        for (let i = 0; i < 9; i++) {
+            let item = this.container.getSlot("slotInput" + i);
+            pattern["slot" + i] = item;
+        }
 
-            for (let i = 0; i < 9; i++) {
-                input["slot" + i] = this.container.getSlot("slotInput" + i)
+        let recipe = CarpenterManager.getRecipe(pattern);
+
+        if (recipe) {
+            let liquid = recipe.liquid;
+            let liquidAmount = recipe.liquidAmount || 1;
+            if (liquid && this.liquidStorage.getAmount(liquid) < liquidAmount) {
+                return;
             }
 
-            let recipe = CarpenterManager.getRecipe(input);
+            let slotSpecial = this.container.getSlot("slotSpecial");
+            let special = recipe.special;
+            if (special) {
+                // noinspection EqualityComparisonWithCoercionJS
+                if (slotSpecial.id !== special.id || slotSpecial.data != (special.data || 0))
+                    return;
+            }
 
-            if (recipe) {
-                let liquidStorage = this.liquidStorage;
-                let liquidStored = liquidStorage.getLiquidStored();
+            let slots = {};
 
-                if ((!recipe.liquid && !liquidStored) || (recipe.liquid === liquidStored && recipe.liquidAmount <= liquidStorage.getAmount(liquidStored))) {
-                    let slotSpecial = this.container.getSlot("slotSpecial");
+            for (let i = 0; i < 9; i++) {
+                let item = this.container.getSlot("slotInput" + i);
 
-                    if ((!recipe.dop && slotSpecial.id === 0) || (recipe.dop && slotSpecial.id === recipe.dop.id && slotSpecial.data === recipe.dop.data)) {
-                        this.data.output = recipe.output;
-                        if (recipe.liquid) {
-                            this.liquidStorage.getLiquid(liquidStorage.getLiquidStored(), recipe.liquidAmount);
+                if (!item.id)
+                    continue;
+
+                for (let k = 0; k < 18; k++) {
+                    let slot = this.container.getSlot("slotResources" + k);
+
+                    if (slot.id && ContainerHelper.equals(slot, item)) {
+                        let count = slots[k];
+
+                        if (!count) {
+                            slots[k] = 1;
+                        } else {
+                            if (slot.count < count + 1) {
+                                if (k === 17)
+                                    return;
+
+                                continue
+                            }
+
+                            slots[k] = count + 1;
                         }
-                        this.data.progress = 1;
-                        this.data.progressMax = recipe.time || 50;
-                        if (recipe.dop && recipe.dop.dec) {
-                            let b = true;
-                            for (let j = 0; j < 19; j++) {
-                                let res_slot = this.container.getSlot("slotResources" + j);
-                                if (res_slot && res_slot.id && res_slot.id === recipe.dop.id && res_slot.data === recipe.dop.data) {
-                                    res_slot.count--;
-                                    b = false;
-                                    break;
-                                }
-                            }
-                            if (b) {
-                                slotSpecial.count--;
-                            }
-                        }
-                        for (let i = 0; i < 9; i++) {
-                            let slot = this.container.getSlot("slotInput" + i);
-                            let g = true;
-                            for (let j = 0; j < 19; j++) {
-                                let res_slot = this.container.getSlot("slotResources" + j);
-                                if (res_slot && res_slot.id && res_slot.id === slot.id && res_slot.data === slot.data) {
-                                    res_slot.count--;
-                                    g = false;
-                                    this.container.validateSlot("slotResources" + j);
-                                    break;
-                                }
-                            }
-                            if (g) {
-                                slot.count--;
-                            }
-                        }
+                        break;
+                    } else if (k === 17) {
+                        return;
                     }
                 }
             }
 
-
-        } else if (this.data.energy >= 204) {
-            if (this.data.progress > this.data.progressMax) {
-                if (ContainerHelper.putInSlot(this.container.getSlot("slotOutput"), this.data.output)) {
-                    this.data.progress = 0;
-                    this.data.progressMax = 0;
-                }
-            } else {
-                this.data.progress++;
-                this.data.energy -= 204;
+            for (let i in slots) {
+                let slot = this.container.getSlot("slotResources" + i);
+                slot.count -= slots[i];
             }
+
+            this.liquidStorage.getLiquid(liquid, liquidAmount);
+
+            if (special && special.dec) {
+                slotSpecial.count -= 1;
+            }
+
+            this.data.progress = 1;
+            this.data.progressMax = recipe.time || 50;
+
+            let output = recipe.output;
+            let slotRecipe = this.container.getSlot("slotRecipe");
+
+            slotRecipe.id = output.id;
+            slotRecipe.data = output.data || 0;
+            slotRecipe.count = output.count || 1;
+
+            this.container.validateAll();
+        }
+    },
+
+    tick: function () {
+        if (World.getThreadTime() % 5 !== 0)
+            return;
+
+        ContainerHelper.drainContainer(null, this, "slotContainer");
+
+
+        if(this.data.energy >= 204) {
+            if (this.data.progress) {
+                if (this.data.progress > this.data.progressMax) {
+                    let slot = this.container.getSlot("slotOutput");
+                    let item = this.container.getSlot("slotRecipe");
+
+                    if (ContainerHelper.putInSlot(slot, item)) {
+                        item.id = 0;
+                        item.data = 0;
+                        item.count = 0;
+                        this.data.progress = 0;
+                    }
+                } else {
+                    this.data.progress++;
+                    this.data.energy -= 204;
+                }
+            } else this.findWork();
         }
 
-        this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
-        this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
+        this.container.setScale("progressScale", (this.data.progress / this.data.progressMax) || 0);
+        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
         this.liquidStorage.updateUiScale("liquidScale", this.liquidStorage.getLiquidStored());
 
         this.container.validateAll();
@@ -103,5 +133,9 @@ MachineRegistry.register(BlockID.carpenter, {
 
     getEnergyStorage: function () {
         return 4000;
+    },
+
+    getGuiScreen: function () {
+        return carpenterGUI;
     }
 });

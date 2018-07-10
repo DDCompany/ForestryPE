@@ -7,27 +7,24 @@ const CarpenterManager = {
         this.recipes.push(recipe);
     },
 
-    getRecipe: function (input) {
-        for (let recipe in this.recipes) {
-            let comp = 0;
-            for (let i = 0; i < 9; i++) {
-                let item = this.recipes[recipe].input["slot" + i];
+    getRecipe: function (pattern) {
+        for (let i in this.recipes) {
+            let recipe = this.recipes[i];
+            let isOk = true;
 
-                if ((!item && input["slot" + i].id === 0) || (item && item.id === 0 && input["slot" + i].id === 0)) {
-                    comp++;
-                } else if (item && input["slot" + i] && item.id === input["slot" + i].id && item.data === input["slot" + i].data) {
-                    comp++;
-                } else {
+            for (let i = 0; i < 9; i++) {
+                let name = "slot" + i;
+                let recipePattern = recipe.input[name];
+                let input = pattern[name];
+
+                if (!ContainerHelper.equals(recipePattern, input)) {
+                    isOk = false;
                     break;
                 }
             }
-            if (comp === 9) {
-                return this.recipes[recipe];
-            } else {
-                comp = 0;
-            }
-        }
-        return null;
-    }
 
+            if(isOk)
+                return recipe;
+        }
+    }
 };
