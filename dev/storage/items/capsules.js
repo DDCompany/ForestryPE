@@ -31,7 +31,7 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
         }
 
         IDRegistry.genItemID("can" + suffix);
-        Item.createFoodItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0});
+        Item.createFoodItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0}, {food: food});
 
         IDRegistry.genItemID("refractory" + suffix);
         Item.createFoodItem("refractory" + suffix, "Capsule (" + suffix + ")", {
@@ -75,15 +75,14 @@ LiquidRegistry.registerLiquid("forestryGlass", "Glass", ["liquid_glass_16x16"]);
 
 function pickupLiquidFromWorld(coords) {
     let pos = Player.getPosition();
-    if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
+    if (World.getBlockID(coords.x, coords.y, coords.z) === 9)
         World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canWater, 1, 0);
-        World.setBlock(coords.x, coords.y, coords.z);
-        Player.decreaseCarriedItem(1);
-    } else if (World.getBlockID(coords.x, coords.y, coords.z) === 11) {
+    else if (World.getBlockID(coords.x, coords.y, coords.z) === 11)
         World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canLava, 1, 0);
-        World.setBlock(coords.x, coords.y, coords.z);
-        Player.decreaseCarriedItem(1);
-    }
+    else return;
+
+    World.setBlock(coords.x, coords.y, coords.z, 0);
+    Player.decreaseCarriedItem(1);
 }
 
 Item.registerUseFunction("canEmpty", pickupLiquidFromWorld);
