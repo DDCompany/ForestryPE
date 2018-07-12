@@ -84,9 +84,13 @@ const ContainerHelper = {
                 return;
 
             if (--slot.count === 0) {
-                slot.id = empty.id;
-                slot.data = empty.data;
-                slot.count = 1;
+                if(!this.isReusable(empty.id)) {
+                    tile.container.clearSlot(slotFullName);
+                }else {
+                    slot.id = empty.id;
+                    slot.data = empty.data;
+                    slot.count = 1;
+                }
             }
 
             tile.liquidStorage.addLiquid(_liquid, 1);
