@@ -1,12 +1,24 @@
 const FermenterManager = {
-    bioItems: [],
+    recipes: {},
+    fuels: {},
 
-    addBioItem: function (arg) {
-        this.bioItems[arg.id] = arg;
+    addRecipe: function (recipe) {
+        recipe.data = recipe.data || 0;
+        this.recipes[recipe.id + ":" + recipe.data] = recipe;
     },
 
-    getBioItem: function (id) {
-        return this.bioItems[id];
-    }
+    addFuel: function (fuel) {
+        fuel.data = fuel.data || 0;
+        this.fuels[fuel.id + ":" + fuel.data] = fuel;
+    },
 
+    getRecipe: function (id, data) {
+        data = data || 0;
+        return this.recipes[id + ":" + data];
+    },
+
+    getFuel: function (id, data) {
+        data = data || 0;
+        return this.fuels[id + ":" + data];
+    }
 };

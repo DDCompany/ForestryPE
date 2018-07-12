@@ -90,7 +90,7 @@ const ContainerHelper = {
             }
 
             tile.liquidStorage.addLiquid(_liquid, 1);
-            return _liquid;
+            return _liquid || liquid;
         }
     },
 

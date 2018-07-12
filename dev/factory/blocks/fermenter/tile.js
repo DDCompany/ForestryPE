@@ -1,113 +1,121 @@
 MachineRegistry.register(BlockID.fermenter, {
     defaultValues: {
-        liquidAmount: 0,
         progress: 0,
-        reagentMax: 0,
-        reagentRemain: 0,
-        liquidUsed: 0
+        progressMax: 1,
+
+        fuel: 0,
+        fuelMax: 1,
+        fuelFerment: 0,
+
+        resultFluid: null,
+        containerFluid: null,
+        inputFluid: null
     },
 
     getTransportSlots: function () {
-        return {input: ["slotPlant"], output: []};
-    },
-
-    getGuiScreen: function () {
-        return fermenterGUI;
+        return {input: ["slotFuel"], output: []};
     },
 
     init: function () {
         this.liquidStorage.setLimit(null, 10);
     },
+
+    findWork: function () {
+        if (!this.getLiquidModifier())
+            return;
+
+        let slot = this.container.getSlot("slotInput");
+        let recipe = FermenterManager.getRecipe(slot.id, slot.data);
+        if (recipe) {
+            if (this.data.containerFluid && this.data.containerFluid !== recipe.liquid)
+                return;
+
+            this.data.resultFluid = recipe.liquid;
+            this.data.progress = this.data.progressMax = recipe.time || 1200;
+
+            slot.count--;
+            this.container.validateSlot("slotInput");
+        }
+    },
+
+    findFuel: function () {
+        if (!this.data.fuel) {
+            let slot = this.container.getSlot("slotFuel");
+            let fuel = FermenterManager.getFuel(slot.id, slot.data);
+            if (fuel) {
+                this.data.fuel = this.data.fuelMax = fuel.cycles || 1;
+                this.data.fuelFerment = fuel.perCycle || 1;
+
+                slot.count--;
+                this.container.validateSlot("slotFuel");
+                return true;
+            }
+            return false;
+        }
+
+        return true;
+    },
+
+    getLiquidModifier: function () {
+        switch (this.data.inputFluid) {
+            case "appleJuice":
+            case "honey":
+                return 1.5;
+            case "water":
+                return 1;
+            default:
+                return 0;
+        }
+    },
+
     tick: function () {
+        if (World.getThreadTime() % 5 !== 0)
+            return;
 
-        if (this.liquidStorage.getAmount("water") > 0) {
-            this.liquidStorage.updateUiScale("liquidInputScale", "water");
-        } else if (this.liquidStorage.getAmount("honey") > 0) {
-            this.liquidStorage.updateUiScale("liquidInputScale", "honey");
-        } else if (this.liquidStorage.getAmount("appleJuice") > 0) {
-            this.liquidStorage.updateUiScale("liquidInputScale", "appleJuice");
-        } else {
-            this.liquidStorage.updateUiScale("liquidInputScale", null);
-        }
+        let inputFluid = ContainerHelper.drainContainer(this.data.inputFluid, this, "slotInputContainer");
+        if (inputFluid)
+            this.data.inputFluid = inputFluid;
 
-        ContainerHelper.drainContainer(null, this, "slotInputContainer");
-        ContainerHelper.fillContainer("biomass", this, "slotContainer", "slotFilledContainer");
-
-        if (this.data.reagentRemain === 0) {
-
-            let slotReagent = this.container.getSlot("slotReagent");
-            if (slotReagent.id === ItemID.mulch) {
-
-                this.data.reagentRemain = 250;
-                this.data.reagentMax = 250;
-                slotReagent.count--;
-
-            } else if (slotReagent.id === ItemID.fertilizerCompound) {
-
-                this.data.reagentRemain = 200;
-                this.data.reagentMax = 200;
-                slotReagent.count--;
-
+        if (ContainerHelper.fillContainer(this.data.containerFluid, this, "slotContainer", "slotFilledContainer")) {
+            if (this.liquidStorage.getAmount(this.data.containerFluid) <= 0) {
+                this.data.containerFluid = null;
             }
-
         }
 
-        if (this.data.progress > 0) {
+        if (this.data.energy >= 150) {
+            if (this.data.progress) {
+                if (this.findFuel()) {
+                    let fermented = Math.min(this.data.fuelFerment, this.data.progress) * this.getLiquidModifier();
+                    let _fermented = fermented / 1000;
 
-            if (this.data.energy >= 40 && this.liquidStorage.getAmount("biomass") + 1 <= 10) {
-                this.data.progress++;
-                this.data.energy -= 40;
+                    let inputFluid = this.data.inputFluid;
+                    let resultFluid = this.data.resultFluid;
 
-                if (this.data.progress >= 160) {
-
-                    if (this.data.liquidUsed === "honey" || this.data.liquidUsed === "appleJuice") {
-                        this.liquidStorage.addLiquid("biomass", this.data.liquidAmount / 1.5);
-                    } else {
-                        this.liquidStorage.addLiquid("biomass", this.data.liquidAmount);
+                    if (this.liquidStorage.getAmount(inputFluid) >= _fermented
+                        && this.liquidStorage.getAmount(resultFluid) + _fermented <= 10) {
+                        this.data.progress -= fermented;
+                        this.data.fuel--;
+                        this.data.containerFluid = resultFluid;
+                        this.liquidStorage.addLiquid(resultFluid, _fermented);
+                        this.liquidStorage.getLiquid(inputFluid, _fermented);
+                        this.data.energy -= 150;
                     }
-                    this.data.progress = 0;
-                    this.data.reagentRemain--;
-
                 }
-            }
-
-        } else if (this.data.reagentRemain > 0) {
-            let slotPlant = this.container.getSlot("slotPlant");
-            let recipe = FermenterManager.getBioItem(slotPlant.id);
-
-            if (recipe) {
-                let liquid = false;
-
-                if (this.liquidStorage.getAmount("water") >= recipe.liquidAmount) {
-                    liquid = "water";
-                } else if (this.liquidStorage.getAmount("honey") >= recipe.liquidAmount) {
-                    liquid = "honey";
-                } else if (this.liquidStorage.getAmount("appleJuice") >= recipe.liquidAmount) {
-                    liquid = "appleJuice";
-                }
-
-                if (liquid) {
-                    this.data.liquidAmount = recipe.liquidAmount;
-                    slotPlant.count--;
-                    this.data.liquidUsed = liquid;
-                    this.data.progress = 1;
-                    this.liquidStorage.getLiquid(liquid, recipe.liquidAmount);
-                    this.liquidStorage.updateUiScale("liquidInputScale", liquid);
-                }
-            }
+            } else this.findWork();
         }
 
-        this.liquidStorage.updateUiScale("liquidOutputScale", "biomass");
-        this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-        this.container.setScale("reagentScale", this.data.reagentRemain / this.data.reagentMax);
-        this.container.setScale("progressScale", this.data.progress / 160);
-
-        this.container.validateAll();
+        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
+        this.container.setScale("reagentScale", (this.data.fuel / this.data.fuelMax) || 0);
+        this.container.setScale("progressScale", (this.data.progress / this.data.progressMax) || 0);
+        this.liquidStorage.updateUiScale("liquidInputScale", inputFluid || this.data.inputFluid);
+        this.liquidStorage.updateUiScale("liquidOutputScale", this.data.containerFluid);
     },
 
     getEnergyStorage: function () {
         return 8000;
     },
 
-
+    getGuiScreen: function () {
+        return fermenterGUI;
+    }
 });
