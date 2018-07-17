@@ -105,7 +105,7 @@ MachineRegistry.register(BlockID.carpenter, {
         ContainerHelper.drainContainer(null, this, "slotContainer");
 
 
-        if(this.data.energy >= 204) {
+        if (this.data.energy >= 204) {
             if (this.data.progress) {
                 if (this.data.progress > this.data.progressMax) {
                     let slot = this.container.getSlot("slotOutput");
@@ -133,6 +133,11 @@ MachineRegistry.register(BlockID.carpenter, {
 
     getEnergyStorage: function () {
         return 4000;
+    },
+
+    destroy: function () {
+        for (let i = 0; i < 9; i++)
+            this.container.clearSlot("slotInput" + i);
     },
 
     getGuiScreen: function () {

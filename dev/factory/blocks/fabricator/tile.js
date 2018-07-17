@@ -148,6 +148,11 @@ MachineRegistry.register(BlockID.fabricator, {
         return 3300;
     },
 
+    destroy: function () {
+        for (let i = 0; i < 9; i++)
+            this.container.clearSlot("slotInput" + i);
+    },
+
     getGuiScreen: function () {
         return fabricatorGUI;
     }
