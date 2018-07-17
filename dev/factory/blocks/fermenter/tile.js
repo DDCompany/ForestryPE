@@ -115,6 +115,10 @@ MachineRegistry.register(BlockID.fermenter, {
         return 8000;
     },
 
+    getMaxTransfer: function () {
+        return 2000;
+    },
+
     getGuiScreen: function () {
         return fermenterGUI;
     }

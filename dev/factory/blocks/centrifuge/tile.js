@@ -103,6 +103,10 @@ MachineRegistry.register(BlockID.centrifuge, {
         return 5000;
     },
 
+    getMaxTransfer: function () {
+        return 800;
+    },
+
     getGuiScreen: function () {
         return centrifugeGUI;
     }
