@@ -1,48 +1,49 @@
-if (ForestryConfig.crateEnabled === true) {
-    IDRegistry.genItemID("crate");
-    Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
+IDRegistry.genItemID("crate");
+Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
 
-    function registerCrate(id, n, texture, d) {
-        let name = id;
-        let data = d ? d : 0;
-        IDRegistry.genItemID("crate" + name);
-        Item.createItem("crate" + name, "Crate (" + n + ")", {name: texture, meta: 0}, {});
+function registerCrate(id, itemName, texture, data) {
+    data = data || 0;
+    let crateId = "crate" + id + "_" + data;
 
-        CarpenterManager.registerRecipe({
-            input: {
-                "slot0": {id: id, data: data}, "slot1": {id: id, data: data}, "slot2": {id: id, data: data},
-                "slot3": {id: id, data: data}, "slot4": {id: id, data: data}, "slot5": {id: id, data: data},
-                "slot6": {id: id, data: data}, "slot7": {id: id, data: data}, "slot8": {id: id, data: data}
-            },
-            liquid: "water",
-            liquidAmount: 0.1,
-            dop: {
-                id: ItemID.crate,
-                data: 0,
-                dec: true
-            },
-            result: {
-                id: ItemID["crate" + name],
-                count: 1,
-                data: 0
-            }
-        });
+    IDRegistry.genItemID(crateId);
+    Item.createItem(crateId, "Crate (" + itemName + ")", {name: texture, meta: 0}, {});
 
-        CarpenterManager.registerRecipe({
-            input: {"slot4": {id: ItemID["crate" + name], data: 0}},
-            result: {
-                id: id,
-                count: 9,
-                data: data
-            }
-        });
+    CarpenterManager.registerRecipe({
+        input: {
+            "slot0": {id: id, data: data}, "slot1": {id: id, data: data}, "slot2": {id: id, data: data},
+            "slot3": {id: id, data: data}, "slot4": {id: id, data: data}, "slot5": {id: id, data: data},
+            "slot6": {id: id, data: data}, "slot7": {id: id, data: data}, "slot8": {id: id, data: data}
+        },
+        liquid: "water",
+        liquidAmount: 0.1,
+        special: {
+            id: ItemID.crate,
+            data: 0,
+            dec: true
+        },
+        result: {
+            id: ItemID[crateId],
+            count: 1,
+            data: 0
+        }
+    });
 
-        Item.registerUseFunction("crate" + name, function (coords, item) {
-            World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, id, 9, 0);
-            Player.decreaseCarriedItem(1);
-        });
-    }
+    CarpenterManager.registerRecipe({
+        input: {"slot4": {id: ItemID[crateId], data: 0}},
+        result: {
+            id: id,
+            count: 9,
+            data: data
+        }
+    });
 
+    Item.registerUseFunction(crateId, function (coords) {
+        World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, id, 9, 0);
+        Player.decreaseCarriedItem(1);
+    });
+}
+
+if (ForestryConfig.crateEnabled) {
     registerCrate(3, "Dirt", "crateDirt");
     registerCrate(87, "Netherrack", "crateNetherrack");
     registerCrate(112, "Netherbrick", "crateNetherbricks");
@@ -77,7 +78,6 @@ if (ForestryConfig.crateEnabled === true) {
     registerCrate(260, "Apple", "crateApple");
     registerCrate(351, "Lapis lazuli", "crateLapisLazuli", 4);
     registerCrate(ItemID.latex, "Latex", "crateLatex");
-    registerCrate(ItemID.matter, "Matter", "crateMatter");
     registerCrate(ItemID.royalJelly, "Royal jelly", "crateRoyalJelly");
     registerCrate(ItemID.honeydew, "Honey dew", "crateHoneydew");
     registerCrate(110, "Mycelium", "crateMycelium");
@@ -92,7 +92,6 @@ if (ForestryConfig.crateEnabled === true) {
     registerCrate(ItemID.beeswax, "Wax", "crateWax");
     registerCrate(296, "Wheat", "crateWheat");
     registerCrate(ItemID.pollen1, "Pollen", "cratePollen");
-    registerCrate(ItemID.rubber, "Rubber", "crateRubber");
     registerCrate(6, "Sapling", "crateSapling");
     registerCrate(348, "Glowstone dust", "crateGlowstone");
     registerCrate(295, "Seeds", "crateSeeds");
