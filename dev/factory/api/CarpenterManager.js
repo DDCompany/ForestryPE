@@ -4,6 +4,17 @@ const CarpenterManager = {
     recipes: [],
 
     registerRecipe: function (recipe) {
+        if(!recipe.input) {
+            Logger.Log("[ForestryAPI] Input is not correct! (Carpenter Recipe Registration)", "ERROR");
+            return;
+        }
+
+        let result = recipe.result;
+        if(!result || result.id <= 0) {
+            Logger.Log("[ForestryAPI] Result is not correct! (Carpenter Recipe Registration)", "ERROR");
+            return;
+        }
+
         this.recipes.push(recipe);
     },
 
@@ -26,5 +37,7 @@ const CarpenterManager = {
             if(isOk)
                 return recipe;
         }
+
+        return null;
     }
 };

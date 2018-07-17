@@ -4,7 +4,7 @@ for (let i = 0; i < 4; i++) {
         liquid: "water",
         liquidAmount: 0.25,
         time: 5,
-        output: {
+        result: {
             id: ItemID.woodPulp,
             count: 4,
             data: 0
@@ -22,7 +22,7 @@ for (let i = 0; i < 4; i++) {
             liquid: "water",
             liquidAmount: 1,
             time: 5,
-            output: {
+            result: {
                 id: ItemID.crate,
                 count: 24,
                 data: 0
@@ -44,7 +44,7 @@ for (let i = 0; i < 4; i++) {
         liquid: "seedOil",
         liquidAmount: 1,
         time: 50,
-        output: {
+        result: {
             id: ItemID.impregnatedCasing,
             count: 1,
             data: 0
@@ -56,7 +56,7 @@ for (let i = 0; i < 4; i++) {
         liquid: "seedOil",
         liquidAmount: 0.01,
         time: 10,
-        output: {
+        result: {
             id: ItemID.stickImpregnated,
             count: 2,
             data: 0
@@ -77,7 +77,7 @@ for (let i = 0; i < 2; i++) {
             liquid: "water",
             liquidAmount: 1,
             time: 5,
-            output: {
+            result: {
                 id: ItemID.crate,
                 count: 24,
                 data: 0
@@ -90,7 +90,7 @@ for (let i = 0; i < 2; i++) {
         liquid: "water",
         liquidAmount: 0.25,
         time: 5,
-        output: {
+        result: {
             id: ItemID.woodPulp,
             count: 4,
             data: 0
@@ -108,7 +108,7 @@ for (let i = 0; i < 2; i++) {
             "slot7": {id: 162, data: i},
             "slot8": {id: 162, data: i}
         },
-        output: {
+        result: {
             id: 368,
             count: 1,
             data: 0
@@ -120,7 +120,7 @@ for (let i = 0; i < 2; i++) {
         liquid: "seedOil",
         liquidAmount: 0.01,
         time: 10,
-        output: {
+        result: {
             id: ItemID.stickImpregnated,
             count: 2,
             data: 0
@@ -141,7 +141,7 @@ CarpenterManager.registerRecipe({
         "slot7": {id: 264, data: 0},
         "slot8": {id: 331, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.analyzer,
         count: 1,
         data: 0
@@ -156,7 +156,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.chipsetBasic,
         count: 1,
         data: 0
@@ -171,7 +171,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.chipsetEnhanced,
         count: 1,
         data: 0
@@ -186,7 +186,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.chipsetIntricate,
         count: 1,
         data: 0
@@ -201,7 +201,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.chipsetRefined,
         count: 1,
         data: 0
@@ -212,7 +212,7 @@ CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.woodPulp, data: 0}, "slot7": {id: ItemID.woodPulp, data: 0}},
     liquid: "water",
     liquidAmount: 0.25,
-    output: {
+    result: {
         id: 339,
         count: 1,
         data: 0
@@ -221,7 +221,7 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.brokenBronzePickaxe, data: 0}},
-    output: {
+    result: {
         id: ItemID.ingotBronze,
         count: 2,
         data: 0
@@ -230,7 +230,7 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {"slot4": {id: ItemID.brokenBronzeShovel, data: 0}},
-    output: {
+    result: {
         id: ItemID.ingotBronze,
         count: 1,
         data: 0
@@ -251,7 +251,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 0.5,
-    output: {
+    result: {
         id: BlockID.wovenSilk,
         count: 1,
         data: 0
@@ -272,7 +272,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.dissipationCharge,
         count: 1,
         data: 0
@@ -293,7 +293,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.iodineCapsule,
         count: 1,
         data: 0
@@ -308,7 +308,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.bog,
         count: 8,
         data: 0
@@ -329,7 +329,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackAdventurerT2,
         count: 8,
         data: 0
@@ -350,7 +350,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackMinersT2,
         count: 8,
         data: 0
@@ -371,7 +371,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackBuilderT2,
         count: 8,
         data: 0
@@ -392,7 +392,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackDiggerT2,
         count: 8,
         data: 0
@@ -413,7 +413,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackForesterT2,
         count: 8,
         data: 0
@@ -434,7 +434,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.backpackHunterT2,
         count: 8,
         data: 0
@@ -449,7 +449,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: BlockID.humus,
         count: 9,
         data: 0
@@ -465,7 +465,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 1,
-    output: {
+    result: {
         id: ItemID.carton,
         count: 2,
         data: 0
@@ -485,7 +485,7 @@ CarpenterManager.registerRecipe({
         data: 0,
         dec: true
     },
-    output: {
+    result: {
         id: ItemID.kitPickaxe,
         count: 1,
         data: 0
@@ -504,7 +504,7 @@ CarpenterManager.registerRecipe({
     },
     liquid: "honey",
     liquidAmount: 0.5,
-    output: {
+    result: {
         id: ItemID.scentedPaneling,
         count: 1,
         data: 0
@@ -518,7 +518,7 @@ CarpenterManager.registerRecipe({
         data: 0,
         dec: true
     },
-    output: {
+    result: {
         id: ItemID.kitShovel,
         count: 1,
         data: 0
@@ -533,7 +533,7 @@ CarpenterManager.registerRecipe({
         "slot5": {id: ItemID.pulsatingMesh, data: 0},
         "slot7": {id: ItemID.pulsatingMesh, data: 0}
     },
-    output: {
+    result: {
         id: 368,
         count: 1,
         data: 0
@@ -555,7 +555,7 @@ CarpenterManager.registerRecipe({
         data: 0,
         dec: true
     },
-    output: {
+    result: {
         id: ItemID.kitShovel,
         count: 1,
         data: 0

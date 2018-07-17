@@ -33,7 +33,7 @@ for (let i = 0; i < 16; i++) {
             count: 1,
             dec: false
         },
-        output: {
+        result: {
             id: BlockID.forestryGlass,
             count: 1,
             data: i
@@ -51,7 +51,7 @@ if (ForestryConfig.glassEnabled) {
             count: 1,
             dec: false
         },
-        output: {
+        result: {
             id: BlockID.forestryGlass,
             count: 1,
             data: i
@@ -69,7 +69,7 @@ if (ForestryConfig.glassEnabled) {
                 count: 1,
                 dec: false
             },
-            output: {
+            result: {
                 id: BlockID.forestryGlass,
                 count: 1,
                 data: i
@@ -89,7 +89,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: ItemID.ingotCopper, data: 0},
         "slot8": {id: ItemID.ingotCopper, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeCopper,
         count: 4,
         data: 0
@@ -106,7 +106,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: ItemID.ingotTin, data: 0},
         "slot8": {id: ItemID.ingotTin, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeTin,
         count: 4,
         data: 0
@@ -123,7 +123,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: ItemID.ingotBronze, data: 0},
         "slot8": {id: ItemID.ingotBronze, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeBronze,
         count: 4,
         data: 0
@@ -140,7 +140,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: 264, data: 0},
         "slot8": {id: 264, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeDiamond,
         count: 4,
         data: 0
@@ -157,7 +157,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: 266, data: 0},
         "slot8": {id: 266, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeGold,
         count: 4,
         data: 0
@@ -174,7 +174,7 @@ FabricatorManager.registerRecipe({
         "slot7": {id: 265, data: 0},
         "slot8": {id: 265, data: 0}
     },
-    output: {
+    result: {
         id: ItemID.thermionicTubeIron,
         count: 4,
         data: 0

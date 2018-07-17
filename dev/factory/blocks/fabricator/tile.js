@@ -88,7 +88,7 @@ MachineRegistry.register(BlockID.fabricator, {
                 slotSpecial.count -= 1;
             }
 
-            this.data.output = recipe.output;
+            this.data.output = recipe.result;
             this.data.glassAmount = recipe.amount;
             this.container.validateAll();
         }

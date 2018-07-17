@@ -21,7 +21,7 @@ if (ForestryConfig.crateEnabled === true) {
                 data: 0,
                 dec: true
             },
-            output: {
+            result: {
                 id: ItemID["crate" + name],
                 count: 1,
                 data: 0
@@ -30,7 +30,7 @@ if (ForestryConfig.crateEnabled === true) {
 
         CarpenterManager.registerRecipe({
             input: {"slot4": {id: ItemID["crate" + name], data: 0}},
-            output: {
+            result: {
                 id: id,
                 count: 9,
                 data: data

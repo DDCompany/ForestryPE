@@ -87,7 +87,7 @@ MachineRegistry.register(BlockID.carpenter, {
             this.data.progress = 1;
             this.data.progressMax = recipe.time || 50;
 
-            let output = recipe.output;
+            let output = recipe.result;
             let slotRecipe = this.container.getSlot("slotRecipe");
 
             slotRecipe.id = output.id;

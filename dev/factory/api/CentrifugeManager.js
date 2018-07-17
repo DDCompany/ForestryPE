@@ -5,11 +5,15 @@ const CentrifugeManager = {
         let input = recipe.input;
         let result = recipe.result;
 
-        if(!result)
+        if(!input) {
+            Logger.Log("[ForestryAPI] Result is not correct! (Centrifuge Recipe Registration)", "ERROR");
             return;
+        }
 
-        if (!input)
+        if(!result) {
+            Logger.Log("[ForestryAPI] Input is not correct! (Centrifuge Recipe Registration)", "ERROR");
             return;
+        }
 
         input.data = input.data || 0;
 

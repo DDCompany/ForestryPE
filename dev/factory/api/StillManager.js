@@ -5,12 +5,27 @@ const StillManager = {
         let inputLiquid = recipe.inputLiquid;
 
         if(!inputLiquid) {
-            Logger.Log("[ForestryAPI]Input liquid is not valid!", "ERROR");
+            Logger.Log("[ForestryAPI] Input Liquid is not correct! (Still Recipe Registration)", "ERROR");
+            return;
+        }
+
+        if(recipe.inputAmount <= 0) {
+            Logger.Log("[ForestryAPI] Amount of input liquid is not correct! (Still Recipe Registration)", "ERROR");
             return;
         }
 
         if(!recipe.outputLiquid) {
-            Logger.Log("[ForestryAPI]Output liquid is not valid!", "ERROR");
+            Logger.Log("[ForestryAPI] Output Liquid is not correct! (Still Recipe Registration)", "ERROR");
+            return;
+        }
+
+        if(recipe.outputAmount <= 0) {
+            Logger.Log("[ForestryAPI] Amount of output liquid is not correct! (Still Recipe Registration)", "ERROR");
+            return;
+        }
+
+        if(!recipe.cycles) {
+            Logger.Log("[ForestryAPI] Cycles value is not correct! (Still Recipe Registration)", "ERROR");
             return;
         }
 

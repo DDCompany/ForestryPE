@@ -3,6 +3,17 @@ const FabricatorManager = {
     smeltingList: {},
 
     registerRecipe: function (recipe) {
+        if(!recipe.input) {
+            Logger.Log("[ForestryAPI] Input is not correct! (Fabricator Recipe Registration)", "ERROR");
+            return;
+        }
+
+        let result = recipe.result;
+        if(!result || result.id <= 0) {
+            Logger.Log("[ForestryAPI] Result is not correct! (Fabricator Recipe Registration)", "ERROR");
+            return;
+        }
+
         recipe.amount = recipe.amount || 0.5;
 
         this.recipes.push(recipe);
@@ -10,12 +21,20 @@ const FabricatorManager = {
 
     addSmelting: function (smelting) {
         let input = smelting.input;
-        if(!input)
+        if(!input || input.id <= 0) {
+            Logger.Log("[ForestryAPI] Input is not correct! (Fabricator Smelting Registration)", "ERROR");
             return;
+        }
+
+        if(!smelting.amount) {
+            Logger.Log("[ForestryAPI] Amount of Liquid Glass is not correct! (Fabricator Smelting Registration)", "ERROR");
+            return;
+        }
 
         smelting.temperature = smelting.temperature || 0;
+        input.data = input.data || 0;
 
-        this.smeltingList[input.id + ":" + (input.data || 0)] = smelting;
+        this.smeltingList[input.id + ":" + input.data] = smelting;
     },
 
     getSmelting: function(id, data) {
@@ -41,5 +60,7 @@ const FabricatorManager = {
             if (isOk)
                 return recipe;
         }
+
+        return null;
     }
 };
