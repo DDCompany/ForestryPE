@@ -19,7 +19,7 @@ FabricatorManager.addSmelting({
     input: {
         id: 24
     },
-    amount: 1,
+    amount: 4,
     temperature: 3000
 });
 
