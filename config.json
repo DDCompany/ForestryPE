@@ -8,6 +8,9 @@
   "hiveDamageOnAttack": true,
   "hiveDamageOnPeaceful": true,
   "reusableCapsules": true,
+  "machines": {
+    "rainTank": false
+  },
   "recipes": {
     "bronzeIngot": true
   },

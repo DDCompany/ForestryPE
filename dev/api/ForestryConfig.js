@@ -32,6 +32,9 @@ const ForestryConfig = {
     /* ----- PARTICLES ----- */
     particlesBeeHives: __config__.getBool("particles.beeHives"),
 
+    /* ----- MACHINES ----- */
+    rainTankEnabled: __config__.getBool("machines.rainTank"),
+
     /* ----- OTHER ----- */
     crateEnabled: __config__.getBool("crateEnabled"),
     glassEnabled: __config__.getBool("glassEnabled"),
