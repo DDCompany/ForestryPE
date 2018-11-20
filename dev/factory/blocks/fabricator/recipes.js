@@ -1,10 +1,38 @@
 //Smelting
+for (let i = 0; i < 16; i++) {
+    FabricatorManager.addSmelting({
+        input: {
+            id: BlockID.forestryGlass,
+            data: i
+        },
+        amount: 1,
+        temperature: 1000
+    });
+}
+
 FabricatorManager.addSmelting({
     input: {
         id: 20
     },
     amount: 1,
     temperature: 1000
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 12
+    },
+    amount: 1,
+    temperature: 3000
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 12,
+        data: 1
+    },
+    amount: 1,
+    temperature: 3000
 });
 
 FabricatorManager.addSmelting({
@@ -20,7 +48,25 @@ FabricatorManager.addSmelting({
         id: 24
     },
     amount: 4,
-    temperature: 3000
+    temperature: 4800
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 24,
+        data: 1
+    },
+    amount: 4,
+    temperature: 4800
+});
+
+FabricatorManager.addSmelting({
+    input: {
+        id: 24,
+        data: 2
+    },
+    amount: 4,
+    temperature: 4800
 });
 
 //Recipes
@@ -44,21 +90,21 @@ for (let i = 0; i < 16; i++) {
 if (ForestryConfig.glassEnabled) {
     for (let i = 0; i < 16; i++) {
         FabricatorManager.registerRecipe({
-        input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
-        special: {
-            id: ItemID.waxCast,
-            data: 0,
-            count: 1,
-            dec: false
-        },
-        result: {
-            id: BlockID.forestryGlass,
-            count: 1,
-            data: i
-        }
-    });
+            input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
+            special: {
+                id: ItemID.waxCast,
+                data: 0,
+                count: 1,
+                dec: false
+            },
+            result: {
+                id: BlockID.forestryGlass,
+                count: 1,
+                data: i
+            }
+        });
 
-}
+    }
 
     for (let i = 0; i < 16; i++) {
         FabricatorManager.registerRecipe({
