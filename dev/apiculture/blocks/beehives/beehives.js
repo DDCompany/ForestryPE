@@ -1,4 +1,7 @@
 function attackByBeehive() {
+    if (!ForestryConfig.hiveDamageOnAttack)
+        return;
+
     if (!Game.getDifficulty() && !ForestryConfig.hiveDamageOnPeaceful)
         return;
 

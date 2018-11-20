@@ -37,6 +37,7 @@ const ForestryConfig = {
     glassEnabled: __config__.getBool("glassEnabled"),
     combsBlocksEnabled: __config__.getBool("combBlocksEnabled"),
     oresBlocksEnabled: __config__.getBool("oresBlocksEnabled"),
+    hiveDamageOnAttack: __config__.getBool("hiveDamageOnAttack"),
     hiveDamageOnPeaceful: __config__.getBool("hiveDamageOnPeaceful"),
     reusableCapsules: __config__.getBool("reusableCapsules")
 
