@@ -36,8 +36,6 @@ Callback.addCallback("PostLoaded", function () {
     Recipes.addFurnace(BlockID.oreTin, ItemID.ingotTin, 0);
 });
 
-let hh = false;
-
 function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY, biomes) {
     for (let i = 0; i < inChunk; i++) {
         let coords = GenerationUtils.randomCoords(chunkX, chunkZ, minY, maxY);

@@ -11,8 +11,7 @@ api/ChestManager.js
 
 ### CORE
 # BLOCKS
-core/blocks/humus/humus.js
-core/blocks/humus/tile.js
+core/blocks/humus.js
 
 core/blocks/peat/peat.js
 core/blocks/peat/tile.js
@@ -71,8 +70,7 @@ apiculture/items/food.js
 apiculture/items/other.js
 
 # MULTIBLOCKS
-apiculture/alveary/alveary/alveary.js
-apiculture/alveary/alveary/tile.js
+apiculture/alveary/alveary.js
 
 apiculture/alveary/fan/alvearyFan.js
 apiculture/alveary/fan/tile.js
