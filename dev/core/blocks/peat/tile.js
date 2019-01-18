@@ -15,12 +15,13 @@ TileEntity.registerPrototype(BlockID.bog, {
     },
 
     isMoistened: function () {
-        for (let index in DIRECTIONS) {
-            let dir = DIRECTIONS[index];
-            let blockId = World.getBlockID(this.x + dir.x, this.y + dir.y, this.z + dir.z);
+        for (let xx = this.x - 1; xx <= this.x + 1; xx++) {
+            for (let zz = this.z - 1; zz <= this.z + 1; zz++) {
+                let blockId = World.getBlockID(xx, this.y, zz);
 
-            if (blockId === 8 || blockId === 9)
-                return true;
+                if (blockId === 8 || blockId === 9)
+                    return true;
+            }
         }
     }
 });
