@@ -71,8 +71,6 @@ registerLiquidContainer("Juice", "appleJuice", 2);
 registerLiquidContainer("Honey", "honey", 2);
 registerLiquidContainer("SeedOil", "seedOil", 0);
 
-LiquidRegistry.registerLiquid("forestryGlass", "Glass", ["liquid_glass_16x16"]);
-
 function pickupLiquidFromWorld(coords) {
     let pos = Player.getPosition();
     if (World.getBlockID(coords.x, coords.y, coords.z) === 9)
