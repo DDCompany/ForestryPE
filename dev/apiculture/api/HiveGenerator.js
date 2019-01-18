@@ -43,6 +43,8 @@ const HiveGenerator = {
                 let x = 16 * chunkX + xOffset;
                 let z = 16 * chunkZ + zOffset;
                 let biome = World.getBiome(x, z);
+                let climate = BiomeHelper.getBiomeClimate(biome);
+                let humidity = BiomeHelper.getBiomeHumidity(biome);
 
                 for (let key in HiveGenerator.generators) {
                     let generator = HiveGenerator.generators[key];
@@ -54,7 +56,7 @@ const HiveGenerator = {
                         continue;
 
                     if (Math.random() <= generator.chance)
-                        generator.generate(x, z, dimension, biome)
+                        generator.generate(x, z, dimension, climate, humidity, biome)
                 }
             }
         }
