@@ -65,7 +65,6 @@ for (let i = 0; i < 4; i++) {
 }
 
 for (let i = 0; i < 2; i++) {
-
     if (ForestryConfig.crateEnabled) {
         CarpenterManager.registerRecipe({
             input: {
@@ -126,7 +125,6 @@ for (let i = 0; i < 2; i++) {
             data: 0
         }
     });
-
 }
 
 CarpenterManager.registerRecipe({
@@ -252,7 +250,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 0.5,
     result: {
-        id: BlockID.wovenSilk,
+        id: ItemID.wovenSilk,
         count: 1,
         data: 0
     }
@@ -330,7 +328,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackAdventurerT2,
+        id: ItemID.backpackAdventurerT2,
         count: 8,
         data: 0
     }
@@ -351,7 +349,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackMinersT2,
+        id: ItemID.backpackMinersT2,
         count: 8,
         data: 0
     }
@@ -372,7 +370,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackBuilderT2,
+        id: ItemID.backpackBuilderT2,
         count: 8,
         data: 0
     }
@@ -393,7 +391,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackDiggerT2,
+        id: ItemID.backpackDiggerT2,
         count: 8,
         data: 0
     }
@@ -414,7 +412,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackForesterT2,
+        id: ItemID.backpackForesterT2,
         count: 8,
         data: 0
     }
@@ -435,7 +433,7 @@ CarpenterManager.registerRecipe({
     liquid: "water",
     liquidAmount: 1,
     result: {
-        id: BlockID.backpackHunterT2,
+        id: ItemID.backpackHunterT2,
         count: 8,
         data: 0
     }
