@@ -19,7 +19,7 @@ MachineRegistry.register(BlockID.biogenerator, {
             ContainerHelper.drainContainer(null, this, "slotContainer");
 
             let stored = this.liquidStorage.getLiquidStored();
-            let fuel = BioGeneratorManager.getBiogeneratorFuel(stored);
+            let fuel = BioGeneratorManager.getFuel(stored);
             if (fuel && this.liquidStorage.getAmount(stored) >= 0.001) {
 
                 if (this.data.energy + fuel.energy <= this.getEnergyStorage()) {

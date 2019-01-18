@@ -11,12 +11,12 @@ Callback.addCallback("PostLoaded", function () {
 });
 
 
-BioGeneratorManager.registerBiogeneratorFuel("biomass", {
+BioGeneratorManager.addFuel("biomass", {
     ticks: 1,
     energy: 8
 });
 
-BioGeneratorManager.registerBiogeneratorFuel("ethanol", {
+BioGeneratorManager.addFuel("ethanol", {
     ticks: 2,
     energy: 16
 });
