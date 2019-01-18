@@ -46,4 +46,6 @@ Callback.addCallback("PostLoaded", function () {
         "sws",
         "sss"
     ], ['w', ItemID.apatite, -1, 's', ItemID.ash, -1]);
+
+    Recipes.addFurnace(263, ItemID.ash, 0);
 });
