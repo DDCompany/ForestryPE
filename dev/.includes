@@ -160,6 +160,7 @@ factory/translation.js
 ### ENERGY
 # API
 energy/api/BioGeneratorManager.js
+energy/api/PeatFiredManager.js
 
 # BLOCKS
 energy/blocks/biogas/biogas.js
@@ -176,6 +177,7 @@ energy/blocks/clockwork/tile.js
 energy/blocks/peat-fired/peat-fired.js
 energy/blocks/peat-fired/gui.js
 energy/blocks/peat-fired/tile.js
+energy/blocks/peat-fired/recipes.js
 
 # TRANSLATION
 energy/translation.js

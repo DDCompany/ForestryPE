@@ -1,5 +1,4 @@
 MachineRegistry.register(BlockID.enginePeat, {
-
     defaultValues: {
         burn: 0,
         burnMax: 0,
@@ -11,38 +10,7 @@ MachineRegistry.register(BlockID.enginePeat, {
         return {input: ["slotFuel"], output: ["slotAsh0", "slotAsh1", "slotAsh2", "slotAsh3"]};
     },
 
-    getGuiScreen: function () {
-        return guiPeatFiredEngine;
-    },
-
-    isGenerator: function () {
-        return true;
-    },
-
-    getFuelValue: function (id) {
-        switch (id) {
-            case ItemID.peat:
-                return 5000;
-            case ItemID.bituminousPeat:
-                return 6000;
-        }
-
-        return 0;
-    },
-
-    getEnergyOutputValue: function (id) {
-        switch (id) {
-            case ItemID.peat:
-                return 10;
-            case ItemID.bituminousPeat:
-                return 20;
-        }
-
-        return 0;
-    },
-
     addAsh: function () {
-
         for (let i = 0; i < 4; i++) {
             let slot = this.container.getSlot("slotAsh" + i);
             if (slot.id === 0) {
@@ -64,9 +32,9 @@ MachineRegistry.register(BlockID.enginePeat, {
         if (this.data.burn) {
 
             if (this.data.burn >= this.data.burnMax) {
-                    this.data.burnMax = 0;
-                    this.data.burn = 0;
-                    this.data.energyOut = 0;
+                this.data.burnMax = 0;
+                this.data.burn = 0;
+                this.data.energyOut = 0;
             } else {
                 if (this.data.energy + this.data.energyOut <= this.getEnergyStorage()) {
                     this.data.energy += this.data.energyOut;
@@ -81,10 +49,10 @@ MachineRegistry.register(BlockID.enginePeat, {
 
             }
         } else if (this.data.energy < this.getEnergyStorage()) {
-            let burnMax = this.getFuelValue(slotFuel.id);
-            if (burnMax) {
-                this.data.energyOut = this.getEnergyOutputValue(slotFuel.id);
-                this.data.burnMax = burnMax;
+            let fuel = PeatFiredManager.getFuel(slotFuel.id);
+            if (fuel) {
+                this.data.energyOut = fuel.energy;
+                this.data.burnMax = fuel.burnTime;
                 this.data.burn++;
                 slotFuel.count--;
                 this.container.validateAll();
@@ -103,5 +71,13 @@ MachineRegistry.register(BlockID.enginePeat, {
         let out = Math.min(32, this.data.energy);
         this.data.energy -= out;
         this.data.energy += src.add(out);
+    },
+
+    isGenerator: function () {
+        return true;
+    },
+
+    getGuiScreen: function () {
+        return guiPeatFiredEngine;
     }
 });
