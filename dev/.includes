@@ -194,5 +194,8 @@ storage/items/crates.js
 # TRANSLATION
 storage/translation.js
 
+# INTEGRATION
+integration/ic2.js
+
 ### ALL API SHARE
 shared.js
