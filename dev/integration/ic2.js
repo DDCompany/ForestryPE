@@ -8,5 +8,16 @@ ModAPI.addAPICallback("ICore", function (api) {
         blacklist.push(bee.queenID);
     }
 
+    CentrifugeManager.registerRecipe({
+        input: {
+            id: ItemID.propolis
+        },
+        result: [
+            {
+                id: ItemID.latex
+            }
+        ]
+    });
+
     Logger.Log("IC Integration Activated", "ForestryPE")
 });
