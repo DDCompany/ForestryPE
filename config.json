@@ -15,22 +15,30 @@
     "bronzeIngot": true
   },
   "gen": {
-    "beehivesDebug": false,
-    "beehivesForestChance": 0.03,
-    "beehivesMeadowsChance": 0.01,
-    "beehivesModestChance": 0.01,
-    "beehivesTropicalChance": 0.06,
-    "beehivesWintryChance": 0.2,
-    "beehivesMarshyChance": 0.2,
-    "beehivesEnderChance": 0.02,
-    "apatite": true,
-    "apatiteSize": 126,
-    "copper": true,
-    "copperInChunk": 20,
-    "copperSize": 6,
-    "tin": true,
-    "tinInChunk": 18,
-    "tinSize": 6
+    "beehives": {
+      "debug": false,
+      "forest": 0.03,
+      "meadows": 0.01,
+      "modest": 0.01,
+      "tropical": 0.06,
+      "wintry": 0.2,
+      "marshy": 0.2,
+      "ender": 0.02
+    },
+    "apatite": {
+      "enabled": true,
+      "size": 126
+    },
+    "copper": {
+      "enabled": true,
+      "inChunk": 20,
+      "size": 6
+    },
+    "tin": {
+      "enabled": true,
+      "inChunk": 18,
+      "size": 6
+    }
   },
   "beekeeping": {
     "secondPrincessChance": 0,

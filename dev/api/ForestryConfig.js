@@ -2,26 +2,26 @@ setLoadingTip("Common Api Loading...");
 
 const ForestryConfig = {
     /* ----- BEEHIVES GEN ----- */
-    genBeehivesDebug: __config__.getBool("gen.beehivesDebug"),
-    genForestChance: __config__.getNumber("gen.beehivesForestChance"),
-    genMeadowsChance: __config__.getNumber("gen.beehivesMeadowsChance"),
-    genModestChance: __config__.getNumber("gen.beehivesModestChance"),
-    genTropicalChance: __config__.getNumber("gen.beehivesTropicalChance"),
-    genWintryChance: __config__.getNumber("gen.beehivesWintryChance"),
-    genMarshyChance: __config__.getNumber("gen.beehivesMarshyChance"),
-    genEnderChance: __config__.getNumber("gen.beehivesEnderChance"),
+    genBeehivesDebug: __config__.getBool("gen.beehives.debug"),
+    genForestChance: __config__.getNumber("gen.beehives.forest"),
+    genMeadowsChance: __config__.getNumber("gen.beehives.meadows"),
+    genModestChance: __config__.getNumber("gen.beehives.modest"),
+    genTropicalChance: __config__.getNumber("gen.beehives.tropical"),
+    genWintryChance: __config__.getNumber("gen.beehives.wintry"),
+    genMarshyChance: __config__.getNumber("gen.beehives.marshy"),
+    genEnderChance: __config__.getNumber("gen.beehives.ender"),
 
     /* ----- ORE GEN ----- */
-    genApatite: __config__.getBool("gen.apatite"),
-    genApatiteSize: __config__.getNumber("gen.apatiteSize"),
+    genApatite: __config__.getBool("gen.apatite.enabled"),
+    genApatiteSize: __config__.getNumber("gen.apatite.size"),
 
-    genCopper: __config__.getBool("gen.copper"),
-    genCopperInChunk: __config__.getNumber("gen.copperInChunk"),
-    genCopperSize: __config__.getNumber("gen.copperSize"),
+    genCopper: __config__.getBool("gen.copper.enabled"),
+    genCopperInChunk: __config__.getNumber("gen.copper.inChunk"),
+    genCopperSize: __config__.getNumber("gen.copper.size"),
 
-    genTin: __config__.getBool("gen.tin"),
-    genTinInChunk: __config__.getNumber("gen.tinInChunk"),
-    genTinSize: __config__.getNumber("gen.tinSize"),
+    genTin: __config__.getBool("gen.tin.enabled"),
+    genTinInChunk: __config__.getNumber("gen.tin.inChunk"),
+    genTinSize: __config__.getNumber("gen.tin.size"),
 
     /* ----- BEEKEEPING ----- */
     secondPrincessChance: __config__.getNumber("beekeeping.secondPrincessChance"),
