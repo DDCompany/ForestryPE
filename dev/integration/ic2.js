@@ -19,5 +19,11 @@ ModAPI.addAPICallback("ICore", function (api) {
         ]
     });
 
+    FermenterManager.addRecipe({
+        id: ItemID.rubberSapling,
+        liquidAmount: 0.25,
+        liquid: "biomass"
+    });
+
     Logger.Log("IC Integration Activated", "ForestryPE")
 });
