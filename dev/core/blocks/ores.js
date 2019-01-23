@@ -39,7 +39,7 @@ Callback.addCallback("PostLoaded", function () {
 function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY, biomes) {
     for (let i = 0; i < inChunk; i++) {
         let coords = GenerationUtils.randomCoords(chunkX, chunkZ, minY, maxY);
-        if(!biomes || biomes.indexOf(World.getBiome(coords.x, coords.z)) > -1) {
+        if (!biomes || biomes.indexOf(World.getBiome(coords.x, coords.z)) > -1) {
             GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, Util.random(1, size));
         }
     }
@@ -48,7 +48,13 @@ function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY, biomes)
 if (ForestryConfig.genCopper) {
     Flags.addUniqueAction("oreGenCopper", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            generateOre(BlockID.oreCopper, chunkX, chunkZ, ForestryConfig.genCopperInChunk, ForestryConfig.genCopperSize, 10, 107);
+            generateOre(BlockID.oreCopper,
+                chunkX,
+                chunkZ,
+                ForestryConfig.genCopperInChunk,
+                ForestryConfig.genCopperSize,
+                ForestryConfig.genCopperMinY,
+                ForestryConfig.genCopperMaxY);
         });
     });
 }
@@ -56,7 +62,13 @@ if (ForestryConfig.genCopper) {
 if (ForestryConfig.genTin) {
     Flags.addUniqueAction("oreGenTin", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            generateOre(BlockID.oreTin, chunkX, chunkZ, ForestryConfig.genTinInChunk, ForestryConfig.genTinSize, 16, 91);
+            generateOre(BlockID.oreTin,
+                chunkX,
+                chunkZ,
+                ForestryConfig.genTinInChunk,
+                ForestryConfig.genTinSize,
+                ForestryConfig.genTinMinY,
+                ForestryConfig.genTinMaxY);
         });
     });
 }
@@ -64,8 +76,15 @@ if (ForestryConfig.genTin) {
 if (ForestryConfig.genApatite) {
     Flags.addUniqueAction("oreGenApatite", function () {
         Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-            if(Math.random() < 0.8)
-            generateOre(BlockID.oreApatite, chunkX, chunkZ, 1, ForestryConfig.genApatiteSize, 50, 247, APATITE_GEN_BIOMES);
+            if (Math.random() < 0.8)
+                generateOre(BlockID.oreApatite,
+                    chunkX,
+                    chunkZ,
+                    1,
+                    ForestryConfig.genApatiteSize,
+                    ForestryConfig.genApatiteMinY,
+                    ForestryConfig.genApatiteMaxY,
+                    APATITE_GEN_BIOMES);
         });
     });
 }

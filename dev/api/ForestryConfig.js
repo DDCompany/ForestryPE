@@ -14,14 +14,20 @@ const ForestryConfig = {
     /* ----- ORE GEN ----- */
     genApatite: __config__.getBool("gen.apatite.enabled"),
     genApatiteSize: __config__.getNumber("gen.apatite.size"),
+    genApatiteMinY: __config__.getNumber("gen.apatite.minY"),
+    genApatiteMaxY: __config__.getNumber("gen.apatite.maxY"),
 
     genCopper: __config__.getBool("gen.copper.enabled"),
     genCopperInChunk: __config__.getNumber("gen.copper.inChunk"),
     genCopperSize: __config__.getNumber("gen.copper.size"),
+    genCopperMinY: __config__.getNumber("gen.copper.minY"),
+    genCopperMaxY: __config__.getNumber("gen.copper.maxY"),
 
     genTin: __config__.getBool("gen.tin.enabled"),
     genTinInChunk: __config__.getNumber("gen.tin.inChunk"),
     genTinSize: __config__.getNumber("gen.tin.size"),
+    genTinMinY: __config__.getNumber("gen.tin.minY"),
+    genTinMaxY: __config__.getNumber("gen.tin.maxY"),
 
     /* ----- BEEKEEPING ----- */
     secondPrincessChance: __config__.getNumber("beekeeping.secondPrincessChance"),
@@ -43,5 +49,4 @@ const ForestryConfig = {
     hiveDamageOnAttack: __config__.getBool("hiveDamageOnAttack"),
     hiveDamageOnPeaceful: __config__.getBool("hiveDamageOnPeaceful"),
     reusableCapsules: __config__.getBool("reusableCapsules")
-
 };

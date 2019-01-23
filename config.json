@@ -27,17 +27,23 @@
     },
     "apatite": {
       "enabled": true,
-      "size": 126
+      "size": 126,
+      "minY": 50,
+      "maxY": 247
     },
     "copper": {
       "enabled": true,
       "inChunk": 20,
-      "size": 6
+      "size": 6,
+      "minY": 10,
+      "maxY": 107
     },
     "tin": {
       "enabled": true,
       "inChunk": 18,
-      "size": 6
+      "size": 6,
+      "minY": 16,
+      "maxY": 91
     }
   },
   "beekeeping": {
