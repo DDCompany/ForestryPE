@@ -13,7 +13,7 @@ var alvearyGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 50, bitmap: "alveary", scale: 3.2}
+        {type: "bitmap", x: 335, y: 50, bitmap: "forestry.for.alveary.bg", scale: 3.2}
     ],
     elements: {
         "progressScale": {
@@ -23,19 +23,19 @@ var alvearyGUI = new UI.StandartWindow({
             direction: 1,
             value: 0,
             invert: true,
-            bitmap: "apiary_scale_green",
+            bitmap: "forestry.for.apiary.scale_green",
             scale: 3.2
         },
 
-        "slot1": {type: "slot", x: 370, y: 106, size: 70.4, bitmap: "apiary_slot", isTransparentBackground: true},
-        "slot2": {type: "slot", x: 370, y: 189.2, size: 70.4, bitmap: "apiary_slot", isTransparentBackground: true},
+        "slot1": {type: "slot", x: 370, y: 106, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
+        "slot2": {type: "slot", x: 370, y: 189.2, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
 
         "slotProduct0": {
             type: "slot",
             x: 648.4,
             y: 64,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct1": {
@@ -43,7 +43,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 581.2,
             y: 107.6,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct2": {
@@ -51,7 +51,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 715.2,
             y: 107.6,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct3": {
@@ -59,7 +59,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 648.2,
             y: 149.2,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct4": {
@@ -67,7 +67,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 581.2,
             y: 190.8,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct5": {
@@ -75,7 +75,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 648.4,
             y: 232.4,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         },
         "slotProduct6": {
@@ -83,7 +83,7 @@ var alvearyGUI = new UI.StandartWindow({
             x: 715.6,
             y: 190.8,
             size: 70.4,
-            bitmap: "apiary_slot",
+            bitmap: "_default_slot_empty",
             isTransparentBackground: true
         }
     }

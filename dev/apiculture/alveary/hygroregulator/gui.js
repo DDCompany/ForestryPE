@@ -22,10 +22,10 @@ var alvearyHygroregulatorGUI = new UI.StandartWindow({
             y: 43.2,
             direction: 1,
             value: 0,
-            bitmap: "liquid_background_2",
+            bitmap: "forestry.bgs.liquid_2",
             scale: 3.2
         },
-        "slotLiquid": {type: "slot", x: 400, y: 65, bitmap: "slot_liquid"},
-        "slotContainer": {type: "slot", x: 400, y: 150, bitmap: "slot_container"}
+        "slotLiquid": {type: "slot", x: 400, y: 65, bitmap: "forestry.slots.liquid"},
+        "slotContainer": {type: "slot", x: 400, y: 150, bitmap: "forestry.slots.container"}
     }
 });

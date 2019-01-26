@@ -74,13 +74,13 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
             if (content) {
                 var healthScale = content.elements["progressScale"];
                 if (this.data.progress <= (this.data.progressMax * 0.8) && this.data.progress >= (this.data.progressMax * 0.5)) {
-                    healthScale.bitmap = "apiary_scale_yellow";
+                    healthScale.bitmap = "forestry.for.apiary.scale_yellow";
                 } else if (this.data.progress <= (this.data.progressMax * 0.5) && this.data.progress >= (this.data.progressMax * 0.3)) {
-                    healthScale.bitmap = "apiary_scale_orange";
+                    healthScale.bitmap = "forestry.for.apiary.scale_orange";
                 } else if (this.data.progress <= (this.data.progressMax * 0.3)) {
-                    healthScale.bitmap = "apiary_scale_red";
+                    healthScale.bitmap = "forestry.for.apiary.scale_red";
                 } else {
-                    healthScale.bitmap = "apiary_scale_green";
+                    healthScale.bitmap = "forestry.for.apiary.scale_green";
                 }
             }
 

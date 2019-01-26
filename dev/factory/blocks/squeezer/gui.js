@@ -13,11 +13,11 @@ const squeezerGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 110, bitmap: "forestry_energy_bar_background", scale: 3.2},
-        {type: "bitmap", x: 400, y: 75, bitmap: "squeezer_slots_bg", scale: 3.2},
-        {type: "bitmap", x: 610, y: 145, bitmap: "furnace_bar_background", scale: 3.2},
-        {type: "bitmap", x: 696, y: 80, bitmap: "liquid_background_1", scale: 3.2},
-        {type: "bitmap", x: 765, y: 155, bitmap: "squeezer_arrow", scale: 3.2}
+        {type: "bitmap", x: 335, y: 110, bitmap: "forestry.scales.energy_empty", scale: 3.2},
+        {type: "bitmap", x: 400, y: 75, bitmap: "forestry.for.squeezer.bg", scale: 3.2},
+        {type: "bitmap", x: 610, y: 145, bitmap: "forestry.scales.furnace_empty", scale: 3.2},
+        {type: "bitmap", x: 696, y: 80, bitmap: "forestry.bgs.liquid_1", scale: 3.2},
+        {type: "bitmap", x: 765, y: 155, bitmap: "forestry.for.squeezer.arrow", scale: 3.2}
     ],
     elements: {
         "energyScale": {
@@ -26,7 +26,7 @@ const squeezerGUI = new UI.StandartWindow({
             y: 110,
             direction: 1,
             value: 0,
-            bitmap: "forestry_energy_bar",
+            bitmap: "forestry.scales.energy_full",
             scale: 3.2
         },
         "progressScale": {
@@ -34,7 +34,7 @@ const squeezerGUI = new UI.StandartWindow({
             x: 610,
             y: 145,
             value: 0,
-            bitmap: "furnace_bar_scale",
+            bitmap: "forestry.scales.furnace_full",
             scale: 3.2
         },
         "liquidScale": {
@@ -43,13 +43,13 @@ const squeezerGUI = new UI.StandartWindow({
             y: 84,
             direction: 1,
             value: 0,
-            bitmap: "liquid_background_2",
+            bitmap: "forestry.bgs.liquid_2",
             scale: 3.2
         },
 
         "slotSpecial": {type: "slot", x: 615, y: 205},
-        "slotEmptyContainer": {type: "slot", x: 760, y: 80, bitmap: "slot_container"},
-        "slotContainer": {type: "slot", x: 760, y: 210, bitmap: "slot_liquid"}
+        "slotEmptyContainer": {type: "slot", x: 760, y: 80, bitmap: "forestry.slots.container"},
+        "slotContainer": {type: "slot", x: 760, y: 210, bitmap: "forestry.slots.liquid"}
     }
 });
 
@@ -58,7 +58,7 @@ const squeezerGUI = new UI.StandartWindow({
     let x = 412;
     let y = 87;
     for (let i = 0; i < 9; i++) {
-        content.elements["slot" + i] = {type: "slot", x: x, y: y, bitmap: "slot_gray", size: 54};
+        content.elements["slot" + i] = {type: "slot", x: x, y: y, bitmap: "forestry.slots.gray", size: 54};
         x += 60;
         if(x >= 560) {
             x = 412;

@@ -13,8 +13,8 @@ const carpenterGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 140, bitmap: "forestry_energy_bar_background", scale: 3.2},
-        {type: "bitmap", x: 556, y: 110, bitmap: "carpenter_background", scale: 3.2}
+        {type: "bitmap", x: 335, y: 140, bitmap: "forestry.scales.energy_empty", scale: 3.2},
+        {type: "bitmap", x: 556, y: 110, bitmap: "forestry.for.carpenter.bg", scale: 3.2}
     ],
     elements: {
         "energyScale": {
@@ -23,7 +23,7 @@ const carpenterGUI = new UI.StandartWindow({
             y: 140,
             direction: 1,
             value: 0,
-            bitmap: "forestry_energy_bar",
+            bitmap: "forestry.scales.energy_full",
             scale: 3.2
         },
         "progressScale": {
@@ -32,7 +32,7 @@ const carpenterGUI = new UI.StandartWindow({
             y: 217,
             direction: 1,
             value: 0,
-            bitmap: "centrifuge_background_scale",
+            bitmap: "forestry.for.carpenter.scale",
             scale: 3.2
         },
         "liquidScale": {
@@ -41,7 +41,7 @@ const carpenterGUI = new UI.StandartWindow({
             y: 113,
             direction: 1,
             value: 0,
-            bitmap: "liquid_background_2",
+            bitmap: "forestry.bgs.liquid_2",
             scale: 3.2
         },
 
@@ -49,7 +49,7 @@ const carpenterGUI = new UI.StandartWindow({
         "slotSpecial": {type: "slot", x: 612, y: 119},
 
         "slotOutput": {type: "slot", x: 727, y: 233},
-        "slotContainer": {type: "slot", x: 727, y: 119, bitmap: "slot_liquid"},
+        "slotContainer": {type: "slot", x: 727, y: 119, bitmap: "forestry.slots.liquid"},
 
     }
 });

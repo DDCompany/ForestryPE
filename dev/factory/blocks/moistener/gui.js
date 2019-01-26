@@ -13,8 +13,8 @@ const moistenerGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 418, y: 90, bitmap: "moistener_background", scale: 3.2},
-        {type: "bitmap", x: 335, y: 90, bitmap: "liquid_background_1", scale: 3.2}
+        {type: "bitmap", x: 418, y: 90, bitmap: "forestry.for.moistener.bg", scale: 3.2},
+        {type: "bitmap", x: 335, y: 90, bitmap: "forestry.bgs.liquid_1", scale: 3.2}
 
     ],
     elements: {
@@ -24,7 +24,7 @@ const moistenerGUI = new UI.StandartWindow({
             y: 94,
             direction: 1,
             value: 0,
-            bitmap: "liquid_background_2",
+            bitmap: "forestry.bgs.liquid_2",
             scale: 3.2
         },
         "progressScale": {
@@ -33,7 +33,7 @@ const moistenerGUI = new UI.StandartWindow({
             y: 215,
             direction: 1,
             value: 0,
-            bitmap: "moistener_arrow_0",
+            bitmap: "forestry.for.moistener.arrow_0",
             scale: 3.2
         },
         "progressScale2": {
@@ -42,10 +42,10 @@ const moistenerGUI = new UI.StandartWindow({
             y: 99,
             direction: 1,
             value: 0,
-            bitmap: "moistener_arrow_1",
+            bitmap: "forestry.for.moistener.arrow_1",
             scale: 3.2
         },
-        "progressScale3": {type: "scale", x: 745, y: 160, value: 0, bitmap: "moistener_arrow_2", scale: 3.2},
+        "progressScale3": {type: "scale", x: 745, y: 160, value: 0, bitmap: "forestry.for.moistener.arrow_2", scale: 3.2},
 
         "slotOutput_00": {type: "slot", x: 469, y: 90, size: 59},
         "slotOutput_01": {type: "slot", x: 529, y: 90, size: 59},
@@ -60,8 +60,8 @@ const moistenerGUI = new UI.StandartWindow({
 
         "slotOutput_20": {type: "slot", x: 681, y: 157, size: 59},
 
-        "slotContainer": {type: "slot", x: 402, y: 102, size: 59, bitmap: "slot_liquid"},
-        "slotEmptyContainer": {type: "slot", x: 402, y: 218, size: 59, bitmap: "slot_container"},
+        "slotContainer": {type: "slot", x: 402, y: 102, size: 59, bitmap: "forestry.slots.liquid"},
+        "slotEmptyContainer": {type: "slot", x: 402, y: 218, size: 59, bitmap: "forestry.slots.container"},
 
         "slotRecipe": {type: "slot", x: 799, y: 99, size: 59},
         "slotResult": {type: "slot", x: 799, y: 214, size: 59}

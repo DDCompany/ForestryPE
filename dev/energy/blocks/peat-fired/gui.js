@@ -6,18 +6,18 @@ const guiPeatFiredEngine = new UI.StandartWindow({
     },
 
     drawing: [
-        {type: "bitmap", x: 335, y: 140, bitmap: "forestry_energy_bar_background", scale: 3.2},
-        {type: "bitmap", x: 385, y: 110, bitmap: "engine_peat_background", scale: 3.2},
+        {type: "bitmap", x: 335, y: 140, bitmap: "forestry.scales.energy_empty", scale: 3.2},
+        {type: "bitmap", x: 385, y: 110, bitmap: "forestry.for.peat-fires.bg", scale: 3.2},
     ],
 
     elements: {
-        "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry_energy_bar", scale: 3.2},
+        "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry.scales.energy_full", scale: 3.2},
         "burnScale": {
             type: "scale",
             x: 394.6,
             y: 142,
             direction: 1,
-            bitmap: "engine_peat_scale",
+            bitmap: "forestry.scales.green_flame_full",
             scale: 3.2
         },
 

@@ -137,7 +137,7 @@ function drawPage1(bee) {
         y: LINE - 15,
         visual: true,
         size: 50,
-        bitmap: "slot_empty"
+        bitmap: "_default_slot_empty"
     };
 
     drawedElements["textInactive"] = {
@@ -156,7 +156,7 @@ function drawPage1(bee) {
         y: LINE - 15,
         visual: true,
         size: 50,
-        bitmap: "slot_empty"
+        bitmap: "_default_slot_empty"
     };
 
     LINE += 32;
@@ -300,7 +300,7 @@ function drawPage1(bee) {
         text: bee.getActiveChromosome("FERTILITY") + " x "
     };
 
-    drawedElements["imageFertility"] = {type: "image", x: COLUMN_1 + 40, y: LINE, bitmap: "analyzer_bee", scale: 2.5};
+    drawedElements["imageFertility"] = {type: "image", x: COLUMN_1 + 40, y: LINE, bitmap: "forestry.for.alyzer.bee", scale: 2.5};
 
     drawedElements["textFertility2"] = {
         type: "text",
@@ -312,7 +312,7 @@ function drawPage1(bee) {
         text: bee.getInactiveChromosome("FERTILITY") + " x "
     };
 
-    drawedElements["imageFertility2"] = {type: "image", x: COLUMN_2 + 40, y: LINE, bitmap: "analyzer_bee", scale: 2.5};
+    drawedElements["imageFertility2"] = {type: "image", x: COLUMN_2 + 40, y: LINE, bitmap: "forestry.for.alyzer.bee", scale: 2.5};
 
     LINE += 32;
 
@@ -470,7 +470,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_1,
         y: LINE,
-        bitmap: bee.getActiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getActiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "forestry.for.alyzer.tolerance_none" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "forestry.for.alyzer.tolerance_both" : (bee.getActiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "forestry.for.alyzer.tolerance_up" : "forestry.for.alyzer.tolerance_down")),
         scale: 2.5
     };
 
@@ -488,7 +488,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_2,
         y: LINE,
-        bitmap: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") === 0 ? "forestry.for.alyzer.tolerance_none" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 6 ? "forestry.for.alyzer.tolerance_both" : (bee.getInactiveChromosome("TEMPERATURE_TOLERANCE") < 11 ? "forestry.for.alyzer.tolerance_up" : "forestry.for.alyzer.tolerance_down")),
         scale: 2.5
     };
 
@@ -547,7 +547,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_1,
         y: LINE,
-        bitmap: bee.getActiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getActiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "forestry.for.alyzer.tolerance_none" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "forestry.for.alyzer.tolerance_both" : (bee.getActiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "forestry.for.alyzer.tolerance_up" : "forestry.for.alyzer.tolerance_down")),
         scale: 2.5
     };
 
@@ -565,7 +565,7 @@ function drawPage2(bee) {
         type: "image",
         x: COLUMN_2,
         y: LINE,
-        bitmap: bee.getInactiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "analyzer_tol_none" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "analyzer_tol_both" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "analyzer_tol_up" : "analyzer_tol_down")),
+        bitmap: bee.getInactiveChromosome("HUMIDITY_TOLERANCE") === 0 ? "forestry.for.alyzer.tolerance_none" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 6 ? "forestry.for.alyzer.tolerance_both" : (bee.getInactiveChromosome("HUMIDITY_TOLERANCE") < 11 ? "forestry.for.alyzer.tolerance_up" : "forestry.for.alyzer.tolerance_down")),
         scale: 2.5
     };
 
@@ -744,7 +744,7 @@ function drawPage3(bee) {
             y: LINE,
             size: 50,
             visual: true,
-            bitmap: "slot_empty"
+            bitmap: "_default_slot_empty"
         };
         t++;
     }
@@ -772,7 +772,7 @@ function drawPage3(bee) {
             y: LINE,
             size: 50,
             visual: true,
-            bitmap: "slot_empty"
+            bitmap: "_default_slot_empty"
         };
         t++;
     }
@@ -816,15 +816,15 @@ const analyzerObj = {
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 40, bitmap: "alyzer", scale: 2.8}
+        {type: "bitmap", x: 335, y: 40, bitmap: "forestry.for.alyzer.bg", scale: 2.8}
     ],
     elements: {
-        "slotHoney": {type: "slot", x: 938, y: 40, size: 51, bitmap: "slot_honey"},
-        "slotScanning": {type: "slot", x: 938, y: 91, size: 51, bitmap: "slot_q"},
+        "slotHoney": {type: "slot", x: 938, y: 40, size: 51, bitmap: "forestry.slots.honey"},
+        "slotScanning": {type: "slot", x: 938, y: 91, size: 51, bitmap: "forestry.for.alyzer.slot_q"},
 
-        "slotPhase1": {type: "slot", x: 938, y: 178.4, size: 51, bitmap: "slot_p1"},
-        "slotPhase2": {type: "slot", x: 938, y: 178.4 + 51, size: 51, bitmap: "slot_p2"},
-        "slotPhase3": {type: "slot", x: 938, y: 178.4 + 2 * 51, size: 51, bitmap: "slot_p3"},
+        "slotPhase1": {type: "slot", x: 938, y: 178.4, size: 51, bitmap: "forestry.for.alyzer.slot_1"},
+        "slotPhase2": {type: "slot", x: 938, y: 178.4 + 51, size: 51, bitmap: "forestry.for.alyzer.slot_2"},
+        "slotPhase3": {type: "slot", x: 938, y: 178.4 + 2 * 51, size: 51, bitmap: "forestry.for.alyzer.slot_3"},
     }
 };
 const analyzerGUI = new UI.StandartWindow(analyzerObj);

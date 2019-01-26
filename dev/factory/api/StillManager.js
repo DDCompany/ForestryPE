@@ -10,7 +10,7 @@ const StillManager = {
         }
 
         if(recipe.inputAmount <= 0) {
-            Logger.Log("[ForestryAPI] Amount of input liquid is not correct! (Still Recipe Registration)", "ERROR");
+            Logger.Log("[ForestryAPI] Amount of input liquids is not correct! (Still Recipe Registration)", "ERROR");
             return;
         }
 
@@ -20,7 +20,7 @@ const StillManager = {
         }
 
         if(recipe.outputAmount <= 0) {
-            Logger.Log("[ForestryAPI] Amount of output liquid is not correct! (Still Recipe Registration)", "ERROR");
+            Logger.Log("[ForestryAPI] Amount of output liquids is not correct! (Still Recipe Registration)", "ERROR");
             return;
         }
 

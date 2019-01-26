@@ -13,8 +13,8 @@ const centrifugeGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 140, bitmap: "forestry_energy_bar_background", scale: 3.2},
-        {type: "bitmap", x: 385, y: 120, bitmap: "centrifuge_background", scale: 3.2},
+        {type: "bitmap", x: 335, y: 140, bitmap: "forestry.scales.energy_empty", scale: 3.2},
+        {type: "bitmap", x: 385, y: 120, bitmap: "forestry.for.centrifuge.bg", scale: 3.2},
     ],
     elements: {
         "progressScale": {
@@ -23,7 +23,7 @@ const centrifugeGUI = new UI.StandartWindow({
             y: 178,
             direction: 1,
             value: 0,
-            bitmap: "centrifuge_background_scale",
+            bitmap: "forestry.for.centrifuge.scale",
             scale: 3.2
         },
         "progressScale2": {
@@ -32,7 +32,7 @@ const centrifugeGUI = new UI.StandartWindow({
             y: 178,
             direction: 1,
             value: 0,
-            bitmap: "centrifuge_background_scale",
+            bitmap: "forestry.for.centrifuge.scale",
             scale: 3.2
         },
         "energyScale": {
@@ -41,7 +41,7 @@ const centrifugeGUI = new UI.StandartWindow({
             y: 140,
             direction: 1,
             value: 0,
-            bitmap: "forestry_energy_bar",
+            bitmap: "forestry.scales.energy_full",
             scale: 3.2
         },
 
