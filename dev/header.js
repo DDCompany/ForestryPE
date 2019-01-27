@@ -66,7 +66,3 @@ switch (BeekeepingMode) {
 Entity.getArmorSlot = function (ent) {
     return AdaptedScriptEntity.getArmor(ent);
 };
-
-ModAPI.addAPICallback("ForestryAPI", function () {
-    Logger.Log("Load time: " + ((java.lang.System.currentTimeMillis() - startTime) / 1000) + "s", "ForestryPE");
-});
