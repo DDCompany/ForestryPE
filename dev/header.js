@@ -15,6 +15,7 @@ importLib("flags", "*");
 importLib("ToolType", "*");
 IMPORT("BackpackAPI");
 
+const startTime = java.lang.System.currentTimeMillis();
 const APATITE_GEN_BIOMES = [3, 131, 34, 162];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
@@ -65,3 +66,7 @@ switch (BeekeepingMode) {
 Entity.getArmorSlot = function (ent) {
     return AdaptedScriptEntity.getArmor(ent);
 };
+
+ModAPI.addAPICallback("ForestryAPI", function () {
+    Logger.Log("Load time: " + ((java.lang.System.currentTimeMillis() - startTime) / 1000) + "s", "ForestryPE");
+});

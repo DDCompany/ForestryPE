@@ -1,5 +1,4 @@
 ModAPI.registerAPI("ForestryAPI", {
-
     Bee: Bee,
     BeeEffects: BeeEffects,
     BeeFrame: BeeFrame,
@@ -36,6 +35,5 @@ ModAPI.registerAPI("ForestryAPI", {
     requireGlobal: function (command) {
         return eval(command);
     }
-
 });
 Logger.Log("Forestry API shared with name ForestryAPI", "API");
