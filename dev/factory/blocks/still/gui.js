@@ -2,7 +2,7 @@ var stillGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Still")
+                text: "Still"
             }
         },
         inventory: {

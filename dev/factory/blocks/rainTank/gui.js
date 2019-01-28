@@ -2,7 +2,7 @@ var raintankGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Rain tank")
+                text: "Rain Tank"
             }
         },
         inventory: {

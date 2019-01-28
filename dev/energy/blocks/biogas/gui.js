@@ -1,6 +1,6 @@
 const guiBiogasEngine = new UI.StandartWindow({
     standart: {
-        header: {text: {text: Translation.translate("Biogas generator")}},
+        header: {text: {text: "Biogas Generator"}},
         inventory: {standart: true},
         background: {standart: true}
     },

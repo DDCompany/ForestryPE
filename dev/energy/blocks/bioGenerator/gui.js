@@ -2,7 +2,7 @@ const biogeneratorGUI = new UI.StandartWindow({
         standart: {
             header: {
                 text: {
-                    text: Translation.translate("Bio Generator")
+                    text: "Bio Generator"
                 }
             },
             inventory: {

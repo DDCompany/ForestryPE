@@ -2,7 +2,7 @@ var alvearyGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Apiary")
+                text: "Apiary"
             }
         },
         inventory: {

@@ -2,7 +2,7 @@ var alvearyHygroregulatorGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Alveary Hygroregulator")
+                text: "Alveary Hygroregulator"
             }
         },
         inventory: {

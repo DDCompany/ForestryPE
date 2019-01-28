@@ -2,7 +2,7 @@ const fabricatorGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
-                text: Translation.translate("Thermionic Fabricator")
+                text: "Thermionic Fabricator"
             }
         },
         inventory: {
