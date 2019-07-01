@@ -25,5 +25,5 @@ ModAPI.addAPICallback("ICore", function (api) {
         liquid: "biomass"
     });
 
-    Logger.Log("IC Integration Activated", "ForestryPE")
+    Logger.Log("IC Integration Activated", LOG_TAG)
 });

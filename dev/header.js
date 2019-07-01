@@ -15,6 +15,7 @@ importLib("flags", "*");
 importLib("ToolType", "*");
 IMPORT("BackpackAPI");
 
+const LOG_TAG = "ForestryPE";
 const startTime = java.lang.System.currentTimeMillis();
 const APATITE_GEN_BIOMES = [3, 131, 34, 162];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);

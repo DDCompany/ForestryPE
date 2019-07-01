@@ -217,5 +217,5 @@ ModAPI.addAPICallback("HarvestAPI", function () {
         });
     }
 
-    Logger.Log("HC Integration Activated", "ForestryPE")
+    Logger.Log("HC Integration Activated", LOG_TAG)
 });
