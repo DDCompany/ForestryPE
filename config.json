@@ -1,56 +1,55 @@
 {
-  "enabled": true,
-  "show_resource_errors": true,
-  "crateEnabled": true,
-  "glassEnabled": true,
-  "combBlocksEnabled": true,
-  "oresBlocksEnabled": true,
-  "hiveDamageOnAttack": true,
-  "hiveDamageOnPeaceful": true,
-  "reusableCapsules": true,
-  "machines": {
-    "rainTank": false
-  },
-  "recipes": {
-    "bronzeIngot": true
-  },
-  "gen": {
-    "beehives": {
-      "debug": false,
-      "forest": 0.03,
-      "meadows": 0.01,
-      "modest": 0.01,
-      "tropical": 0.06,
-      "wintry": 0.2,
-      "marshy": 0.2,
-      "ender": 0.02
+  "crateEnabled":true,
+  "enabled":true,
+  "gen":{
+    "tin":{
+      "enabled":true,
+      "maxY":91,
+      "inChunk":18,
+      "minY":16,
+      "size":6
     },
-    "apatite": {
-      "enabled": true,
-      "size": 126,
-      "minY": 50,
-      "maxY": 247
+    "apatite":{
+      "enabled":true,
+      "maxY":247,
+      "minY":50,
+      "size":126
     },
-    "copper": {
-      "enabled": true,
-      "inChunk": 20,
-      "size": 6,
-      "minY": 10,
-      "maxY": 107
+    "beehives":{
+      "tropical":0.06,
+      "meadows":0.01,
+      "forest":0.03,
+      "debug":false,
+      "wintry":0.2,
+      "ender":0.02,
+      "modest":0.01,
+      "marshy":0.2
     },
-    "tin": {
-      "enabled": true,
-      "inChunk": 18,
-      "size": 6,
-      "minY": 16,
-      "maxY": 91
+    "copper":{
+      "enabled":true,
+      "maxY":107,
+      "inChunk":20,
+      "minY":10,
+      "size":6
     }
   },
-  "beekeeping": {
-    "secondPrincessChance": 0,
-    "mode": 1
+  "combBlocksEnabled":true,
+  "recipes":{
+    "bronzeIngot":true
   },
-  "particles": {
-    "beeHives": true
+  "reusableCapsules":true,
+  "beekeeping":{
+    "secondPrincessChance":0,
+    "mode":1
+  },
+  "hiveDamageOnAttack":true,
+  "machines":{
+    "rainTank":false
+  },
+  "oresBlocksEnabled":true,
+  "glassEnabled":true,
+  "hiveDamageOnPeaceful":true,
+  "particles":{
+    "beeHives":true
   }
 }
