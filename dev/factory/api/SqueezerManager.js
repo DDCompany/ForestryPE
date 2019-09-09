@@ -5,17 +5,17 @@ const SqueezerManager = {
         let input = recipe.input;
 
         if(!input) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Squeezer Recipe Registration)", "ERROR");
+            summonException("Input is not correct! (Squeezer Recipe Registration)");
             return;
         }
 
         if(!recipe.liquid) {
-            Logger.Log("[ForestryAPI] Liquid is not correct! (Squeezer Recipe Registration)", "ERROR");
+            summonException("Liquid is not correct! (Squeezer Recipe Registration)");
             return;
         }
 
         if(!recipe.liquidAmount) {
-            Logger.Log("[ForestryAPI] Amount of Liquid is not correct! (Squeezer Recipe Registration)", "ERROR");
+            summonException("Amount of Liquid is not correct! (Squeezer Recipe Registration)");
             return;
         }
 

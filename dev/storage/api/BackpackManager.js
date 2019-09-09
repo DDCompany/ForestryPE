@@ -70,7 +70,7 @@ const BackpackManager = {
                 return;
             }
 
-            Logger.Log("Error loading file " + path, "ERROR");
+            log("Error loading file " + path, "ERROR");
         }
     }
 ;

@@ -100,20 +100,20 @@ const BeeRegistry = {
 
     addMutation: function (arg) {
         if (!arg.species1) {
-            Logger.Log("[ForestryAPI]Species1 is undefined!", "ERROR");
+            summonException("Species1 is undefined! (Bee Mutation Registration)");
             return;
         }
         if (!arg.species2) {
-            Logger.Log("[ForestryAPI]Species2 is undefined!", "ERROR");
+            summonException("Species2 is undefined! (Bee Mutation Registration)");
             return;
         }
         if (!arg.chance) {
-            Logger.Log("[ForestryAPI]Chance is undefined or equals zero!", "ERROR");
+            summonException("Chance is undefined or equals zero! (Bee Mutation Registration)");
             return;
         }
 
         if (!arg.result) {
-            Logger.Log("[ForestryAPI]Result is undefined!", "ERROR");
+            summonException("Result is undefined! (Bee Mutation Registration)");
             return;
         }
 
@@ -173,15 +173,15 @@ const BeeRegistry = {
 
     registerBee: function (arg) {
         if (!arg.localize) {
-            Logger.Log("[ForestryAPI]Localize is undefined", "ERROR");
+            summonException("Localize is undefined! (Bee Registration)");
             return;
         }
         if (!arg.chromosomes) {
-            Logger.Log("[ForestryAPI]Chromosomes is undefined", "ERROR");
+            summonException("Chromosomes is undefined! (Bee Registration)");
             return;
         }
         if (!arg.species) {
-            Logger.Log("[ForestryAPI]Species is undefined", "ERROR");
+            summonException("Species is undefined! (Bee Registration)");
             return;
         }
 

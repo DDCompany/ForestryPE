@@ -7,12 +7,12 @@ const MoistenerManager = {
         let outputItem = fuel.outputItem;
 
         if(!inputItem || inputItem.id <= 0) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Moistener Fuel Registration)", "ERROR");
+            summonException("Input is not correct! (Moistener Fuel Registration)");
             return;
         }
 
         if(!outputItem || outputItem.id <= 0) {
-            Logger.Log("[ForestryAPI] Output is not correct! (Moistener Fuel Registration)", "ERROR");
+            summonException("Output is not correct! (Moistener Fuel Registration)");
             return;
         }
 
@@ -28,12 +28,12 @@ const MoistenerManager = {
         let outputItem = recipe.outputItem;
 
         if(!inputItem || inputItem.id <= 0) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Moistener Recipe Registration)", "ERROR");
+            summonException("Input is not correct! (Moistener Recipe Registration)");
             return;
         }
 
         if(!outputItem || outputItem.id <= 0) {
-            Logger.Log("[ForestryAPI] Output is not correct! (Moistener Recipe Registration)", "ERROR");
+            summonException("Output is not correct! (Moistener Recipe Registration)");
             return;
         }
 

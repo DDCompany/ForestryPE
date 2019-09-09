@@ -4,13 +4,13 @@ const FabricatorManager = {
 
     registerRecipe: function (recipe) {
         if(!recipe.input) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Fabricator Recipe Registration)", "ERROR");
+            summonException("Input is not correct! (Fabricator Recipe Registration)");
             return;
         }
 
         let result = recipe.result;
         if(!result || result.id <= 0) {
-            Logger.Log("[ForestryAPI] Result is not correct! (Fabricator Recipe Registration)", "ERROR");
+            summonException("Result is not correct! (Fabricator Recipe Registration)");
             return;
         }
 
@@ -22,12 +22,12 @@ const FabricatorManager = {
     addSmelting: function (smelting) {
         let input = smelting.input;
         if(!input || input.id <= 0) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Fabricator Smelting Registration)", "ERROR");
+            summonException("Input is not correct! (Fabricator Smelting Registration)");
             return;
         }
 
         if(!smelting.amount) {
-            Logger.Log("[ForestryAPI] Amount of Liquid Glass is not correct! (Fabricator Smelting Registration)", "ERROR");
+            summonException("Amount of Liquid Glass is not correct! (Fabricator Smelting Registration)");
             return;
         }
 

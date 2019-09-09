@@ -67,3 +67,15 @@ switch (BeekeepingMode) {
 Entity.getArmorSlot = function (ent) {
     return AdaptedScriptEntity.getArmor(ent);
 };
+
+function log(msg, tag) {
+    Logger.Log("[" + LOG_TAG + "] " + msg, tag);
+}
+
+function summonException(msg) {
+    throw new function () {
+        this.toString = function () {
+            return msg;
+        }
+    };
+}

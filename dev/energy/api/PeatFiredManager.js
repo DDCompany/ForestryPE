@@ -3,12 +3,12 @@ const PeatFiredManager = {
 
     addFuel: function (id, energy, burnTime) {
         if (energy <= 0) {
-            Logger.Log("[ForestryAPI] Energy must be > 0! (Peat Fired Fuel Registration)", "ERROR");
+            summonException("Energy must be > 0! (Peat Fired Fuel Registration)");
             return;
         }
 
         if (burnTime <= 0) {
-            Logger.Log("[ForestryAPI] Burn time must be > 0! (Peat Fired Fuel Registration)", "ERROR");
+            summonException("Burn time must be > 0! (Peat Fired Fuel Registration)");
             return;
         }
 

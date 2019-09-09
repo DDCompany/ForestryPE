@@ -6,12 +6,12 @@ const CentrifugeManager = {
         let result = recipe.result;
 
         if(!input) {
-            Logger.Log("[ForestryAPI] Result is not correct! (Centrifuge Recipe Registration)", "ERROR");
+            summonException("Result is not correct! (Centrifuge Recipe Registration)");
             return;
         }
 
         if(!result) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Centrifuge Recipe Registration)", "ERROR");
+            summonException("Input is not correct! (Centrifuge Recipe Registration)");
             return;
         }
 

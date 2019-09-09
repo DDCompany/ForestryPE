@@ -4,17 +4,17 @@ const FermenterManager = {
 
     addRecipe: function (recipe) {
         if(recipe.id <= 0) {
-            Logger.Log("[ForestryAPI] Id is not correct! (Fermenter Recipe Registration)", "ERROR");
+            summonException("Id is not correct! (Fermenter Recipe Registration)");
             return;
         }
 
         if(!recipe.liquid) {
-            Logger.Log("[ForestryAPI] Liquid is not correct! (Fermenter Recipe Registration)", "ERROR");
+            summonException("Liquid is not correct! (Fermenter Recipe Registration)");
             return;
         }
 
         if(!recipe.liquidAmount) {
-            Logger.Log("[ForestryAPI] Liquid Amount is not correct! (Fermenter Recipe Registration)", "ERROR");
+            summonException("Liquid Amount is not correct! (Fermenter Recipe Registration)");
             return;
         }
 
@@ -25,17 +25,17 @@ const FermenterManager = {
 
     addFuel: function (fuel) {
         if(fuel.id <= 0) {
-            Logger.Log("[ForestryAPI] Id is not correct! (Fermenter Fuel Registration)", "ERROR");
+            summonException("Id is not correct! (Fermenter Fuel Registration)");
             return;
         }
 
         if(fuel.perCycle <= 0) {
-            Logger.Log("[ForestryAPI] perCycle value is not correct! (Fermenter Fuel Registration)", "ERROR");
+            summonException("'perCycle' value is not correct! (Fermenter Fuel Registration)");
             return;
         }
 
         if(fuel.cycles <= 0) {
-            Logger.Log("[ForestryAPI] cycles is not correct! (Fermenter Fuel Registration)", "ERROR");
+            summonException("'cycles' is not correct! (Fermenter Fuel Registration)");
             return;
         }
 

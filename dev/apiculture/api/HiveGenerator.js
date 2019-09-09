@@ -3,12 +3,12 @@ const HiveGenerator = {
 
     register: function (generator) {
         if (generator.chance <= 0) {
-            Logger.Log("[ForestryAPI]Hive generation chance is not correct!", "ERROR");
+            summonException("Chance is not correct! (Hive Generator Registration)");
             return;
         }
 
         if (!generator.generate) {
-            Logger.Log("[ForestryAPI]Generate function is not correct!", "ERROR");
+            summonException("Generate function is not correct! (Hive Generator Registration)");
             return;
         }
 

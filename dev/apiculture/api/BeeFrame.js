@@ -2,24 +2,23 @@ var BeeFrame = {
     frames: {},
 
     registerFrame: function (obj) {
-
         if (!obj.codeName) {
-            Logger.Log("[ForestryAPI]CodeName is undefined!", "ERROR");
+            summonException("CodeName is undefined! (Frames Registration)");
             return;
         }
 
         if (!obj.localize) {
-            Logger.Log("[ForestryAPI]Localize is undefined!", "ERROR");
+            summonException("Localize is undefined! (Frames Registration)");
             return;
         }
 
         if (!obj.durability) {
-            Logger.Log("[ForestryAPI]Durability is undefined!", "ERROR");
+            summonException("Durability is undefined! (Frames Registration)");
             return;
         }
 
         if (!obj.modifier) {
-            Logger.Log("[ForestryAPI]Modifier is undefined!", "ERROR");
+            summonException("Modifier is undefined! (Frames Registration)");
             return;
         }
 

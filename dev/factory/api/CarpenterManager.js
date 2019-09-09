@@ -5,13 +5,13 @@ const CarpenterManager = {
 
     registerRecipe: function (recipe) {
         if(!recipe.input) {
-            Logger.Log("[ForestryAPI] Input is not correct! (Carpenter Recipe Registration)", "ERROR");
+            summonException("Input is not correct! (Carpenter Recipe Registration)");
             return;
         }
 
         let result = recipe.result;
         if(!result || result.id <= 0) {
-            Logger.Log("[ForestryAPI] Result is not correct! (Carpenter Recipe Registration)", "ERROR");
+            summonException("Result is not correct! (Carpenter Recipe Registration)");
             return;
         }
 

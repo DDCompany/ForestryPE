@@ -36,5 +36,5 @@ ModAPI.registerAPI("ForestryAPI", {
         return eval(command);
     }
 });
-Logger.Log("Forestry API shared with name ForestryAPI", "API");
-Logger.Log("Load time: " + ((java.lang.System.currentTimeMillis() - startTime) / 1000) + "s", LOG_TAG);
+log("API shared with name ForestryAPI", "API");
+log("Load time: " + ((java.lang.System.currentTimeMillis() - startTime) / 1000) + "s", "INFO");
