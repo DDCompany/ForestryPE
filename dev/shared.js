@@ -14,7 +14,6 @@ ModAPI.registerAPI("ForestryAPI", {
     ModelHelper: ModelHelper,
     Util: Util,
     ApiaryRegistry: ApiaryRegistry,
-    BackpackManager: BackpackManager,
     ChestManager: ChestManager,
     BioGeneratorManager: BioGeneratorManager,
     CarpenterManager: CarpenterManager,

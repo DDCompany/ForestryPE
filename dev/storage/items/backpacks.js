@@ -1,13 +1,40 @@
+setLoadingTip("Storage Module Loading...");
+
 IDRegistry.genItemID("backpackMiners");
 Item.createItem("backpackMiners", "Mining Backpack", {name: "backpackMiners", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackMiners, {
+    title: "Blab",
     slots: 15,
     inRow: 5,
-
-    isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("miners", id, data);
-    }
+    items: [
+        "^ore.+",
+        "^dust.+",
+        "^gem.+",
+        "^ingot.+",
+        "^nugget.+",
+        "^oreCrushed.+",
+        "^dustSmall.+",
+        "^dustTiny.+",
+        "^apatite$",
+        {
+            id: 351,
+            data: 4
+        },
+        263,
+        15,
+        14,
+        388,
+        264,
+        406,
+        129,
+        21,
+        73,
+        56,
+        153,
+        265,
+        266
+    ]
 });
 
 IDRegistry.genItemID("backpackDigger");
@@ -16,10 +43,19 @@ Item.createItem("backpackDigger", "Digging Backpack", {name: "backpackDigger", m
 BackpackRegistry.register(ItemID.backpackDigger, {
     slots: 15,
     inRow: 5,
-
-    isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("diggers", id, data);
-    }
+    items: [
+        "^stone.+",
+        1,
+        3,
+        4,
+        12,
+        24,
+        13,
+        318,
+        337,
+        87,
+        88
+    ]
 });
 
 IDRegistry.genItemID("backpackForester");
@@ -28,10 +64,53 @@ Item.createItem("backpackForester", "Foresting Backpack", {name: "backpackForest
 BackpackRegistry.register(ItemID.backpackForester, {
     slots: 15,
     inRow: 5,
-
-    isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("foresters", id, data);
-    }
+    items: [
+        "^sapling.+",
+        "^seed.+",
+        "^leaves.+",
+        "^log.+",
+        {
+            id: 17,
+            data: -1
+        },
+        {
+            id: 162,
+            data: -1
+        },
+        {
+            id: 6,
+            data: -1
+        },
+        {
+            id: 39,
+            data: -1
+        },
+        {
+            id: 40,
+            data: -1
+        },
+        {
+            id: 175,
+            data: 3
+        },
+        {
+            id: 38,
+            data: -1
+        },
+        {
+            id: 175,
+            data: -1
+        },
+        {
+            id: 18,
+            data: -1
+        },
+        106,
+        260,
+        37,
+        161,
+        81
+    ]
 });
 
 IDRegistry.genItemID("backpackHunter");
@@ -40,10 +119,33 @@ Item.createItem("backpackHunter", "Hunting Backpack", {name: "backpackHunter", m
 BackpackRegistry.register(ItemID.backpackHunter, {
     slots: 15,
     inRow: 5,
-
-    isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("hunters", id, data);
-    }
+    items: [
+        "^fish.+",
+        "^egg.+",
+        "^leather.+",
+        "^bone.+",
+        {
+            id: 351,
+            data: 15
+        },
+        {
+            id: 35,
+            data: -1
+        },
+        288,
+        289,
+        377,
+        370,
+        371,
+        367,
+        262,
+        363,
+        319,
+        365,
+        334,
+        344,
+        368
+    ]
 });
 
 IDRegistry.genItemID("backpackBuilder");
@@ -52,10 +154,60 @@ Item.createItem("backpackBuilder", "Building Backpack", {name: "backpackBuilder"
 BackpackRegistry.register(ItemID.backpackBuilder, {
     slots: 15,
     inRow: 5,
-
-    isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("builders", id, data);
-    }
+    items: [
+        "^glass.+",
+        "^chest.+",
+        "^block.+",
+        "^forestryGlass$",
+        {
+            id: 98,
+            data: -1
+        },
+        {
+            id: 5,
+            data: -1
+        },
+        {
+            id: 43,
+            data: 5
+        },
+        {
+            id: 45,
+            data: 5
+        },
+        1,
+        112,
+        113,
+        53,
+        67,
+        108,
+        109,
+        114,
+        128,
+        134,
+        135,
+        136,
+        156,
+        163,
+        164,
+        180,
+        20,
+        85,
+        107,
+        101,
+        50,
+        44,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192
+    ]
 });
 
 //Woven
@@ -68,7 +220,8 @@ BackpackRegistry.register(ItemID.backpackMinersT2, {
     inRow: 9,
 
     isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("miners", id, data);
+        return !BackpackRegistry.isBackpack(id) &&
+            BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackMiners].items);
     }
 });
 
@@ -80,7 +233,8 @@ BackpackRegistry.register(ItemID.backpackDiggerT2, {
     inRow: 9,
 
     isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("diggers", id, data);
+        return !BackpackRegistry.isBackpack(id) &&
+            BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackDigger].items);
     }
 });
 
@@ -92,7 +246,8 @@ BackpackRegistry.register(ItemID.backpackForesterT2, {
     inRow: 9,
 
     isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("foresters", id, data);
+        return !BackpackRegistry.isBackpack(id) &&
+            BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackForester].items);
     }
 });
 
@@ -104,7 +259,8 @@ BackpackRegistry.register(ItemID.backpackHunterT2, {
     inRow: 9,
 
     isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("hunters", id, data);
+        return !BackpackRegistry.isBackpack(id) &&
+            BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackHunter].items);
     }
 });
 
@@ -116,7 +272,8 @@ BackpackRegistry.register(ItemID.backpackBuilderT2, {
     inRow: 9,
 
     isValidItem: function (id, count, data) {
-        return BackpackManager.isValidItem("builders", id, data);
+        return !BackpackRegistry.isBackpack(id) &&
+            BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackBuilder].items);
     }
 });
 

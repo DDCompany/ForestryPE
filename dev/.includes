@@ -183,9 +183,6 @@ energy/blocks/peat-fired/recipes.js
 energy/translation.js
 
 ### STORAGE
-# API
-storage/api/BackpackManager.js
-
 # ITEMS
 storage/items/backpacks.js
 storage/items/capsules.js
