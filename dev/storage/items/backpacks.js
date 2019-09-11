@@ -4,7 +4,6 @@ IDRegistry.genItemID("backpackMiners");
 Item.createItem("backpackMiners", "Mining Backpack", {name: "backpackMiners", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.backpackMiners, {
-    title: "Blab",
     slots: 15,
     inRow: 5,
     items: [
