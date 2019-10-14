@@ -25,15 +25,18 @@ const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
 const Dimension = Native.Dimension;
 const COMBS = [];
 
-let BM_MUTATION_MODIFIER = 0.2;
-let BM_LIFESPAN_MODIFIER = 10;
-let BM_SPEED_MODIFIER = 0.6;
+if (ForestryConfig.beekeepingMode > 4 || ForestryConfig.beekeepingMode < 0) {
+    ForestryConfig.beekeepingMode = 1;
+    log("Invalid beekeeping mode. Switched to '1'", "ERROR");
+}
+
+let BM_MUTATION_MODIFIER = 0;
+let BM_LIFESPAN_MODIFIER = 0;
+let BM_SPEED_MODIFIER = 0;
 let BM_REDUCES_FERTILITY = true;
 let BM_CAN_FATIGUE = true;
 
-let BeekeepingMode = __config__.getNumber("beekeeping.mode");
-
-switch (BeekeepingMode) {
+switch (ForestryConfig.beekeepingMode) {
     case 0:
         BM_MUTATION_MODIFIER = 2.0;
         BM_LIFESPAN_MODIFIER = 1.0;
@@ -62,6 +65,12 @@ switch (BeekeepingMode) {
         BM_REDUCES_FERTILITY = true;
         BM_CAN_FATIGUE = true;
         break;
+    case 4:
+        BM_MUTATION_MODIFIER = 0.2;
+        BM_LIFESPAN_MODIFIER = 10.0;
+        BM_SPEED_MODIFIER = 0.6;
+        BM_REDUCES_FERTILITY = true;
+        BM_CAN_FATIGUE = true;
 }
 
 Entity.getArmorSlot = function (ent) {

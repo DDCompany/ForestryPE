@@ -1,5 +1,3 @@
-setLoadingTip("Common Api Loading...");
-
 const ForestryConfig = {
     /* ----- BEEHIVES GEN ----- */
     genBeehivesDebug: __config__.getBool("gen.beehives.debug"),
@@ -30,6 +28,7 @@ const ForestryConfig = {
     genTinMaxY: __config__.getNumber("gen.tin.maxY"),
 
     /* ----- BEEKEEPING ----- */
+    beekeepingMode: __config__.getNumber("beekeeping.mode"),
     secondPrincessChance: __config__.getNumber("beekeeping.secondPrincessChance"),
     hiveDamageOnAttack: __config__.getBool("beekeeping.hiveDamageOnAttack"),
     hiveDamageOnPeaceful: __config__.getBool("beekeeping.hiveDamageOnPeaceful"),

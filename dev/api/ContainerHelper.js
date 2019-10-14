@@ -1,3 +1,5 @@
+setLoadingTip("Common Api Loading...");
+
 const ContainerHelper = {
     putInSlots: function (toPut, container, slots) {
         for (let key in toPut) {
