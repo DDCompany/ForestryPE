@@ -31,6 +31,8 @@ const ForestryConfig = {
 
     /* ----- BEEKEEPING ----- */
     secondPrincessChance: __config__.getNumber("beekeeping.secondPrincessChance"),
+    hiveDamageOnAttack: __config__.getBool("beekeeping.hiveDamageOnAttack"),
+    hiveDamageOnPeaceful: __config__.getBool("beekeeping.hiveDamageOnPeaceful"),
 
     /* ----- RECIPES ----- */
     recipeBronzeIngot: __config__.getBool("recipes.bronzeIngot"),
@@ -41,12 +43,12 @@ const ForestryConfig = {
     /* ----- MACHINES ----- */
     rainTankEnabled: __config__.getBool("machines.rainTank"),
 
+    /* ----- BLOCKS ----- */
+    glassEnabled: __config__.getBool("blocks.glassEnabled"),
+    combsBlocksEnabled: __config__.getBool("blocks.combsEnabled"),
+    oresBlocksEnabled: __config__.getBool("blocks.oresEnabled"),
+
     /* ----- OTHER ----- */
     crateEnabled: __config__.getBool("crateEnabled"),
-    glassEnabled: __config__.getBool("glassEnabled"),
-    combsBlocksEnabled: __config__.getBool("combBlocksEnabled"),
-    oresBlocksEnabled: __config__.getBool("oresBlocksEnabled"),
-    hiveDamageOnAttack: __config__.getBool("hiveDamageOnAttack"),
-    hiveDamageOnPeaceful: __config__.getBool("hiveDamageOnPeaceful"),
     reusableCapsules: __config__.getBool("reusableCapsules")
 };
