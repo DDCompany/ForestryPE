@@ -10,9 +10,9 @@
 Forestry PE by Dmitriy Medvedev(https://vk.com/id331953744)
 */
 
-importLib("energylib", "*");
-importLib("flags", "*");
-importLib("ToolType", "*");
+IMPORT("energylib");
+IMPORT("flags");
+IMPORT("ToolType");
 IMPORT("BackpackAPI");
 
 const LOG_TAG = "ForestryPE";
