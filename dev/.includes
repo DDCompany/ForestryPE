@@ -1,8 +1,8 @@
 ### HEADER
-api/ForestryConfig.js
 header.js
 
 ### BASE API
+api/ForestryConfig.js
 api/ContainerHelper.js
 api/MachineRegistry.js
 api/ModelHelper.js
@@ -90,6 +90,7 @@ apiculture/alveary/stabiliser/alvearyStabiliser.js
 apiculture/alveary/stabiliser/tile.js
 
 # OTHER
+apiculture/mode.js
 apiculture/bees.js
 apiculture/effects.js
 
