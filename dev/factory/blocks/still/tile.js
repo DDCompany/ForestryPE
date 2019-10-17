@@ -12,10 +12,9 @@ MachineRegistry.register(BlockID.still, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getGuiScreen: function () {
-        return stillGUI;
+    getTransportSlots: function () {
+        return {input: ["slotInputContainer", "slotOutputContainer"], output: ["slotOutputContainerFilled"]};
     },
-
 
     findWork: function () {
         let liquid = this.data.inputLiquid;
@@ -79,5 +78,9 @@ MachineRegistry.register(BlockID.still, {
 
     getEnergyStorage: function () {
         return 8000;
+    },
+
+    getGuiScreen: function () {
+        return stillGUI;
     }
 });

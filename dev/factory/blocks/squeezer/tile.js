@@ -11,6 +11,15 @@ MachineRegistry.register(BlockID.squeezer, {
         this.liquidStorage.setLimit(null, 10);
     },
 
+    getTransportSlots: function () {
+        let input = [];
+        for (let i = 0; i < 9; i++) {
+            input.push("slot" + i)
+        }
+
+        return {input: input, output: ["slotSpecial", "slotContainer"]};
+    },
+
     findRecipe: function() {
         let container = this.container;
         let slots = {};

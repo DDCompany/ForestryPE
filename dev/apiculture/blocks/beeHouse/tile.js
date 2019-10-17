@@ -1,5 +1,4 @@
 TileEntity.registerPrototype(BlockID.beeHouse, {
-
     OUTPUT_SLOTS: ["slotProduct0", "slotProduct1", "slotProduct2", "slotProduct3", "slotProduct4", "slotProduct5", "slotProduct6"],
 
     defaultValues: {
@@ -78,5 +77,4 @@ TileEntity.registerPrototype(BlockID.beeHouse, {
     getGuiScreen: function () {
         return alvearyGUI;
     }
-
 });

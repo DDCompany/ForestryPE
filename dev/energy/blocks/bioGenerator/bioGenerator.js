@@ -21,4 +21,4 @@ BioGeneratorManager.addFuel("ethanol", {
     energy: 16
 });
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.biogenerator);
+GROUP_ITEM_PIPE.add(BlockID.biogenerator, -1);

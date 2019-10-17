@@ -19,6 +19,6 @@ if (ForestryConfig.rainTankEnabled) {
             "igi"
         ], ['i', 265, 0, 'g', 20, 0, 's', ItemID.sturdyMachine, 0]);
     });
-}
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.rainTank);
+    GROUP_ITEM_PIPE.add(BlockID.rainTank, -1);
+}

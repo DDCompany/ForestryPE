@@ -20,4 +20,4 @@ Callback.addCallback("PostLoaded", function () {
     ], ['c', 266, -1, 'g', 20, -1, 'b', 54, -1]);
 });
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.fabricator);
+GROUP_ITEM_PIPE.add(BlockID.fabricator, -1);

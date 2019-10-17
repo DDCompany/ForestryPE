@@ -20,4 +20,4 @@ Callback.addCallback("PostLoaded", function () {
     ], ['s', 5, -1, 'p', 158, -1, 'g', ItemID.impregnatedCasing, 0]);
 });
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.apiary);
+GROUP_ITEM_PIPE.add(BlockID.apiary, -1);

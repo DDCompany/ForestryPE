@@ -13,7 +13,7 @@ MachineRegistry.register(BlockID.fermenter, {
     },
 
     getTransportSlots: function () {
-        return {input: ["slotFuel"], output: []};
+        return {input: ["slotInput"], output: ["slotFilledContainer"]};
     },
 
     init: function () {

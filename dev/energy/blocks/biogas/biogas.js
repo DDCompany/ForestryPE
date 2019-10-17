@@ -18,5 +18,5 @@ Callback.addCallback("PostLoaded", function () {
     ], ['b', ItemID.ingotBronze, 0, 'g', ItemID.gearBronze, 0, 'p', 33, 0, 's', 20, 0]);
 });
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.engineBiogas);
+GROUP_ITEM_PIPE.add(BlockID.engineBiogas, -1);
 ModelHelper.createEngineModel(BlockID.engineBiogas);

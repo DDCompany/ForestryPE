@@ -2,8 +2,10 @@ IMPORT("energylib");
 IMPORT("flags");
 IMPORT("ToolType");
 IMPORT("BackpackAPI");
+IMPORT("Pipe");
 
 const LOG_TAG = "ForestryPE";
+const GROUP_ITEM_PIPE = ICRender.getGroup("item-pipe");
 const startTime = java.lang.System.currentTimeMillis();
 const APATITE_GEN_BIOMES = [3, 131, 34, 162];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);

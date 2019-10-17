@@ -11,3 +11,4 @@ Callback.addCallback("PostLoaded", function () {
 });
 
 //ICRenderLib.addConnectionBlock("bc-container", BlockID.carpenter);
+GROUP_ITEM_PIPE.add(BlockID.carpenter, -1);

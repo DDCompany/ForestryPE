@@ -1,5 +1,4 @@
 TileEntity.registerPrototype(BlockID.apiary, {
-
     OUTPUT_SLOTS: ["slotProduct0", "slotProduct1", "slotProduct2", "slotProduct3", "slotProduct4", "slotProduct5", "slotProduct6"],
 
     defaultValues: {
@@ -13,7 +12,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
     },
 
     getTransportSlots: function () {
-        return {input: [], output: []};
+        return {input: ["slot1", "slot2"], output: this.OUTPUT_SLOTS};
     },
 
     tick: function () {

@@ -4,7 +4,7 @@ MachineRegistry.register(BlockID.biogenerator, {
         },
 
         getTransportSlots: function () {
-            return {input: ["slotContainer"], output: ["slotEmptyContainer"]};
+            return {input: ["slotContainer"], output: ["slotContainer"]};
         },
 
         init: function () {

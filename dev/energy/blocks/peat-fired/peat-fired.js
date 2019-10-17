@@ -18,5 +18,5 @@ Callback.addCallback("PostLoaded", function () {
     ], ['b', ItemID.ingotCopper, 0, 'g', ItemID.gearCopper, 0, 'p', 33, 0, 's', 20, 0]);
 });
 
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.enginePeat);
+GROUP_ITEM_PIPE.add(BlockID.enginePeat, -1);
 ModelHelper.createEngineModel(BlockID.enginePeat);
