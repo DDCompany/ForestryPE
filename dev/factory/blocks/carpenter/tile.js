@@ -20,7 +20,7 @@ MachineRegistry.register(BlockID.carpenter, {
 
         for (let i = 0; i < 9; i++) {
             let item = this.container.getSlot("slotInput" + i);
-            pattern["slot" + i] = item;
+            pattern[i] = item;
         }
 
         let recipe = CarpenterManager.getRecipe(pattern);

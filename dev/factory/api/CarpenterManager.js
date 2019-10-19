@@ -23,10 +23,9 @@ const CarpenterManager = {
             let recipe = this.recipes[i];
             let isOk = true;
 
-            for (let i = 0; i < 9; i++) {
-                let name = "slot" + i;
-                let recipePattern = recipe.input[name];
-                let input = pattern[name];
+            for (let k = 0; k < 9; k++) {
+                let recipePattern = recipe.input[k];
+                let input = pattern[k];
 
                 if (!ContainerHelper.equals(recipePattern, input)) {
                     isOk = false;

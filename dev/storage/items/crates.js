@@ -10,9 +10,9 @@ function registerCrate(id, itemName, texture, data) {
 
     CarpenterManager.registerRecipe({
         input: {
-            "slot0": {id: id, data: data}, "slot1": {id: id, data: data}, "slot2": {id: id, data: data},
-            "slot3": {id: id, data: data}, "slot4": {id: id, data: data}, "slot5": {id: id, data: data},
-            "slot6": {id: id, data: data}, "slot7": {id: id, data: data}, "slot8": {id: id, data: data}
+            0: {id: id, data: data}, 1: {id: id, data: data}, 2: {id: id, data: data},
+            3: {id: id, data: data}, 4: {id: id, data: data}, 5: {id: id, data: data},
+            6: {id: id, data: data}, 7: {id: id, data: data}, 8: {id: id, data: data}
         },
         liquid: "water",
         liquidAmount: 0.1,
@@ -29,7 +29,7 @@ function registerCrate(id, itemName, texture, data) {
     });
 
     CarpenterManager.registerRecipe({
-        input: {"slot4": {id: ItemID[crateId], data: 0}},
+        input: {4: {id: ItemID[crateId], data: 0}},
         result: {
             id: id,
             count: 9,
