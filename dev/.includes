@@ -151,6 +151,7 @@ factory/blocks/squeezer/tile.js
 
 factory/blocks/still/still.js
 factory/blocks/still/gui.js
+factory/blocks/still/recipes.js
 factory/blocks/still/tile.js
 
 factory/blocks/rainMaker.js
