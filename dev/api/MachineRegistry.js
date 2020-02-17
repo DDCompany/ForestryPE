@@ -26,7 +26,8 @@ const MachineRegistry = {
         }
 
 
-        ToolAPI.registerBlockMaterial(id, "stone");
+        ToolAPI.registerBlockMaterial(id, "stone", 1, true);
+        Block.setDestroyTime(BlockID.oreCopper, 1.5);
         TileEntity.registerPrototype(id, prototype);
         if (isEU) {
             EnergyTileRegistry.addEnergyTypeForId(id, EU);
