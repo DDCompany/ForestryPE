@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.enginePeat, {
+MachineRegistry.registerGenerator(BlockID.enginePeat, {
     defaultValues: {
         burn: 0,
         burnMax: 0,
@@ -65,16 +65,6 @@ MachineRegistry.register(BlockID.enginePeat, {
 
     getEnergyStorage: function () {
         return 200000;
-    },
-
-    energyTick: function (type, src) {
-        let out = Math.min(32, this.data.energy);
-        this.data.energy -= out;
-        this.data.energy += src.add(out);
-    },
-
-    isGenerator: function () {
-        return true;
     },
 
     getGuiScreen: function () {

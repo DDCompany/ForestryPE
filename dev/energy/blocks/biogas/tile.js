@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.engineBiogas, {
+MachineRegistry.registerGenerator(BlockID.engineBiogas, {
     defaultValues: {
         liquidStored: 0,
         energyOut: 0,
@@ -7,10 +7,6 @@ MachineRegistry.register(BlockID.engineBiogas, {
         liquidNow: 0,
         burnMax: 0,
         temperatureRem: 0
-    },
-
-    isGenerator: function () {
-        return true;
     },
 
     getTransportSlots: function () {
@@ -142,11 +138,5 @@ MachineRegistry.register(BlockID.engineBiogas, {
 
     getEnergyStorage: function () {
         return 300000;
-    },
-
-    energyTick: function (type, src) {
-        let out = Math.min(32, this.data.energy);
-        this.data.energy -= out;
-        this.data.energy += src.add(out);
     }
 });

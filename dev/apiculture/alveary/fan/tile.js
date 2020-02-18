@@ -1,5 +1,4 @@
-MachineRegistry.register(BlockID.alvearyFan, {
-
+MachineRegistry.registerConsumer(BlockID.alvearyFan, {
     defaultValues: {},
 
     alvearyTick: function (tile) {

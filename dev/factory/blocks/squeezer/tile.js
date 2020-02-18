@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.squeezer, {
+MachineRegistry.registerConsumer(BlockID.squeezer, {
     defaultValues: {
         energy: 0,
         progress: 0,

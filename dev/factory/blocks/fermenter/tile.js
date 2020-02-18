@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.fermenter, {
+MachineRegistry.registerConsumer(BlockID.fermenter, {
     defaultValues: {
         progress: 0,
         progressMax: 1,

@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.centrifuge, {
+MachineRegistry.registerConsumer(BlockID.centrifuge, {
     defaultValues: {
         progress: 0,
         progressMax: 0,

@@ -1,5 +1,4 @@
-MachineRegistry.register(BlockID.alvearyHeater, {
-
+MachineRegistry.registerConsumer(BlockID.alvearyHeater, {
     defaultValues: {},
 
     alvearyTick: function (tile) {

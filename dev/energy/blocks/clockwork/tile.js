@@ -1,11 +1,7 @@
-MachineRegistry.register(BlockID.engineClockwork, {
+MachineRegistry.registerGenerator(BlockID.engineClockwork, {
     defaultValues: {
         heat: 0,
         delay: 40
-    },
-
-    isGenerator: function () {
-        return true;
     },
 
     click: function () {
@@ -33,11 +29,5 @@ MachineRegistry.register(BlockID.engineClockwork, {
 
     getEnergyStorage: function () {
         return 10;
-    },
-
-    energyTick: function (type, src) {
-        var out = Math.min(2, this.data.energy);
-        this.data.energy -= out;
-        this.data.energy += src.add(out);
     }
 });

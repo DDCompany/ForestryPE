@@ -1,4 +1,4 @@
-IMPORT("energylib");
+IMPORT("EnergyNet");
 IMPORT("flags");
 IMPORT("ToolType");
 IMPORT("BackpackAPI");

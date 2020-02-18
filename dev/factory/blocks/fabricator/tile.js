@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.fabricator, {
+MachineRegistry.registerConsumer(BlockID.fabricator, {
     TEMPERATURE_MAX: 5000,
 
     defaultValues: {

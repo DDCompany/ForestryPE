@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.still, {
+MachineRegistry.registerConsumer(BlockID.still, {
     defaultValues: {
         progress: 0,
         progressMax: 0,

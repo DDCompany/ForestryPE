@@ -1,4 +1,4 @@
-MachineRegistry.register(BlockID.carpenter, {
+MachineRegistry.registerConsumer(BlockID.carpenter, {
     defaultValues: {
         progress: 0,
         progressMax: 0
