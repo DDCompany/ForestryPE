@@ -72,7 +72,7 @@ FabricatorManager.addSmelting({
 //Recipes
 for (let i = 0; i < 16; i++) {
     FabricatorManager.registerRecipe({
-        input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolis, data: 0}},
+        input: {3: {id: 351, data: i}, 6: {id: ItemID.propolis, data: 0}},
         special: {
             id: ItemID.waxCast,
             data: 0,
@@ -90,7 +90,7 @@ for (let i = 0; i < 16; i++) {
 if (ForestryConfig.glassEnabled) {
     for (let i = 0; i < 16; i++) {
         FabricatorManager.registerRecipe({
-            input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisSilky, data: 0}},
+            input: {3: {id: 351, data: i}, 6: {id: ItemID.propolisSilky, data: 0}},
             special: {
                 id: ItemID.waxCast,
                 data: 0,
@@ -108,7 +108,7 @@ if (ForestryConfig.glassEnabled) {
 
     for (let i = 0; i < 16; i++) {
         FabricatorManager.registerRecipe({
-            input: {"slot4": {id: 351, data: i}, "slot7": {id: ItemID.propolisPulse, data: 0}},
+            input: {3: {id: 351, data: i}, 6: {id: ItemID.propolisPulse, data: 0}},
             special: {
                 id: ItemID.waxCast,
                 data: 0,
@@ -127,13 +127,13 @@ if (ForestryConfig.glassEnabled) {
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: ItemID.ingotCopper, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: ItemID.ingotCopper, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: ItemID.ingotCopper, data: 0},
-        "slot7": {id: ItemID.ingotCopper, data: 0},
-        "slot8": {id: ItemID.ingotCopper, data: 0}
+        1: {id: ItemID.ingotCopper, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: ItemID.ingotCopper, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: ItemID.ingotCopper, data: 0},
+        7: {id: ItemID.ingotCopper, data: 0},
+        8: {id: ItemID.ingotCopper, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeCopper,
@@ -144,13 +144,13 @@ FabricatorManager.registerRecipe({
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: ItemID.ingotTin, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: ItemID.ingotTin, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: ItemID.ingotTin, data: 0},
-        "slot7": {id: ItemID.ingotTin, data: 0},
-        "slot8": {id: ItemID.ingotTin, data: 0}
+        1: {id: ItemID.ingotTin, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: ItemID.ingotTin, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: ItemID.ingotTin, data: 0},
+        7: {id: ItemID.ingotTin, data: 0},
+        8: {id: ItemID.ingotTin, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeTin,
@@ -161,13 +161,13 @@ FabricatorManager.registerRecipe({
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: ItemID.ingotBronze, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: ItemID.ingotBronze, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: ItemID.ingotBronze, data: 0},
-        "slot7": {id: ItemID.ingotBronze, data: 0},
-        "slot8": {id: ItemID.ingotBronze, data: 0}
+        1: {id: ItemID.ingotBronze, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: ItemID.ingotBronze, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: ItemID.ingotBronze, data: 0},
+        7: {id: ItemID.ingotBronze, data: 0},
+        8: {id: ItemID.ingotBronze, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeBronze,
@@ -178,13 +178,13 @@ FabricatorManager.registerRecipe({
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: 264, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: 264, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: 264, data: 0},
-        "slot7": {id: 264, data: 0},
-        "slot8": {id: 264, data: 0}
+        1: {id: 264, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: 264, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: 264, data: 0},
+        7: {id: 264, data: 0},
+        8: {id: 264, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeDiamond,
@@ -195,13 +195,13 @@ FabricatorManager.registerRecipe({
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: 266, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: 266, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: 266, data: 0},
-        "slot7": {id: 266, data: 0},
-        "slot8": {id: 266, data: 0}
+        1: {id: 266, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: 266, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: 266, data: 0},
+        7: {id: 266, data: 0},
+        8: {id: 266, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeGold,
@@ -212,13 +212,13 @@ FabricatorManager.registerRecipe({
 
 FabricatorManager.registerRecipe({
     input: {
-        "slot1": {id: 265, data: 0},
-        "slot3": {id: 331, data: 0},
-        "slot4": {id: 265, data: 0},
-        "slot5": {id: 331, data: 0},
-        "slot6": {id: 265, data: 0},
-        "slot7": {id: 265, data: 0},
-        "slot8": {id: 265, data: 0}
+        1: {id: 265, data: 0},
+        3: {id: 331, data: 0},
+        4: {id: 265, data: 0},
+        5: {id: 331, data: 0},
+        6: {id: 265, data: 0},
+        7: {id: 265, data: 0},
+        8: {id: 265, data: 0}
     },
     result: {
         id: ItemID.thermionicTubeIron,
