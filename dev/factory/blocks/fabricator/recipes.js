@@ -125,104 +125,34 @@ if (ForestryConfig.glassEnabled) {
     }
 }
 
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: ItemID.ingotCopper, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: ItemID.ingotCopper, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: ItemID.ingotCopper, data: 0},
-        7: {id: ItemID.ingotCopper, data: 0},
-        8: {id: ItemID.ingotCopper, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeCopper,
-        count: 4,
-        data: 0
-    }
-});
+function registerTubeRecipe(itemId, materialId, materialData) {
+    materialData = materialData || 0;
+    FabricatorManager.registerRecipe({
+        input: {
+            1: {id: materialId, data: materialData},
+            3: {id: 331, data: 0},
+            4: {id: materialId, data: materialData},
+            5: {id: 331, data: 0},
+            6: {id: materialId, data: materialData},
+            7: {id: materialId, data: materialData},
+            8: {id: materialId, data: materialData}
+        },
+        result: {
+            id: itemId,
+            count: 4,
+            data: 0
+        }
+    });
+}
 
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: ItemID.ingotTin, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: ItemID.ingotTin, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: ItemID.ingotTin, data: 0},
-        7: {id: ItemID.ingotTin, data: 0},
-        8: {id: ItemID.ingotTin, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeTin,
-        count: 4,
-        data: 0
-    }
-});
-
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: ItemID.ingotBronze, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: ItemID.ingotBronze, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: ItemID.ingotBronze, data: 0},
-        7: {id: ItemID.ingotBronze, data: 0},
-        8: {id: ItemID.ingotBronze, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeBronze,
-        count: 4,
-        data: 0
-    }
-});
-
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: 264, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: 264, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: 264, data: 0},
-        7: {id: 264, data: 0},
-        8: {id: 264, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeDiamond,
-        count: 4,
-        data: 0
-    }
-});
-
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: 266, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: 266, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: 266, data: 0},
-        7: {id: 266, data: 0},
-        8: {id: 266, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeGold,
-        count: 4,
-        data: 0
-    }
-});
-
-FabricatorManager.registerRecipe({
-    input: {
-        1: {id: 265, data: 0},
-        3: {id: 331, data: 0},
-        4: {id: 265, data: 0},
-        5: {id: 331, data: 0},
-        6: {id: 265, data: 0},
-        7: {id: 265, data: 0},
-        8: {id: 265, data: 0}
-    },
-    result: {
-        id: ItemID.thermionicTubeIron,
-        count: 4,
-        data: 0
-    }
-});
+registerTubeRecipe(ItemID.thermionicTubeCopper, ItemID.ingotCopper);
+registerTubeRecipe(ItemID.thermionicTubeTin, ItemID.ingotTin);
+registerTubeRecipe(ItemID.thermionicTubeBronze, ItemID.ingotBronze);
+registerTubeRecipe(ItemID.thermionicTubeDiamond, 264);
+registerTubeRecipe(ItemID.thermionicTubeGold, 266);
+registerTubeRecipe(ItemID.thermionicTubeIron, 265);
+registerTubeRecipe(ItemID.thermionicTubeObsidian, 49);
+registerTubeRecipe(ItemID.thermionicTubeBlaze, 377);
+registerTubeRecipe(ItemID.thermionicTubeEmerald, 388);
+registerTubeRecipe(ItemID.thermionicTubeApatite, ItemID.apatite);
+registerTubeRecipe(ItemID.thermionicTubeLapis, 351, 4);

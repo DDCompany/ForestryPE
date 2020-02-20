@@ -26,3 +26,29 @@ Item.createArmorItem("bootsApiarist", "Apiarist's Shoes", {name: "apiarist_boots
     durability: 100,
     texture: "armor/apiarist_armor_1.png"
 });
+
+Callback.addCallback("PostLoaded", function () {
+    Recipes.addShaped({id: ItemID.helmetApiarist, count: 1, data: 0}, [
+        "www",
+        "w w",
+        "   "
+    ], ['w', ItemID.wovenSilk, -1]);
+
+    Recipes.addShaped({id: ItemID.chestApiarist, count: 1, data: 0}, [
+        "w w",
+        "www",
+        "www"
+    ], ['w', ItemID.wovenSilk, -1]);
+
+    Recipes.addShaped({id: ItemID.leggingsApiarist, count: 1, data: 0}, [
+        "www",
+        "w w",
+        "w w"
+    ], ['w', ItemID.wovenSilk, -1]);
+
+    Recipes.addShaped({id: ItemID.bootsApiarist, count: 1, data: 0}, [
+        "   ",
+        "w w",
+        "w w"
+    ], ['w', ItemID.wovenSilk, -1]);
+});

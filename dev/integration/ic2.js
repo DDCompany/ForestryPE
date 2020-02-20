@@ -25,5 +25,7 @@ ModAPI.addAPICallback("ICore", function (api) {
         liquid: "biomass"
     });
 
+    registerTubeRecipe(ItemID.thermionicTubeRubber, ItemID.rubber);
+
     log("IC Integration Activated", "INFO")
 });

@@ -300,7 +300,7 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 3, data: 0}, 1: {id: 264, data: 0}, 2: {id: 3, data: 0},
+        0: {id: 3, data: 0}, 1: {id: 12, data: 0}, 2: {id: 3, data: 0},
         3: {id: 12, data: 0}, 4: {id: ItemID.mulch, data: 0}, 5: {id: 12, data: 0},
         6: {id: 3, data: 0}, 7: {id: 12, data: 0}, 8: {id: 3, data: 0}
     },
@@ -329,7 +329,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackAdventurerT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -350,7 +350,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackMinersT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -371,7 +371,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackBuilderT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -392,7 +392,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackDiggerT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -413,7 +413,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackForesterT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -434,7 +434,7 @@ CarpenterManager.registerRecipe({
     liquidAmount: 1,
     result: {
         id: ItemID.backpackHunterT2,
-        count: 8,
+        count: 1,
         data: 0
     }
 });
@@ -478,7 +478,7 @@ CarpenterManager.registerRecipe({
         4: {id: 280, data: 0},
         7: {id: 280, data: 0}
     },
-    dop: {
+    special: {
         id: ItemID.carton,
         data: 0,
         dec: true
@@ -511,7 +511,7 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {1: {id: ItemID.ingotBronze, data: 0}, 4: {id: 280, data: 0}, 7: {id: 280, data: 0}},
-    dop: {
+    special: {
         id: ItemID.carton,
         data: 0,
         dec: true
@@ -548,13 +548,8 @@ CarpenterManager.registerRecipe({
     },
     liquid: "water",
     liquidAmount: 5,
-    dop: {
-        id: ItemID.carton,
-        data: 0,
-        dec: true
-    },
     result: {
-        id: ItemID.kitShovel,
+        id: ItemID.hardenedMachine,
         count: 1,
         data: 0
     }
