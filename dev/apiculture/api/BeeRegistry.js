@@ -80,7 +80,7 @@ const BeeRegistry = {
 
         return bee;
     },
-	
+
     rangeToObject: function (range) {
         return {
             x: parseInt(range.split("x")[0]),
@@ -287,31 +287,28 @@ const BeeRegistry = {
     getBeeTypeByID: function (id) {
         if (id > 0) {
             for (let key in this.bees) {
-                let beetype = this.bees[key];
+                let bee = this.bees[key];
                 switch (id) {
-                    case beetype.princessID:
+                    case bee.princessID:
                         return BeeRegistry.BEETYPE_PRINCESS;
-                        break;
-                    case beetype.droneID:
+                    case bee.droneID:
                         return BeeRegistry.BEETYPE_DRONE;
-                        break;
-                    case beetype.queenID:
+                    case bee.queenID:
                         return BeeRegistry.BEETYPE_QUEEN;
-                        break;
                 }
             }
         }
         return BeeRegistry.BEETYPE_NONE;
     },
 
-    getTypeByID: function (id) {
+    getSpeciesByID: function (id) {
         for (let key in this.bees) {
-            let beetype = this.bees[key];
-            if (beetype.princessID === id || beetype.droneID === id || beetype.queenID === id) {
+            let bee = this.bees[key];
+            if (bee.princessID === id || bee.droneID === id || bee.queenID === id) {
                 return key;
             }
         }
-        return BeeRegistry.BEETYPE_NONE;
+        return null;
     },
 
     getBeeByType: function (type) {
@@ -321,7 +318,7 @@ const BeeRegistry = {
     getBeeFromItem: function (id, data) {
         let bee = null;
         if (!BeeSaver.bees["b" + data]) {
-            let species = BeeRegistry.getTypeByID(id);
+            let species = BeeRegistry.getSpeciesByID(id);
             let beetype = BeeRegistry.getBeeTypeByID(id);
             bee = new Bee(species, beetype, false);
             if (beetype === BeeRegistry.BEETYPE_QUEEN) {
@@ -339,7 +336,7 @@ const BeeRegistry = {
     },
 
     isBee: function (id) {
-        return BeeRegistry.getTypeByID(id) !== BeeRegistry.BEETYPE_NONE;
+        return BeeRegistry.getSpeciesByID(id) !== null;
     },
 
     getChromosomeValueName: function (name, value) {
@@ -365,7 +362,7 @@ const BeeRegistry = {
                 case BeeRegistry.LIFESPAN_LONGEST:
                     return Translation.translate("bees.lifespan.longest")
             }
-        
+
         } else if (name === "SPEED") {
 
             switch (value) {
@@ -384,7 +381,7 @@ const BeeRegistry = {
                 case BeeRegistry.SPEED_SLOWEST:
                     return Translation.translate("bees.speed.slowest")
             }
-        
+
         } else if (name === "FLOWERS") {
             return Translation.translate(value[0]);
         } else if (name === "EFFECT") {
@@ -419,7 +416,7 @@ const BeeRegistry = {
                 case BeeEffects.EFFECT_REPULSION:
                     return Translation.translate("bees.effect.repulsion")
             }
-        
+
         } else if (name === "CLIMATE") {
 
             switch (value) {
@@ -436,7 +433,7 @@ const BeeRegistry = {
                 case BiomeHelper.CLIMATE_HELLISH:
                     return Translation.translate("climate.hellish")
             }
-            
+
         } else if (name === "HUMIDITY") {
 
             switch (value) {
@@ -447,7 +444,7 @@ const BeeRegistry = {
                 case BiomeHelper.HUMIDITY_NORMAL:
                     return Translation.translate("humidity.normal")
             }
-            
+
         }
 
         return value;
