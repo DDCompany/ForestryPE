@@ -30,3 +30,15 @@ function summonException(msg) {
         }
     };
 }
+
+Object.values = function (obj) {
+    let result = [], key;
+
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            result.push(obj[key]);
+        }
+    }
+
+    return result;
+};

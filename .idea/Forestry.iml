@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="core_engine_build_APILEVEL8_v120.js" level="application" />
+    <orderEntry type="library" name="IC Library" level="project" />
   </component>
 </module>

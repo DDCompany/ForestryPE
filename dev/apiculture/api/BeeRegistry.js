@@ -132,15 +132,32 @@ const BeeRegistry = {
 
     getMutations: function (species1, species2) {
         let muts = [];
-        for (let key in this.mutations) {
-            for (let key2 in this.mutations[key]) {
-                let mut = this.mutations[key][key2];
-                if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
-                    muts.push(mut);
+
+        if (species2) {
+            for (let key in this.mutations) {
+                for (let key2 in this.mutations[key]) {
+                    let mut = this.mutations[key][key2];
+                    if ((mut.species1 === species1 && mut.species2 === species2) || (mut.species2 === species1 && mut.species1 === species2)) {
+                        muts.push(mut);
+                    }
+                }
+            }
+        } else {
+            for (let i in this.mutations) {
+                let speciesMutations = this.mutations[i];
+                for (let k in speciesMutations) {
+                    let mutation = speciesMutations[k];
+                    if (mutation.species1 === species1 || mutation.species2 === species1)
+                        muts.push(mutation);
                 }
             }
         }
+
         return muts;
+    },
+
+    getMutationsByResult: function (species) {
+        return this.mutations[species];
     },
 
     getBeeNextUniqueID: function () {
