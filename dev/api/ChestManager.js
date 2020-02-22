@@ -24,17 +24,15 @@ const ChestManager = {
             elements: {}
         };
 
-        let x = 350; //TODO: refactor
-        let y = 40;
         for (let i = 0; i < slots; i++) {
-            guiObj.elements[i] = {type: "slot", x: x, y: y, isValid: tile.isValid};
-            x += 61;
-            if (x >= 930) {
-                y += 61;
-                x = 350;
-            }
+            guiObj.elements[i] = {
+                type: "slot",
+                x: 350 + i % 10 * 61,
+                y: 40 + Math.floor(i / 10) * 61,
+                isValid: tile.isValid
+            };
         }
-        guiObj.standart.minHeight = y + 70;
+        guiObj.standart.minHeight = 110 + slots / 10 * 61;
 
         let gui = new UI.StandartWindow(guiObj);
 
@@ -52,7 +50,7 @@ const ChestManager = {
                 output: true,
 
                 isValid: function (item) {
-                    return BeeRegistry.isBee(item.id);
+                    return tile.isValid(item.id, item.data);
                 },
             };
         }
