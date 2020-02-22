@@ -2,14 +2,6 @@ IDRegistry.genBlockID("apiaristChest");
 ChestManager.register("apiaristChest", "Apiarist's Chest",
     [["apiaristchest", 1], ["apiaristchest", 0], ["apiaristchest", 2], ["apiaristchest", 3], ["apiaristchest", 2], ["apiaristchest", 2]],
     true, 126, {
-        getTransportSlots: function () {
-            let slots = [];
-            for (let i = 0; i < 126; i++) {
-                slots.push(i);
-            }
-            return {input: slots, output: slots};
-        },
-
         isValid: function (id) {
             return BeeRegistry.isBee(id);
         }

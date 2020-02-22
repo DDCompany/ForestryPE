@@ -12,10 +12,6 @@ MachineRegistry.registerConsumer(BlockID.still, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotInputContainer", "slotOutputContainer"], output: ["slotOutputContainerFilled"]};
-    },
-
     findWork: function () {
         let liquid = this.data.inputLiquid;
         let recipe = StillManager.getRecipe(liquid);

@@ -10,10 +10,6 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotLiquid"], output: ["slotContainer"]};
-    },
-
     tick: function () {
         var slotContainerFull = this.container.getSlot("slotLiquid");
         let liquidStored = this.liquidStorage.getLiquidStored();
