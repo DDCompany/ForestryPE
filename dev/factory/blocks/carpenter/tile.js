@@ -7,14 +7,6 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getTransportSlots: function () {
-        let inp = [];
-        for (let i = 0; i < 18; i++) {
-            inp.push("slotResources" + i);
-        }
-        return {input: inp, output: ["slotOutput"]};
-    },
-
     findWork: function () {
         let pattern = {};
 
@@ -144,3 +136,33 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
         return carpenterGUI;
     }
 });
+
+{
+    let slots = {
+        "slotSpecial": {
+            input: true,
+            isValid: function (item, side) {
+                // noinspection JSSuspiciousNameCombination
+                return Math.abs(side.y) === 1
+            }
+        },
+        "slotOutput": {
+            output: true
+        },
+    };
+
+    for (let i = 0; i < 18; i++) {
+        slots["slotResources" + i] = {
+            input: true
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.carpenter, {
+        slots: slots,
+
+        canReceiveLiquid: function (liquid) {
+            let liquidStored = this.tileEntity.liquidStorage.getLiquidStored();
+            return !liquidStored || liquidStored === liquid;
+        }
+    });
+}

@@ -6,10 +6,6 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
         energyOut: 0
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotFuel"], output: ["slotAsh0", "slotAsh1", "slotAsh2", "slotAsh3"]};
-    },
-
     addAsh: function () {
         for (let i = 0; i < 4; i++) {
             let slot = this.container.getSlot("slotAsh" + i);
@@ -69,5 +65,25 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
 
     getGuiScreen: function () {
         return guiPeatFiredEngine;
+    }
+});
+
+StorageInterface.createInterface(BlockID.enginePeat, {
+    slots: {
+        "slotFuel": {
+            input: true
+        },
+        "slotAsh0": {
+            output: true
+        },
+        "slotAsh1": {
+            output: true
+        },
+        "slotAsh2": {
+            output: true
+        },
+        "slotAsh3": {
+            output: true
+        },
     }
 });

@@ -35,32 +35,32 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return light >= 9 ? 1 : (light >= 7 ? 2 : (light >= 5 ? 3 : 4));
     },
 
-    enoughSpace: function(prefix, amount, id, data) {
+    enoughSpace: function (prefix, amount, id, data) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
 
-            if(!slot.id)
+            if (!slot.id)
                 return true;
 
-            if(slot.id === id && slot.data === data && slot.count < Item.getMaxStack(id))
+            if (slot.id === id && slot.data === data && slot.count < Item.getMaxStack(id))
                 return true;
         }
 
         return false;
     },
 
-    findRecipe: function() {
-        if(!this.data.progressRecipe) {
+    findRecipe: function () {
+        if (!this.data.progressRecipe) {
             let slot = this.container.getSlot("slotRecipe");
             let recipe = MoistenerManager.getRecipe(slot.id, slot.data);
 
-            if(recipe) {
+            if (recipe) {
                 this.data.progressRecipe = 1;
                 this.data.progressRecipeMax = recipe.time;
                 this.data.outputRecipe = recipe.outputItem;
                 slot.count--;
                 this.container.validateSlot("slotRecipe");
-            }else return false;
+            } else return false;
         }
 
         return true;
@@ -68,7 +68,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
 
     startBurning: function () {
         let length = MOISTENER_SLOTS.length;
-        for(let i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             let slots = MOISTENER_SLOTS[i];
             let nextSlots;
 
@@ -77,7 +77,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
             else nextSlots = MOISTENER_SLOTS[i + 1];
 
             let data = this.getForGroup(slots.prefix, slots.amount, nextSlots.prefix, nextSlots.amount);
-            if(data) {
+            if (data) {
                 let fuelData = data.fuelData;
 
                 this.data.progress = 1;
@@ -96,7 +96,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
 
             if (fuelData) {
                 let output = fuelData.outputItem;
-                if(this.enoughSpace(outPrefix, outAmount, output.id, output.data))
+                if (this.enoughSpace(outPrefix, outAmount, output.id, output.data))
                     return {fuelData: fuelData, slot: amount};
             }
         }
@@ -115,16 +115,16 @@ TileEntity.registerPrototype(BlockID.moistener, {
     },
 
     tick: function () {
-        if(World.getThreadTime() % 20 === 0)
+        if (World.getThreadTime() % 20 === 0)
             ContainerHelper.drainContainer2("water", this, "slotContainer", "slotEmptyContainer");
 
         if (this.findRecipe()) {
-            if(this.data.progressRecipe >= this.data.progressRecipeMax) {
+            if (this.data.progressRecipe >= this.data.progressRecipeMax) {
                 let slot = this.container.getSlot("slotResult");
-                if(ContainerHelper.putInSlot(slot, this.data.outputRecipe)) {
+                if (ContainerHelper.putInSlot(slot, this.data.outputRecipe)) {
                     this.data.progressRecipe = 0;
                 }
-            }else if (this.data.progress) {
+            } else if (this.data.progress) {
                 let slot = this.container.getSlot(this.data.recipeSlot);
                 if (!MoistenerManager.getFuelInfo(slot.id, slot.data)) {
                     this.data.progress = 0;
@@ -141,7 +141,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
                     }
                     this.data.progress = 0;
                 } else {
-                    if(this.liquidStorage.getAmount("water") >= 0.001) {
+                    if (this.liquidStorage.getAmount("water") >= 0.001) {
                         let speed = this.getSpeed();
                         this.data.progress += speed;
                         this.data.progressRecipe += speed;
@@ -164,3 +164,56 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return moistenerGUI;
     }
 });
+
+{
+    let slots = {
+        "slotContainer": {
+            input: true,
+            isValid: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data) != null;
+            },
+        },
+        "slotRecipe": {
+            input: true,
+            isValid: function (item) {
+                return MoistenerManager.getRecipe(item.id, item.data);
+            },
+        },
+        "slotResult": {
+            output: true
+        },
+        "slotEmptyContainer": {
+            output: true
+        }
+    };
+
+    for (let i = 0; i < 11; i++) {
+        let number = "";
+        if (i < 6) {
+            number = "0" + i;
+        } else if (i < 10) {
+            number = "1" + (i - 6);
+        } else number = "20";
+
+        slots["slotOutput_" + i] = {
+            input: true,
+            output: true,
+
+            isValid: function (item) {
+                return MoistenerManager.getFuelInfo(item.id, item.data);
+            },
+
+            canOutput: function (item) {
+                return !MoistenerManager.getFuelInfo(item.id, item.data);
+            }
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.moistener, {
+        slots: slots,
+
+        canReceiveLiquid: function (liquid) {
+            return liquid === "water";
+        }
+    });
+}

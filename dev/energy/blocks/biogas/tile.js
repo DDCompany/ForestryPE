@@ -9,16 +9,8 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
         temperatureRem: 0
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotContainer"], output: ["slotEmptyContainer"]};
-    },
-
     init: function () {
         this.liquidStorage.setLimit(null, 10);
-    },
-
-    getGuiScreen: function () {
-        return guiBiogasEngine;
     },
 
     getBurnTimeForLiquid: function (liq) {
@@ -56,9 +48,6 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
 
         if (this.data.liquidStored) {
             this.liquidStorage.updateUiScale("liquidScale", this.data.liquidStored);
-            if (!this.liquidStorage.getAmount(this.data.liquidStored)) {
-                this.data.liquidStored = 0;
-            }
         }
 
         if (this.data.temperature && !this.data.liquidNow) {
@@ -138,5 +127,41 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
 
     getEnergyStorage: function () {
         return 300000;
+    },
+
+    getGuiScreen: function () {
+        return guiBiogasEngine;
     }
+});
+
+StorageInterface.createInterface(BlockID.engineBiogas, {
+    slots: {
+        "slotContainer": {
+            input: true
+        },
+        "slotEmptyContainer": {
+            output: true
+        },
+    },
+
+    // canReceiveLiquid: function (liquid) {
+    //     if (liquid === "lava") {
+    //         alert("0");
+    //         return true;
+    //     }
+    //
+    //     let tileData = this.tileEntity.data;
+    //
+    //     if (tileData.liquidStored
+    //         && this.tileEntity.liquidStorage.getAmount(tileData.liquidStored)) {
+    //         alert("1");
+    //         return tileData.liquidStored === liquid;
+    //     } else if (this.tileEntity.getBurnTimeForLiquid(liquid) > 0) {
+    //         tileData.liquidStored = liquid;
+    //         alert("2");
+    //         return true;
+    //     }
+    //
+    //     return false;
+    // }, //TODO: add after StorageInterface update
 });

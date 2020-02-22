@@ -5,13 +5,6 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         outputIDs: []
     },
 
-    getTransportSlots: function () {
-        return {
-            input: ["slotInput"],
-            output: ["slotOutput0", "slotOutput1", "slotOutput2", "slotOutput3", "slotOutput4", "slotOutput5", "slotOutput6", "slotOutput7", "slotOutput8"]
-        };
-    },
-
     findWork: function () {
         let slot = this.container.getSlot("slotInput");
         let recipe = CentrifugeManager.getRecipe(slot.id, slot.data);
@@ -111,3 +104,21 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         return centrifugeGUI;
     }
 });
+
+{
+    let slots = {
+        "slotInput": {
+            input: true
+        }
+    };
+
+    for (let i = 0; i < 9; i++) {
+        slots["slotOutput" + i] = {
+            output: true
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.centrifuge, {
+        slots: slots
+    });
+}

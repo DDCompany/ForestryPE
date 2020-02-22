@@ -11,44 +11,35 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getTransportSlots: function () {
-        let input = [];
-        for (let i = 0; i < 9; i++) {
-            input.push("slot" + i)
-        }
-
-        return {input: input, output: ["slotSpecial", "slotContainer"]};
-    },
-
-    findRecipe: function() {
+    findRecipe: function () {
         let container = this.container;
         let slots = {};
-        for(let i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
             let slotName = "slot" + i;
             slots[slotName] = container.getSlot(slotName);
         }
 
         let recipes = SqueezerManager.getRecipes();
         let recipeSlots;
-        for(let i in recipes) {
+        for (let i in recipes) {
             recipeSlots = [];
             let recipe = recipes[i];
             let ingredients = recipe.input;
 
-            for(let k in ingredients) {
+            for (let k in ingredients) {
                 let item = ingredients[k];
 
-                for(let j in slots) {
+                for (let j in slots) {
                     let slot = slots[j];
-                    if(ContainerHelper.equals(item, slot) && slot.count >= item.count) {
+                    if (ContainerHelper.equals(item, slot) && slot.count >= item.count) {
                         recipeSlots.push(j);
                         break;
                     }
                 }
             }
 
-            if(ingredients.length === recipeSlots.length) {
-                for(let i in recipeSlots) {
+            if (ingredients.length === recipeSlots.length) {
+                for (let i in recipeSlots) {
                     let slotName = recipeSlots[i];
                     slots[slotName].count -= ingredients[i].count;
                     container.validateSlot(slotName);
@@ -58,8 +49,8 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
                 this.data.recipe = recipe;
 
                 let special = recipe.special;
-                if(special) {
-                    if(Math.random() < special.chance) {
+                if (special) {
+                    if (Math.random() < special.chance) {
                         this.data.special = special;
                         return;
                     }
@@ -72,13 +63,13 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
     },
 
     tick: function () {
-        if(World.getThreadTime() % 5 !== 0)
+        if (World.getThreadTime() % 5 !== 0)
             return;
 
         let liquidStored = this.liquidStorage.getLiquidStored();
         ContainerHelper.fillContainer(liquidStored, this, "slotEmptyContainer", "slotContainer");
 
-        if(this.data.energy >= 200) {
+        if (this.data.energy >= 200) {
             if (this.data.progress) {
                 if (this.data.progress >= this.data.progressMax) {
                     let recipe = this.data.recipe;
@@ -111,3 +102,28 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
         return squeezerGUI;
     }
 });
+
+{
+    let slots = {
+        "slotSpecial": {
+            output: true
+        },
+        "slotContainer": {
+            output: true
+        },
+    };
+
+    for (let i = 0; i < 9; i++) {
+        slots["slot" + i] = {
+            input: true
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.squeezer, {
+        slots: slots,
+
+        canTransportLiquid: function () {
+            return true;
+        }
+    });
+}

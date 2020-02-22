@@ -3,10 +3,6 @@ MachineRegistry.registerGenerator(BlockID.biogenerator, {
         progress: 0
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotContainer"], output: ["slotContainer"]};
-    },
-
     init: function () {
         this.liquidStorage.setLimit(null, 10);
     },
@@ -43,3 +39,19 @@ MachineRegistry.registerGenerator(BlockID.biogenerator, {
         return 30000;
     },
 }, EU);
+
+StorageInterface.createInterface(BlockID.biogenerator, {
+    slots: {
+        "slotContainer": {
+            input: true,
+            output: true,
+            canOutput: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data) != null;
+            }
+        },
+    },
+
+    canReceiveLiquid: function (liquid) {
+        return BioGeneratorManager.getFuel(liquid);
+    }
+});

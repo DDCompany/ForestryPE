@@ -12,16 +12,12 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         inputFluid: null
     },
 
-    getTransportSlots: function () {
-        return {input: ["slotInput"], output: ["slotFilledContainer"]};
-    },
-
     init: function () {
         this.liquidStorage.setLimit(null, 10);
     },
 
     findWork: function () {
-        if (!this.getLiquidModifier())
+        if (!this.getLiquidModifier(this.data.inputFluid))
             return;
 
         let slot = this.container.getSlot("slotInput");
@@ -56,8 +52,8 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         return true;
     },
 
-    getLiquidModifier: function () {
-        switch (this.data.inputFluid) {
+    getLiquidModifier: function (liquid) {
+        switch (liquid) {
             case "appleJuice":
             case "honey":
                 return 1.5;
@@ -85,7 +81,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         if (this.data.energy >= 150) {
             if (this.data.progress) {
                 if (this.findFuel()) {
-                    let fermented = Math.min(this.data.fuelFerment, this.data.progress) * this.getLiquidModifier();
+                    let fermented = Math.min(this.data.fuelFerment, this.data.progress) * this.getLiquidModifier(this.data.inputFluid);
                     let _fermented = fermented / 1000;
 
                     let inputFluid = this.data.inputFluid;
@@ -122,4 +118,58 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
     getGuiScreen: function () {
         return fermenterGUI;
     }
+});
+
+StorageInterface.createInterface(BlockID.fermenter, {
+    slots: {
+        "slotInput": {
+            input: true,
+
+            isValid: function (item) {
+                return FermenterManager.getRecipe(item.id, item.data);
+            },
+        },
+        "slotFuel": {
+            input: true,
+
+            isValid: function (item) {
+                return FermenterManager.getFuel(item.id, item.data);
+            },
+        },
+        "slotFilledContainer": {
+            output: true
+        },
+        "slotInputContainer": {
+            input: true,
+            output: true,
+
+            canOutput: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data) == null;
+            },
+
+            isValid: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data) != null;
+            },
+        },
+        "slotContainer": {
+            input: true,
+
+            isValid: function (item) {
+                return !LiquidRegistry.getEmptyItem(item.id, item.data);
+            },
+        },
+    },
+
+    canReceiveLiquid: function (liquid) {
+        if (!this.tileEntity.inputFluid && this.tileEntity.getLiquidModifier(liquid) > 0) {
+            this.tileEntity.inputFluid = liquid;
+            return true;
+        }
+
+        return this.tileEntity.inputFluid === liquid;
+    },
+
+    canTransportLiquid: function (liquid) {
+        return this.tileEntity.data.resultFluid === liquid;
+    },
 });

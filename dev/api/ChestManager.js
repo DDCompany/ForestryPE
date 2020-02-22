@@ -24,12 +24,12 @@ const ChestManager = {
             elements: {}
         };
 
-        let x = 350;
+        let x = 350; //TODO: refactor
         let y = 40;
-        for (; slots > 0; slots--){
-            guiObj.elements[slots] = {type: "slot", x: x, y: y, isValid: tile.isValid};
+        for (let i = 0; i < slots; i++) {
+            guiObj.elements[i] = {type: "slot", x: x, y: y, isValid: tile.isValid};
             x += 61;
-            if(x >= 930) {
+            if (x >= 930) {
                 y += 61;
                 x = 350;
             }
@@ -43,6 +43,23 @@ const ChestManager = {
         };
 
         TileEntity.registerPrototype(BlockID[unique], tile);
+
+        let slotList = {};
+
+        for (let i = 0; i < slots; i++) {
+            slotList[i] = {
+                input: true,
+                output: true,
+
+                isValid: function (item) {
+                    return BeeRegistry.isBee(item.id);
+                },
+            };
+        }
+
+        StorageInterface.createInterface(BlockID[unique], {
+            slots: slotList
+        });
     },
 
     createModel: function (blockID) {

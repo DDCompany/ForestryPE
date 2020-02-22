@@ -7,14 +7,6 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         output: null
     },
 
-    getTransportSlots: function () {
-        let inp = [];
-        for (let i = 0; i < 18; i++) {
-            inp.push("slotResources" + i);
-        }
-        return {input: inp, output: ["slotResult"]};
-    },
-
     init: function () {
         this.liquidStorage.setLimit(null, 8);
     },
@@ -157,3 +149,28 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         return fabricatorGUI;
     }
 });
+
+{
+    let slots = {
+        "slotGlass": {
+            input: true,
+            isValid: function (item, side) {
+                // noinspection JSSuspiciousNameCombination
+                return Math.abs(side.y) === 1
+            }
+        },
+        "slotResult": {
+            output: true
+        },
+    };
+
+    for (let i = 0; i < 18; i++) {
+        slots["slotResources" + i] = {
+            input: true
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.fabricator, {
+        slots: slots
+    });
+}

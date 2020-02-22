@@ -84,3 +84,42 @@ MachineRegistry.registerConsumer(BlockID.still, {
         return stillGUI;
     }
 });
+
+StorageInterface.createInterface(BlockID.still, {
+    slots: {
+        "slotInputContainer": {
+            input: true,
+            output: true,
+
+            canOutput: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data) == null;
+            },
+
+            isValid: function (item) {
+                return LiquidRegistry.getEmptyItem(item.id, item.data);
+            },
+        },
+
+        "slotOutputContainer": {
+            input: true
+        },
+
+        "slotOutputContainerFilled": {
+            output: true
+        }
+    },
+
+    canTransportLiquid: function (liquid) {
+        return this.tileEntity.data.outputLiquid === liquid;
+    },
+
+    canReceiveLiquid: function (liquid) {
+        let inputLiquid = this.tileEntity.data.inputLiquid;
+        if (!inputLiquid || inputLiquid === liquid || !this.tileEntity.liquidStorage.getAmount(liquid)) {
+            this.tileEntity.data.inputLiquid = liquid;
+            return true;
+        }
+
+        return false;
+    }
+});

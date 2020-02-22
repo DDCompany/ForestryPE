@@ -2,10 +2,6 @@ if (ForestryConfig.rainTankEnabled) {
     TileEntity.registerPrototype(BlockID.rainTank, {
         defaultValues: {},
 
-        getTransportSlots: function () {
-            return {input: ["slotContainer"], output: ["slotFullContainer"]};
-        },
-
         init: function () {
             this.liquidStorage.setLimit(null, 15);
         },
@@ -23,6 +19,20 @@ if (ForestryConfig.rainTankEnabled) {
         getGuiScreen: function () {
             return raintankGUI;
         }
+    });
 
+    StorageInterface.createInterface(BlockID.rainTank, {
+        slots: {
+            "slotContainer": {
+                input: true
+            },
+            "slotFullContainer": {
+                output: true
+            }
+        },
+
+        canTransportLiquid: function () {
+            return true;
+        },
     });
 }

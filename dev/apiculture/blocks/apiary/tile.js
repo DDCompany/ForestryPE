@@ -11,12 +11,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
         this.data.biome_override = World.getBiome(this.x, this.z);
     },
 
-    getTransportSlots: function () {
-        return {input: ["slot1", "slot2"], output: this.OUTPUT_SLOTS};
-    },
-
     tick: function () {
-
         var content = this.container.getGuiContent();
 
         if (!this.house) {
@@ -84,5 +79,32 @@ TileEntity.registerPrototype(BlockID.apiary, {
     getGuiScreen: function () {
         return apiaryGUI;
     }
-
 });
+
+{
+    let slots = {
+        "slot1": {
+            input: true,
+            isValid: function (item) {
+                let type = BeeRegistry.getBeeTypeByID(item.id);
+                return type === BeeRegistry.BEETYPE_PRINCESS || type === BeeRegistry.BEETYPE_QUEEN;
+            }
+        },
+        "slot2": {
+            input: true,
+            isValid: function (item) {
+                return BeeRegistry.getBeeTypeByID(item.id) === BeeRegistry.BEETYPE_DRONE;
+            }
+        },
+    };
+
+    for (let i = 0; i < 7; i++) {
+        slots["slotProduct" + i] = {
+            output: true
+        };
+    }
+
+    StorageInterface.createInterface(BlockID.apiary, {
+        slots: slots
+    });
+}

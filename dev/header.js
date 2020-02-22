@@ -2,7 +2,7 @@ IMPORT("EnergyNet");
 IMPORT("flags");
 IMPORT("ToolType");
 IMPORT("BackpackAPI");
-IMPORT("Pipe");
+IMPORT("StorageInterface");
 
 const LOG_TAG = "ForestryPE";
 const GROUP_ITEM_PIPE = ICRender.getGroup("item-pipe");
