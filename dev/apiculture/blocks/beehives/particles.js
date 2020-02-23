@@ -1,4 +1,6 @@
 if (ForestryConfig.particlesBeeHives) {
+    const beesParticleEmitter = new Particles.ParticleEmitter(0, 0, 0);
+
     const BeeParticles = [
         //forest
         Particles.registerParticleType({
@@ -58,9 +60,6 @@ if (ForestryConfig.particlesBeeHives) {
     ];
 
     function spawnBeeParticles(type, x, y, z) {
-        let emitter = new Particles.ParticleEmitter(x + 0.5, y + 0.5, z + 0.5);
-        emitter.setEmitRelatively(true);
-
         let amount = Util.random(2, 4);
         for (; amount > 0; amount--) {
             let xa = Math.random() <= 0.5 ? 0.02 : 0;
@@ -72,7 +71,7 @@ if (ForestryConfig.particlesBeeHives) {
                 za = -za;
             }
 
-            emitter.emit(type, 0, 0, 0, 0, xa, ya, za);
+            beesParticleEmitter.emit(type, 0, x + .5, y + .5, z + .5, xa, ya, za);
         }
     }
 
