@@ -4,49 +4,56 @@ if (ForestryConfig.particlesBeeHives) {
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
-            lifetime: [80, 80]
+            lifetime: [80, 80],
+            render: 2
         }),
         //meadows
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [1, 0.7, 0.7, 1]
+            color: [1, 0.7, 0.7, 1],
+            render: 2
         }),
         //modest
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [1, 1, 0.7, 1]
+            color: [1, 1, 0.7, 1],
+            render: 2
         }),
         //tropical
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [0.1, 0.3, 0, 0.2]
+            color: [0.1, 0.3, 0, 0.2],
+            render: 2
         }),
         //wintry
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [0.4, 1, 1, 0.8]
+            color: [0.4, 1, 1, 0.8],
+            render: 2
         }),
         //marshy
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [0.1, 0.3, 0, 0.7]
+            color: [0.1, 0.3, 0, 0.7],
+            render: 2
         }),
         //ender
         Particles.registerParticleType({
             texture: "bee",
             size: [0.5, 0.5],
             lifetime: [80, 80],
-            color: [0.8, 0, 1, 1]
+            color: [0.8, 0, 1, 1],
+            render: 2
         })
     ];
 
