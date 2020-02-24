@@ -10,51 +10,71 @@ FermenterManager.addFuel({
     cycles: 56,
 });
 
+let fermenterLiquids = {"appleJuice": 1.5, "honey": 1.5, "water": 1};
+for (let i in fermenterLiquids) {
+    let modifier = fermenterLiquids[i];
 
-FermenterManager.addRecipe({
-    id: 6,
-    liquidAmount: 0.25,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 6,
+        inputLiquid: i,
+        liquidAmount: 0.25,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 81,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 81,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 296,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 296,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 338,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 338,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 392,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 392,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 39,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 39,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: 40,
-    liquidAmount: 0.5,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: 40,
+        inputLiquid: i,
+        liquidAmount: 0.05,
+        modifier: modifier,
+        liquid: "biomass"
+    });
 
-FermenterManager.addRecipe({
-    id: ItemID.rubberSapling,
-    liquidAmount: 0.25,
-    liquid: "biomass"
-});
+    FermenterManager.addRecipe({
+        id: ItemID.rubberSapling,
+        inputLiquid: i,
+        liquidAmount: 0.25,
+        modifier: modifier,
+        liquid: "biomass"
+    });
+}
