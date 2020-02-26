@@ -1,6 +1,6 @@
 const FermenterManager = {
     recipes: [],
-    fuels: {},
+    fuels: [],
 
     addRecipe: function (recipe) {
         if (recipe.id <= 0) {
@@ -45,7 +45,7 @@ const FermenterManager = {
 
         fuel.data = fuel.data || 0;
 
-        this.fuels[fuel.id + ":" + fuel.data] = fuel;
+        this.fuels.push(fuel);
     },
 
     getRecipe: function (id, data, inputLiquid) {
@@ -57,8 +57,154 @@ const FermenterManager = {
         });
     },
 
+    getRecipeByItem: function (id, data) {
+        data = data || 0;
+        return this.recipes.find(function (recipe) {
+            return recipe.id === id
+                && (recipe.data === -1 || data === -1 || recipe.data === data)
+        });
+    },
+
     getFuel: function (id, data) {
         data = data || 0;
-        return this.fuels[id + ":" + data];
+        return this.fuels.find(function (fuel) {
+            return fuel.id === id && (fuel.data === -1 || data === -1 || fuel.data === data);
+        });
+    },
+
+    integrateWithRecipeViewer: function (api) {
+        function bakeFuelRecipes(list) {
+            return list.map(function (recipe) {
+                return {
+                    input: [
+                        {id: recipe.id, data: recipe.data, count: 1}
+                    ],
+                    output: [],
+                    value: recipe.perCycle,
+                    cycles: recipe.cycles
+                };
+            });
+        }
+
+        function bakeRecipes(list) {
+            return list.map(function (recipe) {
+                return {
+                    input: [
+                        {id: recipe.id, data: recipe.data, count: 1}
+                    ],
+                    output: [],
+                    recipe: recipe
+                };
+            });
+        }
+
+        api.registerRecipeType("fpe_fermenter_fuel", {
+            contents: {
+                icon: BlockID.fermenter,
+                description: "Fuel",
+                drawing: [],
+                elements: {
+                    input0: {type: "slot", x: 355, y: 125, size: 110, needClean: true},
+                    textValue: {type: "text", x: 485, y: 140, font: {size: 30}},
+                    textCycles: {type: "text", x: 485, y: 185, font: {size: 30}},
+                }
+            },
+            getList: function (id, data, isUsage) {
+                try {
+                    if (isUsage) {
+                        if (id === BlockID.fermenter) {
+                            return bakeFuelRecipes(FermenterManager.fuels);
+                        } else {
+                            let fuel = FermenterManager.getFuel(id, data);
+                            if (fuel)
+                                return bakeFuelRecipes([fuel]);
+                            else return [];
+                        }
+                    } else return [];
+                } catch (e) {
+                    alert(e);
+                }
+            },
+
+            onOpen: function (elements, data) {
+                elements.get("textValue")
+                    .onBindingUpdated("text", data ? "Value: " + data.value : "0");
+
+                elements.get("textCycles")
+                    .onBindingUpdated("text", data ? "Cycles: " + data.cycles : "0");
+            }
+        });
+
+        api.registerRecipeType("fpe_fermenter", {
+            contents: {
+                icon: BlockID.fermenter,
+                drawing: [
+                    {type: "bitmap", x: 300, y: 80, scale: 5, bitmap: "forestry.bgs.liquid_1"},
+                    {type: "bitmap", x: 520, y: 200, scale: 5, bitmap: "forestry.scales.furnace_full"},
+                    {type: "bitmap", x: 640, y: 80, scale: 5, bitmap: "forestry.bgs.liquid_1"},
+                ],
+                elements: {
+                    input0: {type: "slot", x: 400, y: 180, size: 110, needClean: true},
+                    textInputLiquid: {type: "text", x: 280, y: 10, font: {size: 30}, multiline: true},
+                    scaleInputLiquid: {
+                        type: "scale",
+                        x: 305,
+                        y: 85,
+                        scale: 5,
+                        direction: 1,
+                        bitmap: "forestry.bgs.liquid_2",
+                        overlay: "forestry.bgs.liquid_2"
+                    },
+                    textResultLiquid: {type: "text", x: 620, y: 10, font: {size: 30}, multiline: true},
+                    scaleResultLiquid: {
+                        type: "scale",
+                        x: 645,
+                        y: 85,
+                        scale: 5,
+                        direction: 1,
+                        bitmap: "forestry.bgs.liquid_2",
+                        overlay: "forestry.bgs.liquid_2"
+                    },
+                }
+            },
+            getList: function (id, data, isUsage) {
+                try {
+                    if (isUsage) {
+                        if (id === BlockID.fermenter) {
+                            return bakeRecipes(FermenterManager.recipes);
+                        } else {
+                            let fuel = FermenterManager.getRecipeByItem(id, data);
+                            if (fuel)
+                                return bakeRecipes([fuel]);
+                            else return [];
+                        }
+                    } else return [];
+                } catch (e) {
+                    alert(e);
+                }
+            },
+
+            onOpen: function (elements, data) {
+                if (!data) return;
+
+                let scaleInputLiquid = elements.get("scaleInputLiquid");
+                let scaleResultLiquid = elements.get("scaleResultLiquid");
+                let recipe = data.recipe;
+
+                scaleInputLiquid.onBindingUpdated("texture",
+                    LiquidRegistry.getLiquidUITexture(recipe.inputLiquid, 16, 58));
+                scaleInputLiquid.onBindingUpdated("value", recipe.liquidAmount / 10);
+
+                scaleResultLiquid.onBindingUpdated("texture",
+                    LiquidRegistry.getLiquidUITexture(recipe.liquid, 16, 58));
+                scaleResultLiquid.onBindingUpdated("value", recipe.liquidAmount / 10);
+
+                elements.get("textInputLiquid").onBindingUpdated("text",
+                    LiquidRegistry.getLiquidName(recipe.inputLiquid) + "\n" + "Modifier: " + recipe.modifier + "x");
+
+                elements.get("textResultLiquid").onBindingUpdated("text",
+                    LiquidRegistry.getLiquidName(recipe.liquid));
+            }
+        });
     }
 };

@@ -481,7 +481,122 @@ const BeeRegistry = {
         }
 
         return false;
-    }
+    },
+
+    integrateWithRecipeViewer: function (api) {
+        function bakeBeeMutations(mutations) {
+            if (!mutations)
+                return [];
+
+            return mutations.map(function (mutation) {
+                const princessId = BeeRegistry.getPrincessByType(mutation.species1);
+                const droneId = BeeRegistry.getDroneByType(mutation.species2);
+                const resultId = BeeRegistry.getPrincessByType(mutation.result);
+
+                return {
+                    input: [
+                        {id: princessId, data: 0, count: 1},
+                        {id: droneId, data: 0, count: 1}
+                    ],
+                    chance: mutation.chance * 100,
+                    output: [{id: resultId, data: 0, count: 1}]
+                };
+            });
+        }
+
+        api.registerRecipeType("fpe_bee_mutation", {
+            contents: {
+                icon: ItemID.queenMeadows,
+                description: "Mutation",
+                drawing: [
+                    {type: "bitmap", x: 300, y: 100, scale: 5, bitmap: "forestry.for.apiary.bg_left"},
+                    {type: "bitmap", x: 325, y: 130, scale: 5, bitmap: "forestry.for.apiary.scale_green"},
+                    {type: "bitmap", x: 500, y: 220, scale: 5, bitmap: "forestry.scales.furnace_empty"}
+                ],
+                elements: {
+                    input0: {type: "slot", x: 355, y: 125, size: 110, bitmap: "_default_slot_empty", needClean: true},
+                    input1: {type: "slot", x: 355, y: 255, size: 110, bitmap: "_default_slot_empty", needClean: true},
+                    output0: {type: "slot", x: 620, y: 200, size: 120},
+                    textChance: {type: "text", x: 620, y: 330, font: {size: 30}},
+                }
+            },
+            getList: function (id, data, isUsage) {
+                const species = BeeRegistry.getSpeciesByID(id);
+                if (!species)
+                    return [];
+
+                if (isUsage) {
+                    return bakeBeeMutations(BeeRegistry.getMutations(species));
+                } else return bakeBeeMutations(BeeRegistry.getMutationsByResult(species));
+            },
+            onOpen: function (elements, data) {
+                elements.get("textChance")
+                    .onBindingUpdated("text", data ? "Chance: " + data.chance + "%" : "%");
+            }
+        });
+
+        api.registerRecipeType("fpe_bee_product", {
+            contents: {
+                icon: ItemID.queenForest,
+                description: "Product",
+                drawing: [
+                    {type: "bitmap", x: 500, y: 100, scale: 4, bitmap: "forestry.for.recipeViewer.bee_produce"},
+                    {type: "bitmap", x: 380, y: 230, scale: 4, bitmap: "forestry.scales.furnace_empty"}
+                ],
+                elements: {
+                    input0: {type: "slot", x: 240, y: 200, size: 120},
+                    output0: {type: "slot", x: 603, y: 119, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output1: {type: "slot", x: 519, y: 171, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output2: {type: "slot", x: 691, y: 171, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output3: {type: "slot", x: 603, y: 223, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output4: {type: "slot", x: 519, y: 275, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output5: {type: "slot", x: 603, y: 327, size: 90, bitmap: "_default_slot_empty", needClean: true},
+                    output6: {type: "slot", x: 691, y: 275, size: 90, bitmap: "_default_slot_empty", needClean: true}
+                }
+            },
+            getList: function (id, data, isUsage) {
+                if (isUsage) {
+                    let beeType = BeeRegistry.getBeeByType(BeeRegistry.getSpeciesByID(id));
+                    return beeType ? [{
+                        input: [{id: beeType.queenID, data: 0, count: 1}],
+                        output: beeType.produce
+                            .map(function (item) {
+                                return {
+                                    id: item[0],
+                                    data: item[1],
+                                    count: 1
+                                };
+                            })
+                    }] : [];
+                } else {
+                    let recipes = [];
+                    for (let i in BeeRegistry.bees) {
+                        let beeType = BeeRegistry.bees[i];
+                        let produce = beeType.produce;
+                        let isOk = produce.find(function (item) {
+                            return item[0] === id && (data === -1 || item[1] === data);
+                        }) !== undefined;
+
+                        if (isOk) {
+                            recipes.push({
+                                input: [{id: beeType.queenID, data: 0, count: 1}],
+                                output: produce
+                                    .map(function (item) {
+                                        return {
+                                            id: item[0],
+                                            data: item[1],
+                                            count: 1
+                                        };
+                                    })
+                            });
+                        }
+                    }
+
+                    return recipes;
+                }
+            }
+        });
+    },
 };
 
 BeeRegistry.init();
