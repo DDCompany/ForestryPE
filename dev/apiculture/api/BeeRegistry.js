@@ -269,6 +269,12 @@ const BeeRegistry = {
         Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {stack: 1});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
+        if (arg.hasGlint) {
+            Item.setGlint(ItemID["princess" + arg.species], true);
+            Item.setGlint(ItemID["drone" + arg.species], true);
+            Item.setGlint(ItemID["queen" + arg.species], true);
+        }
+
         let bee_type = new BeeType(arg.species, ItemID["princess" + arg.species], ItemID["drone" + arg.species], ItemID["queen" + arg.species], arg.flowers, arg.humidity, arg.climate);
         bee_type.chromosomes_list = arg.chromosomes;
         bee_type.dominant = arg.dominant;
