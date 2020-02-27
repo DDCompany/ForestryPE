@@ -5,6 +5,7 @@ ModAPI.addAPICallback("RecipeViewer", function (api) {
     CentrifugeManager.integrateWithRecipeViewer(RecipeViewer);
     BeeRegistry.integrateWithRecipeViewer(RecipeViewer);
     FermenterManager.integrateWithRecipeViewer(RecipeViewer);
+    MoistenerManager.integrateWithRecipeViewer(RecipeViewer);
 
     log("Recipe Viewer Integration Activated", "INFO");
 });

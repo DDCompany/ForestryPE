@@ -110,20 +110,16 @@ const FermenterManager = {
                 }
             },
             getList: function (id, data, isUsage) {
-                try {
-                    if (isUsage) {
-                        if (id === BlockID.fermenter) {
-                            return bakeFuelRecipes(FermenterManager.fuels);
-                        } else {
-                            let fuel = FermenterManager.getFuel(id, data);
-                            if (fuel)
-                                return bakeFuelRecipes([fuel]);
-                            else return [];
-                        }
-                    } else return [];
-                } catch (e) {
-                    alert(e);
-                }
+                if (isUsage) {
+                    if (id === BlockID.fermenter) {
+                        return bakeFuelRecipes(FermenterManager.fuels);
+                    } else {
+                        let fuel = FermenterManager.getFuel(id, data);
+                        if (fuel)
+                            return bakeFuelRecipes([fuel]);
+                        else return [];
+                    }
+                } else return [];
             },
 
             onOpen: function (elements, data) {
@@ -168,20 +164,16 @@ const FermenterManager = {
                 }
             },
             getList: function (id, data, isUsage) {
-                try {
-                    if (isUsage) {
-                        if (id === BlockID.fermenter) {
-                            return bakeRecipes(FermenterManager.recipes);
-                        } else {
-                            let fuel = FermenterManager.getRecipeByItem(id, data);
-                            if (fuel)
-                                return bakeRecipes([fuel]);
-                            else return [];
-                        }
-                    } else return [];
-                } catch (e) {
-                    alert(e);
-                }
+                if (isUsage) {
+                    if (id === BlockID.fermenter) {
+                        return bakeRecipes(FermenterManager.recipes);
+                    } else {
+                        let fuel = FermenterManager.getRecipeByItem(id, data);
+                        if (fuel)
+                            return bakeRecipes([fuel]);
+                        else return [];
+                    }
+                } else return [];
             },
 
             onOpen: function (elements, data) {
