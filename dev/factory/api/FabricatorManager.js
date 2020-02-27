@@ -38,10 +38,10 @@ const FabricatorManager = {
     },
 
     getSmelting: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.smeltingList
-            .find(function (item) {
-                return item.id === id && (item.data === -1 || data === -1 || item.data === data);
+            .find(function (smelting) {
+                return ContainerHelper.equals(smelting, item);
             });
     },
 
@@ -61,13 +61,13 @@ const FabricatorManager = {
     },
 
     getRecipesByIngredient: function (id, data) {
-        data = data || 0;
+        let ingredient = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
                 const input = recipe.input;
                 for (let key in input) {
                     let item = input[key];
-                    if (item.id === id && (item.data === -1 || data === -1 || item.data === data))
+                    if (ContainerHelper.equals(ingredient, item))
                         return true;
                 }
 
@@ -76,11 +76,10 @@ const FabricatorManager = {
     },
 
     getRecipesByResult: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
-                const result = recipe.result;
-                return result.id === id && (result.data === -1 || data === -1 || result.data === data);
+                return ContainerHelper.equals(item, recipe.result);
             });
     }
 };

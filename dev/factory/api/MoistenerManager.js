@@ -45,34 +45,30 @@ const MoistenerManager = {
     },
 
     getFuelInfo: function (id, data) {
-        data = data || 0;
-        return this.fuels.find(function (obj) {
-            let fuel = obj.inputItem;
-            return fuel.id === id && (fuel.data === -1 || data === -1 || fuel.data === data);
+        let item = {id: id, data: data || 0};
+        return this.fuels.find(function (fuel) {
+            return ContainerHelper.equals(item, fuel.inputItem);
         });
     },
 
     getFuelByResult: function (id, data) {
-        data = data || 0;
-        return this.fuels.find(function (obj) {
-            let fuel = obj.outputItem;
-            return fuel.id === id && (fuel.data === -1 || data === -1 || fuel.data === data);
+        let item = {id: id, data: data || 0};
+        return this.fuels.find(function (fuel) {
+            return ContainerHelper.equals(item, fuel.outputItem);
         });
     },
 
     getRecipe: function (id, data) {
-        data = data || 0;
-        return this.recipes.find(function (obj) {
-            let item = obj.inputItem;
-            return item.id === id && (item.data === -1 || data === -1 || item.data === data);
+        let item = {id: id, data: data || 0};
+        return this.recipes.find(function (recipe) {
+            return ContainerHelper.equals(item, recipe.inputItem);
         });
     },
 
     getRecipeByResult: function (id, data) {
-        data = data || 0;
-        return this.recipes.find(function (obj) {
-            let item = obj.outputItem;
-            return item.id === id && (item.data === -1 || data === -1 || item.data === data);
+        let item = {id: id, data: data || 0};
+        return this.recipes.find(function (recipe) {
+            return ContainerHelper.equals(item, recipe.outputItem);
         });
     },
 

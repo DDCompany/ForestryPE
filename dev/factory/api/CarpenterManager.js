@@ -35,13 +35,13 @@ const CarpenterManager = {
     },
 
     getRecipesByIngredient: function (id, data) {
-        data = data || 0;
+        let ingredient = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
                 const input = recipe.input;
                 for (let key in input) {
                     let item = input[key];
-                    if (item.id === id && (item.data === -1 || data === -1 || item.data === data))
+                    if (ContainerHelper.equals(item, ingredient))
                         return true;
                 }
 
@@ -50,11 +50,10 @@ const CarpenterManager = {
     },
 
     getRecipesByResult: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
-                const result = recipe.result;
-                return result.id === id && (result.data === -1 || data === -1 || result.data === data);
+                return ContainerHelper.equals(item, recipe.result);
             });
     },
 

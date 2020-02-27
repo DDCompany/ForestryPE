@@ -26,29 +26,28 @@ const CentrifugeManager = {
     },
 
     getRecipe: function (id, data) {
+        let item = {id: id, data: data || 0};
         return this.recipes
             .find(function (recipe) {
-                const input = recipe.input;
-                return input.id === id && input.data === data;
+                return ContainerHelper.equals(item, recipe.input);
             });
     },
 
     getRecipeByIngredient: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes
             .find(function (recipe) {
-                const input = recipe.input;
-                return input.id === id && (input.data === -1 || data === -1 || input.data === data);
+                return ContainerHelper.equals(item, recipe.input);
             });
     },
 
     getRecipesByResult: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
                 return recipe.result
                     .find(function (result) {
-                        return result.id === id && (result.data === -1 || data === -1 || result.data === data);
+                        return ContainerHelper.equals(item, result);
                     }) !== undefined;
             });
     },

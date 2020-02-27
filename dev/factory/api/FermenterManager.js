@@ -49,26 +49,23 @@ const FermenterManager = {
     },
 
     getRecipe: function (id, data, inputLiquid) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes.find(function (recipe) {
-            return recipe.id === id
-                && (recipe.data === -1 || data === -1 || recipe.data === data)
-                && inputLiquid === recipe.inputLiquid;
+            return ContainerHelper.equals(item, recipe) && inputLiquid === recipe.inputLiquid;
         });
     },
 
     getRecipeByItem: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes.find(function (recipe) {
-            return recipe.id === id
-                && (recipe.data === -1 || data === -1 || recipe.data === data)
+            return ContainerHelper.equals(item, recipe)
         });
     },
 
     getFuel: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.fuels.find(function (fuel) {
-            return fuel.id === id && (fuel.data === -1 || data === -1 || fuel.data === data);
+            return ContainerHelper.equals(item, fuel);
         });
     },
 
