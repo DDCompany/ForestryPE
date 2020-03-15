@@ -28,8 +28,8 @@ const carpenterGUI = new UI.StandartWindow({
         },
         "progressScale": {
             type: "scale",
-            x: 662,
-            y: 177,
+            x: 665,
+            y: 179,
             direction: 1,
             value: 0,
             bitmap: "forestry.for.carpenter.scale",
