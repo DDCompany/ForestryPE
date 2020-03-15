@@ -41,7 +41,7 @@ const FabricatorManager = {
         let item = {id: id, data: data || 0};
         return this.smeltingList
             .find(function (smelting) {
-                return ContainerHelper.equals(smelting, item);
+                return ContainerHelper.equals(smelting.input, item);
             });
     },
 

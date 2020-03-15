@@ -13,14 +13,14 @@ const carpenterGUI = new UI.StandartWindow({
         }
     },
     drawing: [
-        {type: "bitmap", x: 335, y: 140, bitmap: "forestry.scales.energy_empty", scale: 3.2},
-        {type: "bitmap", x: 556, y: 110, bitmap: "forestry.for.carpenter.bg", scale: 3.2}
+        {type: "bitmap", x: 335, y: 100, bitmap: "forestry.scales.energy_empty", scale: 3.2},
+        {type: "bitmap", x: 556, y: 70, bitmap: "forestry.for.carpenter.bg", scale: 3.2}
     ],
     elements: {
         "energyScale": {
             type: "scale",
             x: 335,
-            y: 140,
+            y: 100,
             direction: 1,
             value: 0,
             bitmap: "forestry.scales.energy_full",
@@ -29,7 +29,7 @@ const carpenterGUI = new UI.StandartWindow({
         "progressScale": {
             type: "scale",
             x: 662,
-            y: 217,
+            y: 177,
             direction: 1,
             value: 0,
             bitmap: "forestry.for.carpenter.scale",
@@ -38,18 +38,18 @@ const carpenterGUI = new UI.StandartWindow({
         "liquidScale": {
             type: "scale",
             x: 828,
-            y: 113,
+            y: 73,
             direction: 1,
             value: 0,
             bitmap: "forestry.bgs.liquid_2",
             scale: 3.2
         },
 
-        "slotRecipe": {type: "slot", x: 606, y: 222, size: 51, visual: true},
-        "slotSpecial": {type: "slot", x: 612, y: 119},
+        "slotRecipe": {type: "slot", x: 606, y: 182, size: 51, visual: true},
+        "slotSpecial": {type: "slot", x: 612, y: 79},
 
-        "slotOutput": {type: "slot", x: 727, y: 233},
-        "slotContainer": {type: "slot", x: 727, y: 119, bitmap: "forestry.slots.liquid"},
+        "slotOutput": {type: "slot", x: 727, y: 193},
+        "slotContainer": {type: "slot", x: 727, y: 79, bitmap: "forestry.slots.liquid"},
 
     }
 });
@@ -64,7 +64,7 @@ const carpenterGUI = new UI.StandartWindow({
             let staticIndex = index;
 
             content.elements[slotName] = {
-                type: "slot", x: 385 + j * 60, y: 115 + i * 60, isValid: function (id, count, data, container) {
+                type: "slot", x: 385 + j * 60, y: 75 + i * 60, isValid: function (id, count, data, container) {
                     container.setSlot(slotName, id, 1, data);
                     return false;
                 }, clicker: {
@@ -86,7 +86,7 @@ const carpenterGUI = new UI.StandartWindow({
     index = 0;
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 9; j++) {
-            content.elements["slotResources" + index] = {type: "slot", x: 335 + j * 60, y: 321 + i * 60};
+            content.elements["slotResources" + index] = {type: "slot", x: 335 + j * 60, y: 281 + i * 60};
             index++;
         }
     }
