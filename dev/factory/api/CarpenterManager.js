@@ -23,8 +23,8 @@ const CarpenterManager = {
         return this.recipes
             .find(function (recipe) {
                 for (let k = 0; k < 9; k++) {
-                    let recipePattern = recipe.input[k];
-                    let input = pattern[k];
+                    let recipePattern = recipe.input[k] || {id: 0, data: 0};
+                    let input = pattern[k] || {id: 0, data: 0};
 
                     if (!ContainerHelper.equals(recipePattern, input))
                         return false;

@@ -49,8 +49,8 @@ const FabricatorManager = {
         return this.recipes
             .find(function (recipe) {
                 for (let i = 0; i < 9; i++) {
-                    let recipePattern = recipe.input[i];
-                    let input = pattern[i];
+                    let recipePattern = recipe.input[i] || {id: 0, data: 0};
+                    let input = pattern[i] || {id: 0, data: 0};
 
                     if (!ContainerHelper.equals(recipePattern, input))
                         return false;
