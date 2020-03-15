@@ -52,13 +52,11 @@ const fabricatorGUI = new UI.StandartWindow({
 });
 
 {
-    let index = 0;
     let content = fabricatorGUI.getContent();
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            let slotName = "slotInput" + index;
-            let staticIndex = index;
+            let slotName = "slotInput" + (i * 3 + j);
 
             content.elements[slotName] = {
                 type: "slot", x: 541 + j * 60, y: 88 + i * 60, isValid: function (id, count, data, container) {
@@ -76,15 +74,12 @@ const fabricatorGUI = new UI.StandartWindow({
                     }
                 }
             };
-            index++;
         }
     }
 
-    index = 0;
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 9; j++) {
-            content.elements["slotResources" + index] = {type: "slot", x: 335 + j * 60, y: 281 + i * 60};
-            index++;
+            content.elements["slotResources" + (i * 9 + j)] = {type: "slot", x: 335 + j * 60, y: 281 + i * 60};
         }
     }
 }
