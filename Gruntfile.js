@@ -89,11 +89,17 @@ module.exports = function (grunt) {
                     }
                 ]
             }
+        },
+
+        watch: {
+            files: ["dev/**"],
+            tasks: ["default"]
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', "", function () {
         grunt.task.run("concat");
