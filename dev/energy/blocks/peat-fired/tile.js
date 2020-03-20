@@ -55,7 +55,8 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
             }
         }
 
-        this.container.setScale("burnScale", (this.data.burnMax - this.data.burn) / this.data.burnMax);
+        this.container.setScale("burnScale", ((this.data.burnMax - this.data.burn) / this.data.burnMax) || 0);
+
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
     },
 
