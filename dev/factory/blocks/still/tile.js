@@ -58,7 +58,7 @@ MachineRegistry.registerConsumer(BlockID.still, {
             if (this.data.progressMax || this.findWork()) {
                 if (this.data.progress <= 0) {
                     this.liquidStorage.addLiquid(this.data.outputLiquid, this.data.outputAmount * this.data.progressMax);
-                    this.data.progressMax = 1;
+                    this.data.progressMax = 0;
                 } else if (this.data.energy >= 200) {
                     this.data.energy -= 200;
                     this.data.progress--;
