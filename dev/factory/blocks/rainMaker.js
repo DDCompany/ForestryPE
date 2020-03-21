@@ -1,3 +1,14 @@
+IDRegistry.genItemID("rainMaker");
+Item.createItem("rainMaker", "Rainmaker", {name: "rainMaker", meta: 0}, {});
+
+Item.registerUseFunctionForID(ItemID.rainMaker, function (coords) {
+    let relative = coords.relative;
+    if (relative) {
+        World.setBlock(relative.x, relative.y, relative.z, BlockID.rainmaker, 0);
+        Player.decreaseCarriedItem(1);
+    }
+});
+
 Block.setPrototype("rainmaker", {
     type: Block.TYPE_BASE,
 
@@ -5,10 +16,14 @@ Block.setPrototype("rainmaker", {
         return [{
             name: "Rainmaker",
             texture: [["rainmaker", 1], ["rainmaker", 2], ["rainmaker", 5], ["rainmaker", 5], ["rainmaker", 0]],
-            inCreative: true
+            inCreative: false
         }]
     }
 
+});
+
+Block.registerDropFunctionForID(BlockID.rainmaker, function () {
+    return [[ItemID.rainMaker, 1, 0]];
 });
 
 Block.setBlockShape(BlockID.rainmaker, {x: 0.3, y: 0, z: 0.3}, {x: 0.6, y: 0.6, z: 0.6});
