@@ -6,6 +6,7 @@ ModAPI.addAPICallback("RecipeViewer", function (api) {
     BeeRegistry.integrateWithRecipeViewer(RecipeViewer);
     FermenterManager.integrateWithRecipeViewer(RecipeViewer);
     MoistenerManager.integrateWithRecipeViewer(RecipeViewer);
+    PeatFiredManager.integrateWithRecipeViewer(RecipeViewer);
 
     log("Recipe Viewer Integration Activated", "INFO");
 });
