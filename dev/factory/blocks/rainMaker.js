@@ -52,11 +52,7 @@ Item.registerUseFunction("dissipationCharge", function (coords, item, block) {
             rain: 0,
             thunder: 0
         });
-        item.count--;
-        if (!item.count) {
-            item.id = 0;
-        }
-        Player.setCarriedItem(item.id, item.count, 0);
+        Player.decreaseCarriedItem(1);
     }
 });
 
@@ -66,11 +62,7 @@ Item.registerUseFunction("iodineCapsule", function (coords, item, block) {
             rain: 1,
             thunder: 0
         });
-        item.count--;
-        if (!item.count) {
-            item.id = 0;
-        }
-        Player.setCarriedItem(item.id, item.count, 0);
+        Player.decreaseCarriedItem(1);
     }
 });
 
