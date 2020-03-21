@@ -7,6 +7,7 @@ ModAPI.addAPICallback("RecipeViewer", function (api) {
     FermenterManager.integrateWithRecipeViewer(RecipeViewer);
     MoistenerManager.integrateWithRecipeViewer(RecipeViewer);
     PeatFiredManager.integrateWithRecipeViewer(RecipeViewer);
+    BioGeneratorManager.integrateWithRecipeViewer(RecipeViewer);
 
     log("Recipe Viewer Integration Activated", "INFO");
 });
