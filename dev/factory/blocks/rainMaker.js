@@ -67,7 +67,7 @@ Item.registerUseFunction("iodineCapsule", function (coords, item, block) {
 });
 
 Callback.addCallback("PostLoaded", function () {
-    Recipes.addShaped({id: BlockID.rainmaker, count: 1, data: 0}, [
+    Recipes.addShaped({id: ItemID.rainMaker, count: 1, data: 0}, [
         "tgt",
         "gcg",
         "tgt"
