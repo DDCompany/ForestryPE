@@ -62,6 +62,20 @@ const FermenterManager = {
         });
     },
 
+    getRecipeByInputLiquid: function (liquid) {
+        return this.recipes
+            .filter(function (recipe) {
+                return recipe.inputLiquid === liquid
+            })
+    },
+
+    getRecipeByResultLiquid: function (liquid) {
+        return this.recipes
+            .filter(function (recipe) {
+                return recipe.liquid === liquid
+            })
+    },
+
     getFuel: function (id, data) {
         let item = {id: id, data: data || 0};
         return this.fuels.find(function (fuel) {
@@ -166,11 +180,23 @@ const FermenterManager = {
                         return bakeRecipes(FermenterManager.recipes);
                     } else {
                         let fuel = FermenterManager.getRecipeByItem(id, data);
+                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        let recipes = [];
                         if (fuel)
-                            return bakeRecipes([fuel]);
-                        else return [];
+                            recipes = bakeRecipes([fuel]);
+
+                        if (empty)
+                            recipes = recipes.concat(bakeRecipes(FermenterManager.getRecipeByInputLiquid(empty.liquid)));
+
+                        return recipes;
                     }
-                } else return [];
+                } else {
+                    let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                    if (empty)
+                        return bakeRecipes(FermenterManager.getRecipeByResultLiquid(empty.liquid));
+
+                    return [];
+                }
             },
 
             onOpen: function (elements, data) {

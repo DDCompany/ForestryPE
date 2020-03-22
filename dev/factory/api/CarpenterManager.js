@@ -49,6 +49,13 @@ const CarpenterManager = {
             })
     },
 
+    getRecipesByLiquid: function (liquid) {
+        return this.recipes
+            .filter(function (recipe) {
+                return recipe.liquid === liquid
+            })
+    },
+
     getRecipesByResult: function (id, data) {
         let item = {id: id, data: data || 0};
         return this.recipes
@@ -118,7 +125,14 @@ const CarpenterManager = {
                 if (isUsage) {
                     if (id === BlockID.carpenter) {
                         return bakeCarpenterRecipes(CarpenterManager.recipes);
-                    } else return bakeCarpenterRecipes(CarpenterManager.getRecipesByIngredient(id, data));
+                    } else {
+                        let recipes = bakeCarpenterRecipes(CarpenterManager.getRecipesByIngredient(id, data));
+                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        if (empty)
+                            recipes = recipes.concat(bakeCarpenterRecipes(CarpenterManager.getRecipesByLiquid(empty.liquid)));
+
+                        return recipes;
+                    }
                 } else {
                     return bakeCarpenterRecipes(CarpenterManager.getRecipesByResult(id, data));
                 }
@@ -184,7 +198,7 @@ const CarpenterManager = {
                 else return bakeCarpenterRecipes(FabricatorManager.getRecipesByResult(id, data));
             },
 
-            onOpen: function (elements, data) {
+            onOpen: function (elements) {
                 const glass =
                     FabricatorManager.smeltingList[Math.round(Math.random() * FabricatorManager.smeltingList.length)].input;
                 let slotGlass = elements.get("slotGlass");

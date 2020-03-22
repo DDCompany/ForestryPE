@@ -59,7 +59,11 @@ const BioGeneratorManager = {
                 if (isUsage) {
                     if (id === BlockID.biogenerator)
                         return bakeFuelRecipes(BioGeneratorManager.fuel);
-                    return [];
+                    else {
+                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        if (empty)
+                            return bakeFuelRecipes([BioGeneratorManager.getFuel(empty.liquid)]);
+                    }
                 } else return [];
             },
 
