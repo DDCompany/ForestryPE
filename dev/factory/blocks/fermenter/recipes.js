@@ -10,7 +10,6 @@ FermenterManager.addFuel({
     cycles: 56,
 });
 
-let fermenterLiquids = {"appleJuice": 1.5, "honey": 1.5, "water": 1};
 for (let i in fermenterLiquids) {
     let modifier = fermenterLiquids[i];
 
@@ -66,14 +65,6 @@ for (let i in fermenterLiquids) {
         id: 40,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
-        liquid: "biomass"
-    });
-
-    FermenterManager.addRecipe({
-        id: ItemID.rubberSapling,
-        inputLiquid: i,
-        liquidAmount: 0.25,
         modifier: modifier,
         liquid: "biomass"
     });

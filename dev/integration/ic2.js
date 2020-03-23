@@ -19,11 +19,15 @@ ModAPI.addAPICallback("ICore", function (api) {
         ]
     });
 
-    FermenterManager.addRecipe({
-        id: ItemID.rubberSapling,
-        liquidAmount: 0.25,
-        liquid: "biomass"
-    });
+    for (let i in fermenterLiquids) {
+        FermenterManager.addRecipe({
+            id: ItemID.rubberSapling,
+            inputLiquid: i,
+            liquidAmount: 0.25,
+            modifier: fermenterLiquids[i],
+            liquid: "biomass"
+        });
+    }
 
     registerTubeRecipe(ItemID.thermionicTubeRubber, ItemID.rubber);
 

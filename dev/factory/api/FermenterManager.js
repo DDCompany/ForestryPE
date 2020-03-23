@@ -1,3 +1,5 @@
+let fermenterLiquids = {"appleJuice": 1.5, "honey": 1.5, "water": 1};
+
 const FermenterManager = {
     recipes: [],
     fuels: [],
