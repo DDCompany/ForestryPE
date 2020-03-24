@@ -38,10 +38,10 @@ const FabricatorManager = {
     },
 
     getSmelting: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.smeltingList
-            .find(function (item) {
-                return item.id === id && (item.data === -1 || data === -1 || item.data === data);
+            .find(function (smelting) {
+                return ContainerHelper.equals(smelting.input, item);
             });
     },
 
@@ -49,8 +49,8 @@ const FabricatorManager = {
         return this.recipes
             .find(function (recipe) {
                 for (let i = 0; i < 9; i++) {
-                    let recipePattern = recipe.input[i];
-                    let input = pattern[i];
+                    let recipePattern = recipe.input[i] || {id: 0, data: 0};
+                    let input = pattern[i] || {id: 0, data: 0};
 
                     if (!ContainerHelper.equals(recipePattern, input))
                         return false;
@@ -61,13 +61,13 @@ const FabricatorManager = {
     },
 
     getRecipesByIngredient: function (id, data) {
-        data = data || 0;
+        let ingredient = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
                 const input = recipe.input;
                 for (let key in input) {
                     let item = input[key];
-                    if (item.id === id && (item.data === -1 || data === -1 || item.data === data))
+                    if (ContainerHelper.equals(ingredient, item))
                         return true;
                 }
 
@@ -76,11 +76,10 @@ const FabricatorManager = {
     },
 
     getRecipesByResult: function (id, data) {
-        data = data || 0;
+        let item = {id: id, data: data || 0};
         return this.recipes
             .filter(function (recipe) {
-                const result = recipe.result;
-                return result.id === id && (result.data === -1 || data === -1 || result.data === data);
+                return ContainerHelper.equals(item, recipe.result);
             });
     }
 };

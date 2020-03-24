@@ -68,7 +68,7 @@ const MachineRegistry = {
 
         this.setupWireConnection(id, energyType);
         ToolAPI.registerBlockMaterial(id, "stone", 1, true);
-        Block.setDestroyTime(BlockID.oreCopper, 1.5);
+        Block.setDestroyTime(id, 1.5);
         TileEntity.registerPrototype(id, prototype);
         EnergyTileRegistry.addEnergyTypeForId(id, energyType);
     },

@@ -7,7 +7,7 @@ const guiPeatFiredEngine = new UI.StandartWindow({
 
     drawing: [
         {type: "bitmap", x: 335, y: 140, bitmap: "forestry.scales.energy_empty", scale: 3.2},
-        {type: "bitmap", x: 385, y: 110, bitmap: "forestry.for.peat-fires.bg", scale: 3.2},
+        {type: "bitmap", x: 385, y: 110, bitmap: "forestry.for.peat-fired.bg", scale: 3.2},
     ],
 
     elements: {

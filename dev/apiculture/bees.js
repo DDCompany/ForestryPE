@@ -28,6 +28,7 @@ BeeRegistry.registerBee({
         }
     ],
     species: "Austere",
+    hasGlint: true,
     humidity: BiomeHelper.HUMIDITY_ARID,
     climate: BiomeHelper.CLIMATE_HOT,
     flowers: BeeRegistry.FLOWERS_CACTI,
@@ -66,6 +67,7 @@ BeeRegistry.registerBee({
         }
     ],
     species: "Avenging",
+    hastGlint: true,
     produce: [[ItemID.combIrradiated, 0, 0.4]],
     chromosomes: {EFFECT: "radiactive", TERRITORY: "15x13x15", LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
@@ -155,6 +157,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Demonic",
+    hasGlint: true,
     produce: [[ItemID.combSimmering, 0, 0.45], [348, 0, 0.15]],
     humidity: BiomeHelper.HUMIDITY_ARID,
     climate: BiomeHelper.CLIMATE_HELLISH,
@@ -237,6 +240,7 @@ BeeRegistry.registerBee({
         }
     ],
     produce: [[ItemID.combSilky, 0, 0.2]],
+    hasGlint: true,
     humidity: BiomeHelper.HUMIDITY_DAMP,
     climate: BiomeHelper.CLIMATE_WARM,
     flowers: BeeRegistry.FLOWERS_JUNGLE,
@@ -463,6 +467,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Glacial",
+    hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.2], [ItemID.iceShard, 0, 0.4]],
     climate: BiomeHelper.CLIMATE_ICY,
     mutations: [
@@ -498,6 +503,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Hermitic",
+    hasGlint: true,
     produce: [[ItemID.combMellow, 0, 0.2]],
     flowers: BeeRegistry.FLOWERS_WHEAT,
     chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
@@ -557,6 +563,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Industrious",
+    hasGlint: true,
     produce: [[ItemID.combStringy, 0, 0.2], [ItemID.pollen1, 0, 0.15]],
     mutations: [
         {
@@ -587,6 +594,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Leporine",
+    hasGlint: true,
     produce: [[ItemID.combSilky, 0, 0.3], [344, 0, 0.1]],
     mutations: [
         {
@@ -696,6 +704,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Merry",
+    hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
     chromosomes: {
@@ -812,6 +821,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Phantasmal",
+    hasGlint: true,
     produce: [[ItemID.combMysterious, 0, 0.4]],
     climate: BiomeHelper.CLIMATE_COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
@@ -968,6 +978,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Tipsy",
+    hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
     climate: BiomeHelper.CLIMATE_ICY,
     chromosomes: {
@@ -1163,6 +1174,7 @@ BeeRegistry.registerBee({
         }
     },
     species: "Imperial",
+    hasGlint: true,
     produce: [[ItemID.combDripping, 0, 0.2], [ItemID.royalJelly, 0, 0.15]],
     mutations: [
         {

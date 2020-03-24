@@ -8,7 +8,7 @@ const FactoryManager = {
     },
 
     createModel: function (blockId, textures) {
-        Block.setBlockShape(blockId, {x: 0.1, y: 0, z: 0}, {x: 0.95, y: 0.95, z: 0.95});
+        Block.setBlockShape(blockId, {x: .0625, y: .0625, z: .0625}, {x: .9375, y: .9375, z: .9375});
 
         let texture2 = [[textures[0][0], 1], [textures[0][0], 1], [textures[5][0], 0], [textures[5][0], 0], [textures[3][0], 0], [textures[3][0], 0]];
 

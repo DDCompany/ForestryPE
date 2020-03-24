@@ -1,130 +1,84 @@
-for (let i = 0; i < 4; i++) {
-    CarpenterManager.registerRecipe({
-        input: {4: {id: 17, data: i}},
-        liquid: "water",
-        liquidAmount: 0.25,
-        time: 5,
-        result: {
-            id: ItemID.woodPulp,
-            count: 4,
-            data: 0
-        }
-    });
-
-    if (ForestryConfig.crateEnabled) {
-        CarpenterManager.registerRecipe({
-            input: {
-                1: {id: 17, data: i},
-                3: {id: 17, data: i},
-                5: {id: 17, data: i},
-                7: {id: 17, data: i}
-            },
-            liquid: "water",
-            liquidAmount: 1,
-            time: 5,
-            result: {
-                id: ItemID.crate,
-                count: 24,
-                data: 0
-            }
-        });
-    }
-
-    CarpenterManager.registerRecipe({
-        input: {
-            0: {id: 17, data: i},
-            1: {id: 17, data: i},
-            2: {id: 17, data: i},
-            3: {id: 17, data: i},
-            5: {id: 17, data: i},
-            6: {id: 17, data: i},
-            7: {id: 17, data: i},
-            8: {id: 17, data: i}
+{
+    const vanillaWood = [
+        {
+            id: 17,
+            variations: 4
         },
-        liquid: "seedOil",
-        liquidAmount: 1,
-        time: 50,
-        result: {
-            id: ItemID.impregnatedCasing,
-            count: 1,
-            data: 0
+        {
+            id: 162,
+            variations: 2
         }
-    });
+    ];
 
-    CarpenterManager.registerRecipe({
-        input: {4: {id: 17, data: i}, 7: {id: 17, data: i}},
-        liquid: "seedOil",
-        liquidAmount: 0.01,
-        time: 10,
-        result: {
-            id: ItemID.stickImpregnated,
-            count: 2,
-            data: 0
-        }
-    });
-}
+    for (let i in vanillaWood) {
+        let wood = vanillaWood[i];
+        let woodId = wood.id;
+        for (let j = 0; j < wood.variations; j++) {
+            CarpenterManager.registerRecipe({
+                input: {4: {id: woodId, data: j}},
+                liquid: "water",
+                liquidAmount: 0.25,
+                time: 5,
+                result: {
+                    id: ItemID.woodPulp,
+                    count: 4,
+                    data: 0
+                }
+            });
 
-for (let i = 0; i < 2; i++) {
-    if (ForestryConfig.crateEnabled) {
-        CarpenterManager.registerRecipe({
-            input: {
-                1: {id: 162, data: i},
-                3: {id: 162, data: i},
-                5: {id: 162, data: i},
-                7: {id: 162, data: i}
-            },
-            liquid: "water",
-            liquidAmount: 1,
-            time: 5,
-            result: {
-                id: ItemID.crate,
-                count: 24,
-                data: 0
+            if (ForestryConfig.crateEnabled) {
+                CarpenterManager.registerRecipe({
+                    input: {
+                        1: {id: woodId, data: j},
+                        3: {id: woodId, data: j},
+                        5: {id: woodId, data: j},
+                        7: {id: woodId, data: j}
+                    },
+                    liquid: "water",
+                    liquidAmount: 1,
+                    time: 5,
+                    result: {
+                        id: ItemID.crate,
+                        count: 24,
+                        data: 0
+                    }
+                });
             }
-        });
+
+            CarpenterManager.registerRecipe({
+                input: {
+                    0: {id: woodId, data: j},
+                    1: {id: woodId, data: j},
+                    2: {id: woodId, data: j},
+                    3: {id: woodId, data: j},
+                    5: {id: woodId, data: j},
+                    6: {id: woodId, data: j},
+                    7: {id: woodId, data: j},
+                    8: {id: woodId, data: j}
+                },
+                liquid: "seedOil",
+                liquidAmount: 1,
+                time: 50,
+                result: {
+                    id: ItemID.impregnatedCasing,
+                    count: 1,
+                    data: 0
+                }
+            });
+
+            CarpenterManager.registerRecipe({
+                input: {4: {id: woodId, data: j}, 7: {id: woodId, data: j}},
+                liquid: "seedOil",
+                liquidAmount: 0.01,
+                time: 10,
+                result: {
+                    id: ItemID.stickImpregnated,
+                    count: 2,
+                    data: 0
+                }
+            });
+        }
     }
-
-    CarpenterManager.registerRecipe({
-        input: {4: {id: 162, data: i}},
-        liquid: "water",
-        liquidAmount: 0.25,
-        time: 5,
-        result: {
-            id: ItemID.woodPulp,
-            count: 4,
-            data: 0
-        }
-    });
-
-    CarpenterManager.registerRecipe({
-        input: {
-            0: {id: 162, data: i},
-            1: {id: 162, data: i},
-            2: {id: 162, data: i},
-            3: {id: 162, data: i},
-            5: {id: 162, data: i},
-            6: {id: 162, data: i},
-            7: {id: 162, data: i},
-            8: {id: 162, data: i}
-        },
-        result: {
-            id: 368,
-            count: 1,
-            data: 0
-        }
-    });
-
-    CarpenterManager.registerRecipe({
-        input: {4: {id: 162, data: i}, 7: {id: 162, data: i}},
-        liquid: "seedOil",
-        liquidAmount: 0.01,
-        time: 10,
-        result: {
-            id: ItemID.stickImpregnated,
-            count: 2,
-            data: 0
-        }
-    });
 }
 
 CarpenterManager.registerRecipe({

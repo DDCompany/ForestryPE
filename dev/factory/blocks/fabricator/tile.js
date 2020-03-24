@@ -23,12 +23,10 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         let pattern = {};
 
         for (let i = 0; i < 9; i++) {
-            let item = this.container.getSlot("slotInput" + i);
-            pattern["slot" + i] = item;
+            pattern[i] = this.container.getSlot("slotInput" + i);
         }
 
         let recipe = FabricatorManager.getRecipe(pattern);
-
         if (recipe) {
             let slotSpecial = this.container.getSlot("slotSpecial");
             let special = recipe.special;

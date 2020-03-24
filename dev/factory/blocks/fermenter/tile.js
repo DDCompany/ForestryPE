@@ -2,9 +2,10 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
     defaultValues: {
         progress: 0,
         progressMax: 1,
+        modifier: 1,
 
-        fuel: 0,
-        fuelMax: 1,
+        fuelBurnTime: 0,
+        fuelBurnMax: 0,
         fuelFerment: 0,
 
         resultFluid: null,
@@ -17,17 +18,15 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
     },
 
     findWork: function () {
-        if (!this.getLiquidModifier(this.data.inputFluid))
-            return;
-
         let slot = this.container.getSlot("slotInput");
-        let recipe = FermenterManager.getRecipe(slot.id, slot.data);
+        let recipe = FermenterManager.getRecipe(slot.id, slot.data, this.data.inputFluid);
         if (recipe) {
             if (this.data.containerFluid && this.data.containerFluid !== recipe.liquid)
                 return;
 
+            this.data.modifier = recipe.modifier;
             this.data.resultFluid = recipe.liquid;
-            this.data.progress = this.data.progressMax = recipe.time || 1200;
+            this.data.progress = this.data.progressMax = recipe.liquidAmount * 1000;
 
             slot.count--;
             this.container.validateSlot("slotInput");
@@ -35,11 +34,11 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
     },
 
     findFuel: function () {
-        if (!this.data.fuel) {
+        if (!this.data.fuelBurnTime) {
             let slot = this.container.getSlot("slotFuel");
             let fuel = FermenterManager.getFuel(slot.id, slot.data);
             if (fuel) {
-                this.data.fuel = this.data.fuelMax = fuel.cycles || 1;
+                this.data.fuelBurnTime = this.data.fuelBurnMax = fuel.cycles || 1;
                 this.data.fuelFerment = fuel.perCycle || 1;
 
                 slot.count--;
@@ -50,18 +49,6 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         }
 
         return true;
-    },
-
-    getLiquidModifier: function (liquid) {
-        switch (liquid) {
-            case "appleJuice":
-            case "honey":
-                return 1.5;
-            case "water":
-                return 1;
-            default:
-                return 0;
-        }
     },
 
     tick: function () {
@@ -79,9 +66,9 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         }
 
         if (this.data.energy >= 150) {
-            if (this.data.progress) {
+            if (this.data.progress > 0) {
                 if (this.findFuel()) {
-                    let fermented = Math.min(this.data.fuelFerment, this.data.progress) * this.getLiquidModifier(this.data.inputFluid);
+                    let fermented = Math.min(this.data.fuelFerment, this.data.progress) * this.data.modifier;
                     let _fermented = fermented / 1000;
 
                     let inputFluid = this.data.inputFluid;
@@ -90,7 +77,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
                     if (this.liquidStorage.getAmount(inputFluid) >= _fermented
                         && this.liquidStorage.getAmount(resultFluid) + _fermented <= 10) {
                         this.data.progress -= fermented;
-                        this.data.fuel--;
+                        this.data.fuelBurnTime--;
                         this.data.containerFluid = resultFluid;
                         this.liquidStorage.addLiquid(resultFluid, _fermented);
                         this.liquidStorage.getLiquid(inputFluid, _fermented);
@@ -101,7 +88,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         }
 
         this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
-        this.container.setScale("reagentScale", (this.data.fuel / this.data.fuelMax) || 0);
+        this.container.setScale("reagentScale", (this.data.fuelBurnTime / this.data.fuelBurnMax) || 0);
         this.container.setScale("progressScale", (this.data.progress / this.data.progressMax) || 0);
         this.liquidStorage.updateUiScale("liquidInputScale", inputFluid || this.data.inputFluid);
         this.liquidStorage.updateUiScale("liquidOutputScale", this.data.containerFluid);
