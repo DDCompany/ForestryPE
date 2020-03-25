@@ -34,3 +34,17 @@ Item.createItem("thermionicTubeApatite", "Apatite Thermionic Tube", {name: "ther
 IDRegistry.genItemID("thermionicTubeLapis");
 Item.createItem("thermionicTubeLapis", "Lapis Thermionic Tube", {name: "thermionicTubeLapis", meta: 0}, {});
 
+Item.addCreativeGroup(GROUP_TUBES, GROUP_TUBES_NAME, [
+    ItemID.thermionicTubeDiamond,
+    ItemID.thermionicTubeGold,
+    ItemID.thermionicTubeBronze,
+    ItemID.thermionicTubeCopper,
+    ItemID.thermionicTubeIron,
+    ItemID.thermionicTubeTin,
+    ItemID.thermionicTubeObsidian,
+    ItemID.thermionicTubeBlaze,
+    ItemID.thermionicTubeRubber,
+    ItemID.thermionicTubeEmerald,
+    ItemID.thermionicTubeApatite,
+    ItemID.thermionicTubeLapis
+]);

@@ -126,6 +126,8 @@ if (ForestryConfig.oresBlocksEnabled) {
     });
     Block.setBlockMaterial(BlockID.blockApatite, "stone", 1);
 
+    Item.addCreativeGroup(GROUP_ORE_BLOCKS, GROUP_ORE_BLOCKS_NAME, [BlockID.blockCopper, BlockID.blockTin, BlockID.blockBronze, BlockID.blockApatite]);
+
     Callback.addCallback("PostLoaded", function () {
         Recipes.addShaped({id: BlockID.blockCopper, count: 1, data: 0}, [
             "iii",

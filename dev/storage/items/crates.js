@@ -1,5 +1,6 @@
 IDRegistry.genItemID("crate");
 Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
+Item.addCreativeGroup(GROUP_CRATES, GROUP_CRATES_NAME, [ItemID.crate]);
 
 function registerCrate(id, itemName, texture, data) {
     data = data || 0;
@@ -7,6 +8,7 @@ function registerCrate(id, itemName, texture, data) {
 
     IDRegistry.genItemID(crateId);
     Item.createItem(crateId, "Crate (" + itemName + ")", {name: texture, meta: 0}, {});
+    Item.addCreativeGroup(GROUP_CRATES, GROUP_CRATES_NAME, [ItemID[crateId]]);
 
     CarpenterManager.registerRecipe({
         input: {

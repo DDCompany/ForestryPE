@@ -20,3 +20,4 @@ Callback.addCallback("PostLoaded", function () {
 
 GROUP_ITEM_PIPE.add(BlockID.enginePeat, -1);
 ModelHelper.createEngineModel(BlockID.enginePeat);
+Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.enginePeat]);

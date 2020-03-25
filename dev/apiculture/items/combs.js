@@ -54,3 +54,5 @@ COMBS.push(ItemID.combSimmering);
 COMBS.push(ItemID.combStringy);
 COMBS.push(ItemID.combWheaten);
 COMBS.push(ItemID.combIrradiated);
+
+Item.addCreativeGroup(GROUP_COMBS, GROUP_COMBS_NAME, COMBS);

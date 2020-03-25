@@ -289,6 +289,23 @@ BackpackRegistry.register(ItemID.backpackApiarist, {
     }
 });
 
+Item.addCreativeGroup(GROUP_BACKPACKS, GROUP_BACKPACKS_NAME, [
+    ItemID.backpackMiners,
+    ItemID.backpackDigger,
+    ItemID.backpackForester,
+    ItemID.backpackHunter,
+    ItemID.backpackBuilder,
+    ItemID.backpackApiarist
+]);
+
+Item.addCreativeGroup(GROUP_WOVEN_BACKPACKS, GROUP_WOVEN_BACKPACKS_NAME, [
+    ItemID.backpackMinersT2,
+    ItemID.backpackDiggerT2,
+    ItemID.backpackForesterT2,
+    ItemID.backpackHunterT2,
+    ItemID.backpackBuilderT2
+]);
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.backpackMiners, count: 1, data: 0}, [
         "sws",
