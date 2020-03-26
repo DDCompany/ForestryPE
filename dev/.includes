@@ -18,7 +18,6 @@ core/blocks/peat/peat.js
 core/blocks/peat/tile.js
 
 core/blocks/ores.js
-core/blocks/glass.js
 core/blocks/storage.js
 
 # ITEMS

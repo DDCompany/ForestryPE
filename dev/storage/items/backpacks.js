@@ -157,7 +157,6 @@ BackpackRegistry.register(ItemID.backpackBuilder, {
         "^glass.+",
         "^chest.+",
         "^block.+",
-        "^forestryGlass$",
         {
             id: 98,
             data: -1
