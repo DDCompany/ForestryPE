@@ -50,7 +50,7 @@ if (ForestryConfig.crateEnabled) {
     registerCrate(372, "Nether wart", "crateNetherWart");
     registerCrate(ItemID.apatite, "Apatite", "crateApatite");
     registerCrate(BlockID.bog, "Bog", "crateBog");
-    registerCrate(ItemID.bronzeIngot, "Bronze ingot", "crateBronzeIngot");
+    registerCrate(ItemID.ingotBronze, "Bronze ingot", "crateBronzeIngot");
     registerCrate(4, "Cobblestone", "crateCobblestone");
     registerCrate(ItemID.combStringy, "Stringy comb", "crateStringyComb");
     registerCrate(ItemID.combCocoa, "Cocoa comb", "crateCocoaComb");
