@@ -210,11 +210,16 @@ ModAPI.addAPICallback("HarvestAPI", function () {
     }
 
     for (let i in plants) {
-        FermenterManager.addRecipe({
-            id: ItemID[plants[i]],
-            liquidAmount: 0.5,
-            liquid: "biomass"
-        });
+        for (let i in fermenterLiquids) {
+            FermenterManager.addRecipe({
+                id: ItemID[plants[i]],
+                inputLiquid: i,
+                modifier: fermenterLiquids[i],
+                liquidAmount: 0.5,
+                liquid: "biomass"
+            });
+        }
+
     }
 
     log("HC Integration Activated", "INFO")
