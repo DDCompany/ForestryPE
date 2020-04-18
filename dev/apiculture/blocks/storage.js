@@ -103,6 +103,8 @@ if (ForestryConfig.combsBlocksEnabled) {
     });
     Block.setBlockMaterial(BlockID.blockComb, "stone", 1);
 
+    Item.addCreativeGroup(GROUP_COMB_BLOCKS, GROUP_COMB_BLOCKS_NAME, [BlockID.blockComb]);
+
     Callback.addCallback("PostLoaded", function () {
         Recipes.addShaped({id: BlockID.blockComb, count: 1, data: 0}, [
             "iii",

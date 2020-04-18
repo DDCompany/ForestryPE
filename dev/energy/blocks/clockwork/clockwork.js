@@ -19,3 +19,4 @@ Callback.addCallback("PostLoaded", function () {
 });
 
 ModelHelper.createEngineModel(BlockID.engineClockwork);
+Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.engineClockwork]);

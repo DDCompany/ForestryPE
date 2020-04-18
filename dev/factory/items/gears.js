@@ -7,6 +7,8 @@ Item.createItem("gearTin", "Tin Gear", {name: "gearTin", meta: 0}, {});
 IDRegistry.genItemID("gearBronze");
 Item.createItem("gearBronze", "Bronze Gear", {name: "gearBronze", meta: 0}, {});
 
+Item.addCreativeGroup(GROUP_GEARS, GROUP_GEARS_NAME, [ItemID.gearCopper, ItemID.gearTin, ItemID.gearBronze]);
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.gearCopper, count: 1, data: 0}, [
         " W ",

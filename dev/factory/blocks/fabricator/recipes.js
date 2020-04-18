@@ -1,15 +1,4 @@
 //Smelting
-for (let i = 0; i < 16; i++) {
-    FabricatorManager.addSmelting({
-        input: {
-            id: BlockID.forestryGlass,
-            data: i
-        },
-        amount: 1,
-        temperature: 1000
-    });
-}
-
 FabricatorManager.addSmelting({
     input: {
         id: 20
@@ -70,61 +59,6 @@ FabricatorManager.addSmelting({
 });
 
 //Recipes
-for (let i = 0; i < 16; i++) {
-    FabricatorManager.registerRecipe({
-        input: {3: {id: 351, data: i}, 6: {id: ItemID.propolis, data: 0}},
-        special: {
-            id: ItemID.waxCast,
-            data: 0,
-            count: 1,
-            dec: false
-        },
-        result: {
-            id: BlockID.forestryGlass,
-            count: 1,
-            data: i
-        }
-    });
-}
-
-if (ForestryConfig.glassEnabled) {
-    for (let i = 0; i < 16; i++) {
-        FabricatorManager.registerRecipe({
-            input: {3: {id: 351, data: i}, 6: {id: ItemID.propolisSilky, data: 0}},
-            special: {
-                id: ItemID.waxCast,
-                data: 0,
-                count: 1,
-                dec: false
-            },
-            result: {
-                id: BlockID.forestryGlass,
-                count: 1,
-                data: i
-            }
-        });
-
-    }
-
-    for (let i = 0; i < 16; i++) {
-        FabricatorManager.registerRecipe({
-            input: {3: {id: 351, data: i}, 6: {id: ItemID.propolisPulse, data: 0}},
-            special: {
-                id: ItemID.waxCast,
-                data: 0,
-                count: 1,
-                dec: false
-            },
-            result: {
-                id: BlockID.forestryGlass,
-                count: 1,
-                data: i
-            }
-        });
-
-    }
-}
-
 function registerTubeRecipe(itemId, materialId, materialData) {
     materialData = materialData || 0;
     FabricatorManager.registerRecipe({

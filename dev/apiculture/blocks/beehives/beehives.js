@@ -55,6 +55,8 @@ Block.setPrototype("beehive", {
     }
 });
 
+Item.addCreativeGroup(GROUP_BEEHIVES, GROUP_BEEHIVES_NAME, [BlockID.beehive]);
+
 Block.registerDropFunction("beehive", function (coords, id, data, diggingLevel) {
     attackByBeehive();
     if (diggingLevel) {

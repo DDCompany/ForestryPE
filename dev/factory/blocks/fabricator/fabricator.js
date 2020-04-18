@@ -21,3 +21,4 @@ Callback.addCallback("PostLoaded", function () {
 });
 
 GROUP_ITEM_PIPE.add(BlockID.fabricator, -1);
+Item.addCreativeGroup(GROUP_MACHINES, GROUP_MACHINES_NAME, [BlockID.fabricator]);
