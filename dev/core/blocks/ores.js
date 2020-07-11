@@ -22,6 +22,8 @@ ToolAPI.registerBlockMaterial(BlockID.oreApatite, "stone", 1, true);
 Block.setDestroyTime(BlockID.oreApatite, 1);
 Block.setDestroyLevel("oreApatite", 2);
 
+Item.addCreativeGroup(GROUP_ORES, GROUP_ORES_NAME, [BlockID.oreCopper, BlockID.oreTin, BlockID.oreApatite]);
+
 Block.registerDropFunction("oreApatite", function (coords, id, data, diggingLevel) {
     if (diggingLevel > 1) {
         ToolAPI.dropOreExp(coords, 1, 4, 1);

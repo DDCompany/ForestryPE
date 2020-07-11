@@ -305,6 +305,10 @@ const BeeRegistry = {
         Item.registerNameOverrideFunction(ItemID["princess" + arg.species], NAME_OVERRIDE);
         Item.registerNameOverrideFunction(ItemID["drone" + arg.species], NAME_OVERRIDE);
         Item.registerNameOverrideFunction(ItemID["queen" + arg.species], NAME_OVERRIDE);
+
+        Item.addCreativeGroup(GROUP_PRINCESSES, GROUP_PRINCESSES_NAME, [ItemID["princess" + arg.species]]);
+        Item.addCreativeGroup(GROUP_DRONES, GROUP_DRONES_NAME, [ItemID["drone" + arg.species]]);
+        Item.addCreativeGroup(GROUP_QUEENS, GROUP_QUEENS_NAME, [ItemID["queen" + arg.species]]);
     },
 
     getBeeTypeByID: function (id) {

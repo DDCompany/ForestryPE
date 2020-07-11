@@ -55,6 +55,8 @@ Item.registerNameOverrideFunction(ItemID.frameProven, function (item, name) {
     return name + "§7\nProduction: 2.0x\nGenetic Decay: 0.3x\nDurability: " + (720 - item.data);
 });
 
+Item.addCreativeGroup(GROUP_FRAMES, GROUP_FRAMES_NAME, [ItemID.frameUntreated, ItemID.frameImpregnated, ItemID.frameProven]);
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.frameUntreated, count: 1, data: 0}, [
         "sss",

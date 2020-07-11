@@ -10,3 +10,4 @@ Item.createItem("chipsetIntricate", "Intricate Circuit Board", {name: "chipsetIn
 IDRegistry.genItemID("chipsetRefined");
 Item.createItem("chipsetRefined", "Refined Circuit Board", {name: "chipsetRefined", meta: 0}, {});
 
+Item.addCreativeGroup(GROUP_CHIPSETS, GROUP_CHIPSETS_NAME, [ItemID.chipsetBasic, ItemID.chipsetEnhanced, ItemID.chipsetIntricate, ItemID.chipsetRefined]);

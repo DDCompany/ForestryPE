@@ -20,3 +20,4 @@ Callback.addCallback("PostLoaded", function () {
 
 GROUP_ITEM_PIPE.add(BlockID.engineBiogas, -1);
 ModelHelper.createEngineModel(BlockID.engineBiogas);
+Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.engineBiogas]);

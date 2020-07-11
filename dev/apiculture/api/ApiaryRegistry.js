@@ -3,6 +3,7 @@ var ApiaryRegistry = {
 
     register: function (id) {
         this.blockIDs.push(id);
+        Item.addCreativeGroup(GROUP_ALVEARY, GROUP_ALVEARY_NAME, [id]);
     },
 
     isApiaryComponent: function (id) {

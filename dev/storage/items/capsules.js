@@ -1,58 +1,70 @@
 IDRegistry.genItemID("waxCapsuleEmpty");
 Item.createItem("waxCapsuleEmpty", "Wax Capsule", {name: "waxCapsuleEmpty", meta: 0});
 Item.setLiquidClip(ItemID.waxCapsuleEmpty, true);
+Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID.waxCapsuleEmpty]);
 
 IDRegistry.genItemID("canEmpty");
 Item.createItem("canEmpty", "Can", {name: "canEmpty", meta: 0});
 Item.setLiquidClip(ItemID.canEmpty, true);
+Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID.canEmpty]);
 
 IDRegistry.genItemID("refractoryEmpty");
 Item.createItem("refractoryEmpty", "Refractory Capsule", {name: "refractoryEmpty", meta: 0});
 Item.setLiquidClip(ItemID.refractoryEmpty, true);
+Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID.refractoryEmpty]);
 
 function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
     if (!isNative) {
-        IDRegistry.genItemID("bucket" + suffix);
-        Item.createItem("bucket" + suffix, suffix + " Bucket", {name: "bucket" + suffix, meta: 0}, {stack: 1});
-        LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID["bucket" + suffix], data: 0});
+        let unique = "bucket" + suffix;
+        IDRegistry.genItemID(unique);
+        Item.createItem(unique, suffix + " Bucket", {name: unique, meta: 0}, {stack: 1});
+        LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID[unique], data: 0});
+        Item.addCreativeGroup(GROUP_BUCKETS, GROUP_BUCKETS_NAME, [ItemID[unique]]);
     }
 
     if (food) {
         if (!isHot) {
-            IDRegistry.genItemID("waxCapsule" + suffix);
-            Item.createFoodItem("waxCapsule" + suffix, "Capsule (" + suffix + ")", {
-                name: "waxCapsule" + suffix,
+            let unique = "waxCapsule" + suffix;
+            IDRegistry.genItemID(unique);
+            Item.createFoodItem(unique, "Capsule (" + suffix + ")", {
+                name: unique,
                 meta: 0
             }, {food: food});
+
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
-            }, {id: ItemID["waxCapsule" + suffix], data: 0});
+            }, {id: ItemID[unique], data: 0});
         }
 
-        IDRegistry.genItemID("can" + suffix);
-        Item.createFoodItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0}, {food: food});
+        let canUnique = "can" + suffix;
+        IDRegistry.genItemID(canUnique);
+        Item.createFoodItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0}, {food: food});
 
-        IDRegistry.genItemID("refractory" + suffix);
-        Item.createFoodItem("refractory" + suffix, "Capsule (" + suffix + ")", {
-            name: "refractory" + suffix,
+        let refractoryUnique = "refractory" + suffix;
+        IDRegistry.genItemID(refractoryUnique);
+        Item.createFoodItem(refractoryUnique, "Capsule (" + suffix + ")", {
+            name: refractoryUnique,
             meta: 0
         }, {food: food});
     } else {
         if (!isHot) {
-            IDRegistry.genItemID("waxCapsule" + suffix);
-            Item.createItem("waxCapsule" + suffix, "Capsule (" + suffix + ")", {name: "waxCapsule" + suffix, meta: 0});
+            let unique = "waxCapsule" + suffix;
+            IDRegistry.genItemID(unique);
+            Item.createItem(unique, "Capsule (" + suffix + ")", {name: unique, meta: 0});
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
-            }, {id: ItemID["waxCapsule" + suffix], data: 0});
+            }, {id: ItemID[unique], data: 0});
         }
 
-        IDRegistry.genItemID("can" + suffix);
-        Item.createItem("can" + suffix, "Can (" + suffix + ")", {name: "can" + suffix, meta: 0});
+        let canUnique = "can" + suffix;
+        IDRegistry.genItemID(canUnique);
+        Item.createItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0});
 
-        IDRegistry.genItemID("refractory" + suffix);
-        Item.createItem("refractory" + suffix, "Capsule (" + suffix + ")", {name: "refractory" + suffix, meta: 0});
+        let refractoryUnique = "refractory" + suffix;
+        IDRegistry.genItemID(refractoryUnique);
+        Item.createItem(refractoryUnique, "Capsule (" + suffix + ")", {name: refractoryUnique, meta: 0});
     }
 
     LiquidRegistry.registerItem(liquid, {id: ItemID.canEmpty, data: 0}, {id: ItemID["can" + suffix], data: 0});
@@ -60,6 +72,12 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
         id: ItemID["refractory" + suffix],
         data: 0
     });
+
+    if(!isHot)
+        Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID["waxCapsule" + suffix]]);
+
+    Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID["can" + suffix]]);
+    Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID["refractory" + suffix]]);
 }
 
 registerLiquidContainer("Water", "water", 0, true);

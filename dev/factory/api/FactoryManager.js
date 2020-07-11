@@ -5,6 +5,7 @@ const FactoryManager = {
         ], specType);
 
         this.createModel(BlockID[unique], textures);
+        Item.addCreativeGroup(GROUP_MACHINES, GROUP_MACHINES_NAME, [BlockID[unique]]);
     },
 
     createModel: function (blockId, textures) {
