@@ -1,5 +1,4 @@
 TileEntity.registerPrototype(BlockID.alveary_misc_center, {
-
     OUTPUT_SLOTS: ["slotProduct0", "slotProduct1", "slotProduct2", "slotProduct3", "slotProduct4", "slotProduct5", "slotProduct6"],
 
     defaultValues: {
@@ -104,10 +103,13 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
 });
 
 TileEntity.registerPrototype(BlockID.alveary_misc, {
-
     click: function () {
+        if (Entity.getSneaking(Player.get())) {
+            return false;
+        }
+
         //??? ??????? ?? ???? ????????? ????????? ???????????? ????? ????????? ????
-        if (World.getBlockID(this.x + 1, this.y, this.z) === BlockID.alveary_misc_center) {
+        if (World.getBlockID(this.x + 1, this.y, this.z) === BlockID.alveary_misc_center) { //TODO: refactor this
             var tile = World.getTileEntity(this.x + 1, this.y, this.z);
             if (tile) {
                 tile.container.openAs(alvearyGUI);
@@ -128,6 +130,7 @@ TileEntity.registerPrototype(BlockID.alveary_misc, {
                 tile.container.openAs(alvearyGUI);
             }
         }
-    }
 
+        return true;
+    }
 });
