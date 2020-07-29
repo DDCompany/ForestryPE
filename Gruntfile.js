@@ -9,8 +9,18 @@ module.exports = function (grunt) {
  *                                      __/ |
  *                                     |___/
  *
+ * Terms of use:
+ *  - Forbidden to distribute the library on third-party sources 
+      without links to the official group (https://vk.com/forestry_pe)
+ *  - Forbidden to change the code of this mod
+ *  - Forbidden to explicitly copy the code to other libraries or mods
+ *  - Using the mod you automatically agree to the conditions described above
+ *
+ * Warning!
+ * All ideas and textures belong to the original author - https://github.com/ForestryMC/ForestryMC
+ * 
  * Built at ${(new Date()).toDateString()}
- * © DDCompany (https://vk.com/id331953744)
+ * Port by DDCompany (https://vk.com/forestry_pe)
  */\n`;
     const modFiles = [
         'gui/**',
