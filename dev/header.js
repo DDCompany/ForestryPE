@@ -1,6 +1,6 @@
 IMPORT("EnergyNet");
 IMPORT("flags");
-IMPORT("ToolType");
+IMPORT("ToolLib");
 IMPORT("BackpackAPI");
 IMPORT("StorageInterface");
 
