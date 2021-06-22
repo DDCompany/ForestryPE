@@ -23,8 +23,7 @@ CentrifugeManager.registerRecipe({
             id: ItemID.beeswax
         },
         {
-            id: 351,
-            data: 3,
+            id: VanillaItemID.cocoa_beans,
             chance: 0.9
         }
     ]
