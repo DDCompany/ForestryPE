@@ -75,7 +75,7 @@ if (ForestryConfig.particlesBeeHives) {
         }
     }
 
-    Block.setAnimateTickCallback(BlockID.beehive, function (x, y, z, id, data) {
+    Block.setAnimateTickCallback(BlockID.beehiveForestry, function (x, y, z, id, data) {
         spawnBeeParticles(BeeParticles[data], x, y, z);
     });
 }

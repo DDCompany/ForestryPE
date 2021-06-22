@@ -11,7 +11,7 @@ function attackByBeehive() {
 }
 
 ToolAPI.addBlockMaterial("beehive", 1.5);
-Block.setPrototype("beehive", {
+Block.setPrototype("beehiveForestry", {
     type: Block.TYPE_BASE,
 
     getVariations: function () {
@@ -55,9 +55,9 @@ Block.setPrototype("beehive", {
     }
 });
 
-Item.addCreativeGroup(GROUP_BEEHIVES, GROUP_BEEHIVES_NAME, [BlockID.beehive]);
+Item.addCreativeGroup(GROUP_BEEHIVES, GROUP_BEEHIVES_NAME, [BlockID.beehiveForestry]);
 
-Block.registerDropFunction("beehive", function (coords, id, data, diggingLevel) {
+Block.registerDropFunction("beehiveForestry", function (coords, id, data, diggingLevel) {
     attackByBeehive();
     if (diggingLevel) {
         let drop = [];
@@ -174,7 +174,7 @@ Block.registerDropFunction("beehive", function (coords, id, data, diggingLevel) 
 
     return [];
 });
-Block.setBlockMaterial(BlockID.beehive, "beehive", 1);
+Block.setBlockMaterial(BlockID.beehiveForestry, "beehive", 1);
 
 HiveGenerator.register({
     chance: ForestryConfig.genForestChance,
@@ -182,7 +182,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        return HiveGenerator.genTreeHive(x, z, BlockID.beehive, 0);
+        return HiveGenerator.genTreeHive(x, z, BlockID.beehiveForestry, 0);
     }
 });
 
@@ -192,7 +192,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 1, [[2, 0], [3, 0]]);
+        HiveGenerator.genHive(x, z, BlockID.beehiveForestry, 1, [[2, 0], [3, 0]]);
         return true;
     }
 });
@@ -203,7 +203,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 2, [[2, 0], [3, 0], [12, -1], [24, -1]]);
+        HiveGenerator.genHive(x, z, BlockID.beehiveForestry, 2, [[2, 0], [3, 0], [12, -1], [24, -1]]);
         return true;
     }
 });
@@ -214,7 +214,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        return HiveGenerator.genTreeHive(x, z, BlockID.beehive, 3);
+        return HiveGenerator.genTreeHive(x, z, BlockID.beehiveForestry, 3);
     }
 });
 
@@ -224,7 +224,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 4, [[2, 0], [3, 0]]);
+        HiveGenerator.genHive(x, z, BlockID.beehiveForestry, 4, [[2, 0], [3, 0]]);
         return true;
     }
 });
@@ -235,7 +235,7 @@ HiveGenerator.register({
     dimension: Dimension.NORMAL,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 5);
+        HiveGenerator.genHive(x, z, BlockID.beehiveForestry, 5);
         return true;
     }
 });
@@ -245,7 +245,7 @@ HiveGenerator.register({
     dimension: Dimension.END,
 
     generate: function (x, z) {
-        HiveGenerator.genHive(x, z, BlockID.beehive, 6);
+        HiveGenerator.genHive(x, z, BlockID.beehiveForestry, 6);
         return true;
     }
 });
