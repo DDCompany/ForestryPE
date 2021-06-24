@@ -58,6 +58,10 @@
     {
       "source": "src/assets/config/*",
       "targetDir": "."
+    },
+    {
+      "source": "src/assets/langs/*",
+      "targetDir": "./langs"
     }
   ]
 }
