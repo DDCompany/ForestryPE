@@ -4,7 +4,7 @@
       "name": "ForestryPE",
       "description": "Need Wood? Get Forestry!",
       "author": "DDCompany",
-      "version": "release-6.0",
+      "version": "release-7.0",
       "icon": "src/mod_icon.png"
     },
     "api": "CoreEngine"
