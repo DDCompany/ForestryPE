@@ -1,0 +1,15 @@
+const combNames = [
+    "cocoa",
+    "dripping",
+    "frozen",
+    "mellow",
+    "mossy",
+    "mysterious",
+    "parched",
+    "powdery",
+    "silky",
+    "simmering",
+    "stringy",
+    "wheaten",
+    "irradiated",
+].map(value => [value, `comb${value[0].toUpperCase()}${value.substring(1)}`]);
