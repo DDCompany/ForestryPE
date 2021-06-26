@@ -21,4 +21,13 @@
  * Port by DDCompany (https://vk.com/forestry_pe)
  */
 
-Logger.Log("Forestry successfully loaded", "INFO");
+IMPORT("ToolLib");
+
+function random(min: number, max?: number) {
+    if (max === undefined) {
+        max = min;
+        min = 0;
+    }
+
+    return Math.random() * (max - min) + min;
+}
