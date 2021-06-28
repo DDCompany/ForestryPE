@@ -13,7 +13,7 @@ Item.addCreativeGroup("casings", t("forestry.creative_group.casings"), [
     ItemID.casingImpregnated,
 ]);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShaped({id: ItemID.casingSturdy, count: 1, data: 0}, [
         "III",
         "I I",

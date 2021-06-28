@@ -28,7 +28,7 @@ Callback.addCallback("ItemUse", ({x, y, z}, {id, count, data}, block, isExternal
     Entity.setCarriedItem(player, id, count, data);
 });
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShapeless({id: ItemID.kitPickaxe, data: 0, count: 1},
         [{id: ItemID.forestryPickaxe, data: 0}, {id: ItemID.carton, data: 0}]);
     Recipes.addShapeless({id: ItemID.kitShovel, data: 0, count: 1},

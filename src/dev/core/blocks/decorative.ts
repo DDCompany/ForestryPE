@@ -13,7 +13,7 @@ Block.createBlock("bricksAsh", [
 Block.setBlockMaterial("bricksAsh", "stone", 1);
 Block.setDestroyLevel("bricksAsh", 1);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShaped({id: BlockID.bricksAsh, count: 1, data: 0}, [
         "ABA",
         "B B",

@@ -20,7 +20,7 @@ Item.addCreativeGroup("gems", t("forestry.creative_group.gems"), [
     ItemID.apatite
 ]);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addFurnace(BlockID.oreApatite, ItemID.apatite, 0);
     Recipes.addFurnace(BlockID.oreCopper, ItemID.ingotCopper, 0);
     Recipes.addFurnace(BlockID.oreTin, ItemID.ingotTin, 0);

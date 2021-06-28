@@ -23,7 +23,7 @@ Item.createItem("forestryShovel", "forestry.item.bronze_shovel", {name: "forestr
 ToolLib.setTool(ItemID.forestryShovel, "bronze", ToolType.shovel, ItemID.forestryShovel);
 Item.addCreativeGroup("shovels", t("forestry.creative_group.shovels"), [ItemID.forestryShovel]);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShaped({id: ItemID.forestryPickaxe, count: 1, data: 0}, [
         " S ",
         " S ",

@@ -13,7 +13,7 @@ Item.addCreativeGroup("gears", t("forestry.creative_group.gears"), [
     ItemID.gearBronze,
 ]);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     const gearCenter = ItemID.gear_stone || ItemID.gearStone || ItemID.ingotCopper; //FIXME
     Recipes.addShaped({id: ItemID.gearBronze, count: 1, data: 0}, [
         " I ",

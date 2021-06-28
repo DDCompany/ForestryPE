@@ -10,7 +10,7 @@ Block.createBlock("earthBog", [
 Block.setBlockMaterial("earthBog", "dirt", 0);
 Block.setDestroyLevel("earthBog", 0);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     for (let key in LiquidRegistry.FullByEmpty) {
         if (key.split(":")[2] === "water") {
             const full = LiquidRegistry.FullByEmpty[key];

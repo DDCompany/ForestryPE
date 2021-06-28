@@ -7,7 +7,7 @@ Item.createItem("capsuleWax", "forestry.item.wax_capsule", {name: "capsuleWax"})
 IDRegistry.genItemID("capsuleRefractory");
 Item.createItem("capsuleRefractory", "forestry.item.refractory_capsule", {name: "capsuleRefractory"});
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShaped({id: ItemID.can, count: 10, data: 0}, [
         " I ",
         "I I",

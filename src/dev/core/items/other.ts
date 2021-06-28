@@ -10,7 +10,7 @@ Item.createItem("fertilizerBio", "forestry.item.bio_fertilizer", {name: "fertili
 IDRegistry.genItemID("fertilizerCompound");
 Item.createItem("fertilizerCompound", "forestry.item.compound_fertilizer", {name: "fertilizerCompound"});
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addFurnace(ItemID.peat, ItemID.ash, 0);
 
     Recipes.addShaped({id: VanillaBlockID.web, count: 4, data: 0}, [

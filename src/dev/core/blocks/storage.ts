@@ -44,7 +44,7 @@ Item.addCreativeGroup("blockGems", t("forestry.creative_group.gem_blocks"), [
     BlockID.blockApatite,
 ]);
 
-Callback.addCallback("PostLoaded", () => {
+Callback.addCallback("PreLoaded", () => {
     Recipes.addShaped({id: BlockID.blockApatite, count: 1, data: 0}, [
         "AAA",
         "AAA",
