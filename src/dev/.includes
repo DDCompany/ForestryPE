@@ -1,8 +1,25 @@
 header.ts
 ForestryConfig.ts
 
-core/
+core/ForestryConfig.ts
+core/I18N.ts
+core/IChancedItem.ts
+core/fluids.ts
+core/blocks/
+core/items/
+core/genetics/Allele.ts
+core/genetics/AlleleRegistry.ts
+core/genetics/AlleleSpecies.ts
+core/genetics/Branch.ts
+core/genetics/Chromosome.ts
+core/genetics/Genome.ts
+core/ClimateUtil.ts
 
 apiculture/header.ts
-apiculture/items/combs.ts
-apiculture/blocks/combs.ts
+apiculture/genetics/BeeChromosomes.ts
+apiculture/genetics/AlleleBeeSpecies.ts
+apiculture/genetics/BeeGenome.ts
+apiculture/genetics/BeeBranch.ts
+apiculture/genetics/BeeRegistry.ts
+apiculture/items/
+apiculture/blocks/
