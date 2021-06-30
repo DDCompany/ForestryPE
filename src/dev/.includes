@@ -5,6 +5,7 @@ core/ForestryConfig.ts
 core/I18N.ts
 core/IChancedItem.ts
 core/fluids.ts
+core/ModdedTileEntity.ts
 core/blocks/
 core/items/
 core/genetics/Allele.ts
