@@ -19,11 +19,11 @@ Block.setDestroyLevel("peat", 0);
 Block.registerDropFunction(BlockID.peat, () => [[ItemID.peat, 2, 0], [VanillaBlockID.dirt, 1, 0]]);
 
 Callback.addCallback("PreLoaded", () => {
-    for (let key in LiquidRegistry.FullByEmpty) {
+    for (const key in LiquidRegistry.FullByEmpty) {
         if (key.split(":")[2] === "water") {
             const full = LiquidRegistry.FullByEmpty[key];
-            const amount = full.id === VanillaItemID.water_bucket ? 4 : 6;
-            Recipes.addShaped({id: BlockID.earthBog, count: amount, data: 0}, [
+            const count = full.id === VanillaItemID.water_bucket ? 4 : 6;
+            Recipes.addShaped({id: BlockID.earthBog, count, data: 0}, [
                 "DSD",
                 "SXS",
                 "DSD",
