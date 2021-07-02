@@ -14,7 +14,6 @@ interface IBeeTemplate {
 interface IBeeSpecies {
     uid: string,
     binomial: string,
-    color: number,
     branch: BeeBranch,
     dominant?: boolean,
     products?: []
@@ -27,10 +26,9 @@ class BeeRegistry {
     static registerSpecies(species: IBeeSpecies) {
         assert("uid" in species, "Invalid uid");
         assert("binomial" in species, "Invalid binomial");
-        assert("color" in species, "Invalid bee color");
         assert("branch" in species, "Invalid bee branch");
 
-        const {uid, dominant, products, template, binomial, branch, color} = species;
+        const {uid, dominant, products, template, binomial, branch} = species;
         const capitalizedUid = capitalize(species.uid);
         ["queen", "drone", "princess"].map(prefix => {
             const id = `${prefix}${capitalizedUid}`;
@@ -59,7 +57,6 @@ class BeeRegistry {
 BeeRegistry.registerSpecies({
     uid: "forest",
     binomial: "nigrocincta",
-    color: 0x19d0ec,
     branch: BeeBranches.HONEY,
     template: {
         [BeeChromosomes.FLOWERING]: AlleleFlowering.SLOW,
