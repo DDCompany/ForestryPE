@@ -8,10 +8,12 @@ Item.addCreativeGroup("wax_capsules", t(`forestry.creative_group.wax_capsules`),
 
 IDRegistry.genItemID("capsuleRefractory");
 Item.createItem("capsuleRefractory", "forestry.item.refractory_capsule", {name: "capsuleRefractory"});
-Item.addCreativeGroup("refractory_capsules", t(`forestry.creative_group.refractory_capsules`), [ItemID.capsuleRefractory]);
+Item.addCreativeGroup("refractory_capsules", t(`forestry.creative_group.refractory_capsules`),
+    [ItemID.capsuleRefractory]);
 
 Callback.addCallback("PreLoaded", () => {
     let i = 1; //0 is empty capsule textures
+    const startDate = Date.now();
     for (const key in LiquidRegistry.liquids) {
         const capitalizedKey = capitalize(key);
         const liquidName = capitalize(t(LiquidRegistry.liquids[key].name));
@@ -43,6 +45,7 @@ Callback.addCallback("PreLoaded", () => {
             });
         i++;
     }
+    Logger.Log(`Registered ${(i - 1) * 3} textures in ${(Date.now() - startDate) / 1000}s`, "INFO");
 
     Recipes.addShaped({id: ItemID.can, count: 10, data: 0}, [
         " I ",
