@@ -15,7 +15,6 @@ enum Humidity {
 
 class ClimateUtil {
     static readonly hellishBiomes: Record<number, boolean> = {};
-    static readonly humidityByBiome: Record<number, Humidity> = {}; //TODO: remove after adding getBiomeHumidityAt
 
     static getTemperatureAt(blockSource: BlockSource, x: number, y: number, z: number): Temperature {
         if (this.isHellishBiome(blockSource.getBiome(x, z))) {
@@ -31,20 +30,20 @@ class ClimateUtil {
             return Temperature.NORMAL;
         } else if (temperature > 0) {
             return Temperature.COLD;
-        } else {
-            return Temperature.ICY;
         }
+
+        return Temperature.ICY;
     }
 
     static getHumidityAt(blockSource: BlockSource, x: number, y: number, z: number) {
-        const biomeId = blockSource.getBiome(x, z);
-        return this.humidityByBiome[biomeId] ?? Humidity.NORMAL;
-    }
-
-    static setBiomesHumidity(value: Humidity, ...biomesId: number[]) {
-        for (const id of biomesId) {
-            this.humidityByBiome[id] = value;
+        const downfall = blockSource.getBiomeDownfallAt(x, y, z);
+        if (downfall > .85) {
+            return Humidity.DAMP;
+        } else if (downfall >= .3) {
+            return Humidity.NORMAL;
         }
+
+        return Humidity.ARID;
     }
 
     static addHellishBiomes(...biomesId: number[]) {
@@ -67,5 +66,3 @@ class ClimateUtil {
 }
 
 ClimateUtil.addHellishBiomes(8, 178, 179, 180, 181);
-ClimateUtil.setBiomesHumidity(Humidity.DAMP, 149, 6, 134, 21);
-ClimateUtil.setBiomesHumidity(Humidity.ARID, 2, 8, 130);
