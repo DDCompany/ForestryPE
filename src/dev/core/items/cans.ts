@@ -1,18 +1,21 @@
 IDRegistry.genItemID("can");
 Item.createItem("can", "forestry.item.can", {name: "can"});
+Item.addCreativeGroup("cans", t(`forestry.creative_group.cans`), [ItemID.can]);
 
 IDRegistry.genItemID("capsuleWax");
 Item.createItem("capsuleWax", "forestry.item.wax_capsule", {name: "capsuleWax"});
+Item.addCreativeGroup("wax_capsules", t(`forestry.creative_group.wax_capsules`), [ItemID.capsuleWax]);
 
 IDRegistry.genItemID("capsuleRefractory");
 Item.createItem("capsuleRefractory", "forestry.item.refractory_capsule", {name: "capsuleRefractory"});
+Item.addCreativeGroup("refractory_capsules", t(`forestry.creative_group.refractory_capsules`), [ItemID.capsuleRefractory]);
 
 Callback.addCallback("PreLoaded", () => {
     let i = 1; //0 is empty capsule textures
     for (const key in LiquidRegistry.liquids) {
         const capitalizedKey = capitalize(key);
         const liquidName = capitalize(t(LiquidRegistry.liquids[key].name));
-        [["can", "can", "cans"], ["capsuleWax", "wax_capsule", "wax_capsules"],
+        [["can", "can", "cans"], ["capsuleWax", "wax_capsules", "wax_capsules"],
             ["capsuleRefractory", "refractory_capsule", "refractory_capsules"]]
             .map(([prefix, locale, textureDir]) => {
                 TextureBakery.create({
@@ -35,6 +38,8 @@ Callback.addCallback("PreLoaded", () => {
 
                 Item.registerNameOverrideFunction(id, (item, translation) =>
                     `${translation}\n${Native.Color.GRAY}${liquidName}`);
+
+                Item.addCreativeGroup(textureDir, t(`forestry.creative_group.${textureDir}`), [ItemID[id]]);
             });
         i++;
     }
