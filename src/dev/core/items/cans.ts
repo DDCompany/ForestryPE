@@ -12,10 +12,11 @@ Callback.addCallback("PreLoaded", () => {
     for (const key in LiquidRegistry.liquids) {
         const capitalizedKey = capitalize(key);
         const liquidName = capitalize(t(LiquidRegistry.liquids[key].name));
-        [["can", "can"], ["capsuleWax", "wax_capsule"], ["capsuleRefractory", "refractory_capsule"]]
-            .map(([prefix, locale]) => {
+        [["can", "can", "cans"], ["capsuleWax", "wax_capsule", "wax_capsules"],
+            ["capsuleRefractory", "refractory_capsule", "refractory_capsules"]]
+            .map(([prefix, locale, textureDir]) => {
                 TextureBakery.create({
-                    path: `items-opaque/capsules/${prefix}_${i}`,
+                    path: `items-opaque/${textureDir}/${prefix}_${i}`,
                     layers: [
                         {
                             bitmap: LiquidRegistry.getLiquidUIBitmap(key, 16, 16),

@@ -62,6 +62,10 @@
     {
       "source": "src/assets/langs/*",
       "targetDir": "./langs"
+    },
+    {
+      "source": "src/assets/overlays/*",
+      "targetDir": "./overlays"
     }
   ]
 }
