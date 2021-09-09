@@ -33,22 +33,22 @@ Translation.addTranslation("Ash Bricks", {ru: "Кирпичи из золы",pt:
 Translation.addTranslation("Block of Apatite", {ru: "Апатитовый блок",pt: "bloco de apatite"});
 
 //Other
-Translation.addTranslation("Ash", {ru: "Пепел"});
+Translation.addTranslation("Ash", {ru: "Пепел",pt: "cinza"});
 Translation.addTranslation("Mulch", {ru: "Мульча"});
 Translation.addTranslation("Wood Pulp", {ru: "Древесная масса"});
-Translation.addTranslation("Carton", {ru: "Картон"});
-Translation.addTranslation("Pickaxe Kit", {ru: "Сборная кирка"});
-Translation.addTranslation("Shovel Kit", {ru: "Сборная лопата"});
-Translation.addTranslation("Fertilizer", {ru: "Минеральное удобрение"});
-Translation.addTranslation("Apatite", {ru: "Апатит"});
+Translation.addTranslation("Carton", {ru: "Картон",pt: "cartão"});
+Translation.addTranslation("Pickaxe Kit", {ru: "Сборная кирка",pt: "conjunto de picareta"});
+Translation.addTranslation("Shovel Kit", {ru: "Сборная лопата",pt: "conjunto de pá"});
+Translation.addTranslation("Fertilizer", {ru: "Минеральное удобрение",pt: "fertilizador"});
+Translation.addTranslation("Apatite", {ru: "Апатит",pt: "apatite"});
 Translation.addTranslation("Mouldy Wheat", {ru: "Плесневелая пшеница"});
 Translation.addTranslation("Decaying Wheat", {ru: "Загнивающая пшеница"});
 Translation.addTranslation("Bog Earth", {ru: "Болотная земля"});
 Translation.addTranslation("Humus", {ru: "Гумус"});
 Translation.addTranslation("Peat", {ru: "Торф"});
 Translation.addTranslation("Bituminous Peat", {ru: "Смолистый торф"});
-Translation.addTranslation("Compost", {ru: "Компост"});
-Translation.addTranslation("Survivalist's Pickaxe", {ru: "Кирка выживающего"});
-Translation.addTranslation("Survivalist's Shovel", {ru: "Лопата выживающего"});
-Translation.addTranslation("Broken Pickaxe", {ru: "Сломанная кирка"});
-Translation.addTranslation("Broken Shovel", {ru: "Сломанная лопата"});
+Translation.addTranslation("Compost", {ru: "Компост",pt: "composto"});
+Translation.addTranslation("Survivalist's Pickaxe", {ru: "Кирка выживающего",pt: "picareta de sobrevivente"});
+Translation.addTranslation("Survivalist's Shovel", {ru: "Лопата выживающего",pt: "pá de sobrevivente"});
+Translation.addTranslation("Broken Pickaxe", {ru: "Сломанная кирка",pt: "picareta quebrada"});
+Translation.addTranslation("Broken Shovel", {ru: "Сломанная лопата",pt: "pá quebrada"});
