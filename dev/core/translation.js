@@ -1,20 +1,20 @@
 //Glass
-Translation.addTranslation("Black Glass", {ru: "Черное стекло"});
-Translation.addTranslation("Red Glass", {ru: "Красное стекло"});
-Translation.addTranslation("Green Glass", {ru: "Зелёное стекло"});
-Translation.addTranslation("Brown Glass", {ru: "Коричневое стекло"});
-Translation.addTranslation("Blue Glass", {ru: "Голубое стекло"});
-Translation.addTranslation("Purple Glass", {ru: "Фиолетовое стекло"});
-Translation.addTranslation("Cyan Glass", {ru: "Берюзовое стекло"});
-Translation.addTranslation("Light Gray glass", {ru: "Светло-серое стекло"});
-Translation.addTranslation("Gray Glass", {ru: "Серое стекло"});
-Translation.addTranslation("Pink Glass", {ru: "Розовое стекло"});
-Translation.addTranslation("Lime Glass", {ru: "Светло-зеленое стекло"});
-Translation.addTranslation("Yellow Glass", {ru: "Желтое стекло"});
-Translation.addTranslation("Light Blue Glass", {ru: "Светло-синее стекло"});
-Translation.addTranslation("Magenta Glass", {ru: "Пурпурное стекло"});
-Translation.addTranslation("Orange Glass", {ru: "Оранжевое стекло"});
-Translation.addTranslation("White Glass", {ru: "Белое стекло"});
+Translation.addTranslation("Black Glass", {ru: "Черное стекло",pt: "vidro preto"});
+Translation.addTranslation("Red Glass", {ru: "Красное стекло",pt: "vidro vermelho"});
+Translation.addTranslation("Green Glass", {ru: "Зелёное стекло",pt: "vidro verde"});
+Translation.addTranslation("Brown Glass", {ru: "Коричневое стекло",pt: "vidro castanho"});
+Translation.addTranslation("Blue Glass", {ru: "Голубое стекло",pt: "vidro azul"});
+Translation.addTranslation("Purple Glass", {ru: "Фиолетовое стекло",pt: "vidro roxo"});
+Translation.addTranslation("Cyan Glass", {ru: "Берюзовое стекло",pt: "vidro ciano"});
+Translation.addTranslation("Light Gray glass", {ru: "Светло-серое стекло",pt: "vidro cinzento claro"});
+Translation.addTranslation("Gray Glass", {ru: "Серое стекло",pt: "vidro cinzento"});
+Translation.addTranslation("Pink Glass", {ru: "Розовое стекло",pt: "vidro rosa"});
+Translation.addTranslation("Lime Glass", {ru: "Светло-зеленое стекло",pt: "vidro lima"});
+Translation.addTranslation("Yellow Glass", {ru: "Желтое стекло",pt: "vidro amarelo"});
+Translation.addTranslation("Light Blue Glass", {ru: "Светло-синее стекло",pt: "vidro azul claro"});
+Translation.addTranslation("Magenta Glass", {ru: "Пурпурное стекло",pt: "vidro magenta"});
+Translation.addTranslation("Orange Glass", {ru: "Оранжевое стекло",pt: "vidro laranja"});
+Translation.addTranslation("White Glass", {ru: "Белое стекло",pt: "vidro branco"});
 
 //Ores
 Translation.addTranslation("Apatite Ore", {ru: "Апатитовая руда"});
