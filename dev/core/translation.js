@@ -27,10 +27,10 @@ Translation.addTranslation("Tin Ingot", {ru: "Оловянный слиток",p
 Translation.addTranslation("Bronze Ingot", {ru: "Бронзовый слиток",pt: "barra de bronze"});
 
 //Storage
-Translation.addTranslation("Block of Charcoal", {ru: "Блок угля"});
-Translation.addTranslation("Ash Block", {ru: "Кучка золы"});
-Translation.addTranslation("Ash Bricks", {ru: "Кирпичи из золы"});
-Translation.addTranslation("Block of Apatite", {ru: "Апатитовый блок"});
+Translation.addTranslation("Block of Charcoal", {ru: "Блок угля",pt: "bloco de carvão vegetal"});
+Translation.addTranslation("Ash Block", {ru: "Кучка золы",pt: "bloco de cinza"});
+Translation.addTranslation("Ash Bricks", {ru: "Кирпичи из золы",pt: "tijolos de cinz"});
+Translation.addTranslation("Block of Apatite", {ru: "Апатитовый блок",pt: "bloco de apatite"});
 
 //Other
 Translation.addTranslation("Ash", {ru: "Пепел"});
