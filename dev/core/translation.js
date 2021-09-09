@@ -22,9 +22,9 @@ Translation.addTranslation("Copper Ore", {ru: "Медная руда",pt: "miné
 Translation.addTranslation("Tin Ore", {ru: "Оловянная руда",pt: "minério de estanho"});
 
 //Ingots
-Translation.addTranslation("Copper Ingot", {ru: "Медный слиток"});
-Translation.addTranslation("Tin Ingot", {ru: "Оловянный слиток"});
-Translation.addTranslation("Bronze Ingot", {ru: "Бронзовый слиток"});
+Translation.addTranslation("Copper Ingot", {ru: "Медный слиток",pt: "barra de cobre"});
+Translation.addTranslation("Tin Ingot", {ru: "Оловянный слиток",pt: "barra de estanho"});
+Translation.addTranslation("Bronze Ingot", {ru: "Бронзовый слиток",pt: "barra de bronze"});
 
 //Storage
 Translation.addTranslation("Block of Charcoal", {ru: "Блок угля"});
