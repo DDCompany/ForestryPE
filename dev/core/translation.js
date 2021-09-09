@@ -17,9 +17,9 @@ Translation.addTranslation("Orange Glass", {ru: "Оранжевое стекло
 Translation.addTranslation("White Glass", {ru: "Белое стекло",pt: "vidro branco"});
 
 //Ores
-Translation.addTranslation("Apatite Ore", {ru: "Апатитовая руда"});
-Translation.addTranslation("Copper Ore", {ru: "Медная руда"});
-Translation.addTranslation("Tin Ore", {ru: "Оловянная руда"});
+Translation.addTranslation("Apatite Ore", {ru: "Апатитовая руда",pt: "minério de apatite"});
+Translation.addTranslation("Copper Ore", {ru: "Медная руда",pt: "minério de cobre"});
+Translation.addTranslation("Tin Ore", {ru: "Оловянная руда",pt: "minério de estanho"});
 
 //Ingots
 Translation.addTranslation("Copper Ingot", {ru: "Медный слиток"});
