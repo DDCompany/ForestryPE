@@ -34,19 +34,19 @@ Translation.addTranslation("Block of Apatite", {ru: "Апатитовый бло
 
 //Other
 Translation.addTranslation("Ash", {ru: "Пепел",pt: "cinza"});
-Translation.addTranslation("Mulch", {ru: "Мульча"});
-Translation.addTranslation("Wood Pulp", {ru: "Древесная масса"});
+Translation.addTranslation("Mulch", {ru: "Мульча",pt: "adubo"});
+Translation.addTranslation("Wood Pulp", {ru: "Древесная масса",pt: "polpa de madeira"});
 Translation.addTranslation("Carton", {ru: "Картон",pt: "cartão"});
 Translation.addTranslation("Pickaxe Kit", {ru: "Сборная кирка",pt: "conjunto de picareta"});
 Translation.addTranslation("Shovel Kit", {ru: "Сборная лопата",pt: "conjunto de pá"});
 Translation.addTranslation("Fertilizer", {ru: "Минеральное удобрение",pt: "fertilizador"});
 Translation.addTranslation("Apatite", {ru: "Апатит",pt: "apatite"});
-Translation.addTranslation("Mouldy Wheat", {ru: "Плесневелая пшеница"});
-Translation.addTranslation("Decaying Wheat", {ru: "Загнивающая пшеница"});
-Translation.addTranslation("Bog Earth", {ru: "Болотная земля"});
-Translation.addTranslation("Humus", {ru: "Гумус"});
-Translation.addTranslation("Peat", {ru: "Торф"});
-Translation.addTranslation("Bituminous Peat", {ru: "Смолистый торф"});
+Translation.addTranslation("Mouldy Wheat", {ru: "Плесневелая пшеница",pt: "trigo mofado"});
+Translation.addTranslation("Decaying Wheat", {ru: "Загнивающая пшеница",pt: "trigo em decomposição"});
+Translation.addTranslation("Bog Earth", {ru: "Болотная земля",pt: "terra pantanosa"});
+Translation.addTranslation("Humus", {ru: "Гумус",pt: "húmus"});
+Translation.addTranslation("Peat", {ru: "Торф",pt: "turfa"});
+Translation.addTranslation("Bituminous Peat", {ru: "Смолистый торф",pt: "turfa betuminosa"});
 Translation.addTranslation("Compost", {ru: "Компост",pt: "composto"});
 Translation.addTranslation("Survivalist's Pickaxe", {ru: "Кирка выживающего",pt: "picareta de sobrevivente"});
 Translation.addTranslation("Survivalist's Shovel", {ru: "Лопата выживающего",pt: "pá de sobrevivente"});
