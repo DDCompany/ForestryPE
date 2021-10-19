@@ -6,6 +6,7 @@ interface IGenerationOptions {
     highestY: number,
     amountVeins: number
     maxVeinSize: number,
+    chance?: number;
 }
 
 function randomCoords(random: java.util.Random, chunkX: number, chunkZ: number, minY: number, maxY: number) {
@@ -17,6 +18,10 @@ function randomCoords(random: java.util.Random, chunkX: number, chunkZ: number, 
 }
 
 function generateMinable(random: java.util.Random, seed: number, options: IGenerationOptions) {
+    if (options.chance && Math.random() > options.chance) {
+        return;
+    }
+
     const {blockId, chunkZ, chunkX, lowestY, highestY, amountVeins, maxVeinSize} = options;
     for (let i = 0; i < amountVeins; i++) {
         const coords = randomCoords(random, chunkX, chunkZ, lowestY, highestY);
@@ -121,39 +126,72 @@ Callback.addCallback("PreLoaded", () => {
     Block.registerDropFunction("oreDeepslateTin", createOreDropFunction(ItemID.metalRawTin));
 });
 
-Callback.addCallback("GenerateChunk", (chunkX, chunkZ, random, seed) => {
-    const copperGen = CoreConfig.worldGen.copper;
-    generateMinable(random, seed, {
-        blockId: BlockID.oreCopper,
-        chunkX,
-        chunkZ,
-        lowestY: copperGen.lowestY,
-        highestY: copperGen.highestY,
-        amountVeins: copperGen.veins,
-        maxVeinSize: copperGen.veinSize,
+function addOreGeneration(actionName: string, options: Omit<IGenerationOptions, "chunkX" | "chunkZ">) {
+    Flags.addUniqueAction(actionName, () => {
+        Callback.addCallback("GenerateChunk", (chunkX, chunkZ, random, seed) => {
+            generateMinable(random, seed, {
+                ...options,
+                chunkZ,
+                chunkX,
+            });
+        });
     });
+}
+
+{
+    const copperGen = CoreConfig.worldGen.copper;
+    if (copperGen.enabled) {
+        addOreGeneration("oreGenCopper", {
+            blockId: BlockID.oreCopper,
+            lowestY: copperGen.lowestY,
+            highestY: copperGen.highestY,
+            amountVeins: copperGen.veins,
+            maxVeinSize: copperGen.veinSize,
+        });
+    }
 
     const tinGen = CoreConfig.worldGen.tin;
-    generateMinable(random, seed, {
-        blockId: BlockID.oreTin,
-        chunkX,
-        chunkZ,
-        lowestY: tinGen.lowestY,
-        highestY: tinGen.highestY,
-        amountVeins: tinGen.veins,
-        maxVeinSize: tinGen.veinSize,
-    });
+    if (tinGen.enabled) {
+        addOreGeneration("oreGenTin", {
+            blockId: BlockID.oreTin,
+            lowestY: tinGen.lowestY,
+            highestY: tinGen.highestY,
+            amountVeins: tinGen.veins,
+            maxVeinSize: tinGen.veinSize,
+        });
+    }
 
     const apatiteGen = CoreConfig.worldGen.apatite;
-    if (random.nextFloat() < apatiteGen.chance) {
-        generateMinable(random, seed, {
+    if (apatiteGen.enabled) {
+        addOreGeneration("oreGenApatite", {
             blockId: BlockID.oreApatite,
-            chunkX,
-            chunkZ,
             lowestY: apatiteGen.lowestY,
             highestY: apatiteGen.highestY,
+            chance: apatiteGen.chance,
             maxVeinSize: apatiteGen.veinSize,
             amountVeins: 1,
         });
     }
-});
+
+    const deepslateCopper = CoreConfig.worldGen.deepslateCopper;
+    if (deepslateCopper.enabled) {
+        addOreGeneration("oreGenDeepslateCopper", {
+            blockId: BlockID.oreDeepslateCopper,
+            lowestY: deepslateCopper.lowestY,
+            highestY: deepslateCopper.highestY,
+            maxVeinSize: deepslateCopper.veinSize,
+            amountVeins: deepslateCopper.veins,
+        });
+    }
+
+    const deepslateTin = CoreConfig.worldGen.deepslateTin;
+    if (deepslateTin.enabled) {
+        addOreGeneration("oreGenDeepslateTin", {
+            blockId: BlockID.oreDeepslateTin,
+            lowestY: deepslateTin.lowestY,
+            highestY: deepslateTin.highestY,
+            maxVeinSize: deepslateTin.veinSize,
+            amountVeins: deepslateTin.veins,
+        });
+    }
+}

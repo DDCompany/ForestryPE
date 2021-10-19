@@ -15,6 +15,20 @@ class CoreConfig {
             veins: +__config__.getNumber("core.worldGen.tin.veins"),
             veinSize: +__config__.getNumber("core.worldGen.tin.veinSize"),
         },
+        deepslateCopper: {
+            enabled: __config__.getBool("core.worldGen.deepslateCopper.enabled"),
+            lowestY: +__config__.getNumber("core.worldGen.deepslateCopper.lowestY"),
+            highestY: +__config__.getNumber("core.worldGen.deepslateCopper.highestY"),
+            veins: +__config__.getNumber("core.worldGen.deepslateCopper.veins"),
+            veinSize: +__config__.getNumber("core.worldGen.deepslateCopper.veinSize"),
+        },
+        deepslateTin: {
+            enabled: __config__.getBool("core.worldGen.deepslateTin.enabled"),
+            lowestY: +__config__.getNumber("core.worldGen.deepslateTin.lowestY"),
+            highestY: +__config__.getNumber("core.worldGen.deepslateTin.highestY"),
+            veins: +__config__.getNumber("core.worldGen.deepslateTin.veins"),
+            veinSize: +__config__.getNumber("core.worldGen.deepslateTin.veinSize"),
+        },
         apatite: {
             enabled: __config__.getBool("core.worldGen.apatite.enabled"),
             lowestY: +__config__.getNumber("core.worldGen.apatite.lowestY"),

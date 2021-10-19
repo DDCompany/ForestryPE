@@ -22,6 +22,7 @@
  */
 
 IMPORT("ToolLib");
+IMPORT("flags");
 
 function random(min: number, max?: number) {
     if (max === undefined) {
@@ -77,6 +78,6 @@ if (typeof Object.assign !== 'function') {
             return to;
         },
         writable: true,
-        configurable: true
+        configurable: true,
     });
 }

@@ -9,12 +9,26 @@
         "veins": 20,
         "veinSize": 8
       },
+      "deepslateCopper": {
+        "enabled": true,
+        "lowestY": 2,
+        "highestY": 16,
+        "veins": 3,
+        "veinSize": 4
+      },
       "tin": {
         "enabled": true,
         "lowestY": 16,
         "highestY": 107,
         "veins": 18,
         "veinSize": 8
+      },
+      "deepslateTin": {
+        "enabled": true,
+        "lowestY": 2,
+        "highestY": 16,
+        "veins": 4,
+        "veinSize": 4
       },
       "apatite": {
         "enabled": true,
