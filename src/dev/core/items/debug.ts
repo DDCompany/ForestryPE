@@ -16,3 +16,23 @@ Item.registerUseFunction("debugForestryClimate", ({x, y, z}, item, block, player
     Debug.message(`Temperature: ${temperature} / ${blockSource.getBiomeTemperatureAt(x, y, z).toFixed(2)}`);
     Debug.message(splitter);
 });
+
+IDRegistry.genItemID("debugForestryChunkGen");
+Item.createItem("debugForestryChunkGen", "forestry.item.debug_chunk_gen", {name: "stick"});
+
+Item.registerUseFunction("debugForestryChunkGen", ({x, y, z}, item, block, player) => {
+    const blockSource = BlockSource.getDefaultForActor(player);
+    const chunkX = Math.floor(x / 16) * 16;
+    const chunkZ = Math.floor(z / 16) * 16;
+
+    for (let xx = chunkX; xx < chunkX + 16; xx++) {
+        for (let zz = chunkZ; zz < chunkZ + 16; zz++) {
+            for (let yy = y; yy > 2; yy--) {
+                const blockId = blockSource.getBlockId(xx, yy, zz);
+                if (blockId && Block.isNativeTile(blockId)) {
+                    blockSource.setBlock(xx, yy, zz, 0, 0);
+                }
+            }
+        }
+    }
+});

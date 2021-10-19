@@ -35,7 +35,7 @@ Callback.addCallback("PreLoaded", () => {
     Recipes.addShapeless({id: ItemID.ingotTin, count: 9, data: 0}, [{id: BlockID.blockTin, data: 0}]);
     Recipes.addShapeless({id: ItemID.ingotBronze, count: 9, data: 0}, [{id: BlockID.blockBronze, data: 0}]);
 
-    if (ForestryConfig.craftingBronzeEnabled) {
+    if (CoreConfig.craftingBronzeEnabled) {
         Recipes.addShapeless({id: ItemID.ingotBronze, count: 4, data: 0},
             [{id: ItemID.ingotTin, data: 0}, {id: ItemID.ingotCopper, data: 0}, {id: ItemID.ingotCopper, data: 0},
                 {id: ItemID.ingotCopper, data: 0}]);

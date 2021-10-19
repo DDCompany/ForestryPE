@@ -1,3 +1,31 @@
+interface IGenerationOptions {
+    blockId: number,
+    chunkX: number,
+    chunkZ: number,
+    lowestY: number,
+    highestY: number,
+    amountVeins: number
+    maxVeinSize: number,
+}
+
+function randomCoords(random: java.util.Random, chunkX: number, chunkZ: number, minY: number, maxY: number) {
+    return {
+        x: chunkX * 16 + random.nextInt(16),
+        y: minY + random.nextInt(maxY - minY),
+        z: chunkZ * 16 + random.nextInt(16),
+    };
+}
+
+function generateMinable(random: java.util.Random, seed: number, options: IGenerationOptions) {
+    const {blockId, chunkZ, chunkX, lowestY, highestY, amountVeins, maxVeinSize} = options;
+    for (let i = 0; i < amountVeins; i++) {
+        const coords = randomCoords(random, chunkX, chunkZ, lowestY, highestY);
+        const veinSize = 1 + random.nextInt(maxVeinSize);
+        GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, veinSize, false,
+            seed);
+    }
+}
+
 function createOreDropFunction(rawMetalId: number): Block.DropFunction {
     assert(rawMetalId, "Metal Id must be valid item");
     return (coords, id, data, level, enchant) => {
@@ -91,4 +119,41 @@ Callback.addCallback("PreLoaded", () => {
     Block.registerDropFunction("oreDeepslateCopper", createOreDropFunction(ItemID.metalRawCopper));
     Block.registerDropFunction("oreTin", createOreDropFunction(ItemID.metalRawTin));
     Block.registerDropFunction("oreDeepslateTin", createOreDropFunction(ItemID.metalRawTin));
+});
+
+Callback.addCallback("GenerateChunk", (chunkX, chunkZ, random, seed) => {
+    const copperGen = CoreConfig.worldGen.copper;
+    generateMinable(random, seed, {
+        blockId: BlockID.oreCopper,
+        chunkX,
+        chunkZ,
+        lowestY: copperGen.lowestY,
+        highestY: copperGen.highestY,
+        amountVeins: copperGen.veins,
+        maxVeinSize: copperGen.veinSize,
+    });
+
+    const tinGen = CoreConfig.worldGen.tin;
+    generateMinable(random, seed, {
+        blockId: BlockID.oreTin,
+        chunkX,
+        chunkZ,
+        lowestY: tinGen.lowestY,
+        highestY: tinGen.highestY,
+        amountVeins: tinGen.veins,
+        maxVeinSize: tinGen.veinSize,
+    });
+
+    const apatiteGen = CoreConfig.worldGen.apatite;
+    if (random.nextFloat() < apatiteGen.chance) {
+        generateMinable(random, seed, {
+            blockId: BlockID.oreApatite,
+            chunkX,
+            chunkZ,
+            lowestY: apatiteGen.lowestY,
+            highestY: apatiteGen.highestY,
+            maxVeinSize: apatiteGen.veinSize,
+            amountVeins: 1,
+        });
+    }
 });

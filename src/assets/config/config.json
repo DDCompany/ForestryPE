@@ -1,3 +1,28 @@
 {
-  "craftingBronzeEnabled": true
+  "craftingBronzeEnabled": true,
+  "core": {
+    "worldGen": {
+      "copper": {
+        "enabled": true,
+        "lowestY": 32,
+        "highestY": 107,
+        "veins": 20,
+        "veinSize": 8
+      },
+      "tin": {
+        "enabled": true,
+        "lowestY": 16,
+        "highestY": 107,
+        "veins": 18,
+        "veinSize": 8
+      },
+      "apatite": {
+        "enabled": true,
+        "lowestY": 50,
+        "highestY": 247,
+        "chance": 0.8,
+        "veinSize": 36
+      }
+    }
+  }
 }

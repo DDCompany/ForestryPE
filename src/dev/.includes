@@ -1,7 +1,7 @@
 header.ts
 ForestryConfig.ts
 
-core/ForestryConfig.ts
+core/CoreConfig.ts
 core/I18N.ts
 core/IChancedItem.ts
 core/fluids.ts
