@@ -34,6 +34,25 @@ Block.createBlock("blockApatite", [
 Block.setBlockMaterial("blockApatite", "stone", 1);
 Block.setDestroyLevel("blockApatite", 1);
 
+IDRegistry.genBlockID("blockRawCopper");
+Block.createBlock("blockRawCopper", [
+    {name: `forestry.block.raw_copper_block`, texture: [["blockRawCopper", 0]], inCreative: true},
+], "forestry_storage");
+Block.setBlockMaterial("blockRawCopper", "stone", 1);
+Block.setDestroyLevel("blockRawCopper", 1);
+
+IDRegistry.genBlockID("blockRawTin");
+Block.createBlock("blockRawTin", [
+    {name: `forestry.block.raw_tin_block`, texture: [["blockRawTin", 0]], inCreative: true},
+], "forestry_storage");
+Block.setBlockMaterial("blockRawTin", "stone", 1);
+Block.setDestroyLevel("blockRawTin", 1);
+
+Item.addCreativeGroup("blockRaw", t("forestry.creative_group.raw_blocks"), [
+    BlockID.blockRawCopper,
+    BlockID.blockRawTin,
+]);
+
 Item.addCreativeGroup("blockMetal", t("forestry.creative_group.metal_blocks"), [
     BlockID.blockCopper,
     BlockID.blockTin,
@@ -45,27 +64,18 @@ Item.addCreativeGroup("blockGems", t("forestry.creative_group.gem_blocks"), [
 ]);
 
 Callback.addCallback("PreLoaded", () => {
-    Recipes.addShaped({id: BlockID.blockApatite, count: 1, data: 0}, [
-        "AAA",
-        "AAA",
-        "AAA",
-    ], ['A', ItemID.apatite, 0]);
+    function createPackRecipe(resultId: number, sourceId: number) {
+        Recipes.addShaped({id: resultId, count: 1, data: 0}, [
+            "AAA",
+            "AAA",
+            "AAA",
+        ], ['A', sourceId, 0]);
+    }
 
-    Recipes.addShaped({id: BlockID.blockCopper, count: 1, data: 0}, [
-        "AAA",
-        "AAA",
-        "AAA",
-    ], ['A', ItemID.ingotCopper, 0]);
-
-    Recipes.addShaped({id: BlockID.blockTin, count: 1, data: 0}, [
-        "AAA",
-        "AAA",
-        "AAA",
-    ], ['A', ItemID.ingotTin, 0]);
-
-    Recipes.addShaped({id: BlockID.blockBronze, count: 1, data: 0}, [
-        "AAA",
-        "AAA",
-        "AAA",
-    ], ['A', ItemID.ingotBronze, 0]);
+    createPackRecipe(BlockID.blockApatite, ItemID.apatite);
+    createPackRecipe(BlockID.blockCopper, ItemID.ingotCopper);
+    createPackRecipe(BlockID.blockTin, ItemID.ingotTin);
+    createPackRecipe(BlockID.blockBronze, ItemID.ingotBronze);
+    createPackRecipe(BlockID.blockRawCopper, ItemID.metalRawCopper);
+    createPackRecipe(BlockID.blockRawTin, ItemID.metalRawTin);
 });

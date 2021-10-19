@@ -17,13 +17,18 @@ Item.addCreativeGroup("ingot", t("forestry.creative_group.ingots"), [
 ]);
 
 Item.addCreativeGroup("gems", t("forestry.creative_group.gems"), [
-    ItemID.apatite
+    ItemID.apatite,
 ]);
 
 Callback.addCallback("PreLoaded", () => {
+    Recipes.addFurnace(ItemID.metalRawCopper, ItemID.ingotCopper, 0);
+    Recipes.addFurnace(ItemID.metalRawTin, ItemID.ingotTin, 0);
+
     Recipes.addFurnace(BlockID.oreApatite, ItemID.apatite, 0);
     Recipes.addFurnace(BlockID.oreCopper, ItemID.ingotCopper, 0);
+    Recipes.addFurnace(BlockID.oreDeepslateCopper, ItemID.ingotCopper, 0);
     Recipes.addFurnace(BlockID.oreTin, ItemID.ingotTin, 0);
+    Recipes.addFurnace(BlockID.oreDeepslateTin, ItemID.ingotTin, 0);
 
     Recipes.addShapeless({id: ItemID.apatite, count: 9, data: 0}, [{id: BlockID.blockApatite, data: 0}]);
     Recipes.addShapeless({id: ItemID.ingotCopper, count: 9, data: 0}, [{id: BlockID.blockCopper, data: 0}]);
