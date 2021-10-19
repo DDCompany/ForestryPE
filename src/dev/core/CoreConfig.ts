@@ -1,5 +1,4 @@
 class CoreConfig {
-    static readonly craftingBronzeEnabled = __config__.getBool("craftingBronzeEnabled");
     static readonly worldGen = {
         copper: {
             enabled: __config__.getBool("core.worldGen.copper.enabled"),
@@ -36,5 +35,8 @@ class CoreConfig {
             chance: +__config__.getNumber("core.worldGen.apatite.chance"),
             veinSize: +__config__.getNumber("core.worldGen.apatite.veinSize"),
         },
+    };
+    static readonly recipes = {
+        bronze: __config__.getBool("core.recipes.bronze"),
     };
 }

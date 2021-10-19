@@ -1,5 +1,4 @@
 {
-  "craftingBronzeEnabled": true,
   "core": {
     "worldGen": {
       "copper": {
@@ -37,6 +36,9 @@
         "chance": 0.8,
         "veinSize": 36
       }
+    },
+    "recipes": {
+      "bronze": true
     }
   }
 }
