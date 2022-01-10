@@ -91,7 +91,7 @@ function BeeHouse(tile, slots, houseModifierList) {
                 this.error = Translation.translate("apiary.error.climate");
             } else if (!this.queen.isValidHumidity(this.getHumidity())) {
                 this.error = Translation.translate("apiary.error.humidity");
-            } else if (!GenerationUtils.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z) && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
+            } else if (!this.canSeeSky() && !modifiersList.isSelfLighted() && !this.houseModifierList.isSelfLighted() && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
                 this.error = Translation.translate("apiary.error.sky");
             } else if (World.getWeather().rain > 0 && !modifiersList.isSealed() && !houseModifierList.isSealed() && !this.queen.getActiveChromosome("TOLERATES_RAIN")) {
                 this.error = Translation.translate("apiary.error.rain");
@@ -130,6 +130,10 @@ function BeeHouse(tile, slots, houseModifierList) {
     };
 
     //Функции для перегрузки
+
+    this.canSeeSky = function () {
+        return GenerationUtils.canSeeSky(this.tile.x, this.tile.y + 1, this.tile.z);
+    };
 
     this.getPrincessSlot = function (slotname) {
         return this.getContainer().getSlot(slotname);

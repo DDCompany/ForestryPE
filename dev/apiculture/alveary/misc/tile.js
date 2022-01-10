@@ -47,6 +47,10 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
                 this.house.getClimate = function () {
                     return self.climate;
                 };
+
+                this.house.canSeeSky = function () {
+                    return GenerationUtils.canSeeSky(self.x, self.y + 2, self.z);
+                };
             }
 
             var Modifiers = new ModifierList([]);
