@@ -1,1 +1,4 @@
-.idea/
+toolchain/bin/.gradle
+toolchain/build
+toolchain/temp
+toolchain/ndk

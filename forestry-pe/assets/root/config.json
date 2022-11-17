@@ -1,0 +1,57 @@
+{
+  "enabled": true,
+  "crateEnabled": true,
+  "reusableCapsules": true,
+  "gen": {
+    "tin": {
+      "enabled": true,
+      "maxY": 91,
+      "inChunk": 18,
+      "minY": 16,
+      "size": 6
+    },
+    "apatite": {
+      "enabled": true,
+      "maxY": 247,
+      "minY": 50,
+      "size": 126
+    },
+    "beehives": {
+      "tropical": 0.06,
+      "meadows": 0.01,
+      "forest": 0.03,
+      "debug": false,
+      "wintry": 0.2,
+      "ender": 0.02,
+      "modest": 0.01,
+      "marshy": 0.2
+    },
+    "copper": {
+      "enabled": true,
+      "maxY": 107,
+      "inChunk": 20,
+      "minY": 10,
+      "size": 6
+    }
+  },
+  "recipes": {
+    "bronzeIngot": true
+  },
+  "blocks": {
+    "oresEnabled": true,
+    "glassEnabled": true,
+    "combsEnabled": true
+  },
+  "beekeeping": {
+    "hiveDamageOnAttack": true,
+    "hiveDamageOnPeaceful": true,
+    "secondPrincessChance": 0,
+    "mode": 1
+  },
+  "machines": {
+    "rainTank": false
+  },
+  "particles": {
+    "beeHives": true
+  }
+}

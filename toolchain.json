@@ -1,0 +1,18 @@
+{
+	"debugAbi": "armeabi-v7a",
+	"abis": [
+		"armeabi-v7a",
+		"x86"
+	],
+	"linkNative": [
+		"minecraftpe",
+		"innercore",
+		"nativejs"
+	],
+	"debugIncludesExclude": [],
+	"projectLocations": [],
+	"workspaceFile": "toolchain.code-workspace",
+	"denyJavaScript": true,
+	"currentProject": "forestry-pe",
+	"devices": []
+}
