@@ -57,7 +57,7 @@
                     8: {id: woodId, data: j}
                 },
                 liquid: "seedOil",
-                liquidAmount: 1,
+                liquidAmount: 0.25,
                 time: 50,
                 result: {
                     id: ItemID.impregnatedCasing,
@@ -69,7 +69,7 @@
             CarpenterManager.registerRecipe({
                 input: {4: {id: woodId, data: j}, 7: {id: woodId, data: j}},
                 liquid: "seedOil",
-                liquidAmount: 0.01,
+                liquidAmount: 0.1,
                 time: 10,
                 result: {
                     id: ItemID.stickImpregnated,
@@ -93,6 +93,8 @@ CarpenterManager.registerRecipe({
         7: {id: 264, data: 0},
         8: {id: 331, data: 0}
     },
+    liquid: "water",
+    liquidAmount: 2,
     result: {
         id: ItemID.analyzer,
         count: 1,
