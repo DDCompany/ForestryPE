@@ -1,31 +1,36 @@
 setLoadingTip("Energy Module Loading...");
 
-const BioGeneratorManager = {
-    fuel: [],
+interface BioGeneratorFuel {
+    fluid: string;
 
-    addFuel: function (fluid, fuel) {
-        fuel.fluid = fluid;
-        this.fuel.push(fuel);
-    },
+    energy: number;
 
-    getFuel: function (fluid) {
-        return this.fuel
-            .find(function (fuel) {
-                return fuel.fluid === fluid
-            });
-    },
+    ticks: number;
+}
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeFuelRecipes(list) {
-            return list.map(function (recipe) {
-                return {
-                    input: [],
-                    output: [],
-                    totalEnergy: recipe.ticks * recipe.energy,
-                    burnTime: recipe.ticks,
-                    fluid: recipe.fluid
-                };
-            });
+class BioGeneratorManager {
+    static readonly fuel: BioGeneratorFuel[] = [];
+
+    static addFuel(fluid: string, fuel: Omit<BioGeneratorFuel, "fluid">) {
+        this.fuel.push({
+            ...fuel,
+            fluid
+        });
+    }
+
+    static getFuel(fluid: string): BioGeneratorFuel | undefined {
+        return this.fuel.find(fuel => fuel.fluid === fluid);
+    }
+
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeFuelRecipes(list: BioGeneratorFuel[]) {
+            return list.map(recipe => ({
+                input: [],
+                output: [],
+                totalEnergy: recipe.ticks * recipe.energy,
+                burnTime: recipe.ticks,
+                fluid: recipe.fluid
+            }));
         }
 
         api.registerRecipeType("fpe_bio_generator_fuel", {
@@ -55,14 +60,14 @@ const BioGeneratorManager = {
                     textBurnTime: {type: "text", x: 435, y: 235, font: {size: 30}},
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.biogenerator)
                         return bakeFuelRecipes(BioGeneratorManager.fuel);
                     else {
-                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                         if (empty) {
-                            let recipe = BioGeneratorManager.getFuel(empty.liquid);
+                            const recipe = BioGeneratorManager.getFuel(empty.liquid);
                             if (recipe)
                                 return bakeFuelRecipes([recipe]);
                         }
@@ -72,8 +77,8 @@ const BioGeneratorManager = {
                 return [];
             },
 
-            onOpen: function (elements, data) {
-                let scaleFluid = elements.get("scaleFluid");
+            onOpen(elements, data) {
+                const scaleFluid = elements.get("scaleFluid");
 
                 elements.get("textTotalEnergy")
                     .onBindingUpdated("text", "Total Energy: " + data.totalEnergy);
@@ -86,4 +91,4 @@ const BioGeneratorManager = {
             }
         });
     }
-};
+}

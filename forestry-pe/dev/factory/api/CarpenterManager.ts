@@ -1,78 +1,84 @@
 setLoadingTip("Factory Module Loading...");
 
-const CarpenterManager = {
-    recipes: [],
+interface CarpenterRecipe {
+    input: Record<number, SingleRecipeItem>;
 
-    registerRecipe: function (recipe) {
-        let input = recipe.input;
+    special?: { id: number, data: number, count?: number, dec: boolean };
+
+    liquid?: string;
+
+    liquidAmount?: number;
+
+    result: RecipeItem;
+
+    time?: number;
+}
+
+class CarpenterManager {
+    static readonly recipes: CarpenterRecipe[] = [];
+
+    static registerRecipe(recipe: CarpenterRecipe) {
+        const input = recipe.input;
         if (!input) {
             summonException("Input is not correct! (Carpenter Recipe Registration)");
             return;
         }
 
-        let result = recipe.result;
+        const result = recipe.result;
         if (!result || result.id <= 0) {
             summonException("Result is not correct! (Carpenter Recipe Registration)");
             return;
         }
 
         this.recipes.push(recipe);
-    },
+    }
 
-    getRecipe: function (pattern) {
-        return this.recipes
-            .find(function (recipe) {
-                for (let k = 0; k < 9; k++) {
-                    let recipePattern = recipe.input[k] || {id: 0, data: 0};
-                    let input = pattern[k] || {id: 0, data: 0};
+    static getRecipe(pattern: ItemInstance[]): CarpenterRecipe | undefined {
+        return this.recipes.find(recipe => {
+            for (let k = 0; k < 9; k++) {
+                const recipePattern = recipe.input[k] || {id: 0, data: 0};
+                const input = pattern[k] || {id: 0, data: 0};
 
-                    if (!ContainerHelper.equals(recipePattern, input))
-                        return false;
-                }
+                if (!ContainerHelper.equals(recipePattern, input))
+                    return false;
+            }
 
-                return true;
-            });
-    },
+            return true;
+        });
+    }
 
-    getRecipesByIngredient: function (id, data) {
-        let ingredient = {id: id, data: data || 0};
-        return this.recipes
-            .filter(function (recipe) {
-                const input = recipe.input;
-                for (let key in input) {
-                    let item = input[key];
-                    if (ContainerHelper.equals(item, ingredient))
-                        return true;
-                }
+    static getRecipesByIngredient(id: number, data: number = 0): CarpenterRecipe[] {
+        const ingredient = {id, data};
+        return this.recipes.filter(recipe => {
+            const input = recipe.input;
+            for (const key in input) {
+                const item = input[key];
+                if (ContainerHelper.equals(item, ingredient))
+                    return true;
+            }
 
-                return false;
-            })
-    },
+            return false;
+        });
+    }
 
-    getRecipesByLiquid: function (liquid) {
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.liquid === liquid
-            })
-    },
+    static getRecipesByLiquid(liquid: string): CarpenterRecipe[] {
+        return this.recipes.filter(recipe => recipe.liquid === liquid)
+    }
 
-    getRecipesByResult: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .filter(function (recipe) {
-                return ContainerHelper.equals(item, recipe.result);
-            });
-    },
+    static getRecipesByResult(id: number, data: number = 0): CarpenterRecipe[] {
+        const item = {id, data};
+        return this.recipes.filter(recipe => ContainerHelper.equals(item, recipe.result));
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeCarpenterRecipes(recipes) {
-            return recipes.map(function (recipe) {
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeCarpenterRecipes(recipes: any[]) {
+            return recipes.map(recipe => {
                 const result = recipe.result;
                 const input = [];
                 for (let i = 0; i < 9; i++) {
-                    let item = recipe.input[i];
+                    const item = recipe.input[i];
                     if (item)
-                        input.push({id: item.id, data: item.data, count: 1});
+                        input.push({id: item.id, data: item.data || 0, count: 1});
                     else input.push({id: 0, data: 0, count: 0})
                 }
 
@@ -82,7 +88,7 @@ const CarpenterManager = {
                 }
 
                 return {
-                    input: input,
+                    input,
                     output: [{id: result.id, data: result.data || 0, count: result.count || 1}],
                     liquid: recipe.liquid,
                     liquidAmount: recipe.liquidAmount,
@@ -121,13 +127,13 @@ const CarpenterManager = {
                     textLiquid: {type: "text", x: 730, y: 30, font: {size: 30}, multiline: true}
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.carpenter) {
                         return bakeCarpenterRecipes(CarpenterManager.recipes);
                     } else {
                         let recipes = bakeCarpenterRecipes(CarpenterManager.getRecipesByIngredient(id, data));
-                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                         if (empty)
                             recipes = recipes.concat(bakeCarpenterRecipes(CarpenterManager.getRecipesByLiquid(empty.liquid)));
 
@@ -138,11 +144,11 @@ const CarpenterManager = {
                 }
             },
 
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 if (!data) return;
 
-                let scaleLiquid = elements.get("scaleLiquid");
-                let textLiquid = elements.get("textLiquid");
+                const scaleLiquid = elements.get("scaleLiquid");
+                const textLiquid = elements.get("textLiquid");
 
                 scaleLiquid.onBindingUpdated("texture",
                     LiquidRegistry.getLiquidUITexture(data.liquid, 16, 58));
@@ -190,7 +196,7 @@ const CarpenterManager = {
                     output0: {type: "slot", x: 790, y: 290, size: 90},
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage)
                     if (id === BlockID.fabricator) {
                         return bakeCarpenterRecipes(FabricatorManager.recipes);
@@ -198,12 +204,12 @@ const CarpenterManager = {
                 else return bakeCarpenterRecipes(FabricatorManager.getRecipesByResult(id, data));
             },
 
-            onOpen: function (elements) {
+            onOpen(elements) {
                 const glass =
                     FabricatorManager.smeltingList[Math.round(Math.random() * FabricatorManager.smeltingList.length)].input;
-                let slotGlass = elements.get("slotGlass");
+                const slotGlass = elements.get("slotGlass");
                 slotGlass.onBindingUpdated("source", {id: glass.id, count: 1, data: glass.data});
             }
         })
     }
-};
+}

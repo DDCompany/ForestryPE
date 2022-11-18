@@ -14,5 +14,8 @@
 	"workspaceFile": "toolchain.code-workspace",
 	"denyJavaScript": true,
 	"currentProject": "forestry-pe",
-	"devices": []
+	"devices": [
+		"RF8NB0LGT5J"
+	],
+	"pushTo": "/storage/emulated/0/games/horizon/packs/Inner_Core/innercore"
 }

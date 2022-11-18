@@ -12,21 +12,17 @@ const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
 const Dimension = Native.Dimension;
-const COMBS = [];
+const COMBS: number[] = [];
 
-function log(msg, tag) {
+function log(msg: string, tag: string) {
     Logger.Log("[" + LOG_TAG + "] " + msg, tag);
 }
 
-function summonException(msg) {
-    throw new function () {
-        this.toString = function () {
-            return msg;
-        }
-    };
+function summonException(msg: string): never {
+    throw new Error(msg);
 }
 
-Object.values = function (obj) {
+function values<T>(obj: Record<string, T>): T[] {
     let result = [], key;
 
     for (key in obj) {
@@ -36,4 +32,28 @@ Object.values = function (obj) {
     }
 
     return result;
-};
+}
+
+interface ChancedRecipeItem {
+    id: number;
+
+    data?: number;
+
+    count?: number;
+
+    chance?: number;
+}
+
+interface RecipeItem {
+    id: number;
+
+    data?: number;
+
+    count?: number;
+}
+
+interface SingleRecipeItem {
+    id: number;
+
+    data?: number;
+}

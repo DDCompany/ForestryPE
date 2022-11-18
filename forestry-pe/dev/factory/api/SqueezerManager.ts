@@ -1,9 +1,24 @@
-const SqueezerManager = {
-    recipes: [],
+interface SqueezerRecipe {
+    input: RecipeItem[];
 
-    registerRecipe: function (recipe) {
-        let input = recipe.input;
+    special?: ChancedRecipeItem;
 
+    liquid: string;
+
+    liquidAmount: number;
+
+    time: number;
+}
+
+type SqueezerRecipeTemplate = Omit<SqueezerRecipe, "time"> & {
+    time?: number;
+};
+
+class SqueezerManager {
+    static readonly recipes: SqueezerRecipe[] = [];
+
+    static registerRecipe(recipe: SqueezerRecipeTemplate) {
+        const input = recipe.input;
         if (!input) {
             summonException("Input is not correct! (Squeezer Recipe Registration)");
             return;
@@ -19,51 +34,45 @@ const SqueezerManager = {
             return;
         }
 
-        recipe.time = recipe.time || 10;
-
-        for (let i in input) {
-            let item = input[i];
+        for (const i in input) {
+            const item = input[i];
 
             item.data = item.data || 0;
             item.count = item.count || 1;
         }
 
-        this.recipes.push(recipe);
-    },
+        this.recipes.push({
+            ...recipe,
+            time: recipe.time || 10,
+        });
+    }
 
-    getRecipesByInput: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.input.find(function (input) {
-                    return ContainerHelper.equals(input, item)
-                })
-            })
-    },
+    static getRecipesByInput(id: number, data: number = 0): SqueezerRecipe[] {
+        const item = {id, data};
+        return this.recipes.filter(recipe =>
+            recipe.input.find(input => ContainerHelper.equals(input, item))
+        );
+    }
 
-    getRecipesBySpecial: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .filter(function (recipe) {
-                let special = recipe.special;
-                return special && ContainerHelper.equals(special, item);
-            })
-    },
+    static getRecipesBySpecial(id: number, data: number = 0): SqueezerRecipe[] {
+        const item = {id, data};
+        return this.recipes.filter(recipe => {
+            const special = recipe.special;
+            return special && ContainerHelper.equals(special, item);
+        });
+    }
 
-    getRecipesByLiquid: function (liquid) {
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.liquid === liquid;
-            })
-    },
+    static getRecipesByLiquid(liquid: string): SqueezerRecipe[] {
+        return this.recipes.filter(recipe => recipe.liquid === liquid)
+    }
 
-    getRecipes: function () {
+    static getRecipes(): SqueezerRecipe[] {
         return this.recipes;
-    },
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeRecipes(recipes) {
-            return recipes.map(function (recipe) {
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeRecipes(recipes: SqueezerRecipe[]) {
+            return recipes.map(recipe => {
                 const output = [];
                 if (recipe.special) {
                     const special = recipe.special;
@@ -71,9 +80,9 @@ const SqueezerManager = {
                 }
 
                 return {
-                    input: recipe.input,
-                    output: output,
-                    recipe: recipe
+                    input: recipe.input.map(item => ({id: item.id, data: item.data || 0, count: item.count || 1})),
+                    output,
+                    recipe
                 };
             });
         }
@@ -109,14 +118,14 @@ const SqueezerManager = {
                     textChance: {type: "text", x: 510, y: 380, font: {size: 30}, multiline: true}
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.squeezer) {
                         return bakeRecipes(SqueezerManager.recipes);
                     } else return bakeRecipes(SqueezerManager.getRecipesByInput(id, data));
                 } else {
                     let recipes = bakeRecipes(SqueezerManager.getRecipesBySpecial(id, data));
-                    let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                    const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                     if (empty)
                         recipes = recipes.concat(bakeRecipes(SqueezerManager.getRecipesByLiquid(empty.liquid)));
 
@@ -124,13 +133,13 @@ const SqueezerManager = {
                 }
             },
 
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 if (!data) return;
 
-                let recipe = data.recipe;
-                let scaleLiquid = elements.get("scaleLiquid");
-                let textLiquid = elements.get("textLiquid");
-                let textChance = elements.get("textChance");
+                const recipe = data.recipe;
+                const scaleLiquid = elements.get("scaleLiquid");
+                const textLiquid = elements.get("textLiquid");
+                const textChance = elements.get("textChance");
 
                 if (recipe.special) {
                     textChance.onBindingUpdated("text", recipe.special.chance * 100 + "%");
@@ -153,4 +162,4 @@ const SqueezerManager = {
             }
         });
     }
-};
+}

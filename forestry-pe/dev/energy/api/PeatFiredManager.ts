@@ -1,7 +1,15 @@
-const PeatFiredManager = {
-    fuel: [],
+interface PeatFiredFuel {
+    id: number;
 
-    addFuel: function (id, energy, burnTime) {
+    energy: number;
+
+    burnTime: number;
+}
+
+class PeatFiredManager {
+    static readonly fuel: PeatFiredFuel[] = [];
+
+    static addFuel(id: number, energy: number, burnTime: number) {
         if (energy <= 0) {
             summonException("Energy must be > 0! (Peat Fired Fuel Registration)");
             return;
@@ -17,27 +25,22 @@ const PeatFiredManager = {
             energy: energy,
             burnTime: burnTime
         });
-    },
+    }
 
-    getFuel: function (id) {
-        return this.fuel
-            .find(function (recipe) {
-                return recipe.id === id
-            })
-    },
+    static getFuel(id: number) {
+        return this.fuel.find(recipe => recipe.id === id);
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeFuelRecipes(list) {
-            return list.map(function (recipe) {
-                return {
-                    input: [
-                        {id: recipe.id, data: 0, count: 1}
-                    ],
-                    output: [],
-                    totalEnergy: recipe.burnTime * recipe.energy,
-                    burnTime: recipe.burnTime
-                };
-            });
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeFuelRecipes(list: PeatFiredFuel[]) {
+            return list.map(recipe => ({
+                input: [
+                    {id: recipe.id, data: 0, count: 1}
+                ],
+                output: [],
+                totalEnergy: recipe.burnTime * recipe.energy,
+                burnTime: recipe.burnTime
+            }));
         }
 
         api.registerRecipeType("fpe_peat_engine_fuel", {
@@ -51,12 +54,12 @@ const PeatFiredManager = {
                     textBurnTime: {type: "text", x: 425, y: 185, font: {size: 30}},
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.enginePeat) {
                         return bakeFuelRecipes(PeatFiredManager.fuel);
                     } else {
-                        let fuel = PeatFiredManager.getFuel(id);
+                        const fuel = PeatFiredManager.getFuel(id);
                         if (fuel)
                             return bakeFuelRecipes([fuel]);
                         else return [];
@@ -64,7 +67,7 @@ const PeatFiredManager = {
                 } else return [];
             },
 
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 elements.get("textTotalEnergy")
                     .onBindingUpdated("text", "Total Energy: " + data.totalEnergy);
 
@@ -73,4 +76,4 @@ const PeatFiredManager = {
             }
         });
     }
-};
+}

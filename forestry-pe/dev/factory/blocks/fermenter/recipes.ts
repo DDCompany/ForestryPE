@@ -11,7 +11,7 @@ FermenterManager.addFuel({
 });
 
 for (let i in fermenterLiquids) {
-    let modifier = fermenterLiquids[i];
+    let modifier = fermenterLiquids[i as keyof typeof fermenterLiquids];
 
     FermenterManager.addRecipe({
         id: 6,

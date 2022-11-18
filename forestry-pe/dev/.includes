@@ -1,3 +1,6 @@
+# noImplicitAny
+# strictNullChecks
+
 ### DECLARATIONS
 ../lib_declarations/**.d.ts
 
@@ -102,14 +105,14 @@ apiculture/translation.js
 
 ### FACTORY
 # API
-factory/api/FactoryManager.js
-factory/api/CarpenterManager.js
-factory/api/CentrifugeManager.js
-factory/api/FabricatorManager.js
-factory/api/FermenterManager.js
-factory/api/SqueezerManager.js
-factory/api/StillManager.js
-factory/api/MoistenerManager.js
+factory/api/FactoryManager.ts
+factory/api/CarpenterManager.ts
+factory/api/CentrifugeManager.ts
+factory/api/FabricatorManager.ts
+factory/api/FermenterManager.ts
+factory/api/SqueezerManager.ts
+factory/api/StillManager.ts
+factory/api/MoistenerManager.ts
 
 #ITEMS
 factory/items/gears.js
@@ -120,27 +123,27 @@ factory/items/chipsets.js
 # BLOCKS
 factory/blocks/carpenter/carpenter.js
 factory/blocks/carpenter/gui.js
-factory/blocks/carpenter/recipes.js
+factory/blocks/carpenter/recipes.ts
 factory/blocks/carpenter/tile.js
 
 factory/blocks/centrifuge/centrifuge.js
 factory/blocks/centrifuge/gui.js
-factory/blocks/centrifuge/recipes.js
+factory/blocks/centrifuge/recipes.ts
 factory/blocks/centrifuge/tile.js
 
 factory/blocks/fabricator/fabricator.js
 factory/blocks/fabricator/gui.js
-factory/blocks/fabricator/recipes.js
+factory/blocks/fabricator/recipes.ts
 factory/blocks/fabricator/tile.js
 
 factory/blocks/fermenter/fermenter.js
 factory/blocks/fermenter/gui.js
-factory/blocks/fermenter/recipes.js
+factory/blocks/fermenter/recipes.ts
 factory/blocks/fermenter/tile.js
 
 factory/blocks/moistener/moistener.js
 factory/blocks/moistener/gui.js
-factory/blocks/moistener/recipes.js
+factory/blocks/moistener/recipes.ts
 factory/blocks/moistener/tile.js
 
 factory/blocks/rainTank/rainTank.js
@@ -149,12 +152,12 @@ factory/blocks/rainTank/tile.js
 
 factory/blocks/squeezer/squeezer.js
 factory/blocks/squeezer/gui.js
-factory/blocks/squeezer/recipes.js
+factory/blocks/squeezer/recipes.ts
 factory/blocks/squeezer/tile.js
 
 factory/blocks/still/still.js
 factory/blocks/still/gui.js
-factory/blocks/still/recipes.js
+factory/blocks/still/recipes.ts
 factory/blocks/still/tile.js
 
 factory/blocks/rainMaker.js
@@ -164,15 +167,15 @@ factory/translation.js
 
 ### ENERGY
 # API
-energy/api/BioGeneratorManager.js
-energy/api/PeatFiredManager.js
+energy/api/BioGeneratorManager.ts
+energy/api/PeatFiredManager.ts
 
 # BLOCKS
 energy/blocks/biogas/biogas.js
 energy/blocks/biogas/gui.js
 energy/blocks/biogas/tile.js
 
-energy/blocks/bioGenerator/bioGenerator.js
+energy/blocks/bioGenerator/bioGenerator.ts
 energy/blocks/bioGenerator/gui.js
 energy/blocks/bioGenerator/tile.js
 
@@ -182,7 +185,7 @@ energy/blocks/clockwork/tile.js
 energy/blocks/peat-fired/peat-fired.js
 energy/blocks/peat-fired/gui.js
 energy/blocks/peat-fired/tile.js
-energy/blocks/peat-fired/recipes.js
+energy/blocks/peat-fired/recipes.ts
 
 # TRANSLATION
 energy/translation.js
@@ -191,7 +194,7 @@ energy/translation.js
 # ITEMS
 storage/items/backpacks.js
 storage/items/capsules.js
-storage/items/crates.js
+storage/items/crates.ts
 
 # TRANSLATION
 storage/translation.js
@@ -202,4 +205,4 @@ integration/harvestCraft.js
 integration/recipeViewer.js
 
 ### ALL API SHARE
-shared.js
+shared.ts

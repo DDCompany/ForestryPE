@@ -59,8 +59,7 @@ FabricatorManager.addSmelting({
 });
 
 //Recipes
-function registerTubeRecipe(itemId, materialId, materialData) {
-    materialData = materialData || 0;
+function registerTubeRecipe(itemId: number, materialId: number, materialData: number = 0) {
     FabricatorManager.registerRecipe({
         input: {
             1: {id: materialId, data: materialData},
@@ -75,7 +74,7 @@ function registerTubeRecipe(itemId, materialId, materialData) {
             id: itemId,
             count: 4,
             data: 0
-        }
+        },
     });
 }
 

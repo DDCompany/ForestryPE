@@ -1,10 +1,20 @@
-const MoistenerManager = {
-    fuels: [],
-    recipes: [],
+interface MoistenerFuel {
+    inputItem: RecipeItem;
 
-    registerFuel: function (fuel) {
-        let inputItem = fuel.inputItem;
-        let outputItem = fuel.outputItem;
+    outputItem: RecipeItem;
+
+    time: number;
+}
+
+type MoistenerRecipe = MoistenerFuel;
+
+class MoistenerManager {
+    static readonly fuels: MoistenerFuel[] = [];
+    static readonly recipes: MoistenerRecipe[] = [];
+
+    static registerFuel(fuel: MoistenerFuel) {
+        const inputItem = fuel.inputItem;
+        const outputItem = fuel.outputItem;
 
         if (!inputItem || inputItem.id <= 0) {
             summonException("Input is not correct! (Moistener Fuel Registration)");
@@ -21,11 +31,11 @@ const MoistenerManager = {
         outputItem.count = 1;
 
         this.fuels.push(fuel);
-    },
+    }
 
-    registerRecipe: function (recipe) {
-        let inputItem = recipe.inputItem;
-        let outputItem = recipe.outputItem;
+    static registerRecipe(recipe: MoistenerRecipe) {
+        const inputItem = recipe.inputItem;
+        const outputItem = recipe.outputItem;
 
         if (!inputItem || inputItem.id <= 0) {
             summonException("Input is not correct! (Moistener Recipe Registration)");
@@ -42,53 +52,37 @@ const MoistenerManager = {
         outputItem.count = 1;
 
         this.recipes.push(recipe);
-    },
+    }
 
-    getFuelInfo: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.fuels.find(function (fuel) {
-            return ContainerHelper.equals(item, fuel.inputItem);
-        });
-    },
+    static getFuelInfo(id: number, data: number = 0): MoistenerFuel | undefined {
+        const item = {id, data};
+        return this.fuels.find(fuel => ContainerHelper.equals(item, fuel.inputItem));
+    }
 
-    getFuelByResult: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.fuels.find(function (fuel) {
-            return ContainerHelper.equals(item, fuel.outputItem);
-        });
-    },
+    static getFuelByResult(id: number, data: number = 0): MoistenerFuel | undefined {
+        const item = {id, data};
+        return this.fuels.find(fuel => ContainerHelper.equals(item, fuel.outputItem));
+    }
 
-    getRecipe: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes.find(function (recipe) {
-            return ContainerHelper.equals(item, recipe.inputItem);
-        });
-    },
+    static getRecipe(id: number, data: number = 0): MoistenerFuel | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe => ContainerHelper.equals(item, recipe.inputItem));
+    }
 
-    getRecipeByResult: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes.find(function (recipe) {
-            return ContainerHelper.equals(item, recipe.outputItem);
-        });
-    },
+    static getRecipeByResult(id: number, data: number = 0): MoistenerFuel | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe => ContainerHelper.equals(item, recipe.outputItem));
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeRecipes(list) {
-            return list.map(function (recipe) {
-                try {
-                    let input = recipe.inputItem;
-                    let output = recipe.outputItem;
-                    return {
-                        input: [
-                            {id: input.id, data: input.data, count: 1}
-                        ],
-                        output: [
-                            {id: output.id, data: output.data, count: 1}
-                        ]
-                    };
-                } catch (e) {
-                    alert(e);
-                }
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeRecipes(list: MoistenerRecipe[]) {
+            return list.map(recipe => {
+                const input = recipe.inputItem;
+                const output = recipe.outputItem;
+                return {
+                    input: [{id: input.id, data: input.data || 0, count: 1}],
+                    output: [{id: output.id, data: output.data || 0, count: 1}],
+                };
             });
         }
 
@@ -104,7 +98,8 @@ const MoistenerManager = {
                     output0: {type: "slot", x: 585, y: 125, size: 110, needClean: true}
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList: (id, data, isUsage) => {
+                const fuel = MoistenerManager.getFuelByResult(id, data);
                 if (isUsage) {
                     if (id === BlockID.moistener) {
                         return bakeRecipes(MoistenerManager.fuels);
@@ -115,7 +110,6 @@ const MoistenerManager = {
                         else return [];
                     }
                 } else {
-                    let fuel = MoistenerManager.getFuelByResult(id, data);
                     if (fuel)
                         return bakeRecipes([fuel]);
                     else return [];
@@ -134,27 +128,23 @@ const MoistenerManager = {
                     output0: {type: "slot", x: 585, y: 125, size: 110, needClean: true}
                 }
             },
-            getList: function (id, data, isUsage) {
-                try {
-                    if (isUsage) {
-                        if (id === BlockID.moistener) {
-                            return bakeRecipes(MoistenerManager.recipes);
-                        } else {
-                            let fuel = MoistenerManager.getRecipe(id, data);
-                            if (fuel)
-                                return bakeRecipes([fuel]);
-                            else return [];
-                        }
+            getList: (id, data, isUsage) => {
+                const fuel = MoistenerManager.getRecipeByResult(id, data);
+                if (isUsage) {
+                    if (id === BlockID.moistener) {
+                        return bakeRecipes(MoistenerManager.recipes);
                     } else {
-                        let fuel = MoistenerManager.getRecipeByResult(id, data);
+                        let fuel = MoistenerManager.getRecipe(id, data);
                         if (fuel)
                             return bakeRecipes([fuel]);
                         else return [];
                     }
-                } catch (e) {
-                    alert(e);
+                } else {
+                    if (fuel)
+                        return bakeRecipes([fuel]);
+                    else return [];
                 }
             }
         });
     }
-};
+}

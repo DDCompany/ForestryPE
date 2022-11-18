@@ -1,9 +1,15 @@
-const CentrifugeManager = {
-    recipes: [],
+interface CentrifugeRecipe {
+    input: SingleRecipeItem;
 
-    registerRecipe: function (recipe) {
-        let input = recipe.input;
-        let result = recipe.result;
+    result: ChancedRecipeItem[];
+}
+
+class CentrifugeManager {
+    static readonly recipes: CentrifugeRecipe[] = [];
+
+    static registerRecipe(recipe: CentrifugeRecipe) {
+        const input = recipe.input;
+        const result = recipe.result;
 
         if (!input) {
             summonException("Result is not correct! (Centrifuge Recipe Registration)");
@@ -17,51 +23,38 @@ const CentrifugeManager = {
 
         input.data = input.data || 0;
 
-        for (let i in result) {
-            let item = result[i];
+        for (const i in result) {
+            const item = result[i];
             item.data = item.data || 0;
         }
 
         this.recipes.push(recipe);
-    },
+    }
 
-    getRecipe: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .find(function (recipe) {
-                return ContainerHelper.equals(item, recipe.input);
-            });
-    },
+    static getRecipe(id: number, data: number = 0): CentrifugeRecipe | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe => ContainerHelper.equals(item, recipe.input));
+    }
 
-    getRecipeByIngredient: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .find(function (recipe) {
-                return ContainerHelper.equals(item, recipe.input);
-            });
-    },
+    static getRecipeByIngredient(id: number, data: number = 0): CentrifugeRecipe | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe => ContainerHelper.equals(item, recipe.input));
+    }
 
-    getRecipesByResult: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.result
-                    .find(function (result) {
-                        return ContainerHelper.equals(item, result);
-                    }) !== undefined;
-            });
-    },
+    static getRecipesByResult(id: number, data: number = 0): CentrifugeRecipe[] {
+        const item = {id, data};
+        return this.recipes.filter(recipe =>
+            recipe.result.find(result => ContainerHelper.equals(item, result)) !== undefined
+        );
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeCentrifugeRecipes(recipes) {
-            return recipes.map(function (recipe) {
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeCentrifugeRecipes(recipes: CentrifugeRecipe[]) {
+            return recipes.map(recipe => {
                 const input = recipe.input;
                 return {
-                    input: [{id: input.id, data: input.data, count: 1}],
-                    output: recipe.result
-                        .map(function (item) {
-                            return {id: item.id, data: item.data || 0, count: item.count || 1};
-                        })
+                    input: [{id: input.id, data: input.data || 0, count: 1}],
+                    output: recipe.result.map(item => ({id: item.id, data: item.data || 0, count: item.count || 1}))
                 };
             });
         }
@@ -88,7 +81,7 @@ const CentrifugeManager = {
                 }
             },
 
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.centrifuge) {
                         return bakeCentrifugeRecipes(CentrifugeManager.recipes);
@@ -103,4 +96,4 @@ const CentrifugeManager = {
             }
         });
     }
-};
+}

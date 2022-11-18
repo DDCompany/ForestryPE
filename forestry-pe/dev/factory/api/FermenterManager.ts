@@ -1,10 +1,34 @@
-let fermenterLiquids = {"appleJuice": 1.5, "honey": 1.5, "water": 1};
+const fermenterLiquids = {"appleJuice": 1.5, "honey": 1.5, "water": 1} as const;
 
-const FermenterManager = {
-    recipes: [],
-    fuels: [],
+interface FermenterRecipe {
+    id: number;
 
-    addRecipe: function (recipe) {
+    data?: number;
+
+    inputLiquid: string;
+
+    liquidAmount: number;
+
+    modifier: number;
+
+    liquid: string;
+}
+
+interface FermenterFuel {
+    id: number;
+
+    perCycle: number;
+
+    cycles: number;
+
+    data?: number;
+}
+
+class FermenterManager {
+    static readonly recipes: FermenterRecipe[] = [];
+    static readonly fuels: FermenterFuel[] = [];
+
+    static addRecipe(recipe: FermenterRecipe) {
         if (recipe.id <= 0) {
             summonException("Id is not correct! (Fermenter Recipe Registration)");
             return;
@@ -27,9 +51,9 @@ const FermenterManager = {
 
         recipe.data = recipe.data || 0;
         this.recipes.push(recipe);
-    },
+    }
 
-    addFuel: function (fuel) {
+    static addFuel(fuel: FermenterFuel) {
         if (fuel.id <= 0) {
             summonException("Id is not correct! (Fermenter Fuel Registration)");
             return;
@@ -46,69 +70,54 @@ const FermenterManager = {
         }
 
         fuel.data = fuel.data || 0;
-
         this.fuels.push(fuel);
-    },
+    }
 
-    getRecipe: function (id, data, inputLiquid) {
-        let item = {id: id, data: data || 0};
-        return this.recipes.find(function (recipe) {
-            return ContainerHelper.equals(item, recipe) && inputLiquid === recipe.inputLiquid;
-        });
-    },
+    static getRecipe(id: number, data: number, inputLiquid: string): FermenterRecipe | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe =>
+            ContainerHelper.equals(item, recipe) && inputLiquid === recipe.inputLiquid
+        );
+    }
 
-    getRecipeByItem: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.recipes.find(function (recipe) {
-            return ContainerHelper.equals(item, recipe)
-        });
-    },
+    static getRecipeByItem(id: number, data: number = 0): FermenterRecipe | undefined {
+        const item = {id, data};
+        return this.recipes.find(recipe => ContainerHelper.equals(item, recipe));
+    }
 
-    getRecipeByInputLiquid: function (liquid) {
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.inputLiquid === liquid
-            })
-    },
+    static getRecipeByInputLiquid(liquid: string): FermenterRecipe[] {
+        return this.recipes.filter(recipe => recipe.inputLiquid === liquid);
+    }
 
-    getRecipeByResultLiquid: function (liquid) {
-        return this.recipes
-            .filter(function (recipe) {
-                return recipe.liquid === liquid
-            })
-    },
+    static getRecipeByResultLiquid(liquid: string): FermenterRecipe[] {
+        return this.recipes.filter(recipe => recipe.liquid === liquid)
+    }
 
-    getFuel: function (id, data) {
-        let item = {id: id, data: data || 0};
-        return this.fuels.find(function (fuel) {
-            return ContainerHelper.equals(item, fuel);
-        });
-    },
+    static getFuel(id: number, data: number = 0): FermenterFuel | undefined {
+        const item = {id, data};
+        return this.fuels.find(fuel => ContainerHelper.equals(item, fuel));
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeFuelRecipes(list) {
-            return list.map(function (recipe) {
-                return {
-                    input: [
-                        {id: recipe.id, data: recipe.data, count: 1}
-                    ],
-                    output: [],
-                    value: recipe.perCycle,
-                    cycles: recipe.cycles
-                };
-            });
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeFuelRecipes(list: FermenterFuel[]) {
+            return list.map(recipe => ({
+                input: [
+                    {id: recipe.id, data: recipe.data || 0, count: 1}
+                ],
+                output: [],
+                value: recipe.perCycle,
+                cycles: recipe.cycles
+            }));
         }
 
-        function bakeRecipes(list) {
-            return list.map(function (recipe) {
-                return {
-                    input: [
-                        {id: recipe.id, data: recipe.data, count: 1}
-                    ],
-                    output: [],
-                    recipe: recipe
-                };
-            });
+        function bakeRecipes(list: FermenterRecipe[]) {
+            return list.map(recipe => ({
+                input: [
+                    {id: recipe.id, data: recipe.data || 0, count: 1}
+                ],
+                output: [],
+                recipe
+            }));
         }
 
         api.registerRecipeType("fpe_fermenter_fuel", {
@@ -122,12 +131,12 @@ const FermenterManager = {
                     textCycles: {type: "text", x: 485, y: 185, font: {size: 30}},
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.fermenter) {
                         return bakeFuelRecipes(FermenterManager.fuels);
                     } else {
-                        let fuel = FermenterManager.getFuel(id, data);
+                        const fuel = FermenterManager.getFuel(id, data);
                         if (fuel)
                             return bakeFuelRecipes([fuel]);
                         else return [];
@@ -135,7 +144,7 @@ const FermenterManager = {
                 } else return [];
             },
 
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 elements.get("textValue")
                     .onBindingUpdated("text", data ? "Value: " + data.value : "0");
 
@@ -176,14 +185,14 @@ const FermenterManager = {
                     },
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     if (id === BlockID.fermenter) {
                         return bakeRecipes(FermenterManager.recipes);
                     } else {
-                        let fuel = FermenterManager.getRecipeByItem(id, data);
-                        let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
-                        let recipes = [];
+                        const fuel = FermenterManager.getRecipeByItem(id, data);
+                        const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                        let recipes: RecipePattern[] = [];
                         if (fuel)
                             recipes = bakeRecipes([fuel]);
 
@@ -193,7 +202,7 @@ const FermenterManager = {
                         return recipes;
                     }
                 } else {
-                    let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                    const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                     if (empty)
                         return bakeRecipes(FermenterManager.getRecipeByResultLiquid(empty.liquid));
 
@@ -201,12 +210,12 @@ const FermenterManager = {
                 }
             },
 
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 if (!data) return;
 
-                let scaleInputLiquid = elements.get("scaleInputLiquid");
-                let scaleResultLiquid = elements.get("scaleResultLiquid");
-                let recipe = data.recipe;
+                const scaleInputLiquid = elements.get("scaleInputLiquid");
+                const scaleResultLiquid = elements.get("scaleResultLiquid");
+                const recipe = data.recipe;
 
                 scaleInputLiquid.onBindingUpdated("texture",
                     LiquidRegistry.getLiquidUITexture(recipe.inputLiquid, 16, 58));
@@ -224,4 +233,4 @@ const FermenterManager = {
             }
         });
     }
-};
+}

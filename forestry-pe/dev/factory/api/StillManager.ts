@@ -1,8 +1,20 @@
-const StillManager = {
-    recipes: [],
+interface StillRecipe {
+    inputLiquid: string;
 
-    registerRecipe: function (recipe) {
-        let inputLiquid = recipe.inputLiquid;
+    inputAmount: number;
+
+    outputLiquid: string;
+
+    outputAmount: number;
+
+    cycles: number;
+}
+
+class StillManager {
+    static readonly recipes: StillRecipe[] = [];
+
+    static registerRecipe(recipe: StillRecipe) {
+        const inputLiquid = recipe.inputLiquid;
 
         if (!inputLiquid) {
             summonException("Input Liquid is not correct! (Still Recipe Registration)");
@@ -30,29 +42,23 @@ const StillManager = {
         }
 
         this.recipes.push(recipe);
-    },
+    }
 
-    getRecipe: function (liquid) {
-        return this.recipes.find(function (recipe) {
-            return recipe.inputLiquid === liquid
-        });
-    },
+    static getRecipe(liquid: string): StillRecipe | undefined {
+        return this.recipes.find(recipe => recipe.inputLiquid === liquid);
+    }
 
-    getRecipeByResult: function (liquid) {
-        return this.recipes.find(function (recipe) {
-            return recipe.outputLiquid === liquid
-        });
-    },
+    static getRecipeByResult(liquid: string): StillRecipe | undefined {
+        return this.recipes.find(recipe => recipe.outputLiquid === liquid);
+    }
 
-    integrateWithRecipeViewer: function (api) {
-        function bakeRecipes(list) {
-            return list.map(function (recipe) {
-                return {
-                    input: [],
-                    output: [],
-                    recipe: recipe
-                };
-            });
+    static integrateWithRecipeViewer(api: RecipeViewerOld) {
+        function bakeRecipes(list: StillRecipe[]) {
+            return list.map(recipe => ({
+                input: [],
+                output: [],
+                recipe: recipe
+            }));
         }
 
         api.registerRecipeType("fpe_still", {
@@ -84,7 +90,9 @@ const StillManager = {
                     },
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList: (id, data, isUsage) => {
+                const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
+                const recipe = StillManager.getRecipeByResult(empty.liquid);
                 if (isUsage) {
                     if (id === BlockID.still) {
                         return bakeRecipes(StillManager.recipes);
@@ -97,9 +105,7 @@ const StillManager = {
                         }
                     }
                 } else {
-                    let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                     if (empty) {
-                        let recipe = StillManager.getRecipeByResult(empty.liquid);
                         if (recipe)
                             return bakeRecipes([recipe]);
                     }
@@ -108,12 +114,12 @@ const StillManager = {
                 return []
             },
 
-            onOpen: function (elements, data) {
+            onOpen: (elements, data) => {
                 if (!data) return;
 
-                let scaleInputLiquid = elements.get("scaleInputLiquid");
-                let scaleResultLiquid = elements.get("scaleResultLiquid");
-                let recipe = data.recipe;
+                const scaleInputLiquid = elements.get("scaleInputLiquid");
+                const scaleResultLiquid = elements.get("scaleResultLiquid");
+                const recipe = data.recipe;
 
                 scaleInputLiquid.onBindingUpdated("texture",
                     LiquidRegistry.getLiquidUITexture(recipe.inputLiquid, 16, 58));
@@ -131,4 +137,4 @@ const StillManager = {
             }
         });
     }
-};
+}

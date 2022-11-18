@@ -2,7 +2,10 @@ IDRegistry.genItemID("crate");
 Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
 Item.addCreativeGroup(GROUP_CRATES, GROUP_CRATES_NAME, [ItemID.crate]);
 
-function registerCrate(id, itemName, texture, data) {
+/**
+ * Register a new crate containing the given item with {@link id} and {@link data}.
+ */
+function registerCrate(id: number, itemName: string, texture: string, data?: number) {
     data = data || 0;
     let crateId = "crate" + id + "_" + data;
 
