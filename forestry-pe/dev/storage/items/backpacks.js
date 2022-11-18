@@ -16,10 +16,7 @@ BackpackRegistry.register(ItemID.backpackMiners, {
         "^dustSmall.+",
         "^dustTiny.+",
         "^apatite$",
-        {
-            id: 351,
-            data: 4
-        },
+        VanillaItemID.lapis_lazuli,
         263,
         15,
         14,
@@ -123,10 +120,7 @@ BackpackRegistry.register(ItemID.backpackHunter, {
         "^egg.+",
         "^leather.+",
         "^bone.+",
-        {
-            id: 351,
-            data: 15
-        },
+        VanillaItemID.lapis_lazuli,
         {
             id: 35,
             data: -1

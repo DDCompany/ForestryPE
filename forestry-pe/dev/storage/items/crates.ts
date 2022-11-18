@@ -81,7 +81,7 @@ if (ForestryConfig.crateEnabled) {
     registerCrate(336, "Brick", "crateBrick");
     registerCrate(331, "Redstone", "crateRedstone");
     registerCrate(260, "Apple", "crateApple");
-    registerCrate(351, "Lapis lazuli", "crateLapisLazuli", 4);
+    registerCrate(VanillaItemID.lapis_lazuli, "Lapis lazuli", "crateLapisLazuli");
     registerCrate(ItemID.latex, "Latex", "crateLatex");
     registerCrate(ItemID.royalJelly, "Royal jelly", "crateRoyalJelly");
     registerCrate(ItemID.honeydew, "Honey dew", "crateHoneydew");

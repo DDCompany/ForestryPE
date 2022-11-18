@@ -88,4 +88,4 @@ registerTubeRecipe(ItemID.thermionicTubeObsidian, 49);
 registerTubeRecipe(ItemID.thermionicTubeBlaze, 377);
 registerTubeRecipe(ItemID.thermionicTubeEmerald, 388);
 registerTubeRecipe(ItemID.thermionicTubeApatite, ItemID.apatite);
-registerTubeRecipe(ItemID.thermionicTubeLapis, 351, 4);
+registerTubeRecipe(ItemID.thermionicTubeLapis, VanillaItemID.lapis_lazuli);
