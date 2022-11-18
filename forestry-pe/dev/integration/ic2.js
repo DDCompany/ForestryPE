@@ -1,8 +1,8 @@
 ModAPI.addAPICallback("ICore", function (api) {
     let blacklist = api.requireGlobal("recyclerBlacklist");
 
-    for (let i in BeeRegistry.bees) {
-        let bee = BeeRegistry.bees[i];
+    for (const key in BeeRegistry.bees) {
+        const bee = BeeRegistry.bees[key];
         blacklist.push(bee.princessID);
         blacklist.push(bee.droneID);
         blacklist.push(bee.queenID);
@@ -19,17 +19,19 @@ ModAPI.addAPICallback("ICore", function (api) {
         ]
     });
 
-    for (let i in fermenterLiquids) {
+    for (const key in fermenterLiquids) {
         FermenterManager.addRecipe({
             id: ItemID.rubberSapling,
-            inputLiquid: i,
+            inputLiquid: key,
             liquidAmount: 0.25,
-            modifier: fermenterLiquids[i],
+            modifier: fermenterLiquids[key],
             liquid: "biomass"
         });
     }
 
     registerTubeRecipe(ItemID.thermionicTubeRubber, ItemID.rubber);
+    registerCrate(ItemID.latex, "Latex", "crateLatex");
+    registerCrate(ItemID.scrap, "Scrap", "crateScrap");
 
     log("IC Integration Activated", "INFO")
 });

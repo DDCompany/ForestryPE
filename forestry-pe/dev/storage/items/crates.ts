@@ -82,7 +82,6 @@ if (ForestryConfig.crateEnabled) {
     registerCrate(331, "Redstone", "crateRedstone");
     registerCrate(260, "Apple", "crateApple");
     registerCrate(VanillaItemID.lapis_lazuli, "Lapis lazuli", "crateLapisLazuli");
-    registerCrate(ItemID.latex, "Latex", "crateLatex");
     registerCrate(ItemID.royalJelly, "Royal jelly", "crateRoyalJelly");
     registerCrate(ItemID.honeydew, "Honey dew", "crateHoneydew");
     registerCrate(110, "Mycelium", "crateMycelium");
@@ -102,7 +101,6 @@ if (ForestryConfig.crateEnabled) {
     registerCrate(295, "Seeds", "crateSeeds");
     registerCrate(ItemID.peat, "Peat", "cratePeat");
     registerCrate(338, "Sugar cane", "crateSugarCane");
-    registerCrate(ItemID.scrap, "Scrap", "crateScrap");
     registerCrate(ItemID.phosphor, "Phosphor", "cratePhosphor");
     registerCrate(263, "Coal", "crateCoal");
 }
