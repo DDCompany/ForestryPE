@@ -92,7 +92,6 @@ class StillManager {
             },
             getList: (id, data, isUsage) => {
                 const empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
-                const recipe = StillManager.getRecipeByResult(empty.liquid);
                 if (isUsage) {
                     if (id === BlockID.still) {
                         return bakeRecipes(StillManager.recipes);
@@ -100,14 +99,17 @@ class StillManager {
                         let empty = LiquidRegistry.getEmptyItem(id, data === -1 ? 0 : data);
                         if (empty) {
                             let recipe = StillManager.getRecipe(empty.liquid);
-                            if (recipe)
+                            if (recipe) {
                                 return bakeRecipes([recipe]);
+                            }
                         }
                     }
                 } else {
                     if (empty) {
-                        if (recipe)
+                        const recipe = StillManager.getRecipeByResult(empty.liquid);
+                        if (recipe) {
                             return bakeRecipes([recipe]);
+                        }
                     }
                 }
 
