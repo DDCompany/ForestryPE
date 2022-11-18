@@ -73,7 +73,7 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
         data: 0
     });
 
-    if(!isHot)
+    if (!isHot)
         Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID["waxCapsule" + suffix]]);
 
     Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID["can" + suffix]]);
@@ -89,20 +89,22 @@ registerLiquidContainer("Juice", "appleJuice", 2);
 registerLiquidContainer("Honey", "honey", 2);
 registerLiquidContainer("SeedOil", "seedOil", 0);
 
-function pickupLiquidFromWorld(coords) {
-    let pos = Player.getPosition();
-    if (World.getBlockID(coords.x, coords.y, coords.z) === 9)
-        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canWater, 1, 0);
-    else if (World.getBlockID(coords.x, coords.y, coords.z) === 11)
-        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.canLava, 1, 0);
-    else return;
+function pickupLiquidFromWorld(waterCanId, lavaCanId) {
+    return (coords) => {
+        let pos = Player.getPosition();
+        if (World.getBlockID(coords.x, coords.y, coords.z) === 9)
+            World.drop(pos.x, pos.y + 0.3, pos.z, waterCanId, 1, 0);
+        else if (World.getBlockID(coords.x, coords.y, coords.z) === 11)
+            World.drop(pos.x, pos.y + 0.3, pos.z, lavaCanId, 1, 0);
+        else return;
 
-    World.setBlock(coords.x, coords.y, coords.z, 0);
-    Player.decreaseCarriedItem(1);
+        World.setBlock(coords.x, coords.y, coords.z, 0);
+        Player.decreaseCarriedItem(1);
+    };
 }
 
-Item.registerUseFunction("canEmpty", pickupLiquidFromWorld);
-Item.registerUseFunction("refractoryEmpty", pickupLiquidFromWorld);
+Item.registerUseFunction("canEmpty", pickupLiquidFromWorld(ItemID.canWater, ItemID.canLava));
+Item.registerUseFunction("refractoryEmpty", pickupLiquidFromWorld(ItemID.refractoryWater, ItemID.refractoryLava));
 Item.registerUseFunction("waxCapsuleEmpty", function (coords) {
     if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
         let pos = Player.getPosition();
