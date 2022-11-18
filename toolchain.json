@@ -1,0 +1,21 @@
+{
+	"debugAbi": "armeabi-v7a",
+	"abis": [
+		"armeabi-v7a",
+		"x86"
+	],
+	"linkNative": [
+		"minecraftpe",
+		"innercore",
+		"nativejs"
+	],
+	"debugIncludesExclude": [],
+	"projectLocations": [],
+	"workspaceFile": "toolchain.code-workspace",
+	"denyJavaScript": true,
+	"currentProject": "forestry-pe",
+	"devices": [
+		"RF8NB0LGT5J"
+	],
+	"pushTo": "/storage/emulated/0/games/horizon/packs/Inner_Core/innercore"
+}
