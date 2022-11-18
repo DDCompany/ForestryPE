@@ -1,14 +1,14 @@
 setLoadingTip("Common Api Loading...");
 
-const ContainerHelper = {
-    putInSlots: function (toPut, container, slots) {
-        for (let key in toPut) {
+class ContainerHelper {
+    static putInSlots(toPut: [number, number, number][], container: UI.Container, slots: string[]) {
+        for (const key in toPut) {
             let count = toPut[key][2];
-            for (let key2 in slots) {
+            for (const key2 in slots) {
                 if (!count) break;
-                let slot = container.getSlot(slots[key2]);
+                const slot = container.getSlot(slots[key2]);
                 if (slot.id === toPut[key][0] && slot.data === toPut[key][1] && slot.count < Item.getMaxStack(slot.id)) {
-                    let f = Math.min(count, Item.getMaxStack(slot.id) - slot.count);
+                    const f = Math.min(count, Item.getMaxStack(slot.id) - slot.count);
                     count -= f;
                     slot.count += f;
                 } else if (slot.id === 0) {
@@ -19,10 +19,10 @@ const ContainerHelper = {
                 }
             }
         }
-    },
+    }
 
-    putInSlot: function (slot, item) {
-        let count = item.count || 1;
+    static putInSlot(slot: UI.Slot, item: { id: number, data: number, count?: number }): boolean {
+        const count = item.count || 1;
 
         if (slot.id === 0) {
             slot.id = item.id;
@@ -35,7 +35,7 @@ const ContainerHelper = {
         }
 
         return false;
-    },
+    }
 
     /**
      * Наполнение предмета определённой жидкостью из TileEntity
@@ -44,17 +44,17 @@ const ContainerHelper = {
      * @param slotEmptyName идентификатор слота для пустых контейнеров
      * @param slotFullName идентификатор слота для заполненных контейнеров
      */
-    fillContainer: function (liquid, tile, slotEmptyName, slotFullName) {
+    static fillContainer(liquid: string, tile: TileEntity.TileEntityPrototype, slotEmptyName: string, slotFullName: string): string | undefined {
         if (!liquid)
             return;
 
         if (tile.liquidStorage.getAmount(liquid) < 1)
             return;
 
-        let container = tile.container;
-        let slotEmpty = container.getSlot(slotEmptyName);
-        let slotFull = container.getSlot(slotFullName);
-        let full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
+        const container = tile.container;
+        const slotEmpty = container.getSlot(slotEmptyName);
+        const slotFull = container.getSlot(slotFullName);
+        const full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
 
         if (full) {
             if (!ContainerHelper.putInSlot(slotFull, full))
@@ -65,7 +65,7 @@ const ContainerHelper = {
             container.validateSlot(slotEmptyName);
             return liquid;
         }
-    },
+    }
 
     /**
      * Извлечение жидкости из контейнера и перемещение ёё в TileEntity
@@ -73,22 +73,22 @@ const ContainerHelper = {
      * @param tile TileEntity
      * @param slotFullName идентификатор слота с наполненными контейнерами
      */
-    drainContainer: function (liquid, tile, slotFullName) {
-        let slot = tile.container.getSlot(slotFullName);
-        let empty = LiquidRegistry.getEmptyItem(slot.id, slot.data);
+    static drainContainer(liquid: string, tile: TileEntity.TileEntityPrototype, slotFullName: string): string | undefined {
+        const slot = tile.container.getSlot(slotFullName);
+        const empty = LiquidRegistry.getEmptyItem(slot.id, slot.data);
 
         if (!empty)
             return;
 
-        let _liquid = empty.liquid;
+        const _liquid = empty.liquid;
         if (!liquid || liquid === _liquid) {
             if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
                 return;
 
             if (--slot.count === 0) {
-                if(!this.isReusable(empty.id)) {
+                if (!this.isReusable(empty.id)) {
                     tile.container.clearSlot(slotFullName);
-                }else {
+                } else {
                     slot.id = empty.id;
                     slot.data = empty.data;
                     slot.count = 1;
@@ -98,35 +98,33 @@ const ContainerHelper = {
             tile.liquidStorage.addLiquid(_liquid, 1);
             return _liquid || liquid;
         }
-    },
+    }
 
-    drainContainer2: function (liquid, tile, slotFullName, slotEmptyName) {
-        let container = tile.container;
-        let slotFull = container.getSlot(slotFullName);
-        let slotEmpty = container.getSlot(slotEmptyName);
-        let empty = LiquidRegistry.getEmptyItem(slotFull.id, slotFull.data);
+    static drainContainer2(liquid: string, tile: TileEntity.TileEntityPrototype, slotFullName: string, slotEmptyName: string): string | undefined {
+        const container = tile.container;
+        const slotFull = container.getSlot(slotFullName);
+        const slotEmpty = container.getSlot(slotEmptyName);
+        const empty = LiquidRegistry.getEmptyItem(slotFull.id, slotFull.data);
 
         if (!empty)
             return;
 
-        let _liquid = empty.liquid;
+        const _liquid = empty.liquid;
         if (!liquid || liquid === _liquid) {
             if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
                 return;
 
-            if(!this.isReusable(empty.id) || this.putInSlot(slotEmpty, empty)) {
+            if (!this.isReusable(empty.id) || this.putInSlot(slotEmpty, empty)) {
                 slotFull.count--;
                 tile.liquidStorage.addLiquid(_liquid, 1);
                 container.validateSlot(slotFullName);
                 return _liquid;
             }
         }
+    }
 
-        return null;
-    },
-
-    isReusable: function (id) {
-        if(ForestryConfig.reusableCapsules)
+    static isReusable(id: number): boolean {
+        if (ForestryConfig.reusableCapsules)
             return true;
 
         switch (id) {
@@ -137,15 +135,15 @@ const ContainerHelper = {
             default:
                 return true;
         }
-    },
+    }
 
-    equals: function (item1, item2) {
+    static equals(item1: { id: number, data?: number }, item2: { id: number, data?: number }): boolean {
         if (!item1 && !item2)
             return true;
 
-        if(!item1 || !item2)
+        if (!item1 || !item2)
             return false;
 
-        return item1.id === item2.id && (item1.data === item2.data || item1.data === -1 || item2.data === -1);
+        return item1.id === item2.id && ((item1.data || 0) === (item2.data || 0) || item1.data === -1 || item2.data === -1);
     }
-};
+}

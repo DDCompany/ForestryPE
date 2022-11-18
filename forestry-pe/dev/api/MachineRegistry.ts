@@ -1,69 +1,58 @@
-const MachineRegistry = {
-    machines: {},
+class MachineRegistry {
+    static readonly machines: Record<number, TileEntity.TileEntityPrototype> = {};
 
-    registerConsumer: function (id, prototype, energyType) {
+    static registerConsumer(id: number, prototype: TileEntity.TileEntityPrototype, energyType?: EnergyType) {
         energyType = energyType || RF;
 
         if (!prototype.energyTick) {
-            prototype.energyTick = function () {
-
+            prototype.energyTick = () => {
             };
         }
 
         if (!prototype.energyReceive) {
-            prototype.energyReceive = function (type, amount) {
-                let add = Math.min(this.getMaxTransfer(), amount, this.getEnergyStorage() - this.data.energy);
+            prototype.energyReceive = function (type: EnergyType, amount: number) {
+                const add = Math.min(this.getMaxTransfer(), amount, this.getEnergyStorage() - this.data.energy);
                 this.data.energy += add;
                 return add;
             };
         }
 
         this.register(id, prototype, energyType);
-    },
+    }
 
-    registerGenerator: function (id, prototype, energyType) {
+    static registerGenerator(id: number, prototype: TileEntity.TileEntityPrototype, energyType?: EnergyType) {
         energyType = energyType || RF;
 
         if (!prototype.energyTick) {
-            prototype.energyTick = function (type, src) {
-                let out = Math.min(32, this.data.energy);
+            prototype.energyTick = function (type: EnergyType, src: EnergyTileNode) {
+                const out = Math.min(32, this.data.energy);
                 this.data.energy -= out;
                 this.data.energy += src.add(out);
             };
         }
 
-        prototype.canReceiveEnergy = function () {
-            return false;
-        };
+        prototype.canReceiveEnergy = () => false;
 
-        prototype.isEnergySource = function () {
-            return true;
-        };
+        prototype.isEnergySource = () => true;
 
         this.register(id, prototype, energyType);
-    },
+    }
 
-    register: function (id, prototype, energyType) {
+    static register(id: number, prototype: TileEntity.TileEntityPrototype, energyType?: EnergyType) {
         energyType = energyType || RF;
         this.machines[id] = prototype;
 
         if (prototype.defaultValues) {
             prototype.defaultValues.energy = 0;
         } else {
-            prototype.defaultValues = {
-                energy: 0
-            };
+            prototype.defaultValues = {energy: 0};
         }
 
         if (!prototype.getMaxTransfer)
-            prototype.getMaxTransfer = function () {
-                return 1100;
-            };
+            prototype.getMaxTransfer = () => 1100;
 
         if (!prototype.getEnergyStorage) {
-            prototype.getEnergyStorage = function () {
-                return 0;
-            }
+            prototype.getEnergyStorage = () => 0
         }
 
         this.setupWireConnection(id, energyType);
@@ -71,9 +60,9 @@ const MachineRegistry = {
         Block.setDestroyTime(id, 1.5);
         TileEntity.registerPrototype(id, prototype);
         EnergyTileRegistry.addEnergyTypeForId(id, energyType);
-    },
+    }
 
-    setupWireConnection: function (id, energyType) {
+    static setupWireConnection(id: number, energyType: EnergyType) {
         switch (energyType.name) {
             case EU.name:
                 ICRender.getGroup("ic-wire").add(id, -1);
@@ -85,4 +74,4 @@ const MachineRegistry = {
                 summonException("Energy type not supported");
         }
     }
-};
+}

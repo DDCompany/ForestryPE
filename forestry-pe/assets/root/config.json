@@ -39,7 +39,6 @@
   },
   "blocks": {
     "oresEnabled": true,
-    "glassEnabled": true,
     "combsEnabled": true
   },
   "beekeeping": {

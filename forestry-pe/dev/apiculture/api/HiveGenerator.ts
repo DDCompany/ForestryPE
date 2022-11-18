@@ -1,7 +1,24 @@
-const HiveGenerator = {
-    generators: [],
+interface HiveGeneratorProto {
+    chance: number;
 
-    register: function (generator) {
+    biomes?: number[];
+
+    dimension: EDimension | Native.Dimension | number;
+
+    generate: (
+        x: number,
+        z: number,
+        dimension: EDimension | Native.Dimension | number,
+        climate: number,
+        humidity: number,
+        biome: number,
+    ) => boolean;
+}
+
+class HiveGenerator {
+    private static readonly generators: HiveGeneratorProto[] = [];
+
+    static register(generator: HiveGeneratorProto) {
         if (generator.chance <= 0) {
             summonException("Chance is not correct! (Hive Generator Registration)");
             return;
@@ -13,17 +30,17 @@ const HiveGenerator = {
         }
 
         this.generators.push(generator);
-    },
+    }
 
-    genChunk: function (chunkX, chunkZ, dimension) {
+    static genChunk(chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
         for (let tries = 0; tries < 4; tries++) {
-            let coords = GenerationUtils.randomXZ(chunkX, chunkZ);
-            let biome = World.getBiome(coords.x, coords.z);
-            let climate = BiomeHelper.getBiomeClimate(biome);
-            let humidity = BiomeHelper.getBiomeHumidity(biome);
+            const coords = GenerationUtils.randomXZ(chunkX, chunkZ);
+            const biome = World.getBiome(coords.x, coords.z);
+            const climate = BiomeHelper.getBiomeClimate(biome);
+            const humidity = BiomeHelper.getBiomeHumidity(biome);
 
-            for (let key in HiveGenerator.generators) {
-                let generator = HiveGenerator.generators[key];
+            for (const key in HiveGenerator.generators) {
+                const generator = HiveGenerator.generators[key];
 
                 if (generator.dimension && generator.dimension !== dimension)
                     continue;
@@ -35,19 +52,19 @@ const HiveGenerator = {
                     return;
             }
         }
-    },
+    }
 
-    genChunkDebug: function (chunkX, chunkZ, dimension) {
+    static genChunkDebug(chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
         for (let xOffset = 0; xOffset < 16; xOffset++) {
             for (let zOffset = 0; zOffset < 16; zOffset++) {
-                let x = 16 * chunkX + xOffset;
-                let z = 16 * chunkZ + zOffset;
-                let biome = World.getBiome(x, z);
-                let climate = BiomeHelper.getBiomeClimate(biome);
-                let humidity = BiomeHelper.getBiomeHumidity(biome);
+                const x = 16 * chunkX + xOffset;
+                const z = 16 * chunkZ + zOffset;
+                const biome = World.getBiome(x, z);
+                const climate = BiomeHelper.getBiomeClimate(biome);
+                const humidity = BiomeHelper.getBiomeHumidity(biome);
 
-                for (let key in HiveGenerator.generators) {
-                    let generator = HiveGenerator.generators[key];
+                for (const key in HiveGenerator.generators) {
+                    const generator = HiveGenerator.generators[key];
 
                     if (generator.dimension && generator.dimension !== dimension)
                         continue;
@@ -60,20 +77,20 @@ const HiveGenerator = {
                 }
             }
         }
-    },
+    }
 
-    genHive: function (x, z, blockId, blockData, grounds) {
-        let y = GenerationUtils.findHighSurface(x, z).y;
+    static genHive(x: number, z: number, blockId: number, blockData: number, grounds?: [number, number][]) {
+        const y = GenerationUtils.findHighSurface(x, z).y;
 
         if (World.getBlockID(x, y + 1, z) !== 0)
             return;
 
         if (grounds) {
             let validGround = false;
-            let block = World.getBlock(x, y, z);
+            const block = World.getBlock(x, y, z);
 
-            for (let key in grounds) {
-                let ground = grounds[key];
+            for (const key in grounds) {
+                const ground = grounds[key];
 
                 if (ground[0] === block.id && (ground[1] === -1 || ground[1] === block.data)) {
                     validGround = true;
@@ -86,14 +103,14 @@ const HiveGenerator = {
         }
 
         World.setBlock(x, y + 1, z, blockId, blockData || 0);
-    },
+    }
 
-    genTreeHive: function (x, z, blockId, blockData) {
+    static genTreeHive(x: number, z: number, blockId: number, blockData: number): boolean {
         let y = 128;
         let prevIsTreeBlock = false;
         while (y > 20) {
-            let id = World.getBlockID(x, y, z);
-            let isTreeBlock = this.isTreeBlock(id);
+            const id = World.getBlockID(x, y, z);
+            const isTreeBlock = this.isTreeBlock(id);
 
             if (prevIsTreeBlock && !isTreeBlock) {
                 World.setBlock(x, y, z, blockId, blockData);
@@ -103,9 +120,9 @@ const HiveGenerator = {
         }
 
         return false;
-    },
+    }
 
-    isTreeBlock: function (blockId) {
+    private static isTreeBlock(blockId: number): boolean {
         switch (blockId) {
             case 17:
             case 18:
@@ -116,7 +133,7 @@ const HiveGenerator = {
 
         return false;
     }
-};
+}
 
 if (ForestryConfig.genBeehivesDebug) {
     Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {

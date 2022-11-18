@@ -9,12 +9,12 @@ header.ts
 creativeGroups.js
 
 ### BASE API
-api/ForestryConfig.js
-api/ContainerHelper.js
-api/MachineRegistry.js
-api/ModelHelper.js
-api/Util.js
-api/ChestManager.js
+api/ForestryConfig.ts
+api/ContainerHelper.ts
+api/MachineRegistry.ts
+api/ModelHelper.ts
+api/Util.ts
+api/ChestManager.ts
 
 ### CORE
 # BLOCKS
@@ -48,9 +48,9 @@ apiculture/api/BeeHouse.js
 apiculture/api/BeeLogic.js
 apiculture/api/BeeRegistry.js
 apiculture/api/BeeSaver.js
-apiculture/api/BiomeHelper.js
+apiculture/api/BiomeHelper.ts
 apiculture/api/Modifier.js
-apiculture/api/HiveGenerator.js
+apiculture/api/HiveGenerator.ts
 
 # BLOCKS
 apiculture/blocks/apiaristChest.js
@@ -65,6 +65,7 @@ apiculture/blocks/beeHouse/tile.js
 apiculture/blocks/storage.js
 
 apiculture/blocks/beehives/beehives.js
+apiculture/blocks/beehives/generation.ts
 apiculture/blocks/beehives/particles.js
 
 # ITEMS

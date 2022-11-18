@@ -1,4 +1,20 @@
 interface ForestryAPI {
+    MachineRegistry: MachineRegistry;
+
+    ContainerHelper: ContainerHelper;
+
+    Config: ForestryConfig;
+
+    HiveGenerator: HiveGenerator;
+
+    ModelHelper: ModelHelper;
+
+    BiomeHelper: BiomeHelper;
+
+    Util: Util;
+
+    ChestManager: ChestManager;
+
     PeatFiredManager: PeatFiredManager;
 
     BioGeneratorManager: BioGeneratorManager;
@@ -40,14 +56,15 @@ ModAPI.registerAPI("ForestryAPI", {
     BeeRegistry: BeeRegistry,
     BeeType: BeeType,
     ModifierList: ModifierList,
-    BiomeHelper: BiomeHelper,
-    HiveGenerator: HiveGenerator,
+    MachineRegistry,
+    BiomeHelper,
+    HiveGenerator,
     Config: ForestryConfig,
-    ContainerHelper: ContainerHelper,
-    ModelHelper: ModelHelper,
-    Util: Util,
+    ContainerHelper,
+    ModelHelper,
+    Util,
     ApiaryRegistry: ApiaryRegistry,
-    ChestManager: ChestManager,
+    ChestManager,
     PeatFiredManager,
     BioGeneratorManager,
     CarpenterManager,
