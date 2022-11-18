@@ -161,7 +161,7 @@ factory/blocks/still/gui.js
 factory/blocks/still/recipes.ts
 factory/blocks/still/tile.js
 
-factory/blocks/rainMaker.js
+factory/blocks/rainMaker.ts
 
 # TRANSLATION
 factory/translation.js
