@@ -52,13 +52,14 @@ const squeezerGUI = new UI.StandartWindow({
         "slotContainer": {type: "slot", x: 760, y: 210, bitmap: "forestry.slots.liquid"}
     }
 });
+MachineRegistry.addUiTitleTranslation(squeezerGUI);
 
 {
-    let content = squeezerGUI.getContent();
+    const content = squeezerGUI.getContent();
     let x = 412;
     let y = 87;
     for (let i = 0; i < 9; i++) {
-        content.elements["slot" + i] = {type: "slot", x: x, y: y, bitmap: "forestry.slots.gray", size: 54};
+        content.elements[`slot${i}`] = {type: "slot", x: x, y: y, bitmap: "forestry.slots.gray", size: 54};
         x += 60;
         if(x >= 560) {
             x = 412;

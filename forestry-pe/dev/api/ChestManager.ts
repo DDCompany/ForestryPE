@@ -45,6 +45,7 @@ class ChestManager {
             drawing: [],
             elements,
         });
+        MachineRegistry.addUiTitleTranslation(gui);
 
         tile.getGuiScreen = () => gui;
         TileEntity.registerPrototype(BlockID[unique], tile);

@@ -45,7 +45,14 @@ const moistenerGUI = new UI.StandartWindow({
             bitmap: "forestry.for.moistener.arrow_1",
             scale: 3.2
         },
-        "progressScale3": {type: "scale", x: 745, y: 160, value: 0, bitmap: "forestry.for.moistener.arrow_2", scale: 3.2},
+        "progressScale3": {
+            type: "scale",
+            x: 745,
+            y: 160,
+            value: 0,
+            bitmap: "forestry.for.moistener.arrow_2",
+            scale: 3.2
+        },
 
         "slotOutput_00": {type: "slot", x: 469, y: 90, size: 59},
         "slotOutput_01": {type: "slot", x: 529, y: 90, size: 59},
@@ -67,3 +74,4 @@ const moistenerGUI = new UI.StandartWindow({
         "slotResult": {type: "slot", x: 799, y: 214, size: 59}
     }
 });
+MachineRegistry.addUiTitleTranslation(moistenerGUI);

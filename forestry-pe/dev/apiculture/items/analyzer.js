@@ -390,7 +390,6 @@ function drawPage1(bee) {
     LINE = 50;
 }
 
-
 function drawPage2(bee) {
     let content = analyzerContainer.getGuiContent();
 
@@ -828,6 +827,7 @@ const analyzerObj = {
     }
 };
 const analyzerGUI = new UI.StandartWindow(analyzerObj);
+MachineRegistry.addUiTitleTranslation(analyzerGUI);
 
 Item.registerUseFunction("analyzer", function () {
     analyzerContainer = new UI.Container();

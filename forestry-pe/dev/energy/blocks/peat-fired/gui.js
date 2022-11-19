@@ -1,6 +1,6 @@
 const guiPeatFiredEngine = new UI.StandartWindow({
     standart: {
-        header: {text: {text: "Peat-fired generator"}},
+        header: {text: {text: "Peat-fired Engine"}},
         inventory: {standart: true},
         background: {standart: true}
     },
@@ -11,7 +11,14 @@ const guiPeatFiredEngine = new UI.StandartWindow({
     ],
 
     elements: {
-        "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry.scales.energy_full", scale: 3.2},
+        "progressEnergyScale": {
+            type: "scale",
+            x: 335,
+            y: 140,
+            direction: 1,
+            bitmap: "forestry.scales.energy_full",
+            scale: 3.2
+        },
         "burnScale": {
             type: "scale",
             x: 394.6,
@@ -29,3 +36,4 @@ const guiPeatFiredEngine = new UI.StandartWindow({
         "slotAsh3": {type: "slot", x: 615, y: 218},
     }
 });
+MachineRegistry.addUiTitleTranslation(guiPeatFiredEngine);

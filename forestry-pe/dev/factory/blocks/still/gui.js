@@ -1,4 +1,4 @@
-var stillGUI = new UI.StandartWindow({
+const stillGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
@@ -26,7 +26,15 @@ var stillGUI = new UI.StandartWindow({
             bitmap: "forestry.scales.energy_full",
             scale: 3.2
         },
-        "progressScale": {type: "scale", x: 625, y: 119.6, direction: 1, value: 0, bitmap: "forestry.for.still.scale", scale: 3.2},
+        "progressScale": {
+            type: "scale",
+            x: 625,
+            y: 119.6,
+            direction: 1,
+            value: 0,
+            bitmap: "forestry.for.still.scale",
+            scale: 3.2
+        },
         "liquidInputScale": {
             type: "scale",
             x: 467,
@@ -53,3 +61,4 @@ var stillGUI = new UI.StandartWindow({
 
     }
 });
+MachineRegistry.addUiTitleTranslation(stillGUI);

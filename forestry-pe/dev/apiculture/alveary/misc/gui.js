@@ -27,8 +27,22 @@ var alvearyGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slot1": {type: "slot", x: 370, y: 106, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
-        "slot2": {type: "slot", x: 370, y: 189.2, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
+        "slot1": {
+            type: "slot",
+            x: 370,
+            y: 106,
+            size: 70.4,
+            bitmap: "_default_slot_empty",
+            isTransparentBackground: true
+        },
+        "slot2": {
+            type: "slot",
+            x: 370,
+            y: 189.2,
+            size: 70.4,
+            bitmap: "_default_slot_empty",
+            isTransparentBackground: true
+        },
 
         "slotProduct0": {
             type: "slot",
@@ -88,3 +102,4 @@ var alvearyGUI = new UI.StandartWindow({
         }
     }
 });
+MachineRegistry.addUiTitleTranslation(alvearyGUI);

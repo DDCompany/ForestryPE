@@ -50,24 +50,25 @@ const fabricatorGUI = new UI.StandartWindow({
         "slotResult": {type: "slot", x: 787, y: 203}
     }
 });
+MachineRegistry.addUiTitleTranslation(fabricatorGUI);
 
 {
-    let content = fabricatorGUI.getContent();
+    const content = fabricatorGUI.getContent();
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            let slotName = "slotInput" + (i * 3 + j);
+            const slotName = `slotInput${i * 3 + j}`;
 
             content.elements[slotName] = {
-                type: "slot", x: 541 + j * 60, y: 88 + i * 60, isValid: function (id, count, data, container) {
+                type: "slot", x: 541 + j * 60, y: 88 + i * 60, isValid: (id, count, data, container) => {
                     container.setSlot(slotName, id, 1, data);
                     return false;
                 }, clicker: {
-                    onClick: function (container) {
+                    onClick: container => {
                         container.clearSlot(slotName);
-                        let elementIns = container.getElement(slotName);
-                        let clazz = elementIns.getClass();
-                        let field = clazz.getDeclaredField("currentSelectedSlot");
+                        const elementIns = container.getElement(slotName);
+                        const clazz = elementIns.getClass();
+                        const field = clazz.getDeclaredField("currentSelectedSlot");
 
                         field.setAccessible(true);
                         field.set(elementIns, elementIns);
@@ -79,7 +80,7 @@ const fabricatorGUI = new UI.StandartWindow({
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 9; j++) {
-            content.elements["slotResources" + (i * 9 + j)] = {type: "slot", x: 335 + j * 60, y: 281 + i * 60};
+            content.elements[`slotResources${i * 9 + j}`] = {type: "slot", x: 335 + j * 60, y: 281 + i * 60};
         }
     }
 }

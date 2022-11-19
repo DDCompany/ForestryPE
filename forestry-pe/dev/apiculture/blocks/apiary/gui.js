@@ -1,4 +1,4 @@
-var apiaryGUI = new UI.StandartWindow({
+const apiaryGUI = new UI.StandartWindow({
     standart: {
         header: {
             text: {
@@ -28,8 +28,22 @@ var apiaryGUI = new UI.StandartWindow({
             scale: 3.2
         },
 
-        "slot1": {type: "slot", x: 370, y: 106, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
-        "slot2": {type: "slot", x: 370, y: 189.2, size: 70.4, bitmap: "_default_slot_empty", isTransparentBackground: true},
+        "slot1": {
+            type: "slot",
+            x: 370,
+            y: 106,
+            size: 70.4,
+            bitmap: "_default_slot_empty",
+            isTransparentBackground: true
+        },
+        "slot2": {
+            type: "slot",
+            x: 370,
+            y: 189.2,
+            size: 70.4,
+            bitmap: "_default_slot_empty",
+            isTransparentBackground: true
+        },
 
         "slotProduct0": {
             type: "slot",
@@ -93,3 +107,4 @@ var apiaryGUI = new UI.StandartWindow({
         "slotFrame2": {type: "slot", x: 478, y: 252, size: 51, bitmap: "forestry.slots.gray"},
     }
 });
+MachineRegistry.addUiTitleTranslation(apiaryGUI);

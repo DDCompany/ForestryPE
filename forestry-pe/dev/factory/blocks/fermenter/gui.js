@@ -72,3 +72,4 @@ const fermenterGUI = new UI.StandartWindow({
         "slotFilledContainer": {type: "slot", x: 711, y: 246},
     }
 });
+MachineRegistry.addUiTitleTranslation(fermenterGUI);

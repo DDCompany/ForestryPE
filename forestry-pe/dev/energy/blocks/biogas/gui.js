@@ -1,6 +1,6 @@
 const guiBiogasEngine = new UI.StandartWindow({
     standart: {
-        header: {text: {text: "Biogas Generator"}},
+        header: {text: {text: "Biogas Engine"}},
         inventory: {standart: true},
         background: {standart: true}
     },
@@ -11,8 +11,23 @@ const guiBiogasEngine = new UI.StandartWindow({
     ],
 
     elements: {
-        "progressEnergyScale": {type: "scale", x: 335, y: 140, direction: 1, bitmap: "forestry.scales.energy_full", scale: 3.2},
-        "lavaScale": {type: "scale", x: 650, y: 113, direction: 1, value: 0, bitmap: "forestry.bgs.liquid_2", scale: 3.2},
+        "progressEnergyScale": {
+            type: "scale",
+            x: 335,
+            y: 140,
+            direction: 1,
+            bitmap: "forestry.scales.energy_full",
+            scale: 3.2
+        },
+        "lavaScale": {
+            type: "scale",
+            x: 650,
+            y: 113,
+            direction: 1,
+            value: 0,
+            bitmap: "forestry.bgs.liquid_2",
+            scale: 3.2
+        },
         "liquidScale": {
             type: "scale",
             x: 593,
@@ -38,3 +53,4 @@ const guiBiogasEngine = new UI.StandartWindow({
 
     }
 });
+MachineRegistry.addUiTitleTranslation(guiBiogasEngine);

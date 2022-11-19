@@ -49,15 +49,16 @@ const centrifugeGUI = new UI.StandartWindow({
         "slotRecipe": {type: "slot", x: 505, y: 181, size: 52, visual: true}
     }
 });
+MachineRegistry.addUiTitleTranslation(centrifugeGUI);
 
 {
-    let content = centrifugeGUI.getContent();
+    const content = centrifugeGUI.getContent();
     let x = 620;
     let y = 116;
     for (let i = 0; i < 9; i++) {
-        content.elements["slotOutput" + i] = {type: "slot", x: x, y: y};
+        content.elements[`slotOutput${i}`] = {type: "slot", x: x, y: y};
         x += 61;
-        if(x >= 800) {
+        if (x >= 800) {
             x = 620;
             y += 61;
         }

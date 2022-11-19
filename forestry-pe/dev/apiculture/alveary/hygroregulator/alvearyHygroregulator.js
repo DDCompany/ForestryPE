@@ -7,13 +7,9 @@ ToolAPI.registerBlockMaterial(BlockID.alvearyHygroregulator, "wood");
 ApiaryRegistry.register(BlockID.alvearyHygroregulator);
 
 Callback.addCallback("PostLoaded", function () {
-
     Recipes.addShaped({id: BlockID.alvearyHygroregulator, count: 1, data: 0}, [
         "gig",
         "gmg",
         "gig"
     ], ['i', 265, 0, 'm', BlockID.alveary, 0, 'g', 20, 0]);
-
 });
-
-//ICRenderLib.addConnectionBlock("bc-container", BlockID.hygroregulator);

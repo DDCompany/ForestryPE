@@ -29,3 +29,4 @@ var alvearyHygroregulatorGUI = new UI.StandartWindow({
         "slotContainer": {type: "slot", x: 400, y: 150, bitmap: "forestry.slots.container"}
     }
 });
+MachineRegistry.addUiTitleTranslation(alvearyHygroregulatorGUI);

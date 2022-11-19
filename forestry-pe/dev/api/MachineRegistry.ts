@@ -1,5 +1,6 @@
 class MachineRegistry {
     static readonly machines: Record<number, TileEntity.TileEntityPrototype> = {};
+    static readonly uis: UI.StandartWindow[] = [];
 
     static registerConsumer(id: number, prototype: TileEntity.TileEntityPrototype, energyType?: EnergyType) {
         energyType = energyType || RF;
@@ -74,4 +75,33 @@ class MachineRegistry {
                 summonException("Energy type not supported");
         }
     }
+
+    static addUiTitleTranslation(ui: UI.StandartWindow) {
+        if (this.uis.indexOf(ui) === -1) {
+            this.uis.push(ui);
+        }
+    }
 }
+
+Callback.addCallback("LocalLevelLoaded", () => {
+    for (const ui of MachineRegistry.uis) {
+        const headerWindow = ui.getWindow("header");
+        if (!headerWindow) {
+            throw new Error("Header window not found");
+        }
+
+        // @ts-ignore
+        const textDrawing = headerWindow.getContentProvider().drawing?.[2] as UI.TextDrawing;
+        if (!textDrawing) {
+            throw new Error("Text drawing not found");
+        }
+
+        // @ts-ignore
+        const headerText = ui.getContent().standard?.header?.text?.text || ui.getContent().standart?.header?.text?.text;
+        if (!headerText) {
+            throw new Error("Title not set");
+        }
+
+        textDrawing.text = Translation.translate(headerText);
+    }
+});

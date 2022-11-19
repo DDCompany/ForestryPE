@@ -62,11 +62,11 @@ const carpenterGUI = new UI.StandartWindow({
             let slotName = "slotInput" + (i * 3 + j);
 
             content.elements[slotName] = {
-                type: "slot", x: 385 + j * 60, y: 75 + i * 60, isValid: function (id, count, data, container) {
+                type: "slot", x: 385 + j * 60, y: 75 + i * 60, isValid: (id, count, data, container) => {
                     container.setSlot(slotName, id, 1, data);
                     return false;
                 }, clicker: {
-                    onClick: function (container) {
+                    onClick: container => {
                         container.clearSlot(slotName);
                         let elementIns = container.getElement(slotName);
                         let clazz = elementIns.getClass();
@@ -86,4 +86,4 @@ const carpenterGUI = new UI.StandartWindow({
         }
     }
 }
-
+MachineRegistry.addUiTitleTranslation(carpenterGUI);
