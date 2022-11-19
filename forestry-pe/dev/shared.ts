@@ -1,4 +1,6 @@
 interface ForestryAPI {
+    RainSubstrateRecipes: RainSubstrateRecipes;
+
     MachineRegistry: MachineRegistry;
 
     ContainerHelper: ContainerHelper;
@@ -75,6 +77,7 @@ ModAPI.registerAPI("ForestryAPI", {
     FactoryManager,
     StillManager,
     MoistenerManager,
+    RainSubstrateRecipes,
     Combs: COMBS,
     registerCrate,
 

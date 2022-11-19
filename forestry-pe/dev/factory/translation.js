@@ -32,5 +32,3 @@ Translation.addTranslation("Basic Circuit Board", {ru: "Базовая печа�
 Translation.addTranslation("Enhanced Circuit Board", {ru: "Продвинутая печатная плата"});
 Translation.addTranslation("Intricate Circuit Board", {ru: "Усовершенствованная печатная плата"});
 Translation.addTranslation("Refined Circuit Board", {ru: "Усложнённая печатная плата"});
-Translation.addTranslation("Iodine Capsule", {ru: "Капсула с йодом"});
-Translation.addTranslation("Dissipation Charge", {ru: "Рассеивающий заряд"});

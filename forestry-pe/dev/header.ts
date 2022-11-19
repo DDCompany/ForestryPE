@@ -45,18 +45,6 @@ function summonException(msg: string): never {
     throw new Error(msg);
 }
 
-function values<T>(obj: Record<string, T>): T[] {
-    let result = [], key;
-
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            result.push(obj[key]);
-        }
-    }
-
-    return result;
-}
-
 interface ChancedRecipeItem {
     id: number;
 

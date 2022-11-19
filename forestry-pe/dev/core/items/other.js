@@ -24,9 +24,11 @@ Item.createItem("ash", "Ash", {name: "ash", meta: 0}, {});
 
 IDRegistry.genItemID("iodineCapsule");
 Item.createItem("iodineCapsule", "Iodine Capsule", {name: "iodineCapsule", meta: 0}, {});
+ItemUtils.addStaticTooltip(ItemID.iodineCapsule, "item.iodine_capsule.tooltip");
 
 IDRegistry.genItemID("dissipationCharge");
 Item.createItem("dissipationCharge", "Dissipation Charge", {name: "dissipationCharge", meta: 0}, {});
+ItemUtils.addStaticTooltip(ItemID.dissipationCharge, "item.dissipation_charge.tooltip");
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.fertilizerBio, count: 4, data: 0}, [
