@@ -3,7 +3,7 @@ TileEntity.registerPrototype(BlockID.bog, {
         maturity: 0
     },
 
-    increaseMaturity: function () {
+    increaseMaturity() {
         if (!this.isMoistened())
             return;
 
@@ -14,7 +14,7 @@ TileEntity.registerPrototype(BlockID.bog, {
 
     },
 
-    isMoistened: function () {
+    isMoistened() {
         for (let xx = this.x - 1; xx <= this.x + 1; xx++) {
             for (let zz = this.z - 1; zz <= this.z + 1; zz++) {
                 let blockId = World.getBlockID(xx, this.y, zz);
@@ -26,7 +26,7 @@ TileEntity.registerPrototype(BlockID.bog, {
     }
 });
 
-Block.setRandomTickCallback(BlockID.bog, function (x, y, z) {
+Block.setRandomTickCallback(BlockID.bog, (x, y, z) => {
     let tile = World.getTileEntity(x, y, z);
 
     if (tile === null)

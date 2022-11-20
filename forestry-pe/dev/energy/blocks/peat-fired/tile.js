@@ -6,7 +6,7 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
         energyOut: 0
     },
 
-    addAsh: function () {
+    addAsh() {
         for (let i = 0; i < 4; i++) {
             let slot = this.container.getSlot("slotAsh" + i);
             if (slot.id === 0) {
@@ -22,7 +22,7 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
         return false;
     },
 
-    tick: function () {
+    tick() {
         let slotFuel = this.container.getSlot("slotFuel");
 
         if (this.data.burn) {
@@ -60,11 +60,11 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 200000;
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return guiPeatFiredEngine;
     }
 });

@@ -2,7 +2,7 @@ IDRegistry.genBlockID("carpenter");
 FactoryManager.register("carpenter", "Carpenter",
     [["carpenter_top", 0], ["carpenter_top", 0], ["carpenter", 0], ["carpenter", 0], ["carpenter_side", 0], ["carpenter_side", 0]], true);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.carpenter, count: 1, data: 0}, [
         "bgb",
         "bfb",

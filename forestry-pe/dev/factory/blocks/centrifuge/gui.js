@@ -56,7 +56,7 @@ MachineRegistry.addUiTitleTranslation(centrifugeGUI);
     let x = 620;
     let y = 116;
     for (let i = 0; i < 9; i++) {
-        content.elements[`slotOutput${i}`] = {type: "slot", x: x, y: y};
+        content.elements[`slotOutput${i}`] = {type: "slot", x, y};
         x += 61;
         if (x >= 800) {
             x = 620;

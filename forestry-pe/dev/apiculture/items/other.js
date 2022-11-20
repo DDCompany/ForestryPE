@@ -55,7 +55,7 @@ Item.createItem("scentedPaneling", "Scented Paneling", {name: "scentedPaneling",
 Item.addCreativeGroup(GROUP_PROPOLIS, GROUP_PROPOLIS_NAME, [ItemID.propolis, ItemID.propolisSilky, ItemID.propolisPulse]);
 Item.addCreativeGroup(GROUP_POLLEN, GROUP_POLLEN_NAME, [ItemID.pollen, ItemID.pollen1]);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: 382, count: 1, data: 0}, [
         "hdh",
         "hmh",

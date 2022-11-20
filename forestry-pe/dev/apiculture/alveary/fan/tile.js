@@ -1,7 +1,7 @@
 MachineRegistry.registerConsumer(BlockID.alvearyFan, {
     defaultValues: {},
 
-    alvearyTick: function (tile) {
+    alvearyTick(tile) {
         if (this.data.energy >= 10 && tile.climate !== undefined) {
             this.data.energy -= 10;
             tile.climate = Math.max(BiomeHelper.CLIMATE_ICY, parseInt(tile.climate - (tile.climate * 0.2)));
@@ -9,7 +9,7 @@ MachineRegistry.registerConsumer(BlockID.alvearyFan, {
 
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 40;
     }
 });

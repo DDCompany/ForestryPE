@@ -24,7 +24,7 @@ Block.setDestroyLevel("oreApatite", 2);
 
 Item.addCreativeGroup(GROUP_ORES, GROUP_ORES_NAME, [BlockID.oreCopper, BlockID.oreTin, BlockID.oreApatite]);
 
-Block.registerDropFunction("oreApatite", function (coords, id, data, diggingLevel) {
+Block.registerDropFunction("oreApatite", (coords, id, data, diggingLevel) => {
     if (diggingLevel > 1) {
         ToolAPI.dropOreExp(coords, 1, 4, 1);
         return [[ItemID.apatite, 1 + Math.random() * 5, 0]];
@@ -33,7 +33,7 @@ Block.registerDropFunction("oreApatite", function (coords, id, data, diggingLeve
     return [];
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addFurnace(BlockID.oreCopper, ItemID.ingotCopper, 0);
     Recipes.addFurnace(BlockID.oreTin, ItemID.ingotTin, 0);
 });
@@ -48,8 +48,8 @@ function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY, biomes)
 }
 
 if (ForestryConfig.genCopper) {
-    Flags.addUniqueAction("oreGenCopper", function () {
-        Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    Flags.addUniqueAction("oreGenCopper", () => {
+        Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
             generateOre(BlockID.oreCopper,
                 chunkX,
                 chunkZ,
@@ -62,8 +62,8 @@ if (ForestryConfig.genCopper) {
 }
 
 if (ForestryConfig.genTin) {
-    Flags.addUniqueAction("oreGenTin", function () {
-        Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    Flags.addUniqueAction("oreGenTin", () => {
+        Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
             generateOre(BlockID.oreTin,
                 chunkX,
                 chunkZ,
@@ -76,8 +76,8 @@ if (ForestryConfig.genTin) {
 }
 
 if (ForestryConfig.genApatite) {
-    Flags.addUniqueAction("oreGenApatite", function () {
-        Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    Flags.addUniqueAction("oreGenApatite", () => {
+        Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
             if (Math.random() < 0.8)
                 generateOre(BlockID.oreApatite,
                     chunkX,

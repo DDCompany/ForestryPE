@@ -4,7 +4,7 @@ MachineRegistry.registerGenerator(BlockID.engineClockwork, {
         delay: 40
     },
 
-    click: function () {
+    click() {
         this.data.delay = 40;
         this.data.heat = Math.min(this.data.heat + 100, 800);
         Player.setExhaustion(Player.getExhaustion() + 0.05);
@@ -15,7 +15,7 @@ MachineRegistry.registerGenerator(BlockID.engineClockwork, {
         }
     },
 
-    tick: function () {
+    tick() {
         if (this.data.heat) {
             if (this.data.delay) {
                 this.data.delay--;
@@ -27,7 +27,7 @@ MachineRegistry.registerGenerator(BlockID.engineClockwork, {
         }
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 10;
     }
 });

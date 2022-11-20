@@ -1,7 +1,7 @@
 Block.setPrototype("enginePeat", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [{
             name: "Peat-fired Engine",
             texture: [["engine_peat", 0], ["engine_peat", 2], ["engine_peat", 1]],
@@ -10,7 +10,7 @@ Block.setPrototype("enginePeat", {
     }
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.enginePeat, count: 1, data: 0}, [
         "bbb",
         "0s0",

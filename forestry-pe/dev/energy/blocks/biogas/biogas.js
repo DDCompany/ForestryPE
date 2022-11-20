@@ -1,7 +1,7 @@
 Block.setPrototype("engineBiogas", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [{
             name: "Biogas Engine",
             texture: [["engine_biogas", 0], ["engine_biogas", 2], ["engine_biogas", 1]],
@@ -10,7 +10,7 @@ Block.setPrototype("engineBiogas", {
     }
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.engineBiogas, count: 1, data: 0}, [
         "bbb",
         "0s0",

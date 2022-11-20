@@ -1,7 +1,7 @@
 Block.setPrototype("engineClockwork", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [{
             name: "Clockwork Engine",
             texture: [["engine_clock", 0], ["engine_clock", 2], ["engine_clock", 1]],
@@ -10,7 +10,7 @@ Block.setPrototype("engineClockwork", {
     }
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.engineClockwork, count: 1, data: 0}, [
         "bbb",
         "0m0",

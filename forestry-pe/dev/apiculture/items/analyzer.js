@@ -16,7 +16,7 @@ let drawedElements = {};
 
 const updatableAnalyzer = {
 
-    update: function () {
+    update() {
         if (analyzerContainer && temp) {
             if (analyzerContainer.isOpened()) {
                 let slotHoney = analyzerContainer.getSlot("slotHoney");
@@ -111,7 +111,7 @@ const updatableAnalyzer = {
 
 };
 
-Callback.addCallback("LevelLoaded", function () {
+Callback.addCallback("LevelLoaded", () => {
     Updatable.addUpdatable(updatableAnalyzer);
 });
 
@@ -829,7 +829,7 @@ const analyzerObj = {
 const analyzerGUI = new UI.StandartWindow(analyzerObj);
 MachineRegistry.addUiTitleTranslation(analyzerGUI);
 
-Item.registerUseFunction("analyzer", function () {
+Item.registerUseFunction("analyzer", () => {
     analyzerContainer = new UI.Container();
     analyzerContainer.openAs(analyzerGUI);
     temp = true;

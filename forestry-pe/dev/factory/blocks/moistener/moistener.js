@@ -2,7 +2,7 @@ IDRegistry.genBlockID("moistener");
 FactoryManager.register("moistener", "Moistener",
     [["moistener_top", 0], ["moistener_top", 0], ["moistener", 0], ["moistener", 0], ["moistener_side", 0], ["moistener_side", 0]], true);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.moistener, count: 1, data: 0}, [
         "gsg",
         "sbs",

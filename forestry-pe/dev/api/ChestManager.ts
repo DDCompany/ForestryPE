@@ -13,7 +13,7 @@ class ChestManager {
         specType?: Block.SpecialType | string,
     ) {
         Block.createBlockWithRotation(unique, [
-            {name: name, texture: textures, inCreative: inCreative}
+            {name, texture: textures, inCreative}
         ], specType);
         this.createModel(BlockID[unique]);
 

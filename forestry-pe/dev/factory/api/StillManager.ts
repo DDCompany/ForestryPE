@@ -57,7 +57,7 @@ class StillManager {
             return list.map(recipe => ({
                 input: [],
                 output: [],
-                recipe: recipe
+                recipe
             }));
         }
 

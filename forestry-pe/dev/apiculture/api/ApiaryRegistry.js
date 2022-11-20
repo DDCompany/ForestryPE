@@ -1,16 +1,16 @@
 var ApiaryRegistry = {
     blockIDs: [],
 
-    register: function (id) {
+    register(id) {
         this.blockIDs.push(id);
         Item.addCreativeGroup(GROUP_ALVEARY, GROUP_ALVEARY_NAME, [id]);
     },
 
-    isApiaryComponent: function (id) {
+    isApiaryComponent(id) {
         return this.blockIDs.indexOf(id) > -1;
     },
 
-    isValidStructure: function (x, y, z) {
+    isValidStructure(x, y, z) {
 
         var gb = World.getBlock;
 

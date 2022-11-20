@@ -8,11 +8,11 @@ MachineRegistry.registerConsumer(BlockID.still, {
         outputLiquid: null
     },
 
-    init: function () {
+    init() {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    findWork: function () {
+    findWork() {
         let liquid = this.data.inputLiquid;
         let recipe = StillManager.getRecipe(liquid);
 
@@ -37,7 +37,7 @@ MachineRegistry.registerConsumer(BlockID.still, {
         return false;
     },
 
-    tick: function () {
+    tick() {
         let threadTime = World.getThreadTime();
         if (threadTime % 20 === 0) {
             let inputLiquid = ContainerHelper.drainContainer(this.data.inputLiquid, this, "slotInputContainer");
@@ -72,11 +72,11 @@ MachineRegistry.registerConsumer(BlockID.still, {
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 8000;
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return stillGUI;
     }
 });
@@ -87,11 +87,11 @@ StorageInterface.createInterface(BlockID.still, {
             input: true,
             output: true,
 
-            canOutput: function (item) {
+            canOutput(item) {
                 return LiquidRegistry.getEmptyItem(item.id, item.data) == null;
             },
 
-            isValid: function (item) {
+            isValid(item) {
                 return LiquidRegistry.getEmptyItem(item.id, item.data);
             },
         },
@@ -105,11 +105,11 @@ StorageInterface.createInterface(BlockID.still, {
         }
     },
 
-    canTransportLiquid: function (liquid) {
+    canTransportLiquid(liquid) {
         return this.tileEntity.data.outputLiquid === liquid;
     },
 
-    canReceiveLiquid: function (liquid) {
+    canReceiveLiquid(liquid) {
         let inputLiquid = this.tileEntity.data.inputLiquid;
         if (!inputLiquid || inputLiquid === liquid || !this.tileEntity.liquidStorage.getAmount(liquid)) {
             this.tileEntity.data.inputLiquid = liquid;

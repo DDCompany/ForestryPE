@@ -7,11 +7,11 @@ TileEntity.registerPrototype(BlockID.apiary, {
         progressCycle: 0
     },
 
-    created: function () {
+    created() {
         this.data.biome_override = World.getBiome(this.x, this.z);
     },
 
-    tick: function () {
+    tick() {
         var content = this.container.getGuiContent();
 
         if (!this.house) {
@@ -23,18 +23,14 @@ TileEntity.registerPrototype(BlockID.apiary, {
                 slotPrincessOut: this.OUTPUT_SLOTS,
                 slotDronesOut: this.OUTPUT_SLOTS
             }, new ModifierList([{
-                getProductionModifier: function () {
+                getProductionModifier() {
                     return 0.1;
                 }
             }]));
 
-            this.house.getHumidity = function () {
-                return BiomeHelper.getBiomeHumidity(self.data.biome_override);
-            };
+            this.house.getHumidity = () => BiomeHelper.getBiomeHumidity(self.data.biome_override);
 
-            this.house.getClimate = function () {
-                return BiomeHelper.getBiomeClimate(self.data.biome_override);
-            };
+            this.house.getClimate = () => BiomeHelper.getBiomeClimate(self.data.biome_override);
         }
         var modifiers = new ModifierList([]);
         if (this.house.queen) {
@@ -76,7 +72,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
         this.container.validateAll();
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return apiaryGUI;
     }
 });
@@ -85,14 +81,14 @@ TileEntity.registerPrototype(BlockID.apiary, {
     let slots = {
         "slot1": {
             input: true,
-            isValid: function (item) {
+            isValid(item) {
                 let type = BeeRegistry.getBeeTypeByID(item.id);
                 return type === BeeRegistry.BEETYPE_PRINCESS || type === BeeRegistry.BEETYPE_QUEEN;
             }
         },
         "slot2": {
             input: true,
-            isValid: function (item) {
+            isValid(item) {
                 return BeeRegistry.getBeeTypeByID(item.id) === BeeRegistry.BEETYPE_DRONE;
             }
         },
@@ -105,6 +101,6 @@ TileEntity.registerPrototype(BlockID.apiary, {
     }
 
     StorageInterface.createInterface(BlockID.apiary, {
-        slots: slots
+        slots
     });
 }

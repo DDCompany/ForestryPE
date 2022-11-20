@@ -9,25 +9,25 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
         temperatureRem: 0
     },
 
-    init: function () {
+    init() {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getBurnTimeForLiquid: function (liq) {
+    getBurnTimeForLiquid(liq) {
         return liq === "biomass" ? 1250 :
             (liq === "seedOil" ? 2500 :
                 (liq === "appleJuice" ? 2500 :
                     (liq === "honey" ? 2500 : 0)));
     },
 
-    getEnergyOutForLiquid: function (liq) {
+    getEnergyOutForLiquid(liq) {
         return liq === "biomass" ? 50 :
             (liq === "seedOil" ? 30 :
                 (liq === "appleJuice" ? 10 :
                     (liq === "honey" ? 20 : 0)));
     },
 
-    addEmptyContainer: function (empty) {
+    addEmptyContainer(empty) {
         let slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
 
         if (slotEmptyContainer.id === 0) {
@@ -43,7 +43,7 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
         return false;
     },
 
-    tick: function () {
+    tick() {
         var slotContainer = this.container.getSlot("slotContainer");
 
         if (this.data.liquidStored) {
@@ -125,11 +125,11 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
         this.container.validateAll();
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 300000;
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return guiBiogasEngine;
     }
 });

@@ -211,7 +211,7 @@ BackpackRegistry.register(ItemID.backpackMinersT2, {
     slots: 45,
     inRow: 9,
 
-    isValidItem: function (id, count, data) {
+    isValidItem(id, count, data) {
         return !BackpackRegistry.isBackpack(id) &&
             BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackMiners].items);
     }
@@ -224,7 +224,7 @@ BackpackRegistry.register(ItemID.backpackDiggerT2, {
     slots: 45,
     inRow: 9,
 
-    isValidItem: function (id, count, data) {
+    isValidItem(id, count, data) {
         return !BackpackRegistry.isBackpack(id) &&
             BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackDigger].items);
     }
@@ -237,7 +237,7 @@ BackpackRegistry.register(ItemID.backpackForesterT2, {
     slots: 45,
     inRow: 9,
 
-    isValidItem: function (id, count, data) {
+    isValidItem(id, count, data) {
         return !BackpackRegistry.isBackpack(id) &&
             BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackForester].items);
     }
@@ -250,7 +250,7 @@ BackpackRegistry.register(ItemID.backpackHunterT2, {
     slots: 45,
     inRow: 9,
 
-    isValidItem: function (id, count, data) {
+    isValidItem(id, count, data) {
         return !BackpackRegistry.isBackpack(id) &&
             BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackHunter].items);
     }
@@ -263,7 +263,7 @@ BackpackRegistry.register(ItemID.backpackBuilderT2, {
     slots: 45,
     inRow: 9,
 
-    isValidItem: function (id, count, data) {
+    isValidItem(id, count, data) {
         return !BackpackRegistry.isBackpack(id) &&
             BackpackRegistry.isValidFor(id, data, BackpackRegistry.prototypes[ItemID.backpackBuilder].items);
     }
@@ -277,7 +277,7 @@ BackpackRegistry.register(ItemID.backpackApiarist, {
     slots: 125,
     inRow: 10,
 
-    isValidItem: function (id) {
+    isValidItem(id) {
         return BeeRegistry.isBee(id);
     }
 });
@@ -299,7 +299,7 @@ Item.addCreativeGroup(GROUP_WOVEN_BACKPACKS, GROUP_WOVEN_BACKPACKS_NAME, [
     ItemID.backpackBuilderT2
 ]);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.backpackMiners, count: 1, data: 0}, [
         "sws",
         "ici",

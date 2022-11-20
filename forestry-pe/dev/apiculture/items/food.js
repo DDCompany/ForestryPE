@@ -7,12 +7,12 @@ Item.createFoodItem("honeyPot", "Honey Pot", {name: "honeyPot", meta: 0}, {food:
 IDRegistry.genItemID("ambrosia");
 Item.createFoodItem("ambrosia", "Ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
 
-Callback.addCallback("FoodEaten", function () {
+Callback.addCallback("FoodEaten", () => {
     if (Player.getCarriedItem().id === ItemID.ambrosia)
         Entity.addEffect(Player.get(), Native.PotionEffect.regeneration, 40, 1, true, true);
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.honeyPot, count: 1, data: 0}, [
         "h h",
         " m ",

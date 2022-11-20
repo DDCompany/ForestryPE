@@ -30,7 +30,7 @@ IDRegistry.genItemID("dissipationCharge");
 Item.createItem("dissipationCharge", "Dissipation Charge", {name: "dissipationCharge", meta: 0}, {});
 ItemUtils.addStaticTooltip(ItemID.dissipationCharge, "item.dissipation_charge.tooltip");
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.fertilizerBio, count: 4, data: 0}, [
         " w ",
         "wdw",

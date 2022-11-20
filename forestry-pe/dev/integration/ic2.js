@@ -1,4 +1,4 @@
-ModAPI.addAPICallback("ICore", function (api) {
+ModAPI.addAPICallback("ICore", api => {
     let blacklist = api.requireGlobal("recyclerBlacklist");
 
     for (const key in BeeRegistry.bees) {

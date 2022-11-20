@@ -1,7 +1,7 @@
 Block.setPrototype("blockWax", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {
                 name: "Wax Block",
@@ -13,7 +13,7 @@ Block.setPrototype("blockWax", {
 });
 Block.setBlockMaterial(BlockID.blockWax, "dirt", 1);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.blockWax, count: 1, data: 0}, [
         "iii",
         "iii",
@@ -26,7 +26,7 @@ if (ForestryConfig.combsBlocksEnabled) {
     Block.setPrototype("blockComb", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [
                 {
                     name: "Cocoa Comb Block",
@@ -105,7 +105,7 @@ if (ForestryConfig.combsBlocksEnabled) {
 
     Item.addCreativeGroup(GROUP_COMB_BLOCKS, GROUP_COMB_BLOCKS_NAME, [BlockID.blockComb]);
 
-    Callback.addCallback("PostLoaded", function () {
+    Callback.addCallback("PostLoaded", () => {
         Recipes.addShaped({id: BlockID.blockComb, count: 1, data: 0}, [
             "iii",
             "iii",

@@ -2,11 +2,11 @@ if (ForestryConfig.rainTankEnabled) {
     TileEntity.registerPrototype(BlockID.rainTank, {
         defaultValues: {},
 
-        init: function () {
+        init() {
             this.liquidStorage.setLimit(null, 15);
         },
 
-        tick: function () {
+        tick() {
             this.liquidStorage.updateUiScale("liquidScale", "water");
 
             ContainerHelper.fillContainer("water", this, "slotContainer", "slotFullContainer");
@@ -16,7 +16,7 @@ if (ForestryConfig.rainTankEnabled) {
             }
         },
 
-        getGuiScreen: function () {
+        getGuiScreen() {
             return raintankGUI;
         }
     });
@@ -31,7 +31,7 @@ if (ForestryConfig.rainTankEnabled) {
             }
         },
 
-        canTransportLiquid: function () {
+        canTransportLiquid() {
             return true;
         },
     });

@@ -26,16 +26,16 @@ TileEntity.registerPrototype(BlockID.moistener, {
         recipeSlot: 0
     },
 
-    init: function () {
+    init() {
         this.liquidStorage.setLimit("water", 10);
     },
 
-    getSpeed: function () {
+    getSpeed() {
         let light = World.getLightLevel(this.x, this.y + 1, this.z);
         return light >= 9 ? 1 : (light >= 7 ? 2 : (light >= 5 ? 3 : 4));
     },
 
-    enoughSpace: function (prefix, amount, id, data) {
+    enoughSpace(prefix, amount, id, data) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
 
@@ -49,7 +49,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return false;
     },
 
-    findRecipe: function () {
+    findRecipe() {
         if (!this.data.progressRecipe) {
             let slot = this.container.getSlot("slotRecipe");
             let recipe = MoistenerManager.getRecipe(slot.id, slot.data);
@@ -66,7 +66,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return true;
     },
 
-    startBurning: function () {
+    startBurning() {
         let length = MOISTENER_SLOTS.length;
         for (let i = 0; i < length; i++) {
             let slots = MOISTENER_SLOTS[i];
@@ -89,7 +89,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         }
     },
 
-    getForGroup: function (prefix, amount, outPrefix, outAmount) {
+    getForGroup(prefix, amount, outPrefix, outAmount) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
             let fuelData = MoistenerManager.getFuelInfo(slot.id, slot.data);
@@ -97,14 +97,14 @@ TileEntity.registerPrototype(BlockID.moistener, {
             if (fuelData) {
                 let output = fuelData.outputItem;
                 if (this.enoughSpace(outPrefix, outAmount, output.id, output.data))
-                    return {fuelData: fuelData, slot: amount};
+                    return {fuelData, slot: amount};
             }
         }
 
         return null;
     },
 
-    putToSlots: function (amount, prefix, item) {
+    putToSlots(amount, prefix, item) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
             if (ContainerHelper.putInSlot(slot, item))
@@ -114,7 +114,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return false;
     },
 
-    tick: function () {
+    tick() {
         if (World.getThreadTime() % 20 === 0)
             ContainerHelper.drainContainer2("water", this, "slotContainer", "slotEmptyContainer");
 
@@ -160,7 +160,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         this.liquidStorage.updateUiScale("liquidScale", "water");
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return moistenerGUI;
     }
 });
@@ -169,13 +169,13 @@ TileEntity.registerPrototype(BlockID.moistener, {
     let slots = {
         "slotContainer": {
             input: true,
-            isValid: function (item) {
+            isValid(item) {
                 return LiquidRegistry.getEmptyItem(item.id, item.data) != null;
             },
         },
         "slotRecipe": {
             input: true,
-            isValid: function (item) {
+            isValid(item) {
                 return MoistenerManager.getRecipe(item.id, item.data);
             },
         },
@@ -199,20 +199,20 @@ TileEntity.registerPrototype(BlockID.moistener, {
             input: true,
             output: true,
 
-            isValid: function (item) {
+            isValid(item) {
                 return MoistenerManager.getFuelInfo(item.id, item.data);
             },
 
-            canOutput: function (item) {
+            canOutput(item) {
                 return !MoistenerManager.getFuelInfo(item.id, item.data);
             }
         };
     }
 
     StorageInterface.createInterface(BlockID.moistener, {
-        slots: slots,
+        slots,
 
-        canReceiveLiquid: function (liquid) {
+        canReceiveLiquid(liquid) {
             return liquid === "water";
         }
     });

@@ -7,11 +7,11 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         output: null
     },
 
-    init: function () {
+    init() {
         this.liquidStorage.setLimit(null, 8);
     },
 
-    decreaseTemperature: function () {
+    decreaseTemperature() {
         let temperature = this.data.temperature;
 
         if (temperature > 2500)
@@ -19,7 +19,7 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         else this.data.temperature--;
     },
 
-    findWork: function () {
+    findWork() {
         let pattern = {};
 
         for (let i = 0; i < 9; i++) {
@@ -84,7 +84,7 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         }
     },
 
-    trySmelt: function () {
+    trySmelt() {
         let slot = this.container.getSlot("slotGlass");
         let smelting = FabricatorManager.getSmelting(slot.id, slot.data);
 
@@ -97,15 +97,15 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         }
     },
 
-    heat: function () {
+    heat() {
         this.data.temperature = Math.min(this.TEMPERATURE_MAX, this.data.temperature + 10);
     },
 
-    tick: function () {
-        if(World.getThreadTime() % 5 !== 0)
+    tick() {
+        if (World.getThreadTime() % 5 !== 0)
             return;
 
-        if(this.data.energy >= 200) {
+        if (this.data.energy >= 200) {
             if (this.data.output) {
                 this.heat();
                 this.trySmelt();
@@ -123,9 +123,9 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
             }
         }
 
-        if(this.data.temperature > 0) {
+        if (this.data.temperature > 0) {
             this.decreaseTemperature();
-        }else if(this.liquidStorage.getAmount("forestryGlass")){
+        } else if (this.liquidStorage.getAmount("forestryGlass")) {
             this.liquidStorage.getLiquid("forestryGlass", 0.05)
         }
 
@@ -134,16 +134,16 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         this.liquidStorage.updateUiScale("smeltingScale", "forestryGlass");
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 3300;
     },
 
-    destroy: function () {
+    destroy() {
         for (let i = 0; i < 9; i++)
             this.container.clearSlot("slotInput" + i);
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return fabricatorGUI;
     }
 });
@@ -152,7 +152,7 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
     let slots = {
         "slotGlass": {
             input: true,
-            isValid: function (item, side) {
+            isValid(item, side) {
                 // noinspection JSSuspiciousNameCombination
                 return Math.abs(side.y) === 1
             }
@@ -169,6 +169,6 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
     }
 
     StorageInterface.createInterface(BlockID.fabricator, {
-        slots: slots
+        slots
     });
 }

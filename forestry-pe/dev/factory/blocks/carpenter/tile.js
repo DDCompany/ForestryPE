@@ -3,11 +3,11 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
         progress: 0,
         progressMax: 0
     },
-    init: function () {
+    init() {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    findWork: function () {
+    findWork() {
         let pattern = {};
 
         for (let i = 0; i < 9; i++) {
@@ -90,7 +90,7 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
         }
     },
 
-    tick: function () {
+    tick() {
         if (World.getThreadTime() % 5 !== 0)
             return;
 
@@ -123,16 +123,16 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
         this.container.validateAll();
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 4000;
     },
 
-    destroy: function () {
+    destroy() {
         for (let i = 0; i < 9; i++)
             this.container.clearSlot("slotInput" + i);
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return carpenterGUI;
     }
 });
@@ -141,7 +141,7 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
     let slots = {
         "slotSpecial": {
             input: true,
-            isValid: function (item, side) {
+            isValid(item, side) {
                 // noinspection JSSuspiciousNameCombination
                 return Math.abs(side.y) === 1
             }
@@ -158,9 +158,9 @@ MachineRegistry.registerConsumer(BlockID.carpenter, {
     }
 
     StorageInterface.createInterface(BlockID.carpenter, {
-        slots: slots,
+        slots,
 
-        canReceiveLiquid: function (liquid) {
+        canReceiveLiquid(liquid) {
             let liquidStored = this.tileEntity.liquidStorage.getLiquidStored();
             return !liquidStored || liquidStored === liquid;
         }

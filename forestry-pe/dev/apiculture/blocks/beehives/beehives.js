@@ -14,7 +14,7 @@ ToolAPI.addBlockMaterial("beehive", 1.5);
 Block.setPrototype("beehiveForestry", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {
                 name: "Forest Hive",
@@ -57,7 +57,7 @@ Block.setPrototype("beehiveForestry", {
 
 Item.addCreativeGroup(GROUP_BEEHIVES, GROUP_BEEHIVES_NAME, [BlockID.beehiveForestry]);
 
-Block.registerDropFunction("beehiveForestry", function (coords, id, data, diggingLevel) {
+Block.registerDropFunction("beehiveForestry", (coords, id, data, diggingLevel) => {
     attackByBeehive();
     if (diggingLevel) {
         let drop = [];

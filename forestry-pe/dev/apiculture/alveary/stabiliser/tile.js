@@ -2,13 +2,13 @@ TileEntity.registerPrototype(BlockID.alvearyStabiliser, {
 
     defaultValues: {},
 
-    tick: function () {
+    tick() {
 
     },
 
-    getModifiers: function () {
+    getModifiers() {
         return {
-            getMutationModifier: function () {
+            getMutationModifier() {
                 return 0;
             }
         };

@@ -7,11 +7,11 @@ TileEntity.registerPrototype(BlockID.beeHouse, {
         progressCycle: 0
     },
 
-    created: function () {
+    created() {
         this.data.biome_override = World.getBiome(this.x, this.z);
     },
 
-    tick: function () {
+    tick() {
         var content = this.container.getGuiContent();
 
         if (!this.house) {
@@ -23,30 +23,26 @@ TileEntity.registerPrototype(BlockID.beeHouse, {
                 slotPrincessOut: this.OUTPUT_SLOTS,
                 slotDronesOut: this.OUTPUT_SLOTS
             }, new ModifierList([{
-                getProductionModifier: function () {
+                getProductionModifier() {
                     return 0.25;
                 },
 
-                getMutationModifier: function () {
+                getMutationModifier() {
                     return 0;
                 },
 
-                getGeneticDecay: function () {
+                getGeneticDecay() {
                     return 0
                 },
 
-                getLifespanModifier: function () {
+                getLifespanModifier() {
                     return 3
                 }
             }]));
 
-            this.house.getHumidity = function () {
-                return BiomeHelper.getBiomeHumidity(self.data.biome_override);
-            };
+            this.house.getHumidity = () => BiomeHelper.getBiomeHumidity(self.data.biome_override);
 
-            this.house.getClimate = function () {
-                return BiomeHelper.getBiomeClimate(self.data.biome_override);
-            };
+            this.house.getClimate = () => BiomeHelper.getBiomeClimate(self.data.biome_override);
         }
 
         this.house.tick(new ModifierList([]));
@@ -74,7 +70,7 @@ TileEntity.registerPrototype(BlockID.beeHouse, {
         this.container.validateAll();
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return alvearyGUI;
     }
 });

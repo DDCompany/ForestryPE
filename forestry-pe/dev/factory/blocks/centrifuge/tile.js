@@ -5,7 +5,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         outputIDs: []
     },
 
-    findWork: function () {
+    findWork() {
         let slot = this.container.getSlot("slotInput");
         let recipe = CentrifugeManager.getRecipe(slot.id, slot.data);
 
@@ -33,7 +33,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         }
     },
 
-    putResult: function() {
+    putResult() {
         let result = this.data.outputIDs;
         let notAdded = [];
 
@@ -44,20 +44,20 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
             for (let j = 0; j < 9; j++) {
                 let slot = this.container.getSlot("slotOutput" + j);
 
-                if(!slot.id) {
+                if (!slot.id) {
                     slot.id = item.id;
                     slot.data = item.data;
                     slot.count = 1;
                     added = true;
                     break;
-                }else if (slot.id === item.id && slot.data === item.data && slot.count < Item.getMaxStack(slot.id)) {
+                } else if (slot.id === item.id && slot.data === item.data && slot.count < Item.getMaxStack(slot.id)) {
                     slot.count++;
                     added = true;
                     break;
                 }
             }
 
-            if(!added)
+            if (!added)
                 notAdded.push(item);
         }
 
@@ -65,14 +65,14 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         return !notAdded.length;
     },
 
-    tick: function () {
+    tick() {
         if (World.getThreadTime() % 5 !== 0)
             return;
 
         if (this.data.energy >= 160) {
             if (this.data.progress) {
                 if (this.data.progress >= this.data.progressMax) {
-                    if(this.putResult()) {
+                    if (this.putResult()) {
                         let slotRecipe = this.container.getSlot("slotRecipe");
                         slotRecipe.id = 0;
                         slotRecipe.data = 0;
@@ -92,15 +92,15 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 5000;
     },
 
-    getMaxTransfer: function () {
+    getMaxTransfer() {
         return 800;
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return centrifugeGUI;
     }
 });
@@ -119,6 +119,6 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
     }
 
     StorageInterface.createInterface(BlockID.centrifuge, {
-        slots: slots
+        slots
     });
 }

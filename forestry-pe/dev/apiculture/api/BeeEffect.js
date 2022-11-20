@@ -1,7 +1,7 @@
 const BeeEffects = {
     effects: {},
 
-    getApiaristArmorWearValue: function (ent) {
+    getApiaristArmorWearValue(ent) {
         let count = 0;
         if (Entity.getArmorSlot(ent, 0).id === ItemID.helmetApiarist) count++;
         if (Entity.getArmorSlot(ent, 1).id === ItemID.chestApiarist) count++;
@@ -11,7 +11,7 @@ const BeeEffects = {
         return count;
     },
 
-    doEffect: function (unique, beeHouse, coords, range) {
+    doEffect(unique, beeHouse, coords, range) {
         let effect = this.effects[unique];
 
         if (effect && ((effect.requireWorking && !beeHouse.error && beeHouse.queen) || (!beeHouse.error && beeHouse.queen))) {
@@ -30,7 +30,7 @@ const BeeEffects = {
     }
     ,
 
-    registerEffect: function (unique, params) {
+    registerEffect(unique, params) {
         this.effects[unique] = params;
     }
 };

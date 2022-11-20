@@ -1,7 +1,7 @@
 var BeeFrame = {
     frames: {},
 
-    registerFrame: function (obj) {
+    registerFrame(obj) {
         if (!obj.codeName) {
             summonException("CodeName is undefined! (Frames Registration)");
             return;
@@ -30,7 +30,7 @@ var BeeFrame = {
         }
 
         if (!obj.onFrameUsed) {
-            obj.onFrameUsed = function (item, house) {
+            obj.onFrameUsed = (item, house) => {
                 item.data++;
                 return item;
             }
@@ -46,7 +46,7 @@ var BeeFrame = {
         this.frames[ItemID[obj.codeName]] = obj;
     },
 
-    isFrame: function (id) {
+    isFrame(id) {
         return this.frames[id];
     }
 

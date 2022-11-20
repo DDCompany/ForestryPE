@@ -7,7 +7,7 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
         progressCycle: 0
     },
 
-    tick: function () {
+    tick() {
         var content = this.container.getGuiContent();
 
         if (World.getThreadTime() % 40 === 0 && ApiaryRegistry.isValidStructure(this.x - 1, this.y - 2, this.z - 1)) {
@@ -40,17 +40,11 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
                     slotDronesOut: this.OUTPUT_SLOTS
                 }, new ModifierList([]));
 
-                this.house.getHumidity = function () {
-                    return self.humidity;
-                };
+                this.house.getHumidity = () => self.humidity;
 
-                this.house.getClimate = function () {
-                    return self.climate;
-                };
+                this.house.getClimate = () => self.climate;
 
-                this.house.canSeeSky = function () {
-                    return GenerationUtils.canSeeSky(self.x, self.y + 2, self.z);
-                };
+                this.house.canSeeSky = () => GenerationUtils.canSeeSky(self.x, self.y + 2, self.z);
             }
 
             var Modifiers = new ModifierList([]);
@@ -107,7 +101,7 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
 });
 
 TileEntity.registerPrototype(BlockID.alveary_misc, {
-    click: function () {
+    click() {
         if (Entity.getSneaking(Player.get())) {
             return false;
         }

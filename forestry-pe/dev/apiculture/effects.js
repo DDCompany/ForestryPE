@@ -2,7 +2,7 @@ BeeEffects.registerEffect("aggress", {
     delay: 40,
     requireWorking: false,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
         for (let key in all) {
@@ -19,7 +19,7 @@ BeeEffects.registerEffect("aggress", {
 BeeEffects.registerEffect("beatific", {
     delay: 20,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.addEffect(Player.get(), Native.PotionEffect.regeneration, 100, 1, true, true);
         }
@@ -30,7 +30,7 @@ BeeEffects.registerEffect("creeper", {
     delay: 20,
     requireWorking: false,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             World.explode(coords.x, coords.y, coords.z, 3, false);
         }
@@ -40,7 +40,7 @@ BeeEffects.registerEffect("creeper", {
 BeeEffects.registerEffect("exploration", {
     delay: 80,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Player.addExperience(2);
         }
@@ -50,7 +50,7 @@ BeeEffects.registerEffect("exploration", {
 BeeEffects.registerEffect("glacial", {
     delay: 200,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         for (let i = 0; i < 10; i++) {
             let blocks = Util.getBlocksInRange(coords, range, {id: 9, data: 0}, true);
             for (let key in blocks) {
@@ -64,7 +64,7 @@ BeeEffects.registerEffect("glacial", {
 BeeEffects.registerEffect("heroic", {
     delay: 40,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
         for (let key in all) {
             let ent = all[key];
@@ -80,7 +80,7 @@ BeeEffects.registerEffect("ignition", {
     delay: 20,
     requireWorking: false,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
         for (let key in all) {
@@ -111,7 +111,7 @@ BeeEffects.registerEffect("ignition", {
 BeeEffects.registerEffect("miasmic", {
     delay: 100,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
         for (let key in all) {
@@ -139,7 +139,7 @@ BeeEffects.registerEffect("misanthrope", {
     delay: 20,
     requireWorking: false,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let damage = 4 - BeeEffects.getApiaristArmorWearValue(Player.get());
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.damageEntity(Player.get(), damage);
@@ -151,7 +151,7 @@ BeeEffects.registerEffect("radiactive", {
     delay: 40,
     requireWorking: false,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         let all = Entity.getAllInRange(coords, range.x);
 
         for (let key in all) {
@@ -176,7 +176,7 @@ BeeEffects.registerEffect("radiactive", {
 BeeEffects.registerEffect("drunkard", {
     delay: 20,
 
-    doEffect: function (beeHouse, coords, range) {
+    doEffect(beeHouse, coords, range) {
         if (Entity.getDistanceBetweenCoords(Entity.getPosition(Player.get()), coords) <= range.x) {
             Entity.addEffect(Player.get(), 9, 500, 1, true, true);
         }

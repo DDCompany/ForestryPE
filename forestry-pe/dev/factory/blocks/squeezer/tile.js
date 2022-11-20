@@ -7,11 +7,11 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
         recipe: null
     },
 
-    init: function () {
+    init() {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    findRecipe: function () {
+    findRecipe() {
         let container = this.container;
         let slots = {};
         for (let i = 0; i < 9; i++) {
@@ -62,7 +62,7 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
         }
     },
 
-    tick: function () {
+    tick() {
         if (World.getThreadTime() % 5 !== 0)
             return;
 
@@ -94,11 +94,11 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
         this.liquidStorage.updateUiScale("liquidScale", liquidStored);
     },
 
-    getEnergyStorage: function () {
+    getEnergyStorage() {
         return 5000;
     },
 
-    getGuiScreen: function () {
+    getGuiScreen() {
         return squeezerGUI;
     }
 });
@@ -120,9 +120,9 @@ MachineRegistry.registerConsumer(BlockID.squeezer, {
     }
 
     StorageInterface.createInterface(BlockID.squeezer, {
-        slots: slots,
+        slots,
 
-        canTransportLiquid: function () {
+        canTransportLiquid() {
             return true;
         }
     });

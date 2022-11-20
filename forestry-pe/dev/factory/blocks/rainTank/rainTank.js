@@ -2,7 +2,7 @@ if (ForestryConfig.rainTankEnabled) {
     Block.setPrototype("rainTank", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [{
                 name: "Rain Tank",
                 texture: [["rainTank", 0], ["rainTank", 0], ["rainTank", 1]],
@@ -12,7 +12,7 @@ if (ForestryConfig.rainTankEnabled) {
 
     });
 
-    Callback.addCallback("PostLoaded", function () {
+    Callback.addCallback("PostLoaded", () => {
         Recipes.addShaped({id: BlockID.rainTank, count: 1, data: 0}, [
             "igi",
             "isi",

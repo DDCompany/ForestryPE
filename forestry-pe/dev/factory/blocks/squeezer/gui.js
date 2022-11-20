@@ -59,7 +59,7 @@ MachineRegistry.addUiTitleTranslation(squeezerGUI);
     let x = 412;
     let y = 87;
     for (let i = 0; i < 9; i++) {
-        content.elements[`slot${i}`] = {type: "slot", x: x, y: y, bitmap: "forestry.slots.gray", size: 54};
+        content.elements[`slot${i}`] = {type: "slot", x, y, bitmap: "forestry.slots.gray", size: 54};
         x += 60;
         if(x >= 560) {
             x = 412;

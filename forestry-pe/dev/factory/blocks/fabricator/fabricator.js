@@ -1,7 +1,7 @@
 Block.setPrototype("fabricator", {
     type: Block.TYPE_ROTATION,
 
-    getVariations: function () {
+    getVariations() {
         return [{
             name: "Thermionic Fabricator",
             texture: [["fabricator_bottom", 0], ["fabricator_top", 0], ["fabricator_side", 0], ["fabricator_front", 0], ["fabricator_side", 0], ["fabricator_side", 0]],
@@ -12,7 +12,7 @@ Block.setPrototype("fabricator", {
 });
 
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.fabricator, count: 1, data: 0}, [
         "cgc",
         "g g",

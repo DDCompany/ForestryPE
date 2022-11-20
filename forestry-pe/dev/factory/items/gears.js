@@ -9,7 +9,7 @@ Item.createItem("gearBronze", "Bronze Gear", {name: "gearBronze", meta: 0}, {});
 
 Item.addCreativeGroup(GROUP_GEARS, GROUP_GEARS_NAME, [ItemID.gearCopper, ItemID.gearTin, ItemID.gearBronze]);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.gearCopper, count: 1, data: 0}, [
         " W ",
         "WWW",

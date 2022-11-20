@@ -29,7 +29,7 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
             Item.createFoodItem(unique, "Capsule (" + suffix + ")", {
                 name: unique,
                 meta: 0
-            }, {food: food});
+            }, {food});
 
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
@@ -39,14 +39,14 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
 
         let canUnique = "can" + suffix;
         IDRegistry.genItemID(canUnique);
-        Item.createFoodItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0}, {food: food});
+        Item.createFoodItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0}, {food});
 
         let refractoryUnique = "refractory" + suffix;
         IDRegistry.genItemID(refractoryUnique);
         Item.createFoodItem(refractoryUnique, "Capsule (" + suffix + ")", {
             name: refractoryUnique,
             meta: 0
-        }, {food: food});
+        }, {food});
     } else {
         if (!isHot) {
             let unique = "waxCapsule" + suffix;
@@ -105,7 +105,7 @@ function pickupLiquidFromWorld(waterCanId, lavaCanId) {
 
 Item.registerUseFunction("canEmpty", pickupLiquidFromWorld(ItemID.canWater, ItemID.canLava));
 Item.registerUseFunction("refractoryEmpty", pickupLiquidFromWorld(ItemID.refractoryWater, ItemID.refractoryLava));
-Item.registerUseFunction("waxCapsuleEmpty", function (coords) {
+Item.registerUseFunction("waxCapsuleEmpty", coords => {
     if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
         let pos = Player.getPosition();
         World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.waxCapsuleWater, 1, 0);
@@ -114,7 +114,7 @@ Item.registerUseFunction("waxCapsuleEmpty", function (coords) {
     }
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.waxCapsuleEmpty, count: 4, data: 0}, [
         "xxx",
     ], ['x', ItemID.beeswax, 0]);

@@ -1,7 +1,7 @@
 Block.setPrototype("blockCharcoal", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {
                 name: "Block of Charcoal",
@@ -16,7 +16,7 @@ Block.setBlockMaterial(BlockID.blockCharcoal, "stone", 1);
 Block.setPrototype("blockAsh", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {
                 name: "Ash Block",
@@ -31,7 +31,7 @@ Block.setBlockMaterial(BlockID.blockAsh, "dirt", 1);
 Block.setPrototype("ashBricks", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {
                 name: "Ash Bricks",
@@ -43,7 +43,7 @@ Block.setPrototype("ashBricks", {
 });
 Block.setBlockMaterial(BlockID.ashBricks, "stone", 1);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.blockAsh, count: 1, data: 0}, [
         "iii",
         "iii",
@@ -69,7 +69,7 @@ if (ForestryConfig.oresBlocksEnabled) {
     Block.setPrototype("blockCopper", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [
                 {
                     name: "Block of Copper",
@@ -84,7 +84,7 @@ if (ForestryConfig.oresBlocksEnabled) {
     Block.setPrototype("blockTin", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [
                 {
                     name: "Block of Tin",
@@ -99,7 +99,7 @@ if (ForestryConfig.oresBlocksEnabled) {
     Block.setPrototype("blockBronze", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [
                 {
                     name: "Block of Bronze",
@@ -114,7 +114,7 @@ if (ForestryConfig.oresBlocksEnabled) {
     Block.setPrototype("blockApatite", {
         type: Block.TYPE_BASE,
 
-        getVariations: function () {
+        getVariations() {
             return [
                 {
                     name: "Block of Apatite",
@@ -128,7 +128,7 @@ if (ForestryConfig.oresBlocksEnabled) {
 
     Item.addCreativeGroup(GROUP_ORE_BLOCKS, GROUP_ORE_BLOCKS_NAME, [BlockID.blockCopper, BlockID.blockTin, BlockID.blockBronze, BlockID.blockApatite]);
 
-    Callback.addCallback("PostLoaded", function () {
+    Callback.addCallback("PostLoaded", () => {
         Recipes.addShaped({id: BlockID.blockCopper, count: 1, data: 0}, [
             "iii",
             "iii",

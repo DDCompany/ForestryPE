@@ -1,7 +1,7 @@
 Block.setPrototype("bog", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {name: "Bog Earth", texture: [["bog", 0]], inCreative: true},
         ];
@@ -12,13 +12,13 @@ ToolAPI.registerBlockMaterial(BlockID.bog, "dirt");
 Block.setPrototype("blockPeat", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {name: "Peat", texture: [["blockPeat", 0]], inCreative: true},
         ];
     },
 
-    getDrop: function () {
+    getDrop() {
         return [[ItemID.peat, 2, 0], [3, 1, 0]];
     }
 });
@@ -30,7 +30,7 @@ Item.createItem("peat", "Peat", {name: "peat", meta: 0}, {});
 IDRegistry.genItemID("bituminousPeat");
 Item.createItem("bituminousPeat", "Bituminous Peat", {name: "bituminousPeat", meta: 0}, {});
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addFurnace(ItemID.peat, ItemID.ash, 0);
 
     Recipes.addFurnaceFuel(ItemID.peat, 0, 2000);

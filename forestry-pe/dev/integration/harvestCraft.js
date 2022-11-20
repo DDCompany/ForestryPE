@@ -1,4 +1,4 @@
-ModAPI.addAPICallback("HarvestAPI", function () {
+ModAPI.addAPICallback("HarvestAPI", () => {
     let list = [
         {
             //berries
