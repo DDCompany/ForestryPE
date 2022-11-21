@@ -14,7 +14,9 @@ const MOISTENER_SLOTS = [
 
 ];
 
-TileEntity.registerPrototype(BlockID.moistener, {
+MachineRegistry.registerDefault(BlockID.moistener, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         progress: 0,
         progressMax: 0,
@@ -31,11 +33,11 @@ TileEntity.registerPrototype(BlockID.moistener, {
     },
 
     getSpeed() {
-        let light = World.getLightLevel(this.x, this.y + 1, this.z);
+        let light = this.blockSource.getLightLevel(this.x, this.y + 1, this.z);
         return light >= 9 ? 1 : (light >= 7 ? 2 : (light >= 5 ? 3 : 4));
     },
 
-    enoughSpace(prefix, amount, id, data) {
+    enoughSpace(prefix: string, amount: number, id: number, data: number) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
 
@@ -58,7 +60,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
                 this.data.progressRecipe = 1;
                 this.data.progressRecipeMax = recipe.time;
                 this.data.outputRecipe = recipe.outputItem;
-                slot.count--;
+                this.container.setSlot("slotRecipe", slot.id, slot.count - 1, slot.data);
                 this.container.validateSlot("slotRecipe");
             } else return false;
         }
@@ -89,7 +91,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         }
     },
 
-    getForGroup(prefix, amount, outPrefix, outAmount) {
+    getForGroup(prefix: string, amount: number, outPrefix: string, outAmount: number) {
         for (; amount >= 0; amount--) {
             let slot = this.container.getSlot(prefix + amount);
             let fuelData = MoistenerManager.getFuelInfo(slot.id, slot.data);
@@ -104,10 +106,9 @@ TileEntity.registerPrototype(BlockID.moistener, {
         return null;
     },
 
-    putToSlots(amount, prefix, item) {
+    putToSlots(amount: number, prefix: string, item: { id: number, data: number }) {
         for (; amount >= 0; amount--) {
-            let slot = this.container.getSlot(prefix + amount);
-            if (ContainerHelper.putInSlot(slot, item))
+            if (ContainerHelper.putInSlot(this.container, prefix + amount, item))
                 return true;
         }
 
@@ -120,8 +121,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
 
         if (this.findRecipe()) {
             if (this.data.progressRecipe >= this.data.progressRecipeMax) {
-                let slot = this.container.getSlot("slotResult");
-                if (ContainerHelper.putInSlot(slot, this.data.outputRecipe)) {
+                if (ContainerHelper.putInSlot(this.container, "slotResult", this.data.outputRecipe)) {
                     this.data.progressRecipe = 0;
                 }
             } else if (this.data.progress) {
@@ -136,7 +136,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
                     let slots = this.data.slots;
 
                     if (this.putToSlots(slots.amount, slots.prefix, output)) {
-                        slot.count--;
+                        this.container.setSlot(this.data.recipeSlot, slot.id, slot.count - 1, slot.data);
                         this.container.validateSlot(this.data.recipeSlot);
                     }
                     this.data.progress = 0;
@@ -156,17 +156,18 @@ TileEntity.registerPrototype(BlockID.moistener, {
         let progress = (this.data.progress / this.data.progressMax) || 0;
         this.container.setScale("progressScale2", progress);
         this.container.setScale("progressScale", progress);
-        this.container.setScale("progressScale3", this.data.progressRecipe / this.data.progressRecipeMax);
-        this.liquidStorage.updateUiScale("liquidScale", "water");
+        this.container.setScale("progressScale3", (this.data.progressRecipe / this.data.progressRecipeMax) || 0);
+        this.updateLiquidScale("liquidScale", "water");
+        this.container.sendChanges();
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return moistenerGUI;
-    }
+    },
 });
 
 {
-    let slots = {
+    let slots: Record<string, SlotData> = {
         "slotContainer": {
             input: true,
             isValid(item) {
@@ -176,7 +177,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
         "slotRecipe": {
             input: true,
             isValid(item) {
-                return MoistenerManager.getRecipe(item.id, item.data);
+                return !!MoistenerManager.getRecipe(item.id, item.data);
             },
         },
         "slotResult": {
@@ -200,7 +201,7 @@ TileEntity.registerPrototype(BlockID.moistener, {
             output: true,
 
             isValid(item) {
-                return MoistenerManager.getFuelInfo(item.id, item.data);
+                return !!MoistenerManager.getFuelInfo(item.id, item.data);
             },
 
             canOutput(item) {

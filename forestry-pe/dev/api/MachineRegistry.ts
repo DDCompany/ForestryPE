@@ -56,11 +56,45 @@ class MachineRegistry {
             prototype.getEnergyStorage = () => 0
         }
 
+        this.setupDefaults(prototype);
         this.setupWireConnection(id, energyType);
         ToolAPI.registerBlockMaterial(id, "stone", 1, true);
         Block.setDestroyTime(id, 1.5);
         TileEntity.registerPrototype(id, prototype);
         EnergyTileRegistry.addEnergyTypeForId(id, energyType);
+    }
+
+    static registerDefault(blockId: number, prototype: TileEntity.TileEntityPrototype) {
+        this.setupDefaults(prototype);
+        TileEntity.registerPrototype(blockId, prototype);
+    }
+
+    static setupDefaults(prototype: TileEntity.TileEntityPrototype) {
+        if (!prototype.getScreenName) {
+            prototype.getScreenName = () => "main";
+        }
+
+        if (!prototype.client) {
+            prototype.client = {};
+        }
+
+        if (!prototype.client.containerEvents) {
+            prototype.client.containerEvents = {};
+        }
+
+        if (prototype.updateLiquidScale) {
+            throw new Error("updateLiquidScale is reserved by MachineRegistry");
+        }
+
+        prototype.updateLiquidScale = function (elementName: string, liquidName: string) {
+            this.container.sendEvent("__updateLiquidScale", {
+                elementName,
+                liquidName,
+                amount: this.liquidStorage.getRelativeAmount(liquidName)
+            });
+        };
+
+        prototype.client.containerEvents.__updateLiquidScale = this.updateUiScaleEvent;
     }
 
     static setupWireConnection(id: number, energyType: EnergyType) {
@@ -79,6 +113,21 @@ class MachineRegistry {
     static addUiTitleTranslation(ui: UI.StandartWindow) {
         if (this.uis.indexOf(ui) === -1) {
             this.uis.push(ui);
+        }
+    }
+
+    private static updateUiScaleEvent(container: ItemContainer, _: UI.Window | UI.StandartWindow | UI.StandardWindow | UI.TabbedWindow | null, __: UI.WindowContent, data: { elementName: string, liquidName: string, amount: number }) {
+        const ui = container.getUiAdapter();
+        const elementRect: android.graphics.Rect = ui.getBinding(data.elementName, "element_rect");
+        if (elementRect) {
+            const texture = LiquidRegistry.getLiquidUITexture(
+                data.liquidName,
+                elementRect.width(),
+                elementRect.height(),
+            );
+
+            ui.setBinding(data.elementName, "texture", texture);
+            ui.setBinding(data.elementName, "value", data.amount);
         }
     }
 }

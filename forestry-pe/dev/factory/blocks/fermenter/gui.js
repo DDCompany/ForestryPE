@@ -1,15 +1,15 @@
 const fermenterGUI = new UI.StandartWindow({
-    standart: {
+    standard: {
         header: {
             text: {
                 text: "Fermenter"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [

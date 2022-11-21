@@ -1,15 +1,15 @@
 const moistenerGUI = new UI.StandartWindow({
-    standart: {
+    standard: {
         header: {
             text: {
                 text: "Moistener"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [

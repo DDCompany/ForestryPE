@@ -1,4 +1,6 @@
 MachineRegistry.registerConsumer(BlockID.fabricator, {
+    useNetworkItemContainer: true,
+
     TEMPERATURE_MAX: 5000,
 
     defaultValues: {
@@ -9,6 +11,22 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
 
     init() {
         this.liquidStorage.setLimit(null, 8);
+
+        const container: ItemContainer = this.container;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                const slotName = "slotInput" + (i * 3 + j);
+                container.setSlotAddTransferPolicy(slotName, (name, slotName, id, count, data, extra) => {
+                    container.setSlot(slotName, id, count, data, extra);
+                    return 0;
+                });
+
+                container.setSlotGetTransferPolicy(slotName, (name, slotName) => {
+                    container.clearSlot(slotName);
+                    return 0;
+                });
+            }
+        }
     },
 
     decreaseTemperature() {
@@ -20,10 +38,10 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
     },
 
     findWork() {
-        let pattern = {};
+        let pattern: ItemInstance[] = [];
 
         for (let i = 0; i < 9; i++) {
-            pattern[i] = this.container.getSlot("slotInput" + i);
+            pattern[i] = this.container.getSlot(`slotInput${i}`);
         }
 
         let recipe = FabricatorManager.getRecipe(pattern);
@@ -36,16 +54,16 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
                     return;
             }
 
-            let slots = {};
+            let slots: Record<number, number> = {};
 
             for (let i = 0; i < 9; i++) {
-                let item = this.container.getSlot("slotInput" + i);
+                let item = this.container.getSlot(`slotInput${i}`);
 
                 if (!item.id)
                     continue;
 
                 for (let k = 0; k < 18; k++) {
-                    let slot = this.container.getSlot("slotResources" + k);
+                    let slot = this.container.getSlot(`slotResources${k}`);
 
                     if (slot.id && ContainerHelper.equals(slot, item)) {
                         let count = slots[k];
@@ -70,12 +88,12 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
             }
 
             for (let i in slots) {
-                let slot = this.container.getSlot("slotResources" + i);
-                slot.count -= slots[i];
+                let slot = this.container.getSlot(`slotResources${i}`);
+                this.container.setSlot(`slotResources${i}`, slot.id, slot.count - slots[i], slot.data);
             }
 
             if (special && special.dec) {
-                slotSpecial.count -= 1;
+                this.container.setSlot("slotSpecial", slotSpecial.id, slotSpecial.count - 1, slotSpecial.data);
             }
 
             this.data.output = recipe.result;
@@ -91,7 +109,7 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
         if (smelting && this.data.temperature >= smelting.temperature) {
             if (this.liquidStorage.getAmount("forestryGlass") + smelting.amount <= 2) {
                 this.liquidStorage.addLiquid("forestryGlass", smelting.amount);
-                slot.count--;
+                this.container.setSlot("slotGlass", slot.id, slot.count - 1, slot.data);
                 this.container.validateSlot("slotGlass");
             }
         }
@@ -110,10 +128,8 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
                 this.heat();
                 this.trySmelt();
 
-                let slot = this.container.getSlot("slotResult");
-
                 if (this.liquidStorage.getAmount("forestryGlass") >= this.data.glassAmount
-                    && ContainerHelper.putInSlot(slot, this.data.output)) {
+                    && ContainerHelper.putInSlot(this.container, "slotResult", this.data.output)) {
                     this.liquidStorage.getLiquid("forestryGlass", this.data.glassAmount);
                     this.data.output = null;
                 }
@@ -131,7 +147,8 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
 
         this.container.setScale("temperatureScale", this.data.temperature / this.TEMPERATURE_MAX);
         this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
-        this.liquidStorage.updateUiScale("smeltingScale", "forestryGlass");
+        this.updateLiquidScale("smeltingScale", "forestryGlass");
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
@@ -139,22 +156,22 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
     },
 
     destroy() {
-        for (let i = 0; i < 9; i++)
-            this.container.clearSlot("slotInput" + i);
+        for (let i = 0; i < 9; i++) {
+            this.container.clearSlot(`slotInput${i}`);
+        }
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return fabricatorGUI;
     }
 });
 
 {
-    let slots = {
+    let slots: Record<string, SlotData> = {
         "slotGlass": {
             input: true,
             isValid(item, side) {
-                // noinspection JSSuspiciousNameCombination
-                return Math.abs(side.y) === 1
+                return side === EBlockSide.UP;
             }
         },
         "slotResult": {
@@ -163,7 +180,7 @@ MachineRegistry.registerConsumer(BlockID.fabricator, {
     };
 
     for (let i = 0; i < 18; i++) {
-        slots["slotResources" + i] = {
+        slots[`slotResources${i}`] = {
             input: true
         };
     }

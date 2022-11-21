@@ -1,15 +1,15 @@
-var raintankGUI = new UI.StandartWindow({
-    standart: {
+const raintankGUI = new UI.StandartWindow({
+    standard: {
         header: {
             text: {
                 text: "Rain Tank"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [

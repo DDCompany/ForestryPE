@@ -1,15 +1,15 @@
 const carpenterGUI = new UI.StandartWindow({
-    standart: {
+    standard: {
         header: {
             text: {
                 text: "Carpenter"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [
@@ -59,24 +59,7 @@ const carpenterGUI = new UI.StandartWindow({
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            let slotName = "slotInput" + (i * 3 + j);
-
-            content.elements[slotName] = {
-                type: "slot", x: 385 + j * 60, y: 75 + i * 60, isValid: (id, count, data, container) => {
-                    container.setSlot(slotName, id, 1, data);
-                    return false;
-                }, clicker: {
-                    onClick: container => {
-                        container.clearSlot(slotName);
-                        let elementIns = container.getElement(slotName);
-                        let clazz = elementIns.getClass();
-                        let field = clazz.getDeclaredField("currentSelectedSlot");
-
-                        field.setAccessible(true);
-                        field.set(elementIns, elementIns);
-                    }
-                }
-            };
+            content.elements["slotInput" + (i * 3 + j)] = {type: "slot", x: 385 + j * 60, y: 75 + i * 60};
         }
     }
 

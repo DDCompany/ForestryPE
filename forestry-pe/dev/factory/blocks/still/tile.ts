@@ -1,11 +1,13 @@
 MachineRegistry.registerConsumer(BlockID.still, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         progress: 0,
         progressMax: 0,
         outputAmount: 0,
 
         inputLiquid: null,
-        outputLiquid: null
+        outputLiquid: null,
     },
 
     init() {
@@ -66,19 +68,20 @@ MachineRegistry.registerConsumer(BlockID.still, {
             }
         }
 
-        this.liquidStorage.updateUiScale("liquidInputScale", this.data.inputLiquid);
-        this.liquidStorage.updateUiScale("liquidOutputScale", this.data.outputLiquid);
+        this.updateLiquidScale("liquidInputScale", this.data.inputLiquid);
+        this.updateLiquidScale("liquidOutputScale", this.data.outputLiquid);
         this.container.setScale("progressScale", (this.data.progress / this.data.progressMax) || 0);
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
         return 8000;
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return stillGUI;
-    }
+    },
 });
 
 StorageInterface.createInterface(BlockID.still, {
@@ -92,7 +95,7 @@ StorageInterface.createInterface(BlockID.still, {
             },
 
             isValid(item) {
-                return LiquidRegistry.getEmptyItem(item.id, item.data);
+                return !!LiquidRegistry.getEmptyItem(item.id, item.data);
             },
         },
 

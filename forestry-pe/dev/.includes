@@ -129,41 +129,41 @@ factory/items/chipsets.js
 factory/blocks/carpenter/carpenter.js
 factory/blocks/carpenter/gui.js
 factory/blocks/carpenter/recipes.ts
-factory/blocks/carpenter/tile.js
+factory/blocks/carpenter/tile.ts
 
 factory/blocks/centrifuge/centrifuge.js
 factory/blocks/centrifuge/gui.js
 factory/blocks/centrifuge/recipes.ts
-factory/blocks/centrifuge/tile.js
+factory/blocks/centrifuge/tile.ts
 
 factory/blocks/fabricator/fabricator.js
 factory/blocks/fabricator/gui.js
 factory/blocks/fabricator/recipes.ts
-factory/blocks/fabricator/tile.js
+factory/blocks/fabricator/tile.ts
 
 factory/blocks/fermenter/fermenter.js
 factory/blocks/fermenter/gui.js
 factory/blocks/fermenter/recipes.ts
-factory/blocks/fermenter/tile.js
+factory/blocks/fermenter/tile.ts
 
 factory/blocks/moistener/moistener.js
 factory/blocks/moistener/gui.js
 factory/blocks/moistener/recipes.ts
-factory/blocks/moistener/tile.js
+factory/blocks/moistener/tile.ts
 
 factory/blocks/rainTank/rainTank.js
 factory/blocks/rainTank/gui.js
-factory/blocks/rainTank/tile.js
+factory/blocks/rainTank/tile.ts
 
 factory/blocks/squeezer/squeezer.js
 factory/blocks/squeezer/gui.js
 factory/blocks/squeezer/recipes.ts
-factory/blocks/squeezer/tile.js
+factory/blocks/squeezer/tile.ts
 
 factory/blocks/still/still.js
 factory/blocks/still/gui.js
 factory/blocks/still/recipes.ts
-factory/blocks/still/tile.js
+factory/blocks/still/tile.ts
 
 factory/blocks/rainMaker/rainMaker.ts
 factory/blocks/rainMaker/tile.ts

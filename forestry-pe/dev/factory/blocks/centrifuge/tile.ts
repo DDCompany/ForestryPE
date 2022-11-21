@@ -1,4 +1,6 @@
 MachineRegistry.registerConsumer(BlockID.centrifuge, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         progress: 0,
         progressMax: 0,
@@ -10,11 +12,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         let recipe = CentrifugeManager.getRecipe(slot.id, slot.data);
 
         if (recipe) {
-            let slotRecipe = this.container.getSlot("slotRecipe");
-            slotRecipe.id = slot.id;
-            slotRecipe.data = slot.data;
-            slotRecipe.count = 1;
-
+            this.container.setSlot("slotRecipe", slot.id, 1, slot.data);
             this.data.progress = 1;
             this.data.progressMax = recipe.time || 20;
 
@@ -28,7 +26,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
             }
             this.data.outputIDs = newResult;
 
-            slot.count--;
+            this.container.setSlot("slotInput", slot.id, slot.count - 1, slot.data);
             this.container.validateSlot("slotInput");
         }
     },
@@ -42,16 +40,15 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
             let added = false;
 
             for (let j = 0; j < 9; j++) {
-                let slot = this.container.getSlot("slotOutput" + j);
+                const slotName = `slotOutput${j}`;
+                let slot = this.container.getSlot(slotName);
 
                 if (!slot.id) {
-                    slot.id = item.id;
-                    slot.data = item.data;
-                    slot.count = 1;
+                    this.container.setSlot(slotName, item.id, 1, item.data);
                     added = true;
                     break;
                 } else if (slot.id === item.id && slot.data === item.data && slot.count < Item.getMaxStack(slot.id)) {
-                    slot.count++;
+                    this.container.setSlot(slotName, slot.id, slot.count + 1, slot.data);
                     added = true;
                     break;
                 }
@@ -73,10 +70,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
             if (this.data.progress) {
                 if (this.data.progress >= this.data.progressMax) {
                     if (this.putResult()) {
-                        let slotRecipe = this.container.getSlot("slotRecipe");
-                        slotRecipe.id = 0;
-                        slotRecipe.data = 0;
-
+                        this.container.clearSlot("slotRecipe");
                         this.data.progress = 0;
                     }
                 } else {
@@ -90,6 +84,7 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         this.container.setScale("progressScale", progress);
         this.container.setScale("progressScale2", progress);
         this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
@@ -100,20 +95,20 @@ MachineRegistry.registerConsumer(BlockID.centrifuge, {
         return 800;
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return centrifugeGUI;
     }
 });
 
 {
-    let slots = {
+    let slots: Record<string, SlotData> = {
         "slotInput": {
             input: true
         }
     };
 
     for (let i = 0; i < 9; i++) {
-        slots["slotOutput" + i] = {
+        slots[`slotOutput${i}`] = {
             output: true
         };
     }

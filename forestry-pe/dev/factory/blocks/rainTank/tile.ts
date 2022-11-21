@@ -1,5 +1,7 @@
 if (ForestryConfig.rainTankEnabled) {
-    TileEntity.registerPrototype(BlockID.rainTank, {
+    MachineRegistry.registerDefault(BlockID.rainTank, {
+        useNetworkItemContainer: true,
+
         defaultValues: {},
 
         init() {
@@ -7,16 +9,17 @@ if (ForestryConfig.rainTankEnabled) {
         },
 
         tick() {
-            this.liquidStorage.updateUiScale("liquidScale", "water");
+            this.updateLiquidScale("liquidScale", "water");
 
             ContainerHelper.fillContainer("water", this, "slotContainer", "slotFullContainer");
 
-            if (!(World.getThreadTime() % 20) && GenerationUtils.canSeeSky(this.x, this.y + 1, this.z) && World.getWeather().rain) {
+            if (!(World.getThreadTime() % 20) && this.blockSource.canSeeSky(this.x, this.y + 1, this.z) && World.getWeather().rain) {
                 this.liquidStorage.addLiquid("water", 0.01);
             }
+            this.container.sendChanges();
         },
 
-        getGuiScreen() {
+        getScreenByName() {
             return raintankGUI;
         }
     });

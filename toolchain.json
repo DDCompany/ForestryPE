@@ -15,7 +15,8 @@
 	"denyJavaScript": true,
 	"currentProject": "forestry-pe",
 	"devices": [
-		"RF8NB0LGT5J"
+		"RF8NB0LGT5J",
+		"Z5SWR4BUROSGIFHM"
 	],
 	"pushTo": "/storage/emulated/0/games/horizon/packs/Inner_Core/innercore"
 }

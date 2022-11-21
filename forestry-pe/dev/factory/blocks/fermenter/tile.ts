@@ -1,4 +1,6 @@
 MachineRegistry.registerConsumer(BlockID.fermenter, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         progress: 0,
         progressMax: 1,
@@ -28,7 +30,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
             this.data.resultFluid = recipe.liquid;
             this.data.progress = this.data.progressMax = recipe.liquidAmount * 1000;
 
-            slot.count--;
+            this.container.setSlot("slotInput", slot.id, slot.count - 1, slot.data);
             this.container.validateSlot("slotInput");
         }
     },
@@ -41,7 +43,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
                 this.data.fuelBurnTime = this.data.fuelBurnMax = fuel.cycles || 1;
                 this.data.fuelFerment = fuel.perCycle || 1;
 
-                slot.count--;
+                this.container.setSlot("slotFuel", slot.id, slot.count - 1, slot.data);
                 this.container.validateSlot("slotFuel");
                 return true;
             }
@@ -90,8 +92,9 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
         this.container.setScale("reagentScale", (this.data.fuelBurnTime / this.data.fuelBurnMax) || 0);
         this.container.setScale("progressScale", (this.data.progress / this.data.progressMax) || 0);
-        this.liquidStorage.updateUiScale("liquidInputScale", inputFluid || this.data.inputFluid);
-        this.liquidStorage.updateUiScale("liquidOutputScale", this.data.containerFluid);
+        this.updateLiquidScale("liquidInputScale", inputFluid || this.data.inputFluid);
+        this.updateLiquidScale("liquidOutputScale", this.data.containerFluid);
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
@@ -102,7 +105,7 @@ MachineRegistry.registerConsumer(BlockID.fermenter, {
         return 2000;
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return fermenterGUI;
     }
 });
@@ -113,14 +116,14 @@ StorageInterface.createInterface(BlockID.fermenter, {
             input: true,
 
             isValid(item) {
-                return FermenterManager.getRecipe(item.id, item.data);
+                return !!FermenterManager.getRecipeByItem(item.id, item.data);
             },
         },
         "slotFuel": {
             input: true,
 
             isValid(item) {
-                return FermenterManager.getFuel(item.id, item.data);
+                return !!FermenterManager.getFuel(item.id, item.data);
             },
         },
         "slotFilledContainer": {
