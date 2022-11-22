@@ -1,4 +1,6 @@
 MachineRegistry.registerGenerator(BlockID.biogenerator, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         progress: 0
     },
@@ -7,17 +9,12 @@ MachineRegistry.registerGenerator(BlockID.biogenerator, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getGuiScreen() {
-        return biogeneratorGUI;
-    },
-
     tick() {
         ContainerHelper.drainContainer(null, this, "slotContainer");
 
         let stored = this.liquidStorage.getLiquidStored();
         let fuel = BioGeneratorManager.getFuel(stored);
         if (fuel && this.liquidStorage.getAmount(stored) >= 0.001) {
-
             if (this.data.energy + fuel.energy <= this.getEnergyStorage()) {
                 this.data.energy += fuel.energy;
                 this.data.progress++;
@@ -28,15 +25,18 @@ MachineRegistry.registerGenerator(BlockID.biogenerator, {
             }
         }
 
-        this.liquidStorage.updateUiScale("liquidScale", stored);
+        this.updateLiquidScale("liquidScale", stored);
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-
         this.container.validateAll();
-
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
         return 30000;
+    },
+
+    getScreenByName() {
+        return biogeneratorGUI;
     },
 }, EU);
 
@@ -52,6 +52,6 @@ StorageInterface.createInterface(BlockID.biogenerator, {
     },
 
     canReceiveLiquid(liquid) {
-        return BioGeneratorManager.getFuel(liquid);
+        return !!BioGeneratorManager.getFuel(liquid);
     }
 });

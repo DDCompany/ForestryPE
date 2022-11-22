@@ -17,13 +17,24 @@ class ChestManager {
         ], specType);
         this.createModel(BlockID[unique]);
 
+        if (tile.init) {
+            summonException("init is reserved by ChestManager");
+        }
+
+        tile.useNetworkItemContainer = true;
+        tile.init = function () {
+            (this.container as ItemContainer).setGlobalAddTransferPolicy((name, slotName, id, count, data) => {
+                return this.isValid(id, data) ? count : 0;
+            });
+        };
+
         const elements: UI.ElementSet = {};
         for (let i = 0; i < slots; i++) {
             elements[i] = {
                 type: "slot",
                 x: 350 + i % 10 * 61,
                 y: 40 + Math.floor(i / 10) * 61,
-                isValid: tile.isValid
+                isValid: tile.isValid,
             };
         }
 

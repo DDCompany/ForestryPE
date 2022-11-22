@@ -23,7 +23,7 @@ api/PlayerUtils.ts
 core/blocks/humus.js
 
 core/blocks/peat/peat.js
-core/blocks/peat/tile.js
+core/blocks/peat/tile.ts
 
 core/blocks/ores.js
 core/blocks/storage.js
@@ -179,19 +179,19 @@ energy/api/PeatFiredManager.ts
 
 # BLOCKS
 energy/blocks/biogas/biogas.js
-energy/blocks/biogas/gui.js
-energy/blocks/biogas/tile.js
+energy/blocks/biogas/gui.ts
+energy/blocks/biogas/tile.ts
 
 energy/blocks/bioGenerator/bioGenerator.ts
-energy/blocks/bioGenerator/gui.js
-energy/blocks/bioGenerator/tile.js
+energy/blocks/bioGenerator/gui.ts
+energy/blocks/bioGenerator/tile.ts
 
 energy/blocks/clockwork/clockwork.js
-energy/blocks/clockwork/tile.js
+energy/blocks/clockwork/tile.ts
 
 energy/blocks/peat-fired/peat-fired.js
-energy/blocks/peat-fired/gui.js
-energy/blocks/peat-fired/tile.js
+energy/blocks/peat-fired/gui.ts
+energy/blocks/peat-fired/tile.ts
 energy/blocks/peat-fired/recipes.ts
 
 # TRANSLATION
@@ -200,7 +200,7 @@ energy/translation.js
 ### STORAGE
 # ITEMS
 storage/items/backpacks.js
-storage/items/capsules.js
+storage/items/capsules.ts
 storage/items/crates.ts
 
 # TRANSLATION

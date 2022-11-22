@@ -42,9 +42,18 @@ function registerCrate(id: number, itemName: string, texture: string, data?: num
         }
     });
 
-    Item.registerUseFunction(crateId, coords => {
-        World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, id, 9, 0);
-        Player.decreaseCarriedItem(1);
+    Item.registerUseFunction(crateId, (coords, item, block, player) => {
+        const blockSource = BlockSource.getDefaultForActor(player);
+        if (blockSource) {
+            const relative = coords.relative;
+            blockSource.spawnDroppedItem(
+                relative.x + 0.5,
+                relative.y + 0.1,
+                relative.z + 0.5,
+                id, 9, 0,
+            );
+            PlayerUtils.decreaseCarriedItem(player);
+        }
     });
 }
 

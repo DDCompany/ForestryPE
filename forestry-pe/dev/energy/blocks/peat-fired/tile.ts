@@ -1,4 +1,6 @@
 MachineRegistry.registerGenerator(BlockID.enginePeat, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         burn: 0,
         burnMax: 0,
@@ -8,17 +10,17 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
 
     addAsh() {
         for (let i = 0; i < 4; i++) {
-            let slot = this.container.getSlot("slotAsh" + i);
+            const slotName = `slotAsh${i}`;
+            let slot = this.container.getSlot(slotName);
             if (slot.id === 0) {
-                slot.id = ItemID.ash;
-                slot.data = 0;
-                slot.count = 1;
+                this.container.setSlot(slotName, ItemID.ash, 1, 0)
                 return true;
             } else if (slot.id === ItemID.ash && slot.data === 0 && slot.count < 64) {
-                slot.count++;
+                this.container.setSlot(slotName, ItemID.ash, slot.count + 1, 0)
                 return true;
             }
         }
+
         return false;
     },
 
@@ -26,7 +28,6 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
         let slotFuel = this.container.getSlot("slotFuel");
 
         if (this.data.burn) {
-
             if (this.data.burn >= this.data.burnMax) {
                 this.data.burnMax = 0;
                 this.data.burn = 0;
@@ -50,23 +51,23 @@ MachineRegistry.registerGenerator(BlockID.enginePeat, {
                 this.data.energyOut = fuel.energy;
                 this.data.burnMax = fuel.burnTime;
                 this.data.burn++;
-                slotFuel.count--;
+                this.container.setSlot("slotFuel", slotFuel.id, slotFuel.count - 1, slotFuel.data);
                 this.container.validateAll();
             }
         }
 
         this.container.setScale("burnScale", ((this.data.burnMax - this.data.burn) / this.data.burnMax) || 0);
-
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
         return 200000;
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return guiPeatFiredEngine;
-    }
+    },
 });
 
 StorageInterface.createInterface(BlockID.enginePeat, {

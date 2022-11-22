@@ -13,20 +13,20 @@ Item.createItem("refractoryEmpty", "Refractory Capsule", {name: "refractoryEmpty
 Item.setLiquidClip(ItemID.refractoryEmpty, true);
 Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID.refractoryEmpty]);
 
-function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
+function registerLiquidContainer(suffix: string, liquid: string, food: number = 0, isNative?: boolean, isHot?: boolean) {
     if (!isNative) {
-        let unique = "bucket" + suffix;
+        let unique = `bucket${suffix}`;
         IDRegistry.genItemID(unique);
-        Item.createItem(unique, suffix + " Bucket", {name: unique, meta: 0}, {stack: 1});
+        Item.createItem(unique, `${suffix} Bucket`, {name: unique, meta: 0}, {stack: 1});
         LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID[unique], data: 0});
         Item.addCreativeGroup(GROUP_BUCKETS, GROUP_BUCKETS_NAME, [ItemID[unique]]);
     }
 
     if (food) {
         if (!isHot) {
-            let unique = "waxCapsule" + suffix;
+            let unique = `waxCapsule${suffix}`;
             IDRegistry.genItemID(unique);
-            Item.createFoodItem(unique, "Capsule (" + suffix + ")", {
+            Item.createFoodItem(unique, `Capsule (${suffix})`, {
                 name: unique,
                 meta: 0
             }, {food});
@@ -37,47 +37,47 @@ function registerLiquidContainer(suffix, liquid, food, isNative, isHot) {
             }, {id: ItemID[unique], data: 0});
         }
 
-        let canUnique = "can" + suffix;
+        let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
-        Item.createFoodItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0}, {food});
+        Item.createFoodItem(canUnique, `Can (${suffix})`, {name: canUnique, meta: 0}, {food});
 
-        let refractoryUnique = "refractory" + suffix;
+        let refractoryUnique = `refractory${suffix}`;
         IDRegistry.genItemID(refractoryUnique);
-        Item.createFoodItem(refractoryUnique, "Capsule (" + suffix + ")", {
+        Item.createFoodItem(refractoryUnique, `Capsule (${suffix})`, {
             name: refractoryUnique,
             meta: 0
         }, {food});
     } else {
         if (!isHot) {
-            let unique = "waxCapsule" + suffix;
+            let unique = `waxCapsule${suffix}`;
             IDRegistry.genItemID(unique);
-            Item.createItem(unique, "Capsule (" + suffix + ")", {name: unique, meta: 0});
+            Item.createItem(unique, `Capsule (${suffix})`, {name: unique, meta: 0});
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
             }, {id: ItemID[unique], data: 0});
         }
 
-        let canUnique = "can" + suffix;
+        let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
-        Item.createItem(canUnique, "Can (" + suffix + ")", {name: canUnique, meta: 0});
+        Item.createItem(canUnique, `Can (${suffix})`, {name: canUnique, meta: 0});
 
-        let refractoryUnique = "refractory" + suffix;
+        let refractoryUnique = `refractory${suffix}`;
         IDRegistry.genItemID(refractoryUnique);
-        Item.createItem(refractoryUnique, "Capsule (" + suffix + ")", {name: refractoryUnique, meta: 0});
+        Item.createItem(refractoryUnique, `Capsule (${suffix})`, {name: refractoryUnique, meta: 0});
     }
 
-    LiquidRegistry.registerItem(liquid, {id: ItemID.canEmpty, data: 0}, {id: ItemID["can" + suffix], data: 0});
+    LiquidRegistry.registerItem(liquid, {id: ItemID.canEmpty, data: 0}, {id: ItemID[`can${suffix}`], data: 0});
     LiquidRegistry.registerItem(liquid, {id: ItemID.refractoryEmpty, data: 0}, {
-        id: ItemID["refractory" + suffix],
+        id: ItemID[`refractory${suffix}`],
         data: 0
     });
 
     if (!isHot)
-        Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID["waxCapsule" + suffix]]);
+        Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID[`waxCapsule${suffix}`]]);
 
-    Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID["can" + suffix]]);
-    Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID["refractory" + suffix]]);
+    Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID[`can${suffix}`]]);
+    Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID[`refractory${suffix}`]]);
 }
 
 registerLiquidContainer("Water", "water", 0, true);
@@ -89,28 +89,35 @@ registerLiquidContainer("Juice", "appleJuice", 2);
 registerLiquidContainer("Honey", "honey", 2);
 registerLiquidContainer("SeedOil", "seedOil", 0);
 
-function pickupLiquidFromWorld(waterCanId, lavaCanId) {
-    return (coords) => {
-        let pos = Player.getPosition();
-        if (World.getBlockID(coords.x, coords.y, coords.z) === 9)
-            World.drop(pos.x, pos.y + 0.3, pos.z, waterCanId, 1, 0);
-        else if (World.getBlockID(coords.x, coords.y, coords.z) === 11)
-            World.drop(pos.x, pos.y + 0.3, pos.z, lavaCanId, 1, 0);
-        else return;
+function pickupLiquidFromWorld(waterCanId: number, lavaCanId: number): Callback.ItemUseLocalFunction {
+    return (coords, item, block, player) => {
+        const pos = Entity.getPosition(player);
+        const blockSource = BlockSource.getDefaultForActor(player);
+        if (!blockSource) return;
 
-        World.setBlock(coords.x, coords.y, coords.z, 0);
-        Player.decreaseCarriedItem(1);
+        const blockID = blockSource.getBlockId(coords.x, coords.y, coords.z);
+        const capsuleId = {
+            9: waterCanId,
+            11: lavaCanId,
+        }[blockID];
+
+        if (!capsuleId) return;
+
+        blockSource.spawnDroppedItem(pos.x, pos.y + 0.3, pos.z, capsuleId, 1, 0);
+        blockSource.setBlock(coords.x, coords.y, coords.z, 0, 0);
+        PlayerUtils.decreaseCarriedItem(player);
     };
 }
 
 Item.registerUseFunction("canEmpty", pickupLiquidFromWorld(ItemID.canWater, ItemID.canLava));
 Item.registerUseFunction("refractoryEmpty", pickupLiquidFromWorld(ItemID.refractoryWater, ItemID.refractoryLava));
-Item.registerUseFunction("waxCapsuleEmpty", coords => {
-    if (World.getBlockID(coords.x, coords.y, coords.z) === 9) {
-        let pos = Player.getPosition();
-        World.drop(pos.x, pos.y + 0.3, pos.z, ItemID.waxCapsuleWater, 1, 0);
-        World.setBlock(coords.x, coords.y, coords.z);
-        Player.decreaseCarriedItem(1);
+Item.registerUseFunction("waxCapsuleEmpty", (coords, item, block, player) => {
+    const blockSource = BlockSource.getDefaultForActor(player);
+    if (blockSource && blockSource.getBlockId(coords.x, coords.y, coords.z) === 9) {
+        const pos = Entity.getPosition(player);
+        blockSource.spawnDroppedItem(pos.x, pos.y + 0.3, pos.z, ItemID.waxCapsuleWater, 1, 0);
+        blockSource.setBlock(coords.x, coords.y, coords.z, 0, 0);
+        PlayerUtils.decreaseCarriedItem(player);
     }
 });
 

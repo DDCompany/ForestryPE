@@ -1,4 +1,6 @@
 MachineRegistry.registerGenerator(BlockID.engineBiogas, {
+    useNetworkItemContainer: true,
+
     defaultValues: {
         liquidStored: 0,
         energyOut: 0,
@@ -13,30 +15,28 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    getBurnTimeForLiquid(liq) {
+    getBurnTimeForLiquid(liq: string) {
         return liq === "biomass" ? 1250 :
             (liq === "seedOil" ? 2500 :
                 (liq === "appleJuice" ? 2500 :
                     (liq === "honey" ? 2500 : 0)));
     },
 
-    getEnergyOutForLiquid(liq) {
+    getEnergyOutForLiquid(liq: string) {
         return liq === "biomass" ? 50 :
             (liq === "seedOil" ? 30 :
                 (liq === "appleJuice" ? 10 :
                     (liq === "honey" ? 20 : 0)));
     },
 
-    addEmptyContainer(empty) {
-        let slotEmptyContainer = this.container.getSlot("slotEmptyContainer");
+    addEmptyContainer(empty: ItemInstance) {
+        let slot = this.container.getSlot("slotEmptyContainer");
 
-        if (slotEmptyContainer.id === 0) {
-            slotEmptyContainer.id = empty.id;
-            slotEmptyContainer.data = empty.data;
-            slotEmptyContainer.count = 1;
+        if (slot.id === 0) {
+            this.container.setSlot("slotEmptyContainer", empty.id, 1, empty.data);
             return true;
-        } else if (slotEmptyContainer.id == empty.id && slotEmptyContainer.data == empty.data && slotEmptyContainer.count + 1 != Item.getMaxStack(slotEmptyContainer.id)) {
-            slotEmptyContainer.count++;
+        } else if (slot.id == empty.id && slot.data == empty.data && slot.count + 1 != Item.getMaxStack(slot.id)) {
+            this.container.setSlot("slotEmptyContainer", slot.id, slot.count + 1, slot.data);
             return true;
         }
 
@@ -44,10 +44,8 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
     },
 
     tick() {
-        var slotContainer = this.container.getSlot("slotContainer");
-
         if (this.data.liquidStored) {
-            this.liquidStorage.updateUiScale("liquidScale", this.data.liquidStored);
+            this.updateLiquidScale("liquidScale", this.data.liquidStored);
         }
 
         if (this.data.temperature && !this.data.liquidNow) {
@@ -59,12 +57,13 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
             }
         }
 
+        const slotContainer = this.container.getSlot("slotContainer");
         if (slotContainer.id && this.liquidStorage.getAmount("lava") + 1 <= 10) {
             let empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
 
             if (empty && empty.liquid === "lava" && this.addEmptyContainer(empty)) {
                 this.liquidStorage.addLiquid("lava", 1);
-                slotContainer.count--;
+                this.container.setSlot("slotContainer", slotContainer.id, slotContainer.count - 1, slotContainer.data);
             }
         }
 
@@ -72,7 +71,7 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
             let empty = LiquidRegistry.getEmptyItem(slotContainer.id, slotContainer.data);
 
             if (empty) {
-                let liq = 0;
+                let liq;
                 if (empty.liquid === "biomass") {
                     liq = "biomass";
                 } else if (empty.liquid === "seedOil") {
@@ -87,7 +86,7 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
                     if (this.addEmptyContainer(empty)) {
                         this.liquidStorage.addLiquid(liq, 1);
                         this.data.liquidStored = liq;
-                        slotContainer.count--;
+                        this.container.setSlot("slotContainer", slotContainer.id, slotContainer.count - 1, slotContainer.data);
                     }
                 }
             }
@@ -118,18 +117,18 @@ MachineRegistry.registerGenerator(BlockID.engineBiogas, {
             this.data.energyOut = this.getEnergyOutForLiquid(this.data.liquidNow);
         }
 
-        this.liquidStorage.updateUiScale("lavaScale", "lava");
+        this.updateLiquidScale("lavaScale", "lava");
         this.container.setScale("progressEnergyScale", this.data.energy / this.getEnergyStorage());
-        this.container.setScale("burnScale", this.data.burnTime / this.data.burnMax);
-
+        this.container.setScale("burnScale", (this.data.burnTime / this.data.burnMax) || 0);
         this.container.validateAll();
+        this.container.sendChanges();
     },
 
     getEnergyStorage() {
         return 300000;
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return guiBiogasEngine;
     }
 });
