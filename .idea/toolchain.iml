@@ -3,8 +3,9 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/forestry-pe/lib" />
-      <excludeFolder url="file://$MODULE_DIR$/forestry-pe/output" />
+      <excludeFolder url="file://$MODULE_DIR$/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/output" />
+      <excludeFolder url="file://$MODULE_DIR$/toolchain/bin" />
       <excludeFolder url="file://$MODULE_DIR$/toolchain/build" />
       <excludeFolder url="file://$MODULE_DIR$/toolchain/python" />
       <excludeFolder url="file://$MODULE_DIR$/toolchain/adb" />

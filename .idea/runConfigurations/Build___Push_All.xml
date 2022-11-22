@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build &amp; Push All" type="ShConfigurationType">
+  <configuration default="false" name="Build and Push All" type="ShConfigurationType">
     <option name="INDEPENDENT_SCRIPT_PATH" value="false" />
     <option name="SCRIPT_PATH" value="$PROJECT_DIR$/toolchain/python/build-and-push-all.bat" />
     <option name="SCRIPT_OPTIONS" value="" />

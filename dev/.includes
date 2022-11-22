@@ -1,9 +1,6 @@
 # noImplicitAny
 # strictNullChecks
 
-### DECLARATIONS
-../lib_declarations/**.d.ts
-
 ### HEADER
 header.ts
 creativeGroups.js

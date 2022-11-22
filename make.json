@@ -7,7 +7,8 @@
 		"clientOnly": false
 	},
 	"project": {
-		"composite": false
+		"compiledLibraries": true,
+		"useReferences": true
 	},
 	"api": "CoreEngine",
 	"resources": [
@@ -46,7 +47,6 @@
 			"language": "javascript"
 		}
 	],
-	"compile": [],
 	"additional": [
 		{
 			"source": "assets/root/*",

@@ -17,13 +17,15 @@ def get_modpack_push_directory():
 		directory = TOOLCHAIN_CONFIG.get_value("pushTo")
 		if directory is not None:
 			directory = join(directory, "mods", basename(MAKE_CONFIG.current_project))
+
 	if directory is None:
 		TOOLCHAIN_CONFIG.set_value("pushTo", setup_modpack_directory())
-		TOOLCHAIN_CONFIG.save()
 		if MAKE_CONFIG.get_value("pushTo") is None:
 			from .task import error
 			error("Nothing may be selected in modpack, nothing to do.")
+		TOOLCHAIN_CONFIG.save()
 		return get_modpack_push_directory()
+
 	if "/horizon/packs/" not in directory and not MAKE_CONFIG.get_value("adb.pushAnyLocation", False):
 		print(
 			f"Push directory {directory} looks suspicious, it does not belong to Horizon packs directory. " +
@@ -36,6 +38,7 @@ def get_modpack_push_directory():
 			"No questions, always push",
 			"Nothing", fallback=3
 		)
+
 		if which == 0:
 			TOOLCHAIN_CONFIG.remove_value("pushTo")
 			MAKE_CONFIG.remove_value("pushTo")
@@ -47,6 +50,7 @@ def get_modpack_push_directory():
 		elif which == 3:
 			print("Pushing aborted.")
 			return None
+
 	return directory
 
 def ls_pack(path):
@@ -97,6 +101,8 @@ def ls(path, *args):
 		if err.returncode != 1:
 			print("adb shell ls failed with code", err.returncode)
 		return []
+	except KeyboardInterrupt:
+		return []
 	return pipe.stdout.rstrip().splitlines()
 
 def push(directory, push_unchanged = False):
@@ -127,12 +133,18 @@ def push(directory, push_unchanged = False):
 		dst = dst_root + "/" + filename
 		progress.seek(percent / len(items), "Pushing " + filename)
 		shell.render()
-		subprocess.call(adb_command + [
-			"shell", "rm", "-r", dst
-		], stderr=devnull, stdout=devnull)
-		result = subprocess.call(adb_command + [
-			"push", src, dst
-		], stderr=devnull, stdout=devnull)
+		try:
+			subprocess.call(adb_command + [
+				"shell", "rm", "-r", dst
+			], stderr=devnull, stdout=devnull)
+			result = subprocess.call(adb_command + [
+				"push", src, dst
+			], stderr=devnull, stdout=devnull)
+		except KeyboardInterrupt:
+			progress.seek(0.5, "Pushing aborted.")
+			shell.render()
+			shell.leave()
+			return 1
 		percent += 1
 
 		if result != 0:
