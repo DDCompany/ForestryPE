@@ -5917,11 +5917,11 @@ declare interface TileEntity extends TileEntity.TileEntityPrototype {
     /**
      * TileEntity data values object
      */
-    data: {[key: string]: any},
+    data: { [key: string]: any },
     /**
      * TileEntity's item container
      */
-    container: ItemContainer | UI.Container,
+    container: ItemContainer,
     /**
      * TileEntity's liquid storage
      */

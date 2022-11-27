@@ -1,15 +1,15 @@
-var alvearyGUI = new UI.StandartWindow({
-    standart: {
+const alvearyGUI = new UI.StandartWindow({
+    standard: {
         header: {
             text: {
                 text: "Apiary"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [
@@ -99,7 +99,15 @@ var alvearyGUI = new UI.StandartWindow({
             size: 70.4,
             bitmap: "_default_slot_empty",
             isTransparentBackground: true
-        }
+        },
+        "error": {
+            type: "text",
+            x: 345,
+            y: 320,
+            width: 500,
+            height: 30,
+            text: "",
+        },
     }
 });
 MachineRegistry.addUiTitleTranslation(alvearyGUI);

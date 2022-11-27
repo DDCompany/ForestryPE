@@ -1,10 +1,6 @@
 TileEntity.registerPrototype(BlockID.alvearyStabiliser, {
-
+    useNetworkItemContainer: true,
     defaultValues: {},
-
-    tick() {
-
-    },
 
     getModifiers() {
         return {
@@ -13,5 +9,4 @@ TileEntity.registerPrototype(BlockID.alvearyStabiliser, {
             }
         };
     }
-
 });

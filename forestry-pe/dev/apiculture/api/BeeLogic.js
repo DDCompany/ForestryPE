@@ -50,17 +50,20 @@ var BeeLogic = {
     /**
      * @param {Bee} bee
      * @param {Object} coords
+     * @param {BlockSource} blockSource
      * @return {boolean} Найдены ли подходящие цветы для пчелы
      */
-    findFlowers(bee, coords) {
-        var flowers = bee.getFlowers();
-        var territory = BeeRegistry.rangeToObject(bee.getActiveChromosome("TERRITORY"));
+    findFlowers(blockSource, bee, coords) {
+        const flowers = bee.getFlowers();
+        const territory = BeeRegistry.rangeToObject(bee.getActiveChromosome("TERRITORY"));
 
-        for (var xx = coords.x - territory.x; xx < coords.x + territory.x; xx++) {
-            for (var yy = coords.y - territory.y; yy < coords.y + territory.y; yy++) {
-                for (var zz = coords.z - territory.z; zz < coords.z + territory.z; zz++) {
-                    var block = World.getBlock(xx, yy, zz);
-                    if (flowers.indexOf(block.id + ":" + block.data) > -1 || flowers.indexOf(block.id + ":-1") > -1) return true;
+        for (let xx = coords.x - territory.x; xx < coords.x + territory.x; xx++) {
+            for (let yy = coords.y - territory.y; yy < coords.y + territory.y; yy++) {
+                for (let zz = coords.z - territory.z; zz < coords.z + territory.z; zz++) {
+                    const block = blockSource.getBlock(xx, yy, zz);
+                    if (flowers.indexOf(block.id + ":" + block.data) > -1 || flowers.indexOf(block.id + ":-1") > -1) {
+                        return true;
+                    }
                 }
             }
         }

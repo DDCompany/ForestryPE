@@ -7,9 +7,12 @@ Item.createFoodItem("honeyPot", "Honey Pot", {name: "honeyPot", meta: 0}, {food:
 IDRegistry.genItemID("ambrosia");
 Item.createFoodItem("ambrosia", "Ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
 
-Callback.addCallback("FoodEaten", () => {
-    if (Player.getCarriedItem().id === ItemID.ambrosia)
-        Entity.addEffect(Player.get(), Native.PotionEffect.regeneration, 40, 1, true, true);
+Callback.addCallback("FoodEaten", (food, ratio, player) => {
+    const actor = new PlayerActor(player);
+    const carriedItem = actor.getInventorySlot(actor.getSelectedSlot());
+    if (carriedItem.id === ItemID.ambrosia) {
+        Entity.addEffect(Player.get(), EPotionEffect.REGENERATION, 40, 1, true, true);
+    }
 });
 
 Callback.addCallback("PostLoaded", () => {

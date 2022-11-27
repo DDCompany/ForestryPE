@@ -142,4 +142,12 @@ class ContainerHelper {
 
         return item1.id === item2.id && ((item1.data || 0) === (item2.data || 0) || item1.data === -1 || item2.data === -1);
     }
+
+    static setMaxStackPolicy(container: ItemContainer, slotName: string, limit: number): void {
+        container.setSlotAddTransferPolicy(slotName, (name, slotName, id, count) => {
+            const maxStack = Item.getMaxStack(id);
+            const current = container.getSlot(slotName).count;
+            return Math.min(count, maxStack - current, limit);
+        });
+    }
 }

@@ -1,15 +1,15 @@
 const apiaryGUI = new UI.StandartWindow({
-    standart: {
+    standard: {
         header: {
             text: {
                 text: "Apiary"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [
@@ -100,6 +100,14 @@ const apiaryGUI = new UI.StandartWindow({
             size: 70.4,
             bitmap: "_default_slot_empty",
             isTransparentBackground: true
+        },
+        "error": {
+            type: "text",
+            x: 345,
+            y: 320,
+            width: 500,
+            height: 30,
+            text: "",
         },
 
         "slotFrame0": {type: "slot", x: 478, y: 66, size: 51, bitmap: "forestry.slots.gray"},

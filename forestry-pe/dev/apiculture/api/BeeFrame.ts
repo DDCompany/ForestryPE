@@ -1,7 +1,15 @@
-var BeeFrame = {
-    frames: {},
+interface BeeFramePrototype {
+    codeName: string;
+    localize: Record<string, string>;
+    durability: number;
+    modifier: BeeModifier;
+    texture?: { name: string, meta: number };
+}
 
-    registerFrame(obj) {
+class BeeFrame {
+    static readonly frames: Record<number, BeeFramePrototype> = {};
+
+    static registerFrame(obj: BeeFramePrototype) {
         if (!obj.codeName) {
             summonException("CodeName is undefined! (Frames Registration)");
             return;
@@ -29,13 +37,6 @@ var BeeFrame = {
             };
         }
 
-        if (!obj.onFrameUsed) {
-            obj.onFrameUsed = (item, house) => {
-                item.data++;
-                return item;
-            }
-        }
-
         IDRegistry.genItemID(obj.codeName);
         Item.createItem(obj.codeName, obj.localize.en, obj.texture, {stack: 1});
         Translation.addTranslation(obj.localize.en, obj.localize);
@@ -44,21 +45,9 @@ var BeeFrame = {
         Item.setMaxDamage(ItemID[obj.codeName], obj.durability);
 
         this.frames[ItemID[obj.codeName]] = obj;
-    },
-
-    isFrame(id) {
-        return this.frames[id];
     }
 
-};
-
-/*BeeFrame.registerFrame({
-    codeName: "frameUntreated",
-    localize: {en: "Test frame", ru: "Тестовый фреуаау"},
-    modifier: {
-        getProductionModifier: function () {
-            return 2.0;
-        }
-    },
-    durability: 20
-});*/
+    static isFrame(id: number) {
+        return this.frames[id];
+    }
+}

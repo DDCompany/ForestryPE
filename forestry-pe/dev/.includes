@@ -42,27 +42,27 @@ core/translation.js
 ### APICULTURE
 #API
 apiculture/api/BeeType.js
-apiculture/api/ApiaryRegistry.js
+apiculture/api/ApiaryRegistry.ts
 apiculture/api/Bee.js
-apiculture/api/BeeEffect.js
-apiculture/api/BeeFrame.js
-apiculture/api/BeeHouse.js
+apiculture/api/BeeEffects.ts
+apiculture/api/BeeFrame.ts
+apiculture/api/BeeHouse.ts
 apiculture/api/BeeLogic.js
 apiculture/api/BeeRegistry.js
 apiculture/api/BeeSaver.js
 apiculture/api/BiomeHelper.ts
-apiculture/api/Modifier.js
+apiculture/api/Modifier.ts
 apiculture/api/HiveGenerator.ts
 
 # BLOCKS
 apiculture/blocks/apiaristChest.js
 
 apiculture/blocks/apiary/block.js
-apiculture/blocks/apiary/gui.js
-apiculture/blocks/apiary/tile.js
+apiculture/blocks/apiary/gui.ts
+apiculture/blocks/apiary/tile.ts
 
 apiculture/blocks/beeHouse/block.js
-apiculture/blocks/beeHouse/tile.js
+apiculture/blocks/beeHouse/tile.ts
 
 apiculture/blocks/storage.js
 
@@ -74,34 +74,34 @@ apiculture/blocks/beehives/particles.js
 apiculture/items/analyzer.js
 apiculture/items/armor.js
 apiculture/items/combs.js
-apiculture/items/frames.js
-apiculture/items/food.js
+apiculture/items/frames.ts
+apiculture/items/food.ts
 apiculture/items/other.js
 
 # MULTIBLOCKS
 apiculture/alveary/alveary.js
 
 apiculture/alveary/fan/alvearyFan.js
-apiculture/alveary/fan/tile.js
+apiculture/alveary/fan/tile.ts
 
 apiculture/alveary/heater/alvearyHeater.js
-apiculture/alveary/heater/tile.js
+apiculture/alveary/heater/tile.ts
 
 apiculture/alveary/hygroregulator/alvearyHygroregulator.js
-apiculture/alveary/hygroregulator/gui.js
-apiculture/alveary/hygroregulator/tile.js
+apiculture/alveary/hygroregulator/gui.ts
+apiculture/alveary/hygroregulator/tile.ts
 
 apiculture/alveary/misc/alvearyMisc.js
-apiculture/alveary/misc/gui.js
-apiculture/alveary/misc/tile.js
+apiculture/alveary/misc/gui.ts
+apiculture/alveary/misc/tile.ts
 
 apiculture/alveary/stabiliser/alvearyStabiliser.js
-apiculture/alveary/stabiliser/tile.js
+apiculture/alveary/stabiliser/tile.ts
 
 # OTHER
 apiculture/mode.js
-apiculture/bees.js
-apiculture/effects.js
+apiculture/bees.ts
+apiculture/effects.ts
 
 # TRANSLATION
 apiculture/translation.js

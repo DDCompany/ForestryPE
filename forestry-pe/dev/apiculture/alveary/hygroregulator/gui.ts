@@ -1,15 +1,15 @@
-var alvearyHygroregulatorGUI = new UI.StandartWindow({
-    standart: {
+const alvearyHygroregulatorGUI = new UI.StandartWindow({
+    standard: {
         header: {
             text: {
                 text: "Alveary Hygroregulator"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [

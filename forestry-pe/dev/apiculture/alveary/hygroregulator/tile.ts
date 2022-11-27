@@ -1,5 +1,5 @@
-TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
-
+MachineRegistry.registerDefault(BlockID.alvearyHygroregulator, {
+    useNetworkItemContainer: true,
     defaultValues: {
         time: 0,
         humidity: 0,
@@ -11,8 +11,7 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
     },
 
     tick() {
-        var slotContainerFull = this.container.getSlot("slotLiquid");
-        let liquidStored = this.liquidStorage.getLiquidStored();
+        const liquidStored = this.liquidStorage.getLiquidStored();
 
         if (this.data.time <= 0) {
             if (this.liquidStorage.getAmount(liquidStored)) {
@@ -31,14 +30,17 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
             this.data.time--;
         }
 
-        if (slotContainerFull.id)
+        const slotContainerFull = this.container.getSlot("slotLiquid");
+        if (slotContainerFull.id) {
             ContainerHelper.drainContainer2(liquidStored, this, "slotLiquid", "slotContainer");
+        }
 
-        this.liquidStorage.updateUiScale("liquidScale", liquidStored);
+        this.updateLiquidScale("liquidScale", liquidStored);
         this.container.validateAll();
+        this.container.sendChanges();
     },
 
-    alvearyTick(tile) {
+    alvearyTick(tile: TileEntity) {
         if (this.data.time && tile.humidity !== undefined) {
             tile.humidity = Math.min(BiomeHelper.HUMIDITY_DAMP, tile.humidity + this.data.humidity);
         }
@@ -48,7 +50,7 @@ TileEntity.registerPrototype(BlockID.alvearyHygroregulator, {
         }
     },
 
-    getGuiScreen() {
+    getScreenByName() {
         return alvearyHygroregulatorGUI;
-    }
+    },
 });

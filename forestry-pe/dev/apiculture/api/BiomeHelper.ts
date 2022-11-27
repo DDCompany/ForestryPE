@@ -12,19 +12,19 @@ class BiomeHelper {
     static CLIMATE_HOT_BIOMES: number[] = [2, 130];
     static CLIMATE_HELLISH_BIOMES: number[] = [8];
 
-    static readonly CLIMATE_HELLISH: 6;
-    static readonly CLIMATE_HOT: 5;
-    static readonly CLIMATE_WARM: 4;
-    static readonly CLIMATE_NORMAL: 3;
-    static readonly CLIMATE_COLD: 2;
-    static readonly CLIMATE_ICY: 1;
+    static readonly CLIMATE_HELLISH = 6;
+    static readonly CLIMATE_HOT = 5;
+    static readonly CLIMATE_WARM = 4;
+    static readonly CLIMATE_NORMAL = 3;
+    static readonly CLIMATE_COLD = 2;
+    static readonly CLIMATE_ICY = 1;
 
-    static getBiomeHumidity(id: number) {
+    static getBiomeHumidity(id: number): number {
         return this.HUMIDITY_DAMP_BIOMES.indexOf(id) != -1 ? this.HUMIDITY_DAMP :
             (this.HUMIDITY_ARID_BIOMES.indexOf(id) != -1 ? this.HUMIDITY_DAMP : this.HUMIDITY_NORMAL);
     }
 
-    static getBiomeClimate(id: number) {
+    static getBiomeClimate(id: number): number {
         return this.CLIMATE_ICY_BIOMES.indexOf(id) != -1 ? this.CLIMATE_ICY :
             (this.CLIMATE_COLD_BIOMES.indexOf(id) != -1 ? this.CLIMATE_COLD :
                 (this.CLIMATE_WARM_BIOMES.indexOf(id) != -1 ? this.CLIMATE_WARM :

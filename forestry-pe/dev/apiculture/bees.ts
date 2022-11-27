@@ -21,9 +21,10 @@ BeeRegistry.registerBee({
             species1: "Modest",
             species2: "Frugal",
             chance: 0.08,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return (climate === BiomeHelper.CLIMATE_HOT || climate === BiomeHelper.CLIMATE_HELLISH) && BiomeHelper.getBiomeHumidity(World.getBiome(house.tile.x, house.tile.z)) === BiomeHelper.HUMIDITY_ARID;
+            onMutate(house: BeeHouse) {
+                const climate = house.getClimate();
+                return (climate === BiomeHelper.CLIMATE_HOT || climate === BiomeHelper.CLIMATE_HELLISH)
+                    && house.getHumidity() === BiomeHelper.HUMIDITY_ARID;
             }
         }
     ],
@@ -167,9 +168,8 @@ BeeRegistry.registerBee({
             species1: "Sinister",
             species2: "Fiendish",
             chance: 0.25,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
@@ -347,27 +347,24 @@ BeeRegistry.registerBee({
             species1: "Modest",
             species2: "Sinister",
             chance: 0.4,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
             species1: "Tropical",
             species2: "Sinister",
             chance: 0.4,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
             species1: "Cultivated",
             species2: "Sinister",
             chance: 0.4,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
@@ -430,18 +427,16 @@ BeeRegistry.registerBee({
             species1: "Modest",
             species2: "Sinister",
             chance: 0.16,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HOT;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HOT;
             }
         },
         {
             species1: "Modest",
             species2: "Fiendish",
             chance: 0.1,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HOT;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HOT;
             }
         }
     ],
@@ -911,18 +906,16 @@ BeeRegistry.registerBee({
             species1: "Modest",
             species2: "Cultivated",
             chance: 0.6,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         },
         {
             species1: "Tropical",
             species2: "Cultivated",
             chance: 0.6,
-            onMutate(house) {
-                let climate = BiomeHelper.getBiomeClimate(World.getBiome(house.tile.x, house.tile.z));
-                return climate === BiomeHelper.CLIMATE_HELLISH;
+            onMutate(house: BeeHouse) {
+                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
             }
         }
     ],
