@@ -32,11 +32,11 @@ TileEntity.registerPrototype(BlockID.bog, {
     }
 });
 
-Block.setRandomTickCallback(BlockID.bog, (x, y, z) => {
-    let tile = World.getTileEntity(x, y, z);
+Block.setRandomTickCallback(BlockID.bog, (x, y, z, id, data, blockSource) => {
+    let tile = World.getTileEntity(x, y, z, blockSource);
 
     if (tile === null)
-        tile = TileEntity.addTileEntity(x, y, z);
+        tile = TileEntity.addTileEntity(x, y, z, blockSource);
 
     (tile as any).increaseMaturity();
 });
