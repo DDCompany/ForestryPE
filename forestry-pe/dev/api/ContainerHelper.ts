@@ -1,36 +1,34 @@
 setLoadingTip("Common Api Loading...");
 
 class ContainerHelper {
-    static putInSlots(toPut: [number, number, number][], container: UI.Container, slots: string[]) {
+    static putInSlots(toPut: [number, number, number][], container: ItemContainer, slots: string[]) {
         for (const key in toPut) {
             let count = toPut[key][2];
             for (const key2 in slots) {
                 if (!count) break;
-                const slot = container.getSlot(slots[key2]);
+                const slotName = slots[key2];
+                const slot = container.getSlot(slotName);
                 if (slot.id === toPut[key][0] && slot.data === toPut[key][1] && slot.count < Item.getMaxStack(slot.id)) {
                     const f = Math.min(count, Item.getMaxStack(slot.id) - slot.count);
                     count -= f;
-                    slot.count += f;
+                    container.setSlot(slotName, slot.id, slot.count + f, slot.data);
                 } else if (slot.id === 0) {
-                    slot.id = toPut[key][0];
-                    slot.data = toPut[key][1];
-                    slot.count = toPut[key][2];
+                    container.setSlot(slotName, toPut[key][0], toPut[key][2], toPut[key][1]);
                     count = 0;
                 }
             }
         }
     }
 
-    static putInSlot(slot: UI.Slot, item: { id: number, data: number, count?: number }): boolean {
+    static putInSlot(container: ItemContainer, slotName: string, item: { id: number, data: number, count?: number }): boolean {
         const count = item.count || 1;
 
+        const slot = container.getSlot(slotName);
         if (slot.id === 0) {
-            slot.id = item.id;
-            slot.data = item.data;
-            slot.count = count;
+            container.setSlot(slotName, item.id, count, item.data);
             return true;
         } else if (slot.id === item.id && slot.data === item.data && slot.count + count <= Item.getMaxStack(item.id)) {
-            slot.count += count;
+            container.setSlot(slotName, slot.id, slot.count + count, slot.data);
             return true;
         }
 
@@ -51,16 +49,15 @@ class ContainerHelper {
         if (tile.liquidStorage.getAmount(liquid) < 1)
             return;
 
-        const container = tile.container;
+        const container: ItemContainer = tile.container;
         const slotEmpty = container.getSlot(slotEmptyName);
-        const slotFull = container.getSlot(slotFullName);
         const full = LiquidRegistry.getFullItem(slotEmpty.id, slotEmpty.data, liquid);
 
         if (full) {
-            if (!ContainerHelper.putInSlot(slotFull, full))
+            if (!ContainerHelper.putInSlot(container, slotFullName, full))
                 return;
 
-            slotEmpty.count--;
+            container.setSlot(slotEmptyName, slotEmpty.id, slotEmpty.count - 1, slotEmpty.data);
             tile.liquidStorage.getLiquid(liquid, 1);
             container.validateSlot(slotEmptyName);
             return liquid;
@@ -73,7 +70,7 @@ class ContainerHelper {
      * @param tile TileEntity
      * @param slotFullName идентификатор слота с наполненными контейнерами
      */
-    static drainContainer(liquid: string, tile: TileEntity.TileEntityPrototype, slotFullName: string): string | undefined {
+    static drainContainer(liquid: string | null, tile: TileEntity.TileEntityPrototype, slotFullName: string): string | undefined {
         const slot = tile.container.getSlot(slotFullName);
         const empty = LiquidRegistry.getEmptyItem(slot.id, slot.data);
 
@@ -85,25 +82,24 @@ class ContainerHelper {
             if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
                 return;
 
-            if (--slot.count === 0) {
+            if (slot.count - 1 === 0) {
                 if (!this.isReusable(empty.id)) {
                     tile.container.clearSlot(slotFullName);
                 } else {
-                    slot.id = empty.id;
-                    slot.data = empty.data;
-                    slot.count = 1;
+                    tile.container.setSlot(slotFullName, empty.id, 1, empty.data);
                 }
+            } else {
+                tile.container.setSlot(slotFullName, slot.id, slot.count - 1, slot.data);
             }
 
             tile.liquidStorage.addLiquid(_liquid, 1);
-            return _liquid || liquid;
+            return _liquid || liquid || undefined;
         }
     }
 
     static drainContainer2(liquid: string, tile: TileEntity.TileEntityPrototype, slotFullName: string, slotEmptyName: string): string | undefined {
         const container = tile.container;
         const slotFull = container.getSlot(slotFullName);
-        const slotEmpty = container.getSlot(slotEmptyName);
         const empty = LiquidRegistry.getEmptyItem(slotFull.id, slotFull.data);
 
         if (!empty)
@@ -114,8 +110,8 @@ class ContainerHelper {
             if (tile.liquidStorage.getAmount(_liquid) + 1 > 10)
                 return;
 
-            if (!this.isReusable(empty.id) || this.putInSlot(slotEmpty, empty)) {
-                slotFull.count--;
+            if (!this.isReusable(empty.id) || this.putInSlot(container, slotEmptyName, empty)) {
+                container.setSlot(slotFullName, slotFull.id, slotFull.count - 1, slotFull.data);
                 tile.liquidStorage.addLiquid(_liquid, 1);
                 container.validateSlot(slotFullName);
                 return _liquid;
@@ -145,5 +141,13 @@ class ContainerHelper {
             return false;
 
         return item1.id === item2.id && ((item1.data || 0) === (item2.data || 0) || item1.data === -1 || item2.data === -1);
+    }
+
+    static setMaxStackPolicy(container: ItemContainer, slotName: string, limit: number): void {
+        container.setSlotAddTransferPolicy(slotName, (name, slotName, id, count) => {
+            const maxStack = Item.getMaxStack(id);
+            const current = container.getSlot(slotName).count;
+            return Math.min(count, maxStack - current, limit);
+        });
     }
 }

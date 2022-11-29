@@ -14,7 +14,7 @@ ToolAPI.registerBlockMaterial(BlockID.alveary_misc, "wood");
 ApiaryRegistry.register(BlockID.alveary_misc_center);
 ApiaryRegistry.register(BlockID.alveary_misc);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.alveary_misc_center, count: 1, data: 0}, [
         "ggg",
         "sss",

@@ -2,6 +2,8 @@ interface CentrifugeRecipe {
     input: SingleRecipeItem;
 
     result: ChancedRecipeItem[];
+
+    time?: number;
 }
 
 class CentrifugeManager {

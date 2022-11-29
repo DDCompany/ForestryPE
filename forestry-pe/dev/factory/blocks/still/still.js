@@ -2,7 +2,7 @@ IDRegistry.genBlockID("still");
 FactoryManager.register("still", "Still",
     [["still_top", 0], ["still_top", 0], ["still", 0], ["still", 0], ["still_side", 0], ["still_side", 0]], true);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.still, count: 1, data: 0}, [
         "cgc",
         "gbg",

@@ -1,7 +1,7 @@
 Block.setPrototype("apiary", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [{
             name: "Apiary",
             texture: [["apiary", 0], ["apiary", 0], ["apiary", 1], ["apiary", 1], ["apiary", 1], ["apiary", 1]],
@@ -12,7 +12,7 @@ Block.setPrototype("apiary", {
 });
 Block.setBlockMaterial(BlockID.apiary, "wood", 1);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.apiary, count: 1, data: 0}, [
         "ppp",
         "sgs",

@@ -13,7 +13,7 @@ Item.createItem("apatite", "Apatite", {name: "apatite", meta: 0}, {});
 Item.addCreativeGroup(GROUP_INGOTS, GROUP_INGOTS_NAME, [ItemID.ingotCopper, ItemID.ingotTin, ItemID.ingotBronze]);
 
 if (ForestryConfig.recipeBronzeIngot) {
-    Callback.addCallback("PostLoaded", function () {
+    Callback.addCallback("PostLoaded", () => {
         Recipes.addShapeless({id: ItemID.ingotBronze, count: 4, data: 0}, [{
             id: ItemID.ingotCopper,
             data: 0

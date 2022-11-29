@@ -136,27 +136,27 @@ class HiveGenerator {
 }
 
 if (ForestryConfig.genBeehivesDebug) {
-    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NORMAL);
     });
 
-    Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.END);
     });
 
-    Callback.addCallback("GenerateNetherChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NETHER);
     });
 } else {
-    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NORMAL);
     });
 
-    Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunk(chunkX, chunkZ, Dimension.END);
     });
 
-    Callback.addCallback("GenerateNetherChunk", function (chunkX, chunkZ) {
+    Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
         HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NETHER);
     });
 }

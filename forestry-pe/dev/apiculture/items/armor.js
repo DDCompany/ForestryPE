@@ -27,7 +27,7 @@ Item.createArmorItem("bootsApiarist", "Apiarist's Shoes", {name: "apiarist_boots
     texture: "armor/apiarist_armor_1.png"
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.helmetApiarist, count: 1, data: 0}, [
         "www",
         "w w",

@@ -4,14 +4,14 @@ var BeeSaver = {
 };
 
 Saver.addSavesScope("BeeSaverScope",
-    function read(scope) {
+    scope => {
         BeeSaver.uniqueID = scope.uniqueID;
         for (var key in scope["bees"]) {
             BeeSaver.bees[key] = BeeRegistry.getBeeFromScope(scope["bees"][key]);
         }
     },
 
-    function save() {
+    () => {
         var scope = {
             uniqueID: BeeSaver.uniqueID,
             bees: {}

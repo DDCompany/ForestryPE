@@ -9,7 +9,7 @@ Item.createItem("sturdyMachine", "Sturdy Casing", {name: "sturdyMachine", meta: 
 
 Item.addCreativeGroup(GROUP_CASINGS, GROUP_CASINGS_NAME, [ItemID.impregnatedCasing, ItemID.hardenedMachine, ItemID.sturdyMachine]);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.sturdyMachine, count: 1, data: 0}, [
         "WWW",
         "W W",

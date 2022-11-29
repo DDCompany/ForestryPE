@@ -1,15 +1,15 @@
 const fabricatorGUI = new UI.StandartWindow({
-    standart: {
+    standard: {
         header: {
             text: {
                 text: "Thermionic Fabricator"
             }
         },
         inventory: {
-            standart: true
+            standard: true
         },
         background: {
-            standart: true
+            standard: true
         }
     },
     drawing: [
@@ -57,24 +57,7 @@ MachineRegistry.addUiTitleTranslation(fabricatorGUI);
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            const slotName = `slotInput${i * 3 + j}`;
-
-            content.elements[slotName] = {
-                type: "slot", x: 541 + j * 60, y: 88 + i * 60, isValid: (id, count, data, container) => {
-                    container.setSlot(slotName, id, 1, data);
-                    return false;
-                }, clicker: {
-                    onClick: container => {
-                        container.clearSlot(slotName);
-                        const elementIns = container.getElement(slotName);
-                        const clazz = elementIns.getClass();
-                        const field = clazz.getDeclaredField("currentSelectedSlot");
-
-                        field.setAccessible(true);
-                        field.set(elementIns, elementIns);
-                    }
-                }
-            };
+            content.elements[`slotInput${i * 3 + j}`] = {type: "slot", x: 541 + j * 60, y: 88 + i * 60};
         }
     }
 

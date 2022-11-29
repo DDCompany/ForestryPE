@@ -6,7 +6,7 @@ Block.createBlock("alvearyFan", [
 ToolAPI.registerBlockMaterial(BlockID.alvearyFan, "wood");
 ApiaryRegistry.register(BlockID.alvearyFan);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
 
     Recipes.addShaped({id: BlockID.alvearyFan, count: 1, data: 0}, [
         "i i",

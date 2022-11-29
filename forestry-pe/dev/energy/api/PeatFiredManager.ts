@@ -21,9 +21,9 @@ class PeatFiredManager {
         }
 
         this.fuel.push({
-            id: id,
-            energy: energy,
-            burnTime: burnTime
+            id,
+            energy,
+            burnTime
         });
     }
 

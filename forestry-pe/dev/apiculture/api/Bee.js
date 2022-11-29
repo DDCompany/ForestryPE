@@ -172,6 +172,9 @@ function Bee(species, beetype, save, inactive_species) {
         return this.getActiveChromosome("LIFESPAN");
     };
 
+    /**
+     * @return {number}
+     */
     this.getItemID = function () {
         switch (this.beetype) {
             case BeeRegistry.BEETYPE_QUEEN:
@@ -181,6 +184,8 @@ function Bee(species, beetype, save, inactive_species) {
             case BeeRegistry.BEETYPE_PRINCESS:
                 return BeeRegistry.getPrincessByType(this.type);
         }
+
+        throw new Error("Unknown bee type");
     };
 
     this.getSaveScope = function () {

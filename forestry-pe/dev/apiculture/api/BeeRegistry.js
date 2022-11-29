@@ -57,7 +57,7 @@ const BeeRegistry = {
     chromosomes_list: {},
     mutations: {},
 
-    init: function () {
+    init() {
 
         this.chromosomes_list["SPEED"] = this.SPEED_SLOWEST;
         this.chromosomes_list["LIFESPAN"] = this.LIFESPAN_SHORTER;
@@ -72,7 +72,7 @@ const BeeRegistry = {
 
     },
 
-    getBeeFromScope: function (scope) {
+    getBeeFromScope(scope) {
         let bee = new Bee();
         for (let key in scope) {
             bee[key] = scope[key];
@@ -81,7 +81,7 @@ const BeeRegistry = {
         return bee;
     },
 
-    rangeToObject: function (range) {
+    rangeToObject(range) {
         return {
             x: parseInt(range.split("x")[0]),
             y: parseInt(range.split("x")[1]),
@@ -89,7 +89,7 @@ const BeeRegistry = {
         };
     },
 
-    convertToItemArray: function (bees) {
+    convertToItemArray(bees) {
         let arr = [];
         for (let key in bees) {
             arr.push([bees[key].getItemID(), bees[key].unique, 1]);
@@ -98,7 +98,7 @@ const BeeRegistry = {
         return arr;
     },
 
-    addMutation: function (arg) {
+    addMutation(arg) {
         if (!arg.species1) {
             summonException("Species1 is undefined! (Bee Mutation Registration)");
             return;
@@ -118,9 +118,7 @@ const BeeRegistry = {
         }
 
         if (!arg.onMutate) {
-            arg.onMutate = function () {
-                return true;
-            };
+            arg.onMutate = () => true;
         }
 
         if (!this.mutations[arg.result]) {
@@ -130,7 +128,7 @@ const BeeRegistry = {
         this.mutations[arg.result].push(arg);
     },
 
-    getMutations: function (species1, species2) {
+    getMutations(species1, species2) {
         let muts = [];
 
         if (species2) {
@@ -156,11 +154,11 @@ const BeeRegistry = {
         return muts;
     },
 
-    getMutationsByResult: function (species) {
+    getMutationsByResult(species) {
         return this.mutations[species];
     },
 
-    getBeeNextUniqueID: function () {
+    getBeeNextUniqueID() {
         if (!BeeSaver.uniqueID) {
             BeeSaver.uniqueID = 0;
         }
@@ -168,27 +166,27 @@ const BeeRegistry = {
         return ++BeeSaver.uniqueID;
     },
 
-    getPrincessByType: function (type) {
+    getPrincessByType(type) {
         return ItemID["princess" + type];
     },
 
-    getDroneByType: function (type) {
+    getDroneByType(type) {
         return ItemID["drone" + type];
     },
 
-    getQueenByType: function (type) {
+    getQueenByType(type) {
         return ItemID["queen" + type];
     },
 
-    getToleranceValue: function (value) {
+    getToleranceValue(value) {
         return value === 0 ? 0 : (value < 6 ? value : (value < 11 ? value - 5 : value - 10));
     },
 
-    getTolerance: function (tol) {
+    getTolerance(tol) {
         return tol === 0 ? 0 : (tol < 6 ? this.TOLERANCE_BOTH : (tol < 11 ? this.TOLERANCE_UP : this.TOLERANCE_DOWN))
     },
 
-    registerBee: function (arg) {
+    registerBee(arg) {
         if (!arg.localize) {
             summonException("Localize is undefined! (Bee Registration)");
             return;
@@ -283,7 +281,7 @@ const BeeRegistry = {
 
         this.bees[arg.species] = bee_type;
 
-        let NAME_OVERRIDE = function (item, name) {
+        let NAME_OVERRIDE = (item, name) => {
             let beeType = BeeRegistry.getBeeTypeByID(item.id);
             let bee = BeeSaver.bees["b" + item.data];
             if (beeType !== BeeRegistry.BEETYPE_DRONE) {
@@ -311,7 +309,7 @@ const BeeRegistry = {
         Item.addCreativeGroup(GROUP_QUEENS, GROUP_QUEENS_NAME, [ItemID["queen" + arg.species]]);
     },
 
-    getBeeTypeByID: function (id) {
+    getBeeTypeByID(id) {
         if (id > 0) {
             for (let key in this.bees) {
                 let bee = this.bees[key];
@@ -328,7 +326,7 @@ const BeeRegistry = {
         return BeeRegistry.BEETYPE_NONE;
     },
 
-    getSpeciesByID: function (id) {
+    getSpeciesByID(id) {
         for (let key in this.bees) {
             let bee = this.bees[key];
             if (bee.princessID === id || bee.droneID === id || bee.queenID === id) {
@@ -338,11 +336,11 @@ const BeeRegistry = {
         return null;
     },
 
-    getBeeByType: function (type) {
+    getBeeByType(type) {
         return this.bees[type];
     },
 
-    getBeeFromItem: function (id, data) {
+    getBeeFromItem(id, data) {
         let bee = null;
         if (!BeeSaver.bees["b" + data]) {
             let species = BeeRegistry.getSpeciesByID(id);
@@ -362,11 +360,11 @@ const BeeRegistry = {
         return bee;
     },
 
-    isBee: function (id) {
+    isBee(id) {
         return BeeRegistry.getSpeciesByID(id) !== null;
     },
 
-    getChromosomeValueName: function (name, value) {
+    getChromosomeValueName(name, value) {
         if (name === "LIFESPAN") {
 
             switch (value) {
@@ -477,7 +475,7 @@ const BeeRegistry = {
         return value;
     },
 
-    isDominant: function (name, value) {
+    isDominant(name, value) {
         if (name === "FERTILITY") {
             return value === 1 || value === 2;
         } else if (name === "SPEED") {
@@ -493,12 +491,12 @@ const BeeRegistry = {
         return false;
     },
 
-    integrateWithRecipeViewer: function (api) {
+    integrateWithRecipeViewer(api) {
         function bakeBeeMutations(mutations) {
             if (!mutations)
                 return [];
 
-            return mutations.map(function (mutation) {
+            return mutations.map(mutation => {
                 const princessId = BeeRegistry.getPrincessByType(mutation.species1);
                 const droneId = BeeRegistry.getDroneByType(mutation.species2);
                 const resultId = BeeRegistry.getPrincessByType(mutation.result);
@@ -530,7 +528,7 @@ const BeeRegistry = {
                     textChance: {type: "text", x: 620, y: 330, font: {size: 30}},
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 const species = BeeRegistry.getSpeciesByID(id);
                 if (!species)
                     return [];
@@ -539,7 +537,7 @@ const BeeRegistry = {
                     return bakeBeeMutations(BeeRegistry.getMutations(species));
                 } else return bakeBeeMutations(BeeRegistry.getMutationsByResult(species));
             },
-            onOpen: function (elements, data) {
+            onOpen(elements, data) {
                 elements.get("textChance")
                     .onBindingUpdated("text", data ? "Chance: " + data.chance + "%" : "%");
             }
@@ -564,40 +562,34 @@ const BeeRegistry = {
                     output6: {type: "slot", x: 691, y: 275, size: 90, bitmap: "_default_slot_empty", needClean: true}
                 }
             },
-            getList: function (id, data, isUsage) {
+            getList(id, data, isUsage) {
                 if (isUsage) {
                     let beeType = BeeRegistry.getBeeByType(BeeRegistry.getSpeciesByID(id));
                     return beeType ? [{
                         input: [{id: beeType.queenID, data: 0, count: 1}],
                         output: beeType.produce
-                            .map(function (item) {
-                                return {
-                                    id: item[0],
-                                    data: item[1],
-                                    count: 1
-                                };
-                            })
+                            .map(item => ({
+                                id: item[0],
+                                data: item[1],
+                                count: 1
+                            }))
                     }] : [];
                 } else {
                     let recipes = [];
                     for (let i in BeeRegistry.bees) {
                         let beeType = BeeRegistry.bees[i];
                         let produce = beeType.produce;
-                        let isOk = produce.find(function (item) {
-                            return item[0] === id && (data === -1 || item[1] === data);
-                        }) !== undefined;
+                        let isOk = produce.find(item => item[0] === id && (data === -1 || item[1] === data)) !== undefined;
 
                         if (isOk) {
                             recipes.push({
                                 input: [{id: beeType.queenID, data: 0, count: 1}],
                                 output: produce
-                                    .map(function (item) {
-                                        return {
-                                            id: item[0],
-                                            data: item[1],
-                                            count: 1
-                                        };
-                                    })
+                                    .map(item => ({
+                                        id: item[0],
+                                        data: item[1],
+                                        count: 1
+                                    }))
                             });
                         }
                     }

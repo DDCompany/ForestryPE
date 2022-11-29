@@ -3,22 +3,22 @@ setLoadingTip("Core Module Loading...");
 Block.setPrototype("humus", {
     type: Block.TYPE_BASE,
 
-    getVariations: function () {
+    getVariations() {
         return [
             {name: "Humus", texture: [["humus", 0]], inCreative: true},
         ];
     },
 
-    getMaterial: function (a) {
+    getMaterial(a) {
         return "dirt";
     },
 
-    getDrop: function () {
+    getDrop() {
         return [[3, 1, 0]];
     }
 });
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.humus, count: 8, data: 0}, [
         "ddd",
         "dmd",

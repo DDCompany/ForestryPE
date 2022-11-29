@@ -1,4 +1,4 @@
-ModAPI.addAPICallback("RecipeViewer", function (api) {
+ModAPI.addAPICallback("RecipeViewer", api => {
     const RecipeViewer = api.Core;
 
     CarpenterManager.integrateWithRecipeViewer(RecipeViewer);

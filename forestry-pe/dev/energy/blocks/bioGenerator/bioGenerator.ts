@@ -2,7 +2,7 @@ IDRegistry.genBlockID("biogenerator");
 FactoryManager.register("biogenerator", "Bio Generator",
     [["biogenerator_top", 0], ["biogenerator_top", 0], ["biogenerator", 0], ["biogenerator", 0], ["biogenerator_side", 0], ["biogenerator_side", 0]], true);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.biogenerator, count: 1, data: 0}, [
         "ghg",
         "gmg",

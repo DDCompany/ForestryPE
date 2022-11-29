@@ -15,9 +15,9 @@ function registerCrate(id: number, itemName: string, texture: string, data?: num
 
     CarpenterManager.registerRecipe({
         input: {
-            0: {id: id, data: data}, 1: {id: id, data: data}, 2: {id: id, data: data},
-            3: {id: id, data: data}, 4: {id: id, data: data}, 5: {id: id, data: data},
-            6: {id: id, data: data}, 7: {id: id, data: data}, 8: {id: id, data: data}
+            0: {id, data}, 1: {id, data}, 2: {id, data},
+            3: {id, data}, 4: {id, data}, 5: {id, data},
+            6: {id, data}, 7: {id, data}, 8: {id, data}
         },
         liquid: "water",
         liquidAmount: 0.1,
@@ -36,15 +36,24 @@ function registerCrate(id: number, itemName: string, texture: string, data?: num
     CarpenterManager.registerRecipe({
         input: {4: {id: ItemID[crateId], data: 0}},
         result: {
-            id: id,
+            id,
             count: 9,
-            data: data
+            data
         }
     });
 
-    Item.registerUseFunction(crateId, function (coords) {
-        World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, id, 9, 0);
-        Player.decreaseCarriedItem(1);
+    Item.registerUseFunction(crateId, (coords, item, block, player) => {
+        const blockSource = BlockSource.getDefaultForActor(player);
+        if (blockSource) {
+            const relative = coords.relative;
+            blockSource.spawnDroppedItem(
+                relative.x + 0.5,
+                relative.y + 0.1,
+                relative.z + 0.5,
+                id, 9, 0,
+            );
+            PlayerUtils.decreaseCarriedItem(player);
+        }
     });
 }
 

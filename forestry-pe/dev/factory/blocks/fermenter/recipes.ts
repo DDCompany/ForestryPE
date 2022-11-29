@@ -17,7 +17,7 @@ for (let i in fermenterLiquids) {
         id: 6,
         inputLiquid: i,
         liquidAmount: 0.25,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -25,7 +25,7 @@ for (let i in fermenterLiquids) {
         id: 81,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -33,7 +33,7 @@ for (let i in fermenterLiquids) {
         id: 296,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -41,7 +41,7 @@ for (let i in fermenterLiquids) {
         id: 338,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -49,7 +49,7 @@ for (let i in fermenterLiquids) {
         id: 392,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -57,7 +57,7 @@ for (let i in fermenterLiquids) {
         id: 39,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 
@@ -65,7 +65,7 @@ for (let i in fermenterLiquids) {
         id: 40,
         inputLiquid: i,
         liquidAmount: 0.05,
-        modifier: modifier,
+        modifier,
         liquid: "biomass"
     });
 }

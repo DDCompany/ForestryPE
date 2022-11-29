@@ -2,7 +2,7 @@ IDRegistry.genBlockID("squeezer");
 FactoryManager.register("squeezer", "Squeezer",
     [["squeezer_top", 0], ["squeezer_top", 0], ["squeezer", 0], ["squeezer", 0], ["squeezer_side", 0], ["squeezer_side", 0]], true);
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.squeezer, count: 1, data: 0}, [
         "cgc",
         "cmc",

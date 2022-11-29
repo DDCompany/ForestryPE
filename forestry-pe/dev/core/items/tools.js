@@ -29,17 +29,26 @@ IDRegistry.genItemID("scoop");
 Item.createItem("scoop", "Scoop", {name: "scoop", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.scoop, "scoop", ToolType.scoop);
 
-Item.registerUseFunction("kitPickaxe", function (coords) {
-    World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, ItemID.forestryBronzePickaxe, 1, 0);
-    Player.decreaseCarriedItem(1);
-});
+function crateUseKitCallback(itemId) {
+    return (coords, item, block, player) => {
+        const blockSource = BlockSource.getDefaultForActor(player);
+        if (blockSource) {
+            const relative = coords.relative;
+            blockSource.spawnDroppedItem(
+                relative.x + 0.5,
+                relative.y + 0.1,
+                relative.z + 0.5,
+                itemId, 1, 0,
+            )
+            PlayerUtils.decreaseCarriedItem(player);
+        }
+    }
+}
 
-Item.registerUseFunction("kitShovel", function (coords) {
-    World.drop(coords.relative.x + 0.5, coords.relative.y + 0.1, coords.relative.z + 0.5, ItemID.forestryBronzeShovel, 1, 0);
-    Player.decreaseCarriedItem(1);
-});
+Item.registerUseFunction("kitPickaxe", crateUseKitCallback(ItemID.forestryBronzePickaxe));
+Item.registerUseFunction("kitShovel", crateUseKitCallback(ItemID.forestryBronzeShovel));
 
-Callback.addCallback("PostLoaded", function () {
+Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.scoop, count: 1, data: 0}, [
         "sws",
         "sss",

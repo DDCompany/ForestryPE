@@ -4,6 +4,8 @@ interface FabricatorRecipe {
     amount: number;
 
     result: RecipeItem;
+
+    special?: { id: number, data?: number, dec?: boolean };
 }
 
 type FabricatorRecipeTemplate = Omit<FabricatorRecipe, "amount"> & {
