@@ -16,7 +16,8 @@ class ItemUtils {
             for (const slotName in container.slots) {
                 const containedItem = container.getSlot(slotName);
                 if (containedItem.count > 0) {
-                    tooltip += `\n§7${Item.getName(containedItem.id, containedItem.data)} x${containedItem.count}`;
+                    const itemName = Translation.translate(Item.getName(containedItem.id, containedItem.data));
+                    tooltip += `\n§7${itemName} x${containedItem.count}`;
                 }
             }
 

@@ -28,7 +28,7 @@ TileEntity.registerPrototype(BlockID.apiary, {
         }
 
         const modifiers = new ModifierList([]);
-        if (this.house.queen) {
+        if (this.house.queen && !this.house.error) {
             for (let i = 0; i < 3; i++) {
                 const slotName = `slotFrame${i}`;
                 const slot = this.container.getSlot(slotName);
@@ -38,12 +38,12 @@ TileEntity.registerPrototype(BlockID.apiary, {
 
                     if (this.data.progressCycle === 0) {
                         slot.data++;
-                    }
 
-                    if (slot.data > frame.durability) {
-                        this.container.setSlot(slotName, 0, 0, 0);
-                    } else {
-                        this.container.setSlot(slotName, slot.id, slot.count, slot.data);
+                        if (slot.data > frame.durability) {
+                            this.container.setSlot(slotName, 0, 0, 0);
+                        } else {
+                            this.container.setSlot(slotName, slot.id, slot.count, slot.data);
+                        }
                     }
                 }
             }
