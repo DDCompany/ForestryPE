@@ -68,7 +68,7 @@ const BeeRegistry = {
         this.chromosomes_list["TOLERATES_RAIN"] = false;
         this.chromosomes_list["CAVE_DWELLING"] = false;
         this.chromosomes_list["TERRITORY"] = "9x6x9";
-        this.chromosomes_list["EFFECT"] = BeeEffects.EFFECT_NONE;
+        this.chromosomes_list["EFFECT"] = null;
 
     },
 
@@ -410,38 +410,11 @@ const BeeRegistry = {
         } else if (name === "FLOWERS") {
             return Translation.translate(value[0]);
         } else if (name === "EFFECT") {
-
-            switch (value) {
-                case BeeEffects.EFFECT_NONE:
-                    return Translation.translate("bees.effect.none");
-                case BeeEffects.EFFECT_AGGRESS:
-                    return Translation.translate("bees.effect.aggress");
-                case BeeEffects.EFFECT_BEATIFIC:
-                    return Translation.translate("bees.effect.beatific");
-                case BeeEffects.EFFECT_CREEPER:
-                    return Translation.translate("bees.effect.creeper");
-                case BeeEffects.EFFECT_DRUNKARD:
-                    return Translation.translate("bees.effect.drunkard");
-                case BeeEffects.EFFECT_EXPLORER:
-                    return Translation.translate("bees.effect.explorer");
-                case BeeEffects.EFFECT_ENDS:
-                    return Translation.translate("bees.effect.ends");
-                case BeeEffects.EFFECT_FLAMMABLE:
-                    return Translation.translate("bees.effect.flammable");
-                case BeeEffects.EFFECT_FREEZING:
-                    return Translation.translate("bees.effect.freezing");
-                case BeeEffects.EFFECT_HEROIC:
-                    return Translation.translate("bees.effect.heroic");
-                case BeeEffects.EFFECT_POISON:
-                    return Translation.translate("bees.effect.poison");
-                case BeeEffects.EFFECT_RADIOACT:
-                    return Translation.translate("bees.effect.radiact");
-                case BeeEffects.EFFECT_REANIMATION:
-                    return Translation.translate("bees.effect.reanimation");
-                case BeeEffects.EFFECT_REPULSION:
-                    return Translation.translate("bees.effect.repulsion")
+            if (!value) {
+                return Translation.translate("bees.effect.none");
             }
 
+            return BeeEffects.getLocalizedName(value);
         } else if (name === "CLIMATE") {
 
             switch (value) {
@@ -483,7 +456,11 @@ const BeeRegistry = {
         } else if (name === "FLOWERS") {
             return value === BeeRegistry.FLOWERS_FLOWERS || value === BeeRegistry.FLOWERS_WHEAT || value === BeeRegistry.FLOWERS_GOURD;
         } else if (name === "EFFECT") {
-            return value === BeeEffects.EFFECT_NONE || value === BeeEffects.EFFECT_AGGRESS || value === BeeEffects.EFFECT_CREEPER || value === BeeEffects.EFFECT_ENDS || value === BeeEffects.EFFECT_RADIOACT || value === BeeEffects.EFFECT_REPULSION || value === BeeEffects.EFFECT_REANIMATION;
+            if (!value) {
+                return true;
+            }
+
+            return BeeEffects.isDominant(value);
         } else if (name === "TEMPERATURE_TOLERANCE" || name === "HUMIDITY_TOLERANCE" || name === "TOLERANCE") {
             return value === this.TOLERANCE_BOTH_1 || value === this.TOLERANCE_UP_1 || value === this.TOLERANCE_DOWN_1;
         }

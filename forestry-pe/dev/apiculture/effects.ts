@@ -35,8 +35,10 @@ function getBlocksInRange(
 }
 
 BeeEffects.registerEffect("aggress", {
+    name: "bees.effect.aggress",
     delay: 40,
     requireWorking: false,
+    isDominant: true,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
         for (const entity of all) {
@@ -50,6 +52,7 @@ BeeEffects.registerEffect("aggress", {
 });
 
 BeeEffects.registerEffect("beatific", {
+    name: "bees.effect.beatific",
     delay: 20,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
@@ -60,8 +63,10 @@ BeeEffects.registerEffect("beatific", {
 });
 
 BeeEffects.registerEffect("creeper", {
+    name: "bees.effect.creeper",
     delay: 20,
     requireWorking: false,
+    isDominant: true,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
         for (const entity of all) {
@@ -72,6 +77,7 @@ BeeEffects.registerEffect("creeper", {
 });
 
 BeeEffects.registerEffect("exploration", {
+    name: "bees.effect.explorer",
     delay: 80,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);
@@ -84,6 +90,7 @@ BeeEffects.registerEffect("exploration", {
 
 //TODO: wtf?
 BeeEffects.registerEffect("glacial", {
+    name: "bees.effect.freezing",
     delay: 200,
     doEffect(blockSource, coords, range) {
         const waterBlocks = getBlocksInRange(blockSource, coords, range, VanillaBlockID.water, 10);
@@ -95,6 +102,7 @@ BeeEffects.registerEffect("glacial", {
 
 //TODO: wtf?
 BeeEffects.registerEffect("heroic", {
+    name: "bees.effect.heroic",
     delay: 40,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
@@ -108,6 +116,7 @@ BeeEffects.registerEffect("heroic", {
 });
 
 BeeEffects.registerEffect("ignition", {
+    name: "bees.effect.flammable",
     delay: 20,
     requireWorking: false,
     doEffect(blockSource, coords, range) {
@@ -140,6 +149,7 @@ BeeEffects.registerEffect("ignition", {
 });
 
 BeeEffects.registerEffect("miasmic", {
+    name: "bees.effect.poison",
     delay: 100,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);
@@ -166,8 +176,10 @@ BeeEffects.registerEffect("miasmic", {
 
 //TODO: wtf?
 BeeEffects.registerEffect("misanthrope", {
+    name: "bees.effect.ends",
     delay: 20,
     requireWorking: false,
+    isDominant: true,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);
         for (const entity of all) {
@@ -179,8 +191,10 @@ BeeEffects.registerEffect("misanthrope", {
 
 //TODO: maybe randomly?
 BeeEffects.registerEffect("radiactive", {
+    name: "bees.effect.radiact",
     delay: 40,
     requireWorking: false,
+    isDominant: true,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
 
@@ -199,6 +213,7 @@ BeeEffects.registerEffect("radiactive", {
 });
 
 BeeEffects.registerEffect("drunkard", {
+    name: "bees.effect.drunkard",
     delay: 20,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);

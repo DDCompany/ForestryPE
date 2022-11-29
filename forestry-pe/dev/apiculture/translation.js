@@ -125,15 +125,13 @@ Translation.addTranslation("bees.effect.none", {en: "None", ru: "Нет"});
 Translation.addTranslation("bees.effect.aggress", {en: "Aggress", ru: "Агрессивность"});
 Translation.addTranslation("bees.effect.beatific", {en: "Beatific", ru: "Блаженность"});
 Translation.addTranslation("bees.effect.creeper", {en: "Creeper", ru: "Крипер"});
-Translation.addTranslation("bees.effect.drunkard", {en: "Drunkard", ru: "Опьянение"});
 Translation.addTranslation("bees.effect.explorer", {en: "Explorer", ru: "Исследовательность"});
-Translation.addTranslation("bees.effect.flammable", {en: "Flammable", ru: "Воспламенение"});
 Translation.addTranslation("bees.effect.freezing", {en: "Freezing", ru: "Замораживание"});
 Translation.addTranslation("bees.effect.heroic", {en: "Heroic", ru: "Геройство"});
-Translation.addTranslation("bees.effect.poison", {en: "Poison", ru: "Отвращение"});
+Translation.addTranslation("bees.effect.flammable", {en: "Flammable", ru: "Воспламенение"});
+Translation.addTranslation("bees.effect.drunkard", {en: "Drunkard", ru: "Опьянение"});
 Translation.addTranslation("bees.effect.radiact", {en: "Radioact", ru: "Радиоактивность"});
-Translation.addTranslation("bees.effect.reanimation", {en: "Reanimation", ru: "Воскрешение"});
-Translation.addTranslation("bees.effect.repulsion", {en: "Repulsion", ru: "Отвращение"});
+Translation.addTranslation("bees.effect.poison", {en: "Poison", ru: "Отвращение"});
 Translation.addTranslation("bees.effect.ends", {en: "Ends", ru: "Окончание"});
 
 Translation.addTranslation("climate.icy", {en: "Icy", ru: "Ледяная"});
