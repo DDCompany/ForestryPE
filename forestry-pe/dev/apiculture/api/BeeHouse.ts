@@ -108,7 +108,8 @@ class BeeHouse {
                 this.error = Translation.translate("apiary.error.climate");
             } else if (!this.queen.isValidHumidity(this.getHumidity())) {
                 this.error = Translation.translate("apiary.error.humidity");
-            } else if (!this.canSeeSky()
+            } else if (this.tile.blockSource.getDimension() !== EDimension.NETHER
+                && !this.canSeeSky()
                 && !modifiersList.isSelfLighted(this)
                 && !this.houseModifierList.isSelfLighted(this)
                 && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
