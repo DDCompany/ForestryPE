@@ -1,6 +1,8 @@
 interface BeeEffect {
+    name: string;
     delay: number;
     requireWorking?: boolean;
+    isDominant?: boolean;
 
     doEffect(
         blockSource: BlockSource,
@@ -52,5 +54,15 @@ class BeeEffects {
                 data.delay = 0;
             } else data.delay = delay + 1;
         }
+    }
+
+    static getLocalizedName(unique: string): string {
+        const effect = this.effects[unique];
+        return Translation.translate(effect?.name || "bees.effect.none");
+    }
+
+    static isDominant(unique: string): boolean {
+        const effect = this.effects[unique];
+        return effect?.isDominant || false;
     }
 }

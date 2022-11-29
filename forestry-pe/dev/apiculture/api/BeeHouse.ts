@@ -5,8 +5,7 @@ interface BeeHouseData {
 }
 
 class BeeHouse {
-    //TODO
-    static readonly CYCLE_TIME = 10;
+    static readonly CYCLE_TIME = 550;
     static readonly TOTAL_BREEDING_TIME = 100;
 
     queen: Bee | null = null;
