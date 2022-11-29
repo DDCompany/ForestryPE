@@ -205,12 +205,12 @@ const BeeRegistry = {
         }
 
         if (!arg.humidity) {
-            arg.humidity = BiomeHelper.HUMIDITY_NORMAL;
+            arg.humidity = Humidity.NORMAL;
         }
 
 
         if (!arg.climate) {
-            arg.climate = BiomeHelper.CLIMATE_NORMAL;
+            arg.climate = Temperature.NORMAL;
         }
 
         if (!arg.dominant) {
@@ -416,33 +416,9 @@ const BeeRegistry = {
 
             return BeeEffects.getLocalizedName(value);
         } else if (name === "CLIMATE") {
-
-            switch (value) {
-                case BiomeHelper.CLIMATE_ICY:
-                    return Translation.translate("climate.icy");
-                case BiomeHelper.CLIMATE_COLD:
-                    return Translation.translate("climate.cold");
-                case BiomeHelper.CLIMATE_NORMAL:
-                    return Translation.translate("climate.normal");
-                case BiomeHelper.CLIMATE_WARM:
-                    return Translation.translate("climate.warm");
-                case BiomeHelper.CLIMATE_HOT:
-                    return Translation.translate("climate.hot");
-                case BiomeHelper.CLIMATE_HELLISH:
-                    return Translation.translate("climate.hellish")
-            }
-
+            return Habitat.localizeTemperature(value);
         } else if (name === "HUMIDITY") {
-
-            switch (value) {
-                case BiomeHelper.HUMIDITY_ARID:
-                    return Translation.translate("humidity.arid");
-                case BiomeHelper.HUMIDITY_DAMP:
-                    return Translation.translate("humidity.damp");
-                case BiomeHelper.HUMIDITY_NORMAL:
-                    return Translation.translate("humidity.normal")
-            }
-
+            return Habitat.localizeHumidity(value);
         }
 
         return value;

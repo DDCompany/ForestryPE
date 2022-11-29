@@ -23,15 +23,15 @@ BeeRegistry.registerBee({
             chance: 0.08,
             onMutate(house: BeeHouse) {
                 const climate = house.getClimate();
-                return (climate === BiomeHelper.CLIMATE_HOT || climate === BiomeHelper.CLIMATE_HELLISH)
-                    && house.getHumidity() === BiomeHelper.HUMIDITY_ARID;
+                return (climate === Temperature.HOT || climate === Temperature.HELLISH)
+                    && house.getHumidity() === Humidity.ARID;
             }
         }
     ],
     species: "Austere",
     hasGlint: true,
-    humidity: BiomeHelper.HUMIDITY_ARID,
-    climate: BiomeHelper.CLIMATE_HOT,
+    humidity: Humidity.ARID,
+    climate: Temperature.HOT,
     flowers: BeeRegistry.FLOWERS_CACTI,
     produce: [[ItemID.combParched, 0, 0.2], [ItemID.combPowdery, 0, 0.5]],
     chromosomes: {
@@ -160,8 +160,8 @@ BeeRegistry.registerBee({
     species: "Demonic",
     hasGlint: true,
     produce: [[ItemID.combSimmering, 0, 0.45], [348, 0, 0.15]],
-    humidity: BiomeHelper.HUMIDITY_ARID,
-    climate: BiomeHelper.CLIMATE_HELLISH,
+    humidity: Humidity.ARID,
+    climate: Temperature.HELLISH,
     flowers: BeeRegistry.FLOWERS_NETHER,
     mutations: [
         {
@@ -169,7 +169,7 @@ BeeRegistry.registerBee({
             species2: "Fiendish",
             chance: 0.25,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         }
     ],
@@ -241,8 +241,8 @@ BeeRegistry.registerBee({
     ],
     produce: [[ItemID.combSilky, 0, 0.2]],
     hasGlint: true,
-    humidity: BiomeHelper.HUMIDITY_DAMP,
-    climate: BiomeHelper.CLIMATE_WARM,
+    humidity: Humidity.DAMP,
+    climate: Temperature.WARM,
     flowers: BeeRegistry.FLOWERS_JUNGLE,
     chromosomes: {
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
@@ -273,7 +273,7 @@ BeeRegistry.registerBee({
     },
     species: "Ender",
     produce: [[ItemID.combMysterious, 0, 0.3]],
-    climate: BiomeHelper.CLIMATE_COLD,
+    climate: Temperature.COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
     chromosomes: {
         EFFECT: "misanthrope",
@@ -302,8 +302,8 @@ BeeRegistry.registerBee({
     },
     species: "Exotic",
     produce: [[ItemID.combSilky, 0, 0.3]],
-    climate: BiomeHelper.CLIMATE_WARM,
-    humidity: BiomeHelper.HUMIDITY_DAMP,
+    climate: Temperature.WARM,
+    humidity: Humidity.DAMP,
     flowers: BeeRegistry.FLOWERS_JUNGLE,
     mutations: [
         {
@@ -339,8 +339,8 @@ BeeRegistry.registerBee({
     },
     species: "Fiendish",
     produce: [[ItemID.combSimmering, 0, 0.55], [ItemID.ash, 0, 0.15]],
-    climate: BiomeHelper.CLIMATE_HELLISH,
-    humidity: BiomeHelper.HUMIDITY_ARID,
+    climate: Temperature.HELLISH,
+    humidity: Humidity.ARID,
     flowers: BeeRegistry.FLOWERS_NETHER,
     mutations: [
         {
@@ -348,7 +348,7 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         },
         {
@@ -356,7 +356,7 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         },
         {
@@ -364,7 +364,7 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.4,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         }
     ],
@@ -419,8 +419,8 @@ BeeRegistry.registerBee({
     },
     species: "Frugal",
     produce: [[ItemID.combParched, 0, 0.3]],
-    climate: BiomeHelper.CLIMATE_HOT,
-    humidity: BiomeHelper.HUMIDITY_ARID,
+    climate: Temperature.HOT,
+    humidity: Humidity.ARID,
     flowers: BeeRegistry.FLOWERS_CACTI,
     mutations: [
         {
@@ -428,7 +428,7 @@ BeeRegistry.registerBee({
             species2: "Sinister",
             chance: 0.16,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HOT;
+                return house.getClimate() === Temperature.HOT;
             }
         },
         {
@@ -436,7 +436,7 @@ BeeRegistry.registerBee({
             species2: "Fiendish",
             chance: 0.1,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HOT;
+                return house.getClimate() === Temperature.HOT;
             }
         }
     ],
@@ -464,7 +464,7 @@ BeeRegistry.registerBee({
     species: "Glacial",
     hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.2], [ItemID.iceShard, 0, 0.4]],
-    climate: BiomeHelper.CLIMATE_ICY,
+    climate: Temperature.ICY,
     mutations: [
         {
             species1: "Wintry",
@@ -524,7 +524,7 @@ BeeRegistry.registerBee({
     },
     species: "Icy",
     produce: [[ItemID.combFrozen, 0, 0.2], [ItemID.iceShard, 0, 0.2]],
-    climate: BiomeHelper.CLIMATE_ICY,
+    climate: Temperature.ICY,
     mutations: [
         {
             species1: "Industrious",
@@ -651,7 +651,7 @@ BeeRegistry.registerBee({
     },
     species: "Marshy",
     produce: [[ItemID.combMossy, 0, 0.3]],
-    humidity: BiomeHelper.HUMIDITY_DAMP,
+    humidity: Humidity.DAMP,
     flowers: BeeRegistry.FLOWERS_MUSHROOMS,
     chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
 });
@@ -701,7 +701,7 @@ BeeRegistry.registerBee({
     species: "Merry",
     hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
-    climate: BiomeHelper.CLIMATE_ICY,
+    climate: Temperature.ICY,
     chromosomes: {
         EFFECT: "glacial",
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
@@ -730,8 +730,8 @@ BeeRegistry.registerBee({
     },
     species: "Modest",
     produce: [[ItemID.combParched, 0, 0.2]],
-    climate: BiomeHelper.CLIMATE_HOT,
-    humidity: BiomeHelper.HUMIDITY_ARID,
+    climate: Temperature.HOT,
+    humidity: Humidity.ARID,
     flowers: BeeRegistry.FLOWERS_CACTI,
     chromosomes: {
         NEVER_SLEEPS: true,
@@ -818,7 +818,7 @@ BeeRegistry.registerBee({
     species: "Phantasmal",
     hasGlint: true,
     produce: [[ItemID.combMysterious, 0, 0.4]],
-    climate: BiomeHelper.CLIMATE_COLD,
+    climate: Temperature.COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
     chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWEST, LIFESPAN: BeeRegistry.LIFESPAN_LONGEST}
 });
@@ -898,8 +898,8 @@ BeeRegistry.registerBee({
     },
     species: "Sinister",
     produce: [[ItemID.combSimmering, 0, 0.45]],
-    climate: BiomeHelper.CLIMATE_HELLISH,
-    humidity: BiomeHelper.HUMIDITY_ARID,
+    climate: Temperature.HELLISH,
+    humidity: Humidity.ARID,
     flowers: BeeRegistry.FLOWERS_NETHER,
     mutations: [
         {
@@ -907,7 +907,7 @@ BeeRegistry.registerBee({
             species2: "Cultivated",
             chance: 0.6,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         },
         {
@@ -915,7 +915,7 @@ BeeRegistry.registerBee({
             species2: "Cultivated",
             chance: 0.6,
             onMutate(house: BeeHouse) {
-                return house.getClimate() === BiomeHelper.CLIMATE_HELLISH;
+                return house.getClimate() === Temperature.HELLISH;
             }
         }
     ],
@@ -947,7 +947,7 @@ BeeRegistry.registerBee({
     },
     species: "Spectral",
     produce: [[ItemID.combMysterious, 0, 0.5]],
-    climate: BiomeHelper.CLIMATE_COLD,
+    climate: Temperature.COLD,
     flowers: BeeRegistry.FLOWERS_ENDS,
     chromosomes: {TERRITORY: "11x8x11", SPEED: BeeRegistry.SPEED_SLOWER, EFFECT: "aggress"}
 });
@@ -973,7 +973,7 @@ BeeRegistry.registerBee({
     species: "Tipsy",
     hasGlint: true,
     produce: [[ItemID.combFrozen, 0, 0.3], [ItemID.iceShard, 0, 0.2]],
-    climate: BiomeHelper.CLIMATE_ICY,
+    climate: Temperature.ICY,
     chromosomes: {
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1,
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_2,
@@ -1002,8 +1002,8 @@ BeeRegistry.registerBee({
     },
     species: "Tropical",
     produce: [[ItemID.combSilky, 0, 0.2]],
-    climate: BiomeHelper.CLIMATE_WARM,
-    humidity: BiomeHelper.HUMIDITY_DAMP,
+    climate: Temperature.WARM,
+    humidity: Humidity.DAMP,
     flowers: BeeRegistry.FLOWERS_JUNGLE,
     chromosomes: {
         HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
@@ -1138,7 +1138,7 @@ BeeRegistry.registerBee({
     },
     species: "Wintry",
     produce: [[ItemID.combFrozen, 0, 0.3]],
-    climate: BiomeHelper.CLIMATE_ICY,
+    climate: Temperature.ICY,
     chromosomes: {
         EFFECT: "glacial",
         TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,

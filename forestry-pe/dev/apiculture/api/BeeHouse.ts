@@ -162,14 +162,12 @@ class BeeHouse {
         return this.getContainer().getSlot(this.slots.slotDrone);
     }
 
-    getHumidity() {
-        const biome = this.tile.blockSource.getBiome(this.tile.x, this.tile.z);
-        return BiomeHelper.getBiomeHumidity(biome);
+    getHumidity(): Humidity {
+        return Habitat.getHumidityAt(this.tile.blockSource, this.tile.x, this.tile.y, this.tile.z);
     }
 
-    getClimate() {
-        const biome = this.tile.blockSource.getBiome(this.tile.x, this.tile.z);
-        return BiomeHelper.getBiomeClimate(biome);
+    getClimate(): Temperature {
+        return Habitat.getTemperatureAt(this.tile.blockSource, this.tile.x, this.tile.y, this.tile.z);
     }
 
     canSeeSky() {

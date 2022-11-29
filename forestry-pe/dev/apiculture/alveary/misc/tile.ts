@@ -74,9 +74,8 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
 
             if (this.humidity !== undefined && this.climate !== undefined) this.house.tick(Modifiers);
 
-            const biome = this.blockSource.getBiome(this.x, this.z);
-            this.humidity = BiomeHelper.getBiomeHumidity(biome);
-            this.climate = BiomeHelper.getBiomeClimate(biome);
+            this.humidity = Habitat.getHumidityAt(this.blockSource, this.x, this.y, this.z);
+            this.climate = Habitat.getTemperatureAt(this.blockSource, this.x, this.y, this.z);
 
             let progressTexture: string;
             if (this.data.progress > this.data.progressMax * .8) {

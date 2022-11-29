@@ -32,6 +32,7 @@ core/blocks/storage.js
 core/items/resources.js
 core/items/tools.js
 core/items/other.js
+core/items/debug.ts
 
 # OTHER
 core/fluids.js
@@ -50,7 +51,7 @@ apiculture/api/BeeHouse.ts
 apiculture/api/BeeLogic.js
 apiculture/api/BeeRegistry.js
 apiculture/api/BeeSaver.js
-apiculture/api/BiomeHelper.ts
+apiculture/api/Habitat.ts
 apiculture/api/Modifier.ts
 apiculture/api/HiveGenerator.ts
 

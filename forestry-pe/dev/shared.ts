@@ -1,4 +1,20 @@
 interface ForestryAPI {
+    Bee: typeof Bee;
+
+    BeeEffects: typeof BeeEffects;
+
+    BeeFrame: typeof BeeFrame;
+
+    BeeHouse: typeof BeeHouse;
+
+    BeeLogic: typeof BeeLogic;
+
+    BeeRegistry: typeof BeeRegistry;
+
+    BeeType: typeof BeeType;
+
+    ModifierList: typeof ModifierList;
+
     RainSubstrateRecipes: RainSubstrateRecipes;
 
     MachineRegistry: MachineRegistry;
@@ -9,9 +25,11 @@ interface ForestryAPI {
 
     HiveGenerator: HiveGenerator;
 
+    ApiaryRegistry: ApiaryRegistry;
+
     ModelHelper: ModelHelper;
 
-    BiomeHelper: BiomeHelper;
+    Habitat: Habitat;
 
     Util: Util;
 
@@ -59,7 +77,7 @@ ModAPI.registerAPI("ForestryAPI", {
     BeeType,
     ModifierList,
     MachineRegistry,
-    BiomeHelper,
+    Habitat,
     HiveGenerator,
     Config: ForestryConfig,
     ContainerHelper,

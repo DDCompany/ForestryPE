@@ -134,16 +134,16 @@ Translation.addTranslation("bees.effect.radiact", {en: "Radioact", ru: "Ради
 Translation.addTranslation("bees.effect.poison", {en: "Poison", ru: "Отвращение"});
 Translation.addTranslation("bees.effect.ends", {en: "Ends", ru: "Окончание"});
 
-Translation.addTranslation("climate.icy", {en: "Icy", ru: "Ледяная"});
-Translation.addTranslation("climate.cold", {en: "Cold", ru: "Холодная"});
-Translation.addTranslation("climate.normal", {en: "Normal", ru: "Обычная"});
-Translation.addTranslation("climate.warm", {en: "Warm", ru: "Тёплая"});
-Translation.addTranslation("climate.hot", {en: "Hot", ru: "Горячая"});
-Translation.addTranslation("climate.hellish", {en: "Hellish", ru: "Адская"});
+Translation.addTranslation("forestry.gui.temperature.1", {en: "Icy", ru: "Ледяная"});
+Translation.addTranslation("forestry.gui.temperature.2", {en: "Cold", ru: "Холодная"});
+Translation.addTranslation("forestry.gui.temperature.3", {en: "Normal", ru: "Обычная"});
+Translation.addTranslation("forestry.gui.temperature.4", {en: "Warm", ru: "Тёплая"});
+Translation.addTranslation("forestry.gui.temperature.5", {en: "Hot", ru: "Горячая"});
+Translation.addTranslation("forestry.gui.temperature.6", {en: "Hellish", ru: "Адская"});
 
-Translation.addTranslation("humidity.arid", {en: "Arid", ru: "Сухая"});
-Translation.addTranslation("humidity.damp", {en: "Damp", ru: "Сырая"});
-Translation.addTranslation("humidity.normal", {en: "Normal", ru: "Обычная"});
+Translation.addTranslation("forestry.gui.humidity.1", {en: "Arid", ru: "Сухая"});
+Translation.addTranslation("forestry.gui.humidity.2", {en: "Damp", ru: "Сырая"});
+Translation.addTranslation("forestry.gui.humidity.3", {en: "Normal", ru: "Обычная"});
 
 Translation.addTranslation("analyzer.active", {en: "Active", ru: "Активный"});
 Translation.addTranslation("analyzer.speed", {en: "Speed", ru: "Скорость"});

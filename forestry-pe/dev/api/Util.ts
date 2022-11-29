@@ -3,12 +3,12 @@ class Util {
         const obj = {};
         for (let key in objects) {
             const n = objects[key];
-            if (typeof n !== "object" && !this.isArray(n)) {
+            if (typeof n !== "object" && !Array.isArray(n)) {
                 continue;
             }
             for (let key2 in n) {
                 // @ts-ignore
-                if (typeof n[key2] === "object" && !this.isArray(n[key2])) {
+                if (typeof n[key2] === "object" && !Array.isArray(n[key2])) {
                     // @ts-ignore
                     obj[key2] = this.objectUnion(obj, n[key2]);
                     continue;
@@ -18,10 +18,6 @@ class Util {
             }
         }
         return obj;
-    }
-
-    static isArray(arr: any): boolean {
-        return "length" in arr;
     }
 
     static random(min: number, max: number): number {

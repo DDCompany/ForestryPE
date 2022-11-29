@@ -46,3 +46,7 @@ Translation.addTranslation("item.dissipation_charge.tooltip", {
     ru: "Используйте на вызывателе дождя, чтобы прекратить дождь.",
     pt: "Use no rainmaker para parar a chuva."
 });
+Translation.addTranslation("forestry.item.debug_climate", {
+    ru: "Палка для отладки (Среда обитания)",
+    en: "Debug Stick (Habitat)"
+});

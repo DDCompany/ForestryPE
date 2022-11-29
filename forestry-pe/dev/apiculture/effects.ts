@@ -105,9 +105,9 @@ BeeEffects.registerEffect("glacial", {
     delay: 200,
     doEffect(blockSource, coords, range, house) {
         switch (house.getClimate()) {
-            case BiomeHelper.CLIMATE_HELLISH:
-            case BiomeHelper.CLIMATE_HOT:
-            case BiomeHelper.CLIMATE_WARM:
+            case Temperature.HELLISH:
+            case Temperature.HOT:
+            case Temperature.WARM:
                 return;
         }
 

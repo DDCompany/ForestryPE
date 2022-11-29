@@ -42,11 +42,11 @@ MachineRegistry.registerDefault(BlockID.alvearyHygroregulator, {
 
     alvearyTick(tile: TileEntity) {
         if (this.data.time && tile.humidity !== undefined) {
-            tile.humidity = Math.min(BiomeHelper.HUMIDITY_DAMP, tile.humidity + this.data.humidity);
+            tile.humidity = Math.min(Humidity.DAMP, tile.humidity + this.data.humidity);
         }
 
         if (this.data.time && tile.climate !== undefined) {
-            tile.climate = Math.min(BiomeHelper.CLIMATE_HELLISH, tile.climate + this.data.climate);
+            tile.climate = Math.min(Temperature.HELLISH, tile.climate + this.data.climate);
         }
     },
 

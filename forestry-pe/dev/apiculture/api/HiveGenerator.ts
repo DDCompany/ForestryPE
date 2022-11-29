@@ -32,12 +32,12 @@ class HiveGenerator {
         this.generators.push(generator);
     }
 
-    static genChunk(chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
+    static genChunk(blockSource: BlockSource, chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
         for (let tries = 0; tries < 4; tries++) {
             const coords = GenerationUtils.randomXZ(chunkX, chunkZ);
             const biome = World.getBiome(coords.x, coords.z);
-            const climate = BiomeHelper.getBiomeClimate(biome);
-            const humidity = BiomeHelper.getBiomeHumidity(biome);
+            const climate = Habitat.getTemperatureAt(blockSource, coords.x, 0, coords.z);
+            const humidity = Habitat.getHumidityAt(blockSource, coords.x, 0, coords.z);
 
             for (const key in HiveGenerator.generators) {
                 const generator = HiveGenerator.generators[key];
@@ -54,14 +54,14 @@ class HiveGenerator {
         }
     }
 
-    static genChunkDebug(chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
+    static genChunkDebug(blockSource: BlockSource, chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
         for (let xOffset = 0; xOffset < 16; xOffset++) {
             for (let zOffset = 0; zOffset < 16; zOffset++) {
                 const x = 16 * chunkX + xOffset;
                 const z = 16 * chunkZ + zOffset;
                 const biome = World.getBiome(x, z);
-                const climate = BiomeHelper.getBiomeClimate(biome);
-                const humidity = BiomeHelper.getBiomeHumidity(biome);
+                const climate = Habitat.getTemperatureAt(blockSource, x, 0, z);
+                const humidity = Habitat.getHumidityAt(blockSource, x, 0, z);
 
                 for (const key in HiveGenerator.generators) {
                     const generator = HiveGenerator.generators[key];
@@ -137,26 +137,44 @@ class HiveGenerator {
 
 if (ForestryConfig.genBeehivesDebug) {
     Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NORMAL);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.NORMAL);
     });
 
     Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.END);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.END);
     });
 
     Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunkDebug(chunkX, chunkZ, Dimension.NETHER);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.NETHER);
     });
 } else {
     Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NORMAL);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.NORMAL);
     });
 
     Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.END);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.END);
     });
 
     Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
-        HiveGenerator.genChunk(chunkX, chunkZ, Dimension.NETHER);
+        const region = BlockSource.getCurrentWorldGenRegion();
+        if (!region) return;
+
+        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.NETHER);
     });
 }
