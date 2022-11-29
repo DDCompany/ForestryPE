@@ -5,8 +5,8 @@ function listEntitiesInRange(
     entityType: number = 0,
 ) {
     return blockSource.listEntitiesInAABB(
-        coords.x - range.x, coords.y - range.y, coords.z - range.z,
-        coords.x + range.x, coords.y + range.y, coords.z + range.z,
+        coords.x - range.x / 2, coords.y - range.y / 2, coords.z - range.z / 2,
+        coords.x + range.x / 2, coords.y + range.y / 2, coords.z + range.z / 2,
         entityType, entityType === 0,
     );
 }
@@ -19,9 +19,9 @@ function getBlocksInRange(
     limit: number = -1,
 ) {
     const blocks: { x: number, y: number, z: number }[] = [];
-    for (let x = coords.x - range.x; x < coords.x + range.x; x++) {
-        for (let y = coords.y - range.y; y < coords.y + range.y; y++) {
-            for (let z = coords.z - range.z; z < coords.z + range.z; z++) {
+    for (let x = coords.x - range.x / 2; x < coords.x + range.x / 2; x++) {
+        for (let y = coords.y - range.y / 2; y < coords.y + range.y / 2; y++) {
+            for (let z = coords.z - range.z / 2; z < coords.z + range.z / 2; z++) {
                 const id = blockSource.getBlockId(x, y, z);
                 if (id === blockId) {
                     blocks.push({x, y, z});
@@ -32,6 +32,18 @@ function getBlocksInRange(
     }
 
     return blocks;
+}
+
+function getRandomPositionInRange(
+    blockSource: BlockSource,
+    coords: { x: number, y: number, z: number },
+    range: { x: number, y: number, z: number },
+) {
+    return {
+        x: Math.floor(coords.x + (Math.random() - 0.5) * range.x * 2),
+        y: Math.floor(coords.y + (Math.random() - 0.5) * range.y * 2),
+        z: Math.floor(coords.z + (Math.random() - 0.5) * range.z * 2),
+    };
 }
 
 BeeEffects.registerEffect("aggress", {
@@ -88,19 +100,28 @@ BeeEffects.registerEffect("exploration", {
     }
 });
 
-//TODO: wtf?
 BeeEffects.registerEffect("glacial", {
     name: "bees.effect.freezing",
     delay: 200,
-    doEffect(blockSource, coords, range) {
-        const waterBlocks = getBlocksInRange(blockSource, coords, range, VanillaBlockID.water, 10);
-        for (const block of waterBlocks) {
-            blockSource.setBlock(block.x, block.y, block.z, VanillaBlockID.ice, 0);
+    doEffect(blockSource, coords, range, house) {
+        switch (house.getClimate()) {
+            case BiomeHelper.CLIMATE_HELLISH:
+            case BiomeHelper.CLIMATE_HOT:
+            case BiomeHelper.CLIMATE_WARM:
+                return;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            const pos = getRandomPositionInRange(blockSource, coords, range);
+            const id = blockSource.getBlockId(pos.x, pos.y, pos.z);
+            const aboveId = blockSource.getBlockId(pos.x, pos.y + 1, pos.z);
+            if (id === VanillaBlockID.water && aboveId === 0) {
+                blockSource.setBlock(pos.x, pos.y, pos.z, VanillaBlockID.ice, 0);
+            }
         }
     }
 });
 
-//TODO: wtf?
 BeeEffects.registerEffect("heroic", {
     name: "bees.effect.heroic",
     delay: 40,
@@ -174,7 +195,6 @@ BeeEffects.registerEffect("miasmic", {
     }
 });
 
-//TODO: wtf?
 BeeEffects.registerEffect("misanthrope", {
     name: "bees.effect.ends",
     delay: 20,
@@ -189,7 +209,6 @@ BeeEffects.registerEffect("misanthrope", {
     }
 });
 
-//TODO: maybe randomly?
 BeeEffects.registerEffect("radiactive", {
     name: "bees.effect.radiact",
     delay: 40,

@@ -8,6 +8,7 @@ interface BeeEffect {
         blockSource: BlockSource,
         coords: { x: number, y: number, z: number },
         range: { x: number, y: number, z: number },
+        house: BeeHouse,
     ): void;
 }
 
@@ -50,7 +51,7 @@ class BeeEffects {
             const data = beeHouse.tile.data;
             const delay = data.delay || 0;
             if (delay >= effect.delay) {
-                effect.doEffect(blockSource, coords, range);
+                effect.doEffect(blockSource, coords, range, beeHouse);
                 data.delay = 0;
             } else data.delay = delay + 1;
         }
