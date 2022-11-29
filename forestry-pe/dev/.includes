@@ -71,7 +71,10 @@ apiculture/blocks/beehives/generation.ts
 apiculture/blocks/beehives/particles.js
 
 # ITEMS
-apiculture/items/analyzer.js
+apiculture/items/analyzer/AnalyzerUi.ts
+apiculture/items/analyzer/AnalyzerManager.ts
+apiculture/items/analyzer/analyzer.ts
+
 apiculture/items/armor.js
 apiculture/items/combs.js
 apiculture/items/frames.ts
