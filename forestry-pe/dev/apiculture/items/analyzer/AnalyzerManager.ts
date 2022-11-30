@@ -101,18 +101,8 @@ class AnalyzerManager {
             }
         });
 
-        container.setGlobalAddTransferPolicy((container, name, id, count, data, extra) => {
-            const slot = container.getSlot(name);
-            const transfer = Math.min(slot.count + count, Item.getMaxStack(id)) - slot.count;
-            if (name === "slotHoney") {
-                //consumeHoney checks if the item is in the slot
-                container.setSlot("slotHoney", id, slot.count + transfer, data, extra);
-
-                //Cannot be moved to setGlobalDirtySlotListener because consumeHoney causes dirtySlotListener to be called
-                //again, causing StackOverflowError
-                this.tryScan(container);
-                return 0;
-            } else {
+        container.setGlobalAddTransferPolicy((container, name, id, count) => {
+            if (name !== "slotHoney") {
                 //Only allow one item to be scanned at a time
                 const slots = ["slotScanning", "slotPhase1", "slotPhase2", "slotPhase3"];
                 for (const slotName of slots) {
@@ -122,7 +112,8 @@ class AnalyzerManager {
                 }
             }
 
-            return transfer;
+            const slot = container.getSlot(name);
+            return Math.min(slot.count + count, Item.getMaxStack(id)) - slot.count;
         });
 
         container.setGlobalDirtySlotListener((container, name, slot) => {
@@ -135,6 +126,7 @@ class AnalyzerManager {
 
                 return;
             } else if (name === "slotHoney") {
+                container.validateSlot("slotHoney");
                 return;
             }
 
