@@ -17,14 +17,13 @@
       "size": 126
     },
     "beehives": {
-      "tropical": 0.06,
-      "meadows": 0.01,
-      "forest": 0.03,
-      "debug": false,
-      "wintry": 0.2,
-      "ender": 0.02,
-      "modest": 0.01,
-      "marshy": 0.2
+      "forest": 3,
+      "meadows": 1,
+      "modest": 1,
+      "tropical": 6,
+      "ender": 2,
+      "wintry": 2,
+      "marshy": 2
     },
     "copper": {
       "enabled": true,

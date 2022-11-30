@@ -51,7 +51,6 @@ TileEntity.registerPrototype(BlockID.alveary_misc_center, {
                 this.house.getHumidity = () => this.humidity;
                 this.house.getClimate = () => this.climate;
                 this.house.canSeeSky = () => {
-                    Debug.message("canSeeSky");
                     return this.blockSource.canSeeSky(this.x, this.y + 2, this.z);
                 };
             }

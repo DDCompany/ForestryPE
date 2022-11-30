@@ -142,8 +142,8 @@ Translation.addTranslation("forestry.gui.temperature.5", {en: "Hot", ru: "Гор
 Translation.addTranslation("forestry.gui.temperature.6", {en: "Hellish", ru: "Адская"});
 
 Translation.addTranslation("forestry.gui.humidity.1", {en: "Arid", ru: "Сухая"});
-Translation.addTranslation("forestry.gui.humidity.2", {en: "Damp", ru: "Сырая"});
-Translation.addTranslation("forestry.gui.humidity.3", {en: "Normal", ru: "Обычная"});
+Translation.addTranslation("forestry.gui.humidity.2", {en: "Normal", ru: "Обычная"});
+Translation.addTranslation("forestry.gui.humidity.3", {en: "Damp", ru: "Сырая"});
 
 Translation.addTranslation("analyzer.active", {en: "Active", ru: "Активный"});
 Translation.addTranslation("analyzer.speed", {en: "Speed", ru: "Скорость"});

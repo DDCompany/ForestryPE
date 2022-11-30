@@ -55,6 +55,11 @@ apiculture/api/Habitat.ts
 apiculture/api/Modifier.ts
 apiculture/api/HiveGenerator.ts
 
+# OTHER
+apiculture/mode.js
+apiculture/bees.ts
+apiculture/effects.ts
+
 # BLOCKS
 apiculture/blocks/apiaristChest.js
 
@@ -101,11 +106,6 @@ apiculture/alveary/misc/tile.ts
 
 apiculture/alveary/stabiliser/alvearyStabiliser.js
 apiculture/alveary/stabiliser/tile.ts
-
-# OTHER
-apiculture/mode.js
-apiculture/bees.ts
-apiculture/effects.ts
 
 # TRANSLATION
 apiculture/translation.js

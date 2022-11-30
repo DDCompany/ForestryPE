@@ -183,7 +183,7 @@ const BeeRegistry = {
     },
 
     getTolerance(tol) {
-        return tol === 0 ? 0 : (tol < 6 ? this.TOLERANCE_BOTH : (tol < 11 ? this.TOLERANCE_UP : this.TOLERANCE_DOWN))
+        return tol === this.TOLERANCE_NONE ? 0 : (tol < 6 ? this.TOLERANCE_BOTH : (tol < 11 ? this.TOLERANCE_UP : this.TOLERANCE_DOWN))
     },
 
     registerBee(arg) {

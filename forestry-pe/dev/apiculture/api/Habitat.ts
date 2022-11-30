@@ -15,10 +15,12 @@ enum Humidity {
 
 class Habitat {
     static getTemperatureAt(blockSource: BlockSource, x: number, y: number, z: number): Temperature {
-        const temperature = blockSource.getBiomeTemperatureAt(x, y, z);
-        if (temperature > 1.5) {
+        if (blockSource.getDimension() === EDimension.NETHER) {
             return Temperature.HELLISH;
-        } else if (temperature > 1) {
+        }
+
+        const temperature = blockSource.getBiomeTemperatureAt(x, y, z);
+        if (temperature > 1) {
             return Temperature.HOT;
         } else if (temperature > .85) {
             return Temperature.WARM;
@@ -32,6 +34,14 @@ class Habitat {
     }
 
     static getHumidityAt(blockSource: BlockSource, x: number, y: number, z: number) {
+        //The humidity of the swamp is different in Bedrock Edition and Java Edition (0.5 and 0.9 respectively).
+        //Damp is required for swamp hives to spawn and marshy bees to work.
+        //Differences in other biomes are insignificant.
+        const biome = blockSource.getBiome(x, z);
+        if (biome === 6) {
+            return Humidity.DAMP;
+        }
+
         const downfall = blockSource.getBiomeDownfallAt(x, y, z);
         if (downfall > .85) {
             return Humidity.DAMP;
@@ -40,6 +50,24 @@ class Habitat {
         }
 
         return Humidity.ARID;
+    }
+
+    static isWithinLimit(current: Temperature | Humidity, base: Temperature | Humidity, tolerance: number) {
+        let up = 0;
+        let down = 0;
+
+        const side = BeeRegistry.getTolerance(tolerance);
+        const value = BeeRegistry.getToleranceValue(tolerance);
+        if (side === BeeRegistry.TOLERANCE_BOTH) {
+            up = value;
+            down = value;
+        } else if (side === BeeRegistry.TOLERANCE_UP) {
+            up = value;
+        } else if (side === BeeRegistry.TOLERANCE_DOWN) {
+            down = value;
+        }
+
+        return current <= base + up && current >= base - down;
     }
 
     static localizeTemperature(value: Temperature) {

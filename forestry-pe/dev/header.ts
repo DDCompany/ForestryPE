@@ -34,7 +34,6 @@ const APATITE_GEN_BIOMES = [3, 131, 34, 162];
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
 const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");
-const Dimension = Native.Dimension;
 const COMBS: number[] = [];
 
 function log(msg: string, tag: string) {

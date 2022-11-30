@@ -219,19 +219,7 @@ function Bee(species, beetype, save, inactive_species) {
      * @return {boolean} пригоден ли климат для пчелы
      */
     this.isValidClimate = function (value) {
-        var up = 0;
-        var down = 0;
-        var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["TEMPERATURE_TOLERANCE"]);
-        if (tol === BeeRegistry.TOLERANCE_BOTH) {
-            up = this.getClimateTolValue();
-            down = this.getClimateTolValue();
-        } else if (tol === BeeRegistry.TOLERANCE_UP) {
-            up = this.getClimateTolValue();
-        } else if (tol === BeeRegistry.TOLERANCE_DOWN) {
-            down = this.getClimateTolValue();
-        }
-
-        return this.getBeeType().climate + up >= value && this.getBeeType().climate - down <= value;
+        return Habitat.isWithinLimit(value, this.getBeeType().climate, this.getActiveChromosome("TEMPERATURE_TOLERANCE"));
     };
 
     /**
@@ -239,19 +227,7 @@ function Bee(species, beetype, save, inactive_species) {
      * @return {boolean} пригодна ли влажность для пчелы
      */
     this.isValidHumidity = function (value) {
-        var up = 0;
-        var down = 0;
-        var tol = BeeRegistry.getTolerance(this.active_chromosomes_list["HUMIDITY_TOLERANCE"]);
-        if (tol === BeeRegistry.TOLERANCE_BOTH) {
-            up = this.getHumidityTolValue();
-            down = this.getHumidityTolValue();
-        } else if (tol === BeeRegistry.TOLERANCE_UP) {
-            up = this.getHumidityTolValue();
-        } else if (tol === BeeRegistry.TOLERANCE_DOWN) {
-            down = this.getHumidityTolValue();
-        }
-
-        return this.getBeeType().humidity + up >= value && this.getBeeType().humidity - down <= value;
+        return Habitat.isWithinLimit(value, this.getBeeType().humidity, this.getActiveChromosome("HUMIDITY_TOLERANCE"));
     };
 
     if (species) {

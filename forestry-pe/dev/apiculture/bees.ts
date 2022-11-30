@@ -653,7 +653,7 @@ BeeRegistry.registerBee({
     produce: [[ItemID.combMossy, 0, 0.3]],
     humidity: Humidity.DAMP,
     flowers: BeeRegistry.FLOWERS_MUSHROOMS,
-    chromosomes: {HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_BOTH_1, TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1}
+    chromosomes: {},
 });
 
 BeeRegistry.registerBee({
@@ -1006,8 +1006,8 @@ BeeRegistry.registerBee({
     humidity: Humidity.DAMP,
     flowers: BeeRegistry.FLOWERS_JUNGLE,
     chromosomes: {
-        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
-        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_DOWN_1,
+        HUMIDITY_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
+        TEMPERATURE_TOLERANCE: BeeRegistry.TOLERANCE_UP_1,
         SPEED: BeeRegistry.SPEED_SLOWER,
         LIFESPAN: BeeRegistry.LIFESPAN_SHORT
     }

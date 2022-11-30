@@ -1,17 +1,13 @@
 interface HiveGeneratorProto {
     chance: number;
 
-    biomes?: number[];
+    species?: string;
 
-    dimension: EDimension | Native.Dimension | number;
+    dimension?: EDimension;
 
     generate: (
         x: number,
         z: number,
-        dimension: EDimension | Native.Dimension | number,
-        climate: number,
-        humidity: number,
-        biome: number,
     ) => boolean;
 }
 
@@ -29,51 +25,42 @@ class HiveGenerator {
             return;
         }
 
+        if (generator.species && !BeeRegistry.getBeeByType(generator.species)) {
+            summonException("Species is not correct! (Hive Generator Registration)");
+            return;
+        }
+
         this.generators.push(generator);
     }
 
-    static genChunk(blockSource: BlockSource, chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
-        for (let tries = 0; tries < 4; tries++) {
+    static genChunk(blockSource: BlockSource, chunkX: number, chunkZ: number, dimension: EDimension) {
+        const hivesAmount = this.generators.length;
+        for (let tries = 0; tries < hivesAmount / 2; tries++) {
             const coords = GenerationUtils.randomXZ(chunkX, chunkZ);
-            const biome = World.getBiome(coords.x, coords.z);
-            const climate = Habitat.getTemperatureAt(blockSource, coords.x, 0, coords.z);
+            const temperature = Habitat.getTemperatureAt(blockSource, coords.x, 0, coords.z);
             const humidity = Habitat.getHumidityAt(blockSource, coords.x, 0, coords.z);
 
             for (const key in HiveGenerator.generators) {
                 const generator = HiveGenerator.generators[key];
 
-                if (generator.dimension && generator.dimension !== dimension)
+                const requiredDimension = generator.dimension || EDimension.NORMAL;
+                if (requiredDimension !== dimension) {
                     continue;
+                }
 
-                if (generator.biomes && generator.biomes.indexOf(biome) === -1)
-                    continue;
+                if (generator.species) {
+                    const species = BeeRegistry.getBeeByType(generator.species);
+                    if (!species) {
+                        continue;
+                    }
 
-                if (Math.random() <= generator.chance && generator.generate(coords.x, coords.z, dimension, climate, humidity, biome))
+                    if (!species.isValidTemperature(temperature) || !species.isValidHumidity(humidity)) {
+                        continue;
+                    }
+                }
+
+                if (generator.chance * hivesAmount / 8 >= Math.random() * 100 && generator.generate(coords.x, coords.z)) {
                     return;
-            }
-        }
-    }
-
-    static genChunkDebug(blockSource: BlockSource, chunkX: number, chunkZ: number, dimension: EDimension | Native.Dimension | number) {
-        for (let xOffset = 0; xOffset < 16; xOffset++) {
-            for (let zOffset = 0; zOffset < 16; zOffset++) {
-                const x = 16 * chunkX + xOffset;
-                const z = 16 * chunkZ + zOffset;
-                const biome = World.getBiome(x, z);
-                const climate = Habitat.getTemperatureAt(blockSource, x, 0, z);
-                const humidity = Habitat.getHumidityAt(blockSource, x, 0, z);
-
-                for (const key in HiveGenerator.generators) {
-                    const generator = HiveGenerator.generators[key];
-
-                    if (generator.dimension && generator.dimension !== dimension)
-                        continue;
-
-                    if (generator.biomes && generator.biomes.indexOf(biome) === -1)
-                        continue;
-
-                    if (Math.random() <= generator.chance)
-                        generator.generate(x, z, dimension, climate, humidity, biome)
                 }
             }
         }
@@ -135,46 +122,23 @@ class HiveGenerator {
     }
 }
 
-if (ForestryConfig.genBeehivesDebug) {
-    Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
+Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
+    const region = BlockSource.getCurrentWorldGenRegion();
+    if (!region) return;
 
-        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.NORMAL);
-    });
+    HiveGenerator.genChunk(region, chunkX, chunkZ, EDimension.NORMAL);
+});
 
-    Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
+Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
+    const region = BlockSource.getCurrentWorldGenRegion();
+    if (!region) return;
 
-        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.END);
-    });
+    HiveGenerator.genChunk(region, chunkX, chunkZ, EDimension.END);
+});
 
-    Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
+Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
+    const region = BlockSource.getCurrentWorldGenRegion();
+    if (!region) return;
 
-        HiveGenerator.genChunkDebug(region, chunkX, chunkZ, Dimension.NETHER);
-    });
-} else {
-    Callback.addCallback("GenerateChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
-
-        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.NORMAL);
-    });
-
-    Callback.addCallback("GenerateEndChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
-
-        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.END);
-    });
-
-    Callback.addCallback("GenerateNetherChunk", (chunkX, chunkZ) => {
-        const region = BlockSource.getCurrentWorldGenRegion();
-        if (!region) return;
-
-        HiveGenerator.genChunk(region, chunkX, chunkZ, Dimension.NETHER);
-    });
-}
+    HiveGenerator.genChunk(region, chunkX, chunkZ, EDimension.NETHER);
+});
