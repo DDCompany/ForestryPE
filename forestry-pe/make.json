@@ -1,9 +1,9 @@
 {
 	"info": {
 		"name": "ForestryPE",
-		"author": "ICMods",
-		"version": "1.0",
-		"description": "",
+		"author": "DDCompany",
+		"version": "7.0",
+		"description": "Need Wood? Get Forestry!",
 		"clientOnly": false
 	},
 	"project": {
