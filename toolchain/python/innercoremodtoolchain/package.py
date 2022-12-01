@@ -3,7 +3,7 @@ import os
 from os.path import exists, isdir, join, basename, relpath
 import time
 
-from .utils import clear_directory, copy_directory, copy_file, ensure_not_whitespace, get_all_files, get_project_folder_by_name, name_to_identifier
+from .utils import clear_directory, copy_file, ensure_not_whitespace, get_all_files, get_project_folder_by_name, name_to_identifier
 from .base_config import BaseConfig
 from .make_config import MAKE_CONFIG, TOOLCHAIN_CONFIG
 from .shell import Input, Interrupt, Notice, Progress, SelectiveShell, Entry, Separator, Shell, Switch, select_prompt
@@ -196,7 +196,7 @@ def select_project(variants, prompt = "Which project do you want?", selected = N
 	binding = {}
 	for variant in variants:
 		if not variant in binding:
-			binding[variant] = PROJECT_MANAGER.resolve_mod_name(variant) + " (" + variant + ")"
+			binding[variant] = PROJECT_MANAGER.get_shortcut(variant)
 	names = list(binding.keys())
 	names.sort()
 	for variant in names:
@@ -210,7 +210,11 @@ def select_project(variants, prompt = "Which project do you want?", selected = N
 		print()
 		return None
 	try:
-		print((prompt + " " if prompt is not None else "") + "\x1b[2m" + shell.what() + "\x1b[0m")
+		what = shell.what()
+		if what in additionals:
+			print()
+			return print("Abort.")
+		print((prompt + " " if prompt is not None else "") + "\x1b[2m" + what + "\x1b[0m")
+		return what
 	except ValueError:
-		pass
-	return shell.what()
+		return None

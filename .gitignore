@@ -2,3 +2,9 @@ toolchain/bin/.gradle
 toolchain/build
 toolchain/temp
 toolchain/ndk
+__pycache__
+output
+tsconfig.json
+*.log
+*.icmod
+toolchain.json

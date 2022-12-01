@@ -7,7 +7,8 @@
 		"clientOnly": false
 	},
 	"project": {
-		"composite": false
+		"compiledLibraries": true,
+		"useReferences": true
 	},
 	"api": "CoreEngine",
 	"resources": [
@@ -18,14 +19,6 @@
 		{
 			"path": "assets/gui",
 			"type": "gui"
-		},
-		{
-			"path": "assets/resource_packs/*",
-			"type": "minecraft_resource_pack"
-		},
-		{
-			"path": "assets/behavior_packs/*",
-			"type": "minecraft_behavior_pack"
 		}
 	],
 	"sources": [
@@ -46,7 +39,6 @@
 			"language": "javascript"
 		}
 	],
-	"compile": [],
 	"additional": [
 		{
 			"source": "assets/root/*",

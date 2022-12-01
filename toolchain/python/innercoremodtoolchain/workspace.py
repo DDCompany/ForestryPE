@@ -1,8 +1,9 @@
-from os.path import exists, isfile, abspath, relpath, join, dirname
+from os.path import exists, isfile, isdir, abspath, relpath, join, dirname
 import subprocess
 import json
 import glob
 import os
+import platform
 
 from .make_config import MakeConfig, MAKE_CONFIG, TOOLCHAIN_CONFIG
 from .base_config import BaseConfig
@@ -224,7 +225,17 @@ class WorkspaceComposite:
 
 	@staticmethod
 	def resolve_declarations(debug_build = False):
+		includes = MAKE_CONFIG.get_value("declarations", [
+			"declarations"
+		])
 		declarations = []
+		for filepath in [
+			MAKE_CONFIG.get_absolute_path(include) for include in includes
+		]:
+			if exists(filepath):
+				if isdir(filepath):
+					filepath = f"{filepath}/**/*.d.ts"
+				declarations.extend(glob.glob(filepath, recursive=True))
 		if exists(TOOLCHAIN_CONFIG.get_path("toolchain/declarations")):
 			declarations.extend(glob.glob(
 				TOOLCHAIN_CONFIG.get_path("toolchain/declarations/**/*.d.ts"),
@@ -240,7 +251,7 @@ class WorkspaceComposite:
 					for declaration in glob.glob(TOOLCHAIN_CONFIG.get_path(excluded), recursive=True):
 						if declaration in declarations:
 							declarations.remove(declaration)
-		return declarations
+		return list(set(declarations))
 
 	def flush(self, debug_build = False, **kwargs):
 		from .includes import temp_directory
@@ -272,7 +283,7 @@ class WorkspaceComposite:
 			"--build", self.get_tsconfig(),
 			*MAKE_CONFIG.get_value("development.tsc", []),
 			*args
-		], shell=True)
+		], shell=platform.system() == "Windows")
 
 	def watch(self, *args):
 		try:
@@ -281,11 +292,11 @@ class WorkspaceComposite:
 				"--watch",
 				*MAKE_CONFIG.get_value("development.watch", []),
 				*args
-			], cwd=dirname(self.get_tsconfig()).replace("/", os.path.sep), shell=True)
+			], cwd=dirname(self.get_tsconfig()).replace("/", os.path.sep), shell=platform.system() == "Windows")
 		except KeyboardInterrupt:
 			return 0
 
 
-CODE_WORKSPACE = CodeWorkspace(TOOLCHAIN_CONFIG.get_absolute_path(MAKE_CONFIG.get_value("workspaceFile")))
+CODE_WORKSPACE = CodeWorkspace(TOOLCHAIN_CONFIG.get_absolute_path(MAKE_CONFIG.get_value("workspaceFile", "toolchain.code-workspace")))
 CODE_SETTINGS = CodeWorkspace(TOOLCHAIN_CONFIG.get_path(".vscode/settings.json"))
 WORKSPACE_COMPOSITE = WorkspaceComposite("tsconfig.json")
