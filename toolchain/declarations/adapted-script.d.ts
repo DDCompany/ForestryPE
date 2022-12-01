@@ -5547,7 +5547,7 @@ declare class NetworkEntity {
  */
 declare class NetworkEntityType {
 	constructor(name: string);
-	setClientListSetupListener(action: (list: NetworkConnectedClientList, target: object, entity) => void): this;
+	setClientListSetupListener(action: (list: NetworkConnectedClientList, target: object, entity: number) => void): this;
 	setClientEntityAddedListener<T = any>(action: (entity: number, packet: any) => T): this;
 	setClientEntityRemovedListener(action: (target: any, entity: number) => void): this;
 	setClientAddPacketFactory(action: (target: any, entity: number, client: any) => any): this;
@@ -8368,7 +8368,7 @@ declare namespace Item {
      * @param description 
      */
     function describeItem(numericID: number, description: {
-        category?
+        category?: any
     }): void;
 
     /**
@@ -8882,7 +8882,7 @@ declare namespace Callback {
      * @param workbenchContainer workbench container instance
      */
     interface VanillaWorkbenchRecipeSelectedFunction {
-        (recipe: Recipes.WorkbenchRecipe, result: ItemInstance, workbenchContainer: UI.Container)
+        (recipe: Recipes.WorkbenchRecipe, result: ItemInstance, workbenchContainer: UI.Container): any
     }
 
     /**
@@ -9332,7 +9332,7 @@ declare namespace Callback {
      * @param count what count?
      */
     interface EntityPickUpDropFunction {
-        (entity: number, dropEntity: number, dropStack: ItemInstance, count: number)
+        (entity: number, dropEntity: number, dropStack: ItemInstance, count: number): any
     }
 
     /**
