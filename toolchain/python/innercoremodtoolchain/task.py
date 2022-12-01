@@ -256,7 +256,7 @@ def task_exclude_directories(args = None):
 def task_build_package(args = None):
 	import shutil
 	output_dir = MAKE_CONFIG.get_path("output")
-	name = basename(MAKE_CONFIG.current_project) if MAKE_CONFIG.current_project is not None else "unknown"
+	name = "forestry-pe" #Очень грубое исправление ошибки при сборке. Ждем фикс от разработчиков.
 	output_dir_root_tmp = MAKE_CONFIG.get_build_path("package")
 	output_dir_tmp = join(output_dir_root_tmp, name)
 	ensure_directory(output_dir)

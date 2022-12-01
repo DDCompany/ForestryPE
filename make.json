@@ -44,6 +44,5 @@
 			"source": "assets/root/*",
 			"targetDir": "."
 		}
-	],
-	"pushTo": "/storage/emulated/0/games/horizon/packs/Inner_Core/innercore"
+	]
 }
