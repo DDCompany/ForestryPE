@@ -2,7 +2,7 @@ const fabricatorGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Thermionic Fabricator"
+                text: "forestry.gui.thermionic_fabricator.title"
             }
         },
         inventory: {

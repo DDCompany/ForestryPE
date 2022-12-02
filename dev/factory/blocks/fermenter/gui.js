@@ -2,7 +2,7 @@ const fermenterGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Fermenter"
+                text: "forestry.gui.fermenter.title"
             }
         },
         inventory: {

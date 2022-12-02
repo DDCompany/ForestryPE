@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("squeezer");
-FactoryManager.register("squeezer", "Squeezer",
+FactoryManager.register("squeezer", "forestry.block.squeezer",
     [["squeezer_top", 0], ["squeezer_top", 0], ["squeezer", 0], ["squeezer", 0], ["squeezer_side", 0], ["squeezer_side", 0]], true);
 
 Callback.addCallback("PostLoaded", () => {

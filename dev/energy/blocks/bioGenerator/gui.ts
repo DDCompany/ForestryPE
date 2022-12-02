@@ -2,7 +2,7 @@ const biogeneratorGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Bio Generator"
+                text: "forestry.gui.bio_generator.title"
             }
         },
         inventory: {

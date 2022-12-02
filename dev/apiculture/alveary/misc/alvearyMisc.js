@@ -5,7 +5,7 @@ Block.createBlock("alveary_misc", [
 
 IDRegistry.genBlockID("alveary_misc_center");
 Block.createBlock("alveary_misc_center", [
-    {name: "Alveary Controller", texture: [["alveary_heater", 0]], inCreative: true}
+    {name: "forestry.block.alveary_controller", texture: [["alveary_heater", 0]], inCreative: true}
 ]);
 
 ToolAPI.registerBlockMaterial(BlockID.alveary_misc, "unbreaking");

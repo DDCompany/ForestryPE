@@ -19,6 +19,9 @@ api/ItemUtils.ts
 api/PlayerUtils.ts
 
 ### CORE
+#API
+core/api/I18n.ts
+
 # BLOCKS
 core/blocks/humus.js
 
@@ -36,9 +39,6 @@ core/items/debug.ts
 
 # OTHER
 core/fluids.js
-
-# TRANSLATION
-core/translation.js
 
 ### APICULTURE
 #API
@@ -82,7 +82,7 @@ apiculture/items/analyzer/AnalyzerManager.ts
 apiculture/items/analyzer/analyzer.ts
 
 apiculture/items/armor.js
-apiculture/items/combs.js
+apiculture/items/combs.ts
 apiculture/items/frames.ts
 apiculture/items/food.ts
 apiculture/items/other.js
@@ -106,9 +106,6 @@ apiculture/alveary/misc/tile.ts
 
 apiculture/alveary/stabiliser/alvearyStabiliser.js
 apiculture/alveary/stabiliser/tile.ts
-
-# TRANSLATION
-apiculture/translation.js
 
 ### FACTORY
 # API
@@ -173,9 +170,6 @@ factory/blocks/rainMaker/rainMaker.ts
 factory/blocks/rainMaker/tile.ts
 factory/blocks/rainMaker/recipes.ts
 
-# TRANSLATION
-factory/translation.js
-
 ### ENERGY
 # API
 energy/api/BioGeneratorManager.ts
@@ -198,17 +192,11 @@ energy/blocks/peat-fired/gui.ts
 energy/blocks/peat-fired/tile.ts
 energy/blocks/peat-fired/recipes.ts
 
-# TRANSLATION
-energy/translation.js
-
 ### STORAGE
 # ITEMS
 storage/items/backpacks.js
 storage/items/capsules.ts
 storage/items/crates.ts
-
-# TRANSLATION
-storage/translation.js
 
 # INTEGRATION
 integration/ic2.js

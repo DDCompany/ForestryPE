@@ -2,7 +2,7 @@ const alvearyGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Apiary"
+                text: "forestry.gui.apiary.title"
             }
         },
         inventory: {

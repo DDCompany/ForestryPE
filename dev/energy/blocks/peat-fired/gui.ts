@@ -1,6 +1,6 @@
 const guiPeatFiredEngine = new UI.StandartWindow({
     standard: {
-        header: {text: {text: "Peat-fired Engine"}},
+        header: {text: {text: "forestry.gui.peat_engine.title"}},
         inventory: {standard: true},
         background: {standard: true}
     },

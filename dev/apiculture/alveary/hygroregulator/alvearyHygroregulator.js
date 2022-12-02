@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("alvearyHygroregulator");
 Block.createBlock("alvearyHygroregulator", [
-    {name: "Alveary Hygroregulator", texture: [["alveary_valve", 0]], inCreative: true}
+    {name: "forestry.block.alveary_hygroregulator", texture: [["alveary_valve", 0]], inCreative: true}
 ]);
 
 ToolAPI.registerBlockMaterial(BlockID.alvearyHygroregulator, "wood");

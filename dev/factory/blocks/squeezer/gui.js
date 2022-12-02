@@ -2,7 +2,7 @@ const squeezerGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Squeezer"
+                text: "forestry.gui.squeezer.title"
             }
         },
         inventory: {

@@ -1,17 +1,23 @@
 IDRegistry.genItemID("crate");
-Item.createItem("crate", "Crate", {name: "crate", meta: 0}, {});
-Item.addCreativeGroup(GROUP_CRATES, GROUP_CRATES_NAME, [ItemID.crate]);
+Item.createItem("crate", "forestry.item.crate", {name: "crate", meta: 0}, {});
+Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [
+    ItemID.crate,
+]);
 
 /**
  * Register a new crate containing the given item with {@link id} and {@link data}.
  */
-function registerCrate(id: number, itemName: string, texture: string, data?: number) {
+function registerCrate(id: number, texture: string, data?: number) {
     data = data || 0;
     let crateId = "crate" + id + "_" + data;
 
     IDRegistry.genItemID(crateId);
-    Item.createItem(crateId, "Crate (" + itemName + ")", {name: texture, meta: 0}, {});
-    Item.addCreativeGroup(GROUP_CRATES, GROUP_CRATES_NAME, [ItemID[crateId]]);
+    Item.createItem(crateId, "forestry.item.crate", {name: texture, meta: 0}, {});
+    ItemUtils.addTooltip(ItemID[crateId], () => t(Item.getName(id, data || 0)));
+
+    Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [
+        ItemID[crateId],
+    ]);
 
     CarpenterManager.registerRecipe({
         input: {
@@ -58,58 +64,58 @@ function registerCrate(id: number, itemName: string, texture: string, data?: num
 }
 
 if (ForestryConfig.crateEnabled) {
-    registerCrate(3, "Dirt", "crateDirt");
-    registerCrate(87, "Netherrack", "crateNetherrack");
-    registerCrate(112, "Netherbrick", "crateNetherbricks");
-    registerCrate(372, "Nether wart", "crateNetherWart");
-    registerCrate(ItemID.apatite, "Apatite", "crateApatite");
-    registerCrate(BlockID.bog, "Bog", "crateBog");
-    registerCrate(ItemID.ingotBronze, "Bronze ingot", "crateBronzeIngot");
-    registerCrate(4, "Cobblestone", "crateCobblestone");
-    registerCrate(ItemID.combStringy, "Stringy comb", "crateStringyComb");
-    registerCrate(ItemID.combCocoa, "Cocoa comb", "crateCocoaComb");
-    registerCrate(ItemID.combDripping, "Dripping comb", "crateDrippingComb");
-    registerCrate(ItemID.combHoney, "Honey comb", "crateHoneyComb");
-    registerCrate(ItemID.combFrozen, "Frozen comb", "crateFrozenComb");
-    registerCrate(ItemID.combMellow, "Mellow comb", "crateMellowComb");
-    registerCrate(ItemID.combMossy, "Mossy comb", "crateMossyComb");
-    registerCrate(ItemID.combMysterious, "Mysterious comb", "crateMysteriousComb");
-    registerCrate(ItemID.combParched, "Parched comb", "crateParchedComb");
-    registerCrate(ItemID.combSilky, "Silky comb", "crateSilkyComb");
-    registerCrate(ItemID.combSimmering, "Simmering comb", "crateSimmeringComb");
-    registerCrate(ItemID.combWheaten, "Wheaten comb", "crateWheatenComb");
-    registerCrate(ItemID.combIrradiated, "Irradiated comb", "crateIrradiatedComb");
-    registerCrate(337, "Clay", "crateClay");
-    registerCrate(13, "Gravel", "crateGravel");
-    registerCrate(BlockID.humus, "Humus", "crateHumus");
-    registerCrate(17, "Oak wood", "crateOakWood");
-    registerCrate(263, "Charcoal", "crateCharcoal", 1);
-    registerCrate(ItemID.ash, "Ash", "crateAsh");
-    registerCrate(81, "Cactus", "crateCactus");
-    registerCrate(1, "Stone", "crateStone");
-    registerCrate(336, "Brick", "crateBrick");
-    registerCrate(331, "Redstone", "crateRedstone");
-    registerCrate(260, "Apple", "crateApple");
-    registerCrate(VanillaItemID.lapis_lazuli, "Lapis lazuli", "crateLapisLazuli");
-    registerCrate(ItemID.royalJelly, "Royal jelly", "crateRoyalJelly");
-    registerCrate(ItemID.honeydew, "Honey dew", "crateHoneydew");
-    registerCrate(110, "Mycelium", "crateMycelium");
-    registerCrate(ItemID.mulch, "Mulch", "crateMulch");
-    registerCrate(ItemID.refractoryWax, "Refractory wax", "crateRefractoryWax");
-    registerCrate(ItemID.ingotTin, "Tin ingot", "crateTinIngot");
-    registerCrate(12, "Sand", "crateSand");
-    registerCrate(88, "Soul sand", "crateSoulSand");
-    registerCrate(24, "Sandstone", "crateSandstone");
-    registerCrate(357, "Cookie", "crateCookie");
-    registerCrate(ItemID.propolis, "Propolis", "cratePropolis");
-    registerCrate(ItemID.beeswax, "Wax", "crateWax");
-    registerCrate(296, "Wheat", "crateWheat");
-    registerCrate(ItemID.pollen1, "Pollen", "cratePollen");
-    registerCrate(6, "Sapling", "crateSapling");
-    registerCrate(348, "Glowstone dust", "crateGlowstone");
-    registerCrate(295, "Seeds", "crateSeeds");
-    registerCrate(ItemID.peat, "Peat", "cratePeat");
-    registerCrate(338, "Sugar cane", "crateSugarCane");
-    registerCrate(ItemID.phosphor, "Phosphor", "cratePhosphor");
-    registerCrate(263, "Coal", "crateCoal");
+    registerCrate(3, "crateDirt");
+    registerCrate(87, "crateNetherrack");
+    registerCrate(112, "crateNetherbricks");
+    registerCrate(372, "crateNetherWart");
+    registerCrate(ItemID.apatite, "crateApatite");
+    registerCrate(BlockID.bog, "crateBog");
+    registerCrate(ItemID.ingotBronze, "crateBronzeIngot");
+    registerCrate(4, "crateCobblestone");
+    registerCrate(ItemID.combStringy, "crateStringyComb");
+    registerCrate(ItemID.combCocoa, "crateCocoaComb");
+    registerCrate(ItemID.combDripping, "crateDrippingComb");
+    registerCrate(ItemID.combHoney, "crateHoneyComb");
+    registerCrate(ItemID.combFrozen, "crateFrozenComb");
+    registerCrate(ItemID.combMellow, "crateMellowComb");
+    registerCrate(ItemID.combMossy, "crateMossyComb");
+    registerCrate(ItemID.combMysterious, "crateMysteriousComb");
+    registerCrate(ItemID.combParched, "crateParchedComb");
+    registerCrate(ItemID.combSilky, "crateSilkyComb");
+    registerCrate(ItemID.combSimmering, "crateSimmeringComb");
+    registerCrate(ItemID.combWheaten, "crateWheatenComb");
+    registerCrate(ItemID.combIrradiated, "crateIrradiatedComb");
+    registerCrate(337, "crateClay");
+    registerCrate(13, "crateGravel");
+    registerCrate(BlockID.humus, "crateHumus");
+    registerCrate(17, "crateOakWood");
+    registerCrate(263, "crateCharcoal", 1);
+    registerCrate(ItemID.ash, "crateAsh");
+    registerCrate(81, "crateCactus");
+    registerCrate(1, "crateStone");
+    registerCrate(336, "crateBrick");
+    registerCrate(331, "crateRedstone");
+    registerCrate(260, "crateApple");
+    registerCrate(VanillaItemID.lapis_lazuli, "crateLapisLazuli");
+    registerCrate(ItemID.royalJelly, "crateRoyalJelly");
+    registerCrate(ItemID.honeydew, "crateHoneydew");
+    registerCrate(110, "crateMycelium");
+    registerCrate(ItemID.mulch, "crateMulch");
+    registerCrate(ItemID.refractoryWax, "crateRefractoryWax");
+    registerCrate(ItemID.ingotTin, "crateTinIngot");
+    registerCrate(12, "crateSand");
+    registerCrate(88, "crateSoulSand");
+    registerCrate(24, "crateSandstone");
+    registerCrate(357, "crateCookie");
+    registerCrate(ItemID.propolis, "cratePropolis");
+    registerCrate(ItemID.beeswax, "crateWax");
+    registerCrate(296, "crateWheat");
+    registerCrate(ItemID.pollen1, "cratePollen");
+    registerCrate(6, "crateSapling");
+    registerCrate(348, "crateGlowstone");
+    registerCrate(295, "crateSeeds");
+    registerCrate(ItemID.peat, "cratePeat");
+    registerCrate(338, "crateSugarCane");
+    registerCrate(ItemID.phosphor, "cratePhosphor");
+    registerCrate(263, "crateCoal");
 }

@@ -3,7 +3,7 @@ Block.setPrototype("fabricator", {
 
     getVariations() {
         return [{
-            name: "Thermionic Fabricator",
+            name: "forestry.block.thermionic_fabricator",
             texture: [["fabricator_bottom", 0], ["fabricator_top", 0], ["fabricator_side", 0], ["fabricator_front", 0], ["fabricator_side", 0], ["fabricator_side", 0]],
             inCreative: true
         }];
@@ -21,4 +21,6 @@ Callback.addCallback("PostLoaded", () => {
 });
 
 GROUP_ITEM_PIPE.add(BlockID.fabricator, -1);
-Item.addCreativeGroup(GROUP_MACHINES, GROUP_MACHINES_NAME, [BlockID.fabricator]);
+Item.addCreativeGroup("forestry_machines", t("forestry.creative_group.machines"), [
+    BlockID.fabricator,
+]);

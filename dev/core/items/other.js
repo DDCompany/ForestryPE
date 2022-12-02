@@ -1,34 +1,34 @@
 IDRegistry.genItemID("fertilizerBio");
-Item.createItem("fertilizerBio", "Compost", {name: "fertilizerBio", meta: 0}, {});
+Item.createItem("fertilizerBio", "forestry.item.compost", {name: "fertilizerBio", meta: 0}, {});
 
 IDRegistry.genItemID("mouldyWheat");
-Item.createItem("mouldyWheat", "Mouldy Wheat", {name: "mouldyWheat", meta: 0}, {});
+Item.createItem("mouldyWheat", "forestry.item.mouldy_wheat", {name: "mouldyWheat", meta: 0}, {});
 
 IDRegistry.genItemID("decayingWheat");
-Item.createItem("decayingWheat", "Decaying Wheat", {name: "decayingWheat", meta: 0}, {});
+Item.createItem("decayingWheat", "forestry.item.decaying_wheat", {name: "decayingWheat", meta: 0}, {});
 
 IDRegistry.genItemID("mulch");
-Item.createItem("mulch", "Mulch", {name: "mulch", meta: 0}, {});
+Item.createItem("mulch", "forestry.item.mulch", {name: "mulch", meta: 0}, {});
 
 IDRegistry.genItemID("woodPulp");
-Item.createItem("woodPulp", "Wood Pulp", {name: "woodPulp", meta: 0}, {});
+Item.createItem("woodPulp", "forestry.item.wood_pulp", {name: "woodPulp", meta: 0}, {});
 
 IDRegistry.genItemID("carton");
-Item.createItem("carton", "Carton", {name: "carton", meta: 0}, {});
+Item.createItem("carton", "forestry.item.carton", {name: "carton", meta: 0}, {});
 
 IDRegistry.genItemID("fertilizerCompound");
-Item.createItem("fertilizerCompound", "Fertilizer", {name: "fertilizerCompound", meta: 0}, {});
+Item.createItem("fertilizerCompound", "forestry.item.fertilizer", {name: "fertilizerCompound", meta: 0}, {});
 
 IDRegistry.genItemID("ash");
-Item.createItem("ash", "Ash", {name: "ash", meta: 0}, {});
+Item.createItem("ash", "forestry.item.ash", {name: "ash", meta: 0}, {});
 
 IDRegistry.genItemID("iodineCapsule");
-Item.createItem("iodineCapsule", "Iodine Capsule", {name: "iodineCapsule", meta: 0}, {});
-ItemUtils.addStaticTooltip(ItemID.iodineCapsule, "item.iodine_capsule.tooltip");
+Item.createItem("iodineCapsule", "forestry.item.iodine_capsule", {name: "iodineCapsule", meta: 0}, {});
+ItemUtils.addStaticTooltip(ItemID.iodineCapsule, "forestry.item.iodine_capsule.tooltip");
 
 IDRegistry.genItemID("dissipationCharge");
-Item.createItem("dissipationCharge", "Dissipation Charge", {name: "dissipationCharge", meta: 0}, {});
-ItemUtils.addStaticTooltip(ItemID.dissipationCharge, "item.dissipation_charge.tooltip");
+Item.createItem("dissipationCharge", "forestry.item.dissipation_charge", {name: "dissipationCharge", meta: 0}, {});
+ItemUtils.addStaticTooltip(ItemID.dissipationCharge, "forestry.item.dissipation_charge.tooltip");
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.fertilizerBio, count: 4, data: 0}, [

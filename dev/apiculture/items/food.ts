@@ -1,11 +1,11 @@
 IDRegistry.genItemID("honeyedSlice");
-Item.createFoodItem("honeyedSlice", "Honeyed Slice", {name: "honeyedSlice", meta: 0}, {food: 10});
+Item.createFoodItem("honeyedSlice", "forestry.item.honeyed_slice", {name: "honeyedSlice", meta: 0}, {food: 10});
 
 IDRegistry.genItemID("honeyPot");
-Item.createFoodItem("honeyPot", "Honey Pot", {name: "honeyPot", meta: 0}, {food: 2});
+Item.createFoodItem("honeyPot", "forestry.item.honey_pot", {name: "honeyPot", meta: 0}, {food: 2});
 
 IDRegistry.genItemID("ambrosia");
-Item.createFoodItem("ambrosia", "Ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
+Item.createFoodItem("ambrosia", "forestry.item.ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
 
 Callback.addCallback("FoodEaten", (food, ratio, player) => {
     const actor = new PlayerActor(player);

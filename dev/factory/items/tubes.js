@@ -1,40 +1,40 @@
 IDRegistry.genItemID("thermionicTubeDiamond");
-Item.createItem("thermionicTubeDiamond", "Diamond Thermionic Tube", {name: "thermionicTubeDiamond", meta: 0}, {});
+Item.createItem("thermionicTubeDiamond", "forestry.item.diamond_thermionic_tube", {name: "thermionicTubeDiamond", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeGold");
-Item.createItem("thermionicTubeGold", "Gold Thermionic Tube", {name: "thermionicTubeGold", meta: 0}, {});
+Item.createItem("thermionicTubeGold", "forestry.item.gold_thermionic_tube", {name: "thermionicTubeGold", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeBronze");
-Item.createItem("thermionicTubeBronze", "Bronze Thermionic Tube", {name: "thermionicTubeBronze", meta: 0}, {});
+Item.createItem("thermionicTubeBronze", "forestry.item.bronze_thermionic_tube", {name: "thermionicTubeBronze", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeCopper");
-Item.createItem("thermionicTubeCopper", "Copper Thermionic Tube", {name: "thermionicTubeCopper", meta: 0}, {});
+Item.createItem("thermionicTubeCopper", "forestry.item.copper_thermionic_tube", {name: "thermionicTubeCopper", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeIron");
-Item.createItem("thermionicTubeIron", "Iron Thermionic Tube", {name: "thermionicTubeIron", meta: 0}, {});
+Item.createItem("thermionicTubeIron", "forestry.item.iron_thermionic_tube", {name: "thermionicTubeIron", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeTin");
-Item.createItem("thermionicTubeTin", "Tin Thermionic Tube", {name: "thermionicTubeTin", meta: 0}, {});
+Item.createItem("thermionicTubeTin", "forestry.item.tin_thermionic_tube", {name: "thermionicTubeTin", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeObsidian");
-Item.createItem("thermionicTubeObsidian", "Obsidian Thermionic Tube", {name: "thermionicTubeObsidian", meta: 0}, {});
+Item.createItem("thermionicTubeObsidian", "forestry.item.obsidian_thermionic_tube", {name: "thermionicTubeObsidian", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeBlaze");
-Item.createItem("thermionicTubeBlaze", "Blaze Thermionic Tube", {name: "thermionicTubeBlaze", meta: 0}, {});
+Item.createItem("thermionicTubeBlaze", "forestry.item.blaze_thermionic_tube", {name: "thermionicTubeBlaze", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeRubber");
-Item.createItem("thermionicTubeRubber", "Rubber Thermionic Tube", {name: "thermionicTubeRubber", meta: 0}, {});
+Item.createItem("thermionicTubeRubber", "forestry.item.rubber_thermionic_tube", {name: "thermionicTubeRubber", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeEmerald");
-Item.createItem("thermionicTubeEmerald", "Emerald Thermionic Tube", {name: "thermionicTubeEmerald", meta: 0}, {});
+Item.createItem("thermionicTubeEmerald", "forestry.item.emerald_thermionic_tube", {name: "thermionicTubeEmerald", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeApatite");
-Item.createItem("thermionicTubeApatite", "Apatite Thermionic Tube", {name: "thermionicTubeApatite", meta: 0}, {});
+Item.createItem("thermionicTubeApatite", "forestry.item.apatite_thermionic_tube", {name: "thermionicTubeApatite", meta: 0}, {});
 
 IDRegistry.genItemID("thermionicTubeLapis");
-Item.createItem("thermionicTubeLapis", "Lapis Thermionic Tube", {name: "thermionicTubeLapis", meta: 0}, {});
+Item.createItem("thermionicTubeLapis", "forestry.item.lapis_thermionic_tube", {name: "thermionicTubeLapis", meta: 0}, {});
 
-Item.addCreativeGroup(GROUP_TUBES, GROUP_TUBES_NAME, [
+Item.addCreativeGroup("forestry_tubes", t("forestry.creative_group.thermionic_tubes"), [
     ItemID.thermionicTubeDiamond,
     ItemID.thermionicTubeGold,
     ItemID.thermionicTubeBronze,
@@ -46,5 +46,5 @@ Item.addCreativeGroup(GROUP_TUBES, GROUP_TUBES_NAME, [
     ItemID.thermionicTubeRubber,
     ItemID.thermionicTubeEmerald,
     ItemID.thermionicTubeApatite,
-    ItemID.thermionicTubeLapis
+    ItemID.thermionicTubeLapis,
 ]);

@@ -59,7 +59,7 @@ class BeeEffects {
 
     static getLocalizedName(unique: string): string {
         const effect = this.effects[unique];
-        return Translation.translate(effect?.name || "bees.effect.none");
+        return Translation.translate(effect?.name || "forestry.alleles.effect.none");
     }
 
     static isDominant(unique: string): boolean {

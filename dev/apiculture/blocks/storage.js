@@ -4,7 +4,7 @@ Block.setPrototype("blockWax", {
     getVariations() {
         return [
             {
-                name: "Wax Block",
+                name: "forestry.block.wax_block",
                 texture: [["block_wax", 0]],
                 inCreative: true
             }
@@ -29,72 +29,72 @@ if (ForestryConfig.combsBlocksEnabled) {
         getVariations() {
             return [
                 {
-                    name: "Cocoa Comb Block",
+                    name: "forestry.block.cocoa_comb_block",
                     texture: [["comb_block_cocoa", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Dripping Comb Block",
+                    name: "forestry.block.dripping_comb_block",
                     texture: [["comb_block_dripping", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Honey Comb Block",
+                    name: "forestry.block.honey_comb_block",
                     texture: [["comb_block_honey", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Frozen Comb Block",
+                    name: "forestry.block.frozen_comb_block",
                     texture: [["comb_block_frozen", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Mellow Comb Block",
+                    name: "forestry.block.mellow_comb_block",
                     texture: [["comb_block_mellow", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Mossy Comb Block",
+                    name: "forestry.block.mossy_comb_block",
                     texture: [["comb_block_mossy", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Mysterious Comb Block",
+                    name: "forestry.block.mysterious_comb_block",
                     texture: [["comb_block_mysterious", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Parched Comb Block",
+                    name: "forestry.block.parched_comb_block",
                     texture: [["comb_block_parched", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Powdery Comb Block",
+                    name: "forestry.block.powdery_comb_block",
                     texture: [["comb_block_powdery", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Silky Comb Block",
+                    name: "forestry.block.silky_comb_block",
                     texture: [["comb_block_silky", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Simmering Comb Block",
+                    name: "forestry.block.simmering_comb_block",
                     texture: [["comb_block_simmering", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Stringy Comb Block",
+                    name: "forestry.block.stringy_comb_block",
                     texture: [["comb_block_stringy", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Wheaten Comb Block",
+                    name: "forestry.block.wheaten_comb_block",
                     texture: [["comb_block_wheaten", 0]],
                     inCreative: true
                 },
                 {
-                    name: "Irradiated Comb Block",
+                    name: "forestry.block.irradiated_comb_block",
                     texture: [["comb_block_irradiated", 0]],
                     inCreative: true
                 },
@@ -103,7 +103,9 @@ if (ForestryConfig.combsBlocksEnabled) {
     });
     Block.setBlockMaterial(BlockID.blockComb, "stone", 1);
 
-    Item.addCreativeGroup(GROUP_COMB_BLOCKS, GROUP_COMB_BLOCKS_NAME, [BlockID.blockComb]);
+    Item.addCreativeGroup("forestry_bee_comb_blocks", t("forestry.creative_group.bee_comb_blocks"), [
+        BlockID.blockComb,
+    ]);
 
     Callback.addCallback("PostLoaded", () => {
         Recipes.addShaped({id: BlockID.blockComb, count: 1, data: 0}, [

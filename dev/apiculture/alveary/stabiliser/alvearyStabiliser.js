@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("alvearyStabiliser");
 Block.createBlock("alvearyStabiliser", [
-    {name: "Alveary Stabiliser", texture: [["alveary_stabiliser", 0]], inCreative: true}
+    {name: "forestry.block.alveary_stabiliser", texture: [["alveary_stabiliser", 0]], inCreative: true}
 ]);
 
 ToolAPI.registerBlockMaterial(BlockID.alvearyStabiliser, "wood");

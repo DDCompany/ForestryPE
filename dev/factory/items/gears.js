@@ -1,13 +1,17 @@
 IDRegistry.genItemID("gearCopper");
-Item.createItem("gearCopper", "Copper Gear", {name: "gearCopper", meta: 0}, {});
+Item.createItem("gearCopper", "forestry.item.copper_gear", {name: "gearCopper", meta: 0}, {});
 
 IDRegistry.genItemID("gearTin");
-Item.createItem("gearTin", "Tin Gear", {name: "gearTin", meta: 0}, {});
+Item.createItem("gearTin", "forestry.item.tin_gear", {name: "gearTin", meta: 0}, {});
 
 IDRegistry.genItemID("gearBronze");
-Item.createItem("gearBronze", "Bronze Gear", {name: "gearBronze", meta: 0}, {});
+Item.createItem("gearBronze", "forestry.item.bronze_gear", {name: "gearBronze", meta: 0}, {});
 
-Item.addCreativeGroup(GROUP_GEARS, GROUP_GEARS_NAME, [ItemID.gearCopper, ItemID.gearTin, ItemID.gearBronze]);
+Item.addCreativeGroup("forestry_gears", t("forestry.creative_group.gears"), [
+    ItemID.gearCopper,
+    ItemID.gearTin,
+    ItemID.gearBronze,
+]);
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.gearCopper, count: 1, data: 0}, [

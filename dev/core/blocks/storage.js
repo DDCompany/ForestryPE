@@ -4,7 +4,7 @@ Block.setPrototype("blockCharcoal", {
     getVariations() {
         return [
             {
-                name: "Block of Charcoal",
+                name: "forestry.block.charcoal_block",
                 texture: [["block_charcoal", 0]],
                 inCreative: true
             }
@@ -19,7 +19,7 @@ Block.setPrototype("blockAsh", {
     getVariations() {
         return [
             {
-                name: "Ash Block",
+                name: "forestry.block.ash_block",
                 texture: [["block_ash", 0]],
                 inCreative: true
             }
@@ -34,7 +34,7 @@ Block.setPrototype("ashBricks", {
     getVariations() {
         return [
             {
-                name: "Ash Bricks",
+                name: "forestry.block.ash_bricks",
                 texture: [["brick_ash", 0]],
                 inCreative: true
             }
@@ -72,7 +72,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations() {
             return [
                 {
-                    name: "Block of Copper",
+                    name: "forestry.block.copper_block",
                     texture: [["block_copper", 0]],
                     inCreative: true
                 }
@@ -87,7 +87,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations() {
             return [
                 {
-                    name: "Block of Tin",
+                    name: "forestry.block.tin_block",
                     texture: [["block_tin", 0]],
                     inCreative: true
                 }
@@ -102,7 +102,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations() {
             return [
                 {
-                    name: "Block of Bronze",
+                    name: "forestry.block.bronze_block",
                     texture: [["block_bronze", 0]],
                     inCreative: true
                 }
@@ -117,7 +117,7 @@ if (ForestryConfig.oresBlocksEnabled) {
         getVariations() {
             return [
                 {
-                    name: "Block of Apatite",
+                    name: "forestry.block.apatite_block",
                     texture: [["block_apatite", 0]],
                     inCreative: true
                 }
@@ -126,7 +126,12 @@ if (ForestryConfig.oresBlocksEnabled) {
     });
     Block.setBlockMaterial(BlockID.blockApatite, "stone", 1);
 
-    Item.addCreativeGroup(GROUP_ORE_BLOCKS, GROUP_ORE_BLOCKS_NAME, [BlockID.blockCopper, BlockID.blockTin, BlockID.blockBronze, BlockID.blockApatite]);
+    Item.addCreativeGroup("forestry_ore_blocks", t("forestry.creative_group.ore_blocks"), [
+        BlockID.blockCopper,
+        BlockID.blockTin,
+        BlockID.blockBronze,
+        BlockID.blockApatite,
+    ]);
 
     Callback.addCallback("PostLoaded", () => {
         Recipes.addShaped({id: BlockID.blockCopper, count: 1, data: 0}, [

@@ -1,35 +1,48 @@
 IDRegistry.genItemID("waxCapsuleEmpty");
-Item.createItem("waxCapsuleEmpty", "Wax Capsule", {name: "waxCapsuleEmpty", meta: 0});
+Item.createItem("waxCapsuleEmpty", "forestry.item.wax_capsule", {name: "waxCapsuleEmpty", meta: 0});
 Item.setLiquidClip(ItemID.waxCapsuleEmpty, true);
-Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID.waxCapsuleEmpty]);
+Item.addCreativeGroup("forestry_wax_capsules", t("forestry.creative_group.wax_capsules"), [
+    ItemID.waxCapsuleEmpty,
+]);
 
 IDRegistry.genItemID("canEmpty");
-Item.createItem("canEmpty", "Can", {name: "canEmpty", meta: 0});
+Item.createItem("canEmpty", "forestry.item.can", {name: "canEmpty", meta: 0});
 Item.setLiquidClip(ItemID.canEmpty, true);
-Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID.canEmpty]);
+Item.addCreativeGroup("forestry_cans", t("forestry.creative_group.cans"), [
+    ItemID.canEmpty,
+]);
 
 IDRegistry.genItemID("refractoryEmpty");
 Item.createItem("refractoryEmpty", "Refractory Capsule", {name: "refractoryEmpty", meta: 0});
 Item.setLiquidClip(ItemID.refractoryEmpty, true);
-Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID.refractoryEmpty]);
+Item.addCreativeGroup("forestry_refractory_capsules", t("forestry.creative_group.refractory_capsules"), [
+    ItemID.refractoryEmpty,
+]);
 
-function registerLiquidContainer(suffix: string, liquid: string, food: number = 0, isNative?: boolean, isHot?: boolean) {
+function registerLiquidContainer(liquid: string, food: number = 0, isNative?: boolean, isHot?: boolean) {
+    const liquidName = LiquidRegistry.getLiquidName(liquid);
+    const suffix = liquid.charAt(0).toUpperCase() + liquid.slice(1);
     if (!isNative) {
         let unique = `bucket${suffix}`;
         IDRegistry.genItemID(unique);
-        Item.createItem(unique, `${suffix} Bucket`, {name: unique, meta: 0}, {stack: 1});
+        Item.createItem(unique, "forestry.item.bucket", {name: unique, meta: 0}, {stack: 1});
         LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID[unique], data: 0});
-        Item.addCreativeGroup(GROUP_BUCKETS, GROUP_BUCKETS_NAME, [ItemID[unique]]);
+        ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
+
+        Item.addCreativeGroup("forestry_buckets", t("forestry.creative_group.buckets"), [
+            ItemID[unique],
+        ]);
     }
 
     if (food) {
         if (!isHot) {
             let unique = `waxCapsule${suffix}`;
             IDRegistry.genItemID(unique);
-            Item.createFoodItem(unique, `Capsule (${suffix})`, {
+            Item.createFoodItem(unique, "forestry.item.wax_capsule", {
                 name: unique,
                 meta: 0
             }, {food});
+            ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
 
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
@@ -39,32 +52,37 @@ function registerLiquidContainer(suffix: string, liquid: string, food: number = 
 
         let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
-        Item.createFoodItem(canUnique, `Can (${suffix})`, {name: canUnique, meta: 0}, {food});
+        Item.createFoodItem(canUnique, "forestry.item.can", {name: canUnique, meta: 0}, {food});
+        ItemUtils.addStaticTooltip(ItemID[canUnique], liquidName);
 
         let refractoryUnique = `refractory${suffix}`;
         IDRegistry.genItemID(refractoryUnique);
-        Item.createFoodItem(refractoryUnique, `Capsule (${suffix})`, {
+        Item.createFoodItem(refractoryUnique, "forestry.item.refractory_capsule", {
             name: refractoryUnique,
             meta: 0
         }, {food});
+        ItemUtils.addStaticTooltip(ItemID[refractoryUnique], liquidName);
     } else {
         if (!isHot) {
             let unique = `waxCapsule${suffix}`;
             IDRegistry.genItemID(unique);
-            Item.createItem(unique, `Capsule (${suffix})`, {name: unique, meta: 0});
+            Item.createItem(unique, "forestry.item.wax_capsule", {name: unique, meta: 0});
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
             }, {id: ItemID[unique], data: 0});
+            ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
         }
 
         let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
-        Item.createItem(canUnique, `Can (${suffix})`, {name: canUnique, meta: 0});
+        Item.createItem(canUnique, "forestry.item.can", {name: canUnique, meta: 0});
+        ItemUtils.addStaticTooltip(ItemID[canUnique], liquidName);
 
         let refractoryUnique = `refractory${suffix}`;
         IDRegistry.genItemID(refractoryUnique);
-        Item.createItem(refractoryUnique, `Capsule (${suffix})`, {name: refractoryUnique, meta: 0});
+        Item.createItem(refractoryUnique, "forestry.item.refractory_capsule", {name: refractoryUnique, meta: 0});
+        ItemUtils.addStaticTooltip(ItemID[refractoryUnique], liquidName);
     }
 
     LiquidRegistry.registerItem(liquid, {id: ItemID.canEmpty, data: 0}, {id: ItemID[`can${suffix}`], data: 0});
@@ -74,20 +92,26 @@ function registerLiquidContainer(suffix: string, liquid: string, food: number = 
     });
 
     if (!isHot)
-        Item.addCreativeGroup(GROUP_WAX_CAPSULES, GROUP_WAX_CAPSULES_NAME, [ItemID[`waxCapsule${suffix}`]]);
+        Item.addCreativeGroup("forestry_wax_capsules", t("forestry.creative_group.wax_capsules"), [
+            ItemID[`waxCapsule${suffix}`],
+        ]);
 
-    Item.addCreativeGroup(GROUP_CANS, GROUP_CANS_NAME, [ItemID[`can${suffix}`]]);
-    Item.addCreativeGroup(GROUP_REFRACTORY_CAPSULES, GROUP_REFRACTORY_CAPSULES_NAME, [ItemID[`refractory${suffix}`]]);
+    Item.addCreativeGroup("forestry_cans", t("forestry.creative_group.cans"), [
+        ItemID[`can${suffix}`],
+    ]);
+    Item.addCreativeGroup("forestry_refractory_capsules", t("forestry.creative_group.refractory_capsules"), [
+        ItemID[`refractory${suffix}`],
+    ]);
 }
 
-registerLiquidContainer("Water", "water", 0, true);
-registerLiquidContainer("Lava", "lava", 0, true, true);
-registerLiquidContainer("Biomass", "biomass");
-registerLiquidContainer("Ethanol", "ethanol");
-registerLiquidContainer("Milk", "milk", 0, true);
-registerLiquidContainer("Juice", "appleJuice", 2);
-registerLiquidContainer("Honey", "honey", 2);
-registerLiquidContainer("SeedOil", "seedOil", 0);
+registerLiquidContainer("water", 0, true);
+registerLiquidContainer("lava", 0, true, true);
+registerLiquidContainer("biomass");
+registerLiquidContainer("ethanol");
+registerLiquidContainer("milk", 0, true);
+registerLiquidContainer("appleJuice", 2);
+registerLiquidContainer("honey", 2);
+registerLiquidContainer("seedOil", 0);
 
 function pickupLiquidFromWorld(waterCanId: number, lavaCanId: number): Callback.ItemUseLocalFunction {
     return (coords, item, block, player) => {

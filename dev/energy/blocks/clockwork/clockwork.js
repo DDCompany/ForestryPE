@@ -3,7 +3,7 @@ Block.setPrototype("engineClockwork", {
 
     getVariations() {
         return [{
-            name: "Clockwork Engine",
+            name: "forestry.block.clockwork_engine",
             texture: [["engine_clock", 0], ["engine_clock", 2], ["engine_clock", 1]],
             inCreative: true
         }];
@@ -19,4 +19,6 @@ Callback.addCallback("PostLoaded", () => {
 });
 
 ModelHelper.createEngineModel(BlockID.engineClockwork);
-Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.engineClockwork]);
+Item.addCreativeGroup("forestry_engines", t("forestry.creative_group.engines"), [
+    BlockID.engineClockwork,
+]);

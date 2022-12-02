@@ -2,7 +2,7 @@ const carpenterGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Carpenter"
+                text: "forestry.gui.carpenter.title"
             }
         },
         inventory: {

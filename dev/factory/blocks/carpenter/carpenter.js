@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("carpenter");
-FactoryManager.register("carpenter", "Carpenter",
+FactoryManager.register("carpenter", "forestry.block.carpenter",
     [["carpenter_top", 0], ["carpenter_top", 0], ["carpenter", 0], ["carpenter", 0], ["carpenter_side", 0], ["carpenter_side", 0]], true);
 
 Callback.addCallback("PostLoaded", () => {

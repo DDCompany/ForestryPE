@@ -47,7 +47,7 @@ function getRandomPositionInRange(
 }
 
 BeeEffects.registerEffect("aggress", {
-    name: "bees.effect.aggress",
+    name: "forestry.alleles.effect.aggress",
     delay: 40,
     requireWorking: false,
     isDominant: true,
@@ -64,7 +64,7 @@ BeeEffects.registerEffect("aggress", {
 });
 
 BeeEffects.registerEffect("beatific", {
-    name: "bees.effect.beatific",
+    name: "forestry.alleles.effect.beatific",
     delay: 20,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
@@ -75,7 +75,7 @@ BeeEffects.registerEffect("beatific", {
 });
 
 BeeEffects.registerEffect("creeper", {
-    name: "bees.effect.creeper",
+    name: "forestry.alleles.effect.creeper",
     delay: 20,
     requireWorking: false,
     isDominant: true,
@@ -89,7 +89,7 @@ BeeEffects.registerEffect("creeper", {
 });
 
 BeeEffects.registerEffect("exploration", {
-    name: "bees.effect.explorer",
+    name: "forestry.alleles.effect.explorer",
     delay: 80,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);
@@ -101,7 +101,7 @@ BeeEffects.registerEffect("exploration", {
 });
 
 BeeEffects.registerEffect("glacial", {
-    name: "bees.effect.freezing",
+    name: "forestry.alleles.effect.freezing",
     delay: 200,
     doEffect(blockSource, coords, range, house) {
         switch (house.getClimate()) {
@@ -123,7 +123,7 @@ BeeEffects.registerEffect("glacial", {
 });
 
 BeeEffects.registerEffect("heroic", {
-    name: "bees.effect.heroic",
+    name: "forestry.alleles.effect.heroic",
     delay: 40,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range);
@@ -137,7 +137,7 @@ BeeEffects.registerEffect("heroic", {
 });
 
 BeeEffects.registerEffect("ignition", {
-    name: "bees.effect.flammable",
+    name: "forestry.alleles.effect.flammable",
     delay: 20,
     requireWorking: false,
     doEffect(blockSource, coords, range) {
@@ -170,7 +170,7 @@ BeeEffects.registerEffect("ignition", {
 });
 
 BeeEffects.registerEffect("miasmic", {
-    name: "bees.effect.poison",
+    name: "forestry.alleles.effect.poison",
     delay: 100,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);
@@ -196,7 +196,7 @@ BeeEffects.registerEffect("miasmic", {
 });
 
 BeeEffects.registerEffect("misanthrope", {
-    name: "bees.effect.ends",
+    name: "forestry.alleles.effect.ends",
     delay: 20,
     requireWorking: false,
     isDominant: true,
@@ -210,7 +210,7 @@ BeeEffects.registerEffect("misanthrope", {
 });
 
 BeeEffects.registerEffect("radiactive", {
-    name: "bees.effect.radiact",
+    name: "forestry.alleles.effect.radiact",
     delay: 40,
     requireWorking: false,
     isDominant: true,
@@ -232,7 +232,7 @@ BeeEffects.registerEffect("radiactive", {
 });
 
 BeeEffects.registerEffect("drunkard", {
-    name: "bees.effect.drunkard",
+    name: "forestry.alleles.effect.drunkard",
     delay: 20,
     doEffect(blockSource, coords, range) {
         const all = listEntitiesInRange(blockSource, coords, range, EEntityType.PLAYER);

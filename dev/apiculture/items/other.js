@@ -1,59 +1,67 @@
 IDRegistry.genItemID("honeyDrop");
-Item.createItem("honeyDrop", "Honey Drop", {name: "honeyDrop", meta: 0}, {});
+Item.createItem("honeyDrop", "forestry.item.honey_drop", {name: "honeyDrop", meta: 0}, {});
 
 IDRegistry.genItemID("beeswax");
-Item.createItem("beeswax", "Beeswax", {name: "beeswax", meta: 0}, {});
+Item.createItem("beeswax", "forestry.item.beeswax", {name: "beeswax", meta: 0}, {});
 
 IDRegistry.genItemID("honeydew");
-Item.createItem("honeydew", "Honeydew", {name: "honeydew", meta: 0}, {});
+Item.createItem("honeydew", "forestry.item.honeydew", {name: "honeydew", meta: 0}, {});
 
 IDRegistry.genItemID("propolis");
-Item.createItem("propolis", "Propolis", {name: "propolis", meta: 0}, {});
+Item.createItem("propolis", "forestry.item.propolis", {name: "propolis", meta: 0}, {});
 
 IDRegistry.genItemID("propolisSilky");
-Item.createItem("propolisSilky", "Silky Propolis", {name: "propolis", meta: 1}, {});
+Item.createItem("propolisSilky", "forestry.item.silky_propolis", {name: "propolis", meta: 1}, {});
 
 IDRegistry.genItemID("propolisPulse");
-Item.createItem("propolisPulse", "Pulsating Propolis", {name: "propolis", meta: 2}, {});
+Item.createItem("propolisPulse", "forestry.item.pulsating_propolis", {name: "propolis", meta: 2}, {});
 
 IDRegistry.genItemID("refractoryWax");
-Item.createItem("refractoryWax", "Refractory Wax", {name: "refractoryWax", meta: 0}, {});
+Item.createItem("refractoryWax", "forestry.item.refractory_wax", {name: "refractoryWax", meta: 0}, {});
 
 IDRegistry.genItemID("phosphor");
-Item.createItem("phosphor", "Phosphor", {name: "phosphor", meta: 0}, {});
+Item.createItem("phosphor", "forestry.item.phosphor", {name: "phosphor", meta: 0}, {});
 
 IDRegistry.genItemID("pollen");
-Item.createItem("pollen", "Crystalline Pollen Cluster", {name: "pollen", meta: 0}, {});
+Item.createItem("pollen", "forestry.item.crystalline_pollen_cluster", {name: "pollen", meta: 0}, {});
 
 IDRegistry.genItemID("pollen1");
-Item.createItem("pollen1", "Pollen Cluster", {name: "pollen", meta: 1}, {});
+Item.createItem("pollen1", "forestry.item.pollen_cluster", {name: "pollen", meta: 1}, {});
 
 IDRegistry.genItemID("royalJelly");
-Item.createItem("royalJelly", "Royal Jelly", {name: "royalJelly", meta: 0}, {});
+Item.createItem("royalJelly", "forestry.item.royal_jelly", {name: "royalJelly", meta: 0}, {});
 
 IDRegistry.genItemID("iceShard");
-Item.createItem("iceShard", "Ice Shard", {name: "iceShard", meta: 0}, {});
+Item.createItem("iceShard", "forestry.item.ice_shard", {name: "iceShard", meta: 0}, {});
 
 IDRegistry.genItemID("silkWisp");
-Item.createItem("silkWisp", "Silk Wisp", {name: "silkWisp", meta: 0}, {});
+Item.createItem("silkWisp", "forestry.item.silk_wisp", {name: "silkWisp", meta: 0}, {});
 
 IDRegistry.genItemID("wovenSilk");
-Item.createItem("wovenSilk", "Woven Silk", {name: "wovenSilk", meta: 0}, {});
+Item.createItem("wovenSilk", "forestry.item.woven_silk", {name: "wovenSilk", meta: 0}, {});
 
 IDRegistry.genItemID("waxCast");
-Item.createItem("waxCast", "Wax Cast", {name: "waxCast", meta: 0}, {});
+Item.createItem("waxCast", "forestry.item.wax_cast", {name: "waxCast", meta: 0}, {});
 
 IDRegistry.genItemID("pulsatingMesh");
-Item.createItem("pulsatingMesh", "Pulsating Mesh", {name: "pulsatingMesh", meta: 0}, {});
+Item.createItem("pulsatingMesh", "forestry.item.pulsating_mesh", {name: "pulsatingMesh", meta: 0}, {});
 
 IDRegistry.genItemID("stickImpregnated");
-Item.createItem("stickImpregnated", "Impregnated Stick", {name: "stickImpregnated", meta: 0}, {});
+Item.createItem("stickImpregnated", "forestry.item.impregnated_stick", {name: "stickImpregnated", meta: 0}, {});
 
 IDRegistry.genItemID("scentedPaneling");
-Item.createItem("scentedPaneling", "Scented Paneling", {name: "scentedPaneling", meta: 0}, {});
+Item.createItem("scentedPaneling", "forestry.item.scented_paneling", {name: "scentedPaneling", meta: 0}, {});
 
-Item.addCreativeGroup(GROUP_PROPOLIS, GROUP_PROPOLIS_NAME, [ItemID.propolis, ItemID.propolisSilky, ItemID.propolisPulse]);
-Item.addCreativeGroup(GROUP_POLLEN, GROUP_POLLEN_NAME, [ItemID.pollen, ItemID.pollen1]);
+Item.addCreativeGroup("forestry_propolis", t("forestry.creative_group.propolis"), [
+    ItemID.propolis,
+    ItemID.propolisSilky,
+    ItemID.propolisPulse,
+]);
+
+Item.addCreativeGroup("forestry_pollen", t("forestry.creative_group.pollen"), [
+    ItemID.pollen,
+    ItemID.pollen1,
+]);
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: 382, count: 1, data: 0}, [

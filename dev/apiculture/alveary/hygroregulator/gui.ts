@@ -2,7 +2,7 @@ const alvearyHygroregulatorGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Alveary Hygroregulator"
+                text: "forestry.gui.alveary_hygroregulator.title"
             }
         },
         inventory: {

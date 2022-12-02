@@ -2,7 +2,7 @@ const centrifugeGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Centrifuge"
+                text: "forestry.gui.centrifuge.title"
             }
         },
         inventory: {

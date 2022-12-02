@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("moistener");
-FactoryManager.register("moistener", "Moistener",
+FactoryManager.register("moistener", "forestry.block.moistener",
     [["moistener_top", 0], ["moistener_top", 0], ["moistener", 0], ["moistener", 0], ["moistener_side", 0], ["moistener_side", 0]], true);
 
 Callback.addCallback("PostLoaded", () => {

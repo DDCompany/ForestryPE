@@ -103,25 +103,25 @@ class BeeHouse {
         if (World.getThreadTime() % 128 === 0) {
             const tileCoords = {x: this.tile.x, y: this.tile.y, z: this.tile.z};
             if (!BeeLogic.findFlowers(this.tile.blockSource, this.queen, tileCoords)) {
-                this.error = Translation.translate("apiary.error.flowers");
+                this.error = Translation.translate("forestry.gui.error.no_flowers");
             } else if (!this.queen.isValidClimate(this.getClimate())) {
-                this.error = Translation.translate("apiary.error.climate");
+                this.error = Translation.translate("forestry.gui.error.invalid_climate");
             } else if (!this.queen.isValidHumidity(this.getHumidity())) {
-                this.error = Translation.translate("apiary.error.humidity");
+                this.error = Translation.translate("forestry.gui.error.invalid_humidity");
             } else if (this.tile.blockSource.getDimension() !== EDimension.NETHER
                 && !this.canSeeSky()
                 && !modifiersList.isSelfLighted(this)
                 && !this.houseModifierList.isSelfLighted(this)
                 && !this.queen.getActiveChromosome("CAVE_DWELLING")) {
-                this.error = Translation.translate("apiary.error.sky");
+                this.error = Translation.translate("forestry.gui.error.sky_is_not_visible");
             } else if (World.getWeather().rain > 0
                 && !modifiersList.isSealed(this)
                 && !this.houseModifierList.isSealed(this)
                 && !this.queen.getActiveChromosome("TOLERATES_RAIN")) {
-                this.error = Translation.translate("apiary.error.rain");
+                this.error = Translation.translate("forestry.gui.error.no_rainfall_required");
             } else if (!(World.getWorldTime() % 24000 >= 1000 && World.getWorldTime() % 24000 <= 13000)
                 && !this.queen.getActiveChromosome("NEVER_SLEEPS")) {
-                this.error = Translation.translate("apiary.error.night");
+                this.error = Translation.translate("forestry.gui.error.night_required");
             } else {
                 this.error = null;
             }

@@ -30,8 +30,8 @@ ModAPI.addAPICallback("ICore", api => {
     }
 
     registerTubeRecipe(ItemID.thermionicTubeRubber, ItemID.rubber);
-    registerCrate(ItemID.latex, "Latex", "crateLatex");
-    registerCrate(ItemID.scrap, "Scrap", "crateScrap");
+    registerCrate(ItemID.latex, "crateLatex");
+    registerCrate(ItemID.scrap, "crateScrap");
 
     log("IC Integration Activated", "INFO")
 });

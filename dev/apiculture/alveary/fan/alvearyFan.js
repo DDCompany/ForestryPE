@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("alvearyFan");
 Block.createBlock("alvearyFan", [
-    {name: "Alveary Fan", texture: [["alveary_fan", 0]], inCreative: true}
+    {name: "forestry.block.alveary_fan", texture: [["alveary_fan", 0]], inCreative: true}
 ]);
 
 ToolAPI.registerBlockMaterial(BlockID.alvearyFan, "wood");

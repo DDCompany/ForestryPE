@@ -1,6 +1,6 @@
 const guiBiogasEngine = new UI.StandartWindow({
     standard: {
-        header: {text: {text: "Biogas Engine"}},
+        header: {text: {text: "forestry.gui.biogas_engine.title"}},
         inventory: {standard: true},
         background: {standard: true}
     },

@@ -3,7 +3,7 @@ Block.setPrototype("engineBiogas", {
 
     getVariations() {
         return [{
-            name: "Biogas Engine",
+            name: "forestry.block.biogas_engine",
             texture: [["engine_biogas", 0], ["engine_biogas", 2], ["engine_biogas", 1]],
             inCreative: true
         }];
@@ -20,4 +20,6 @@ Callback.addCallback("PostLoaded", () => {
 
 GROUP_ITEM_PIPE.add(BlockID.engineBiogas, -1);
 ModelHelper.createEngineModel(BlockID.engineBiogas);
-Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.engineBiogas]);
+Item.addCreativeGroup("forestry_engines", t("forestry.creative_group.engines"), [
+    BlockID.engineBiogas,
+]);

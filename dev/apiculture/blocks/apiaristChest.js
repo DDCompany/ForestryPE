@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("apiaristChest");
-ChestManager.register("apiaristChest", "Apiarist's Chest",
+ChestManager.register("apiaristChest", "forestry.block.apiarists_chest",
     [["apiaristchest", 1], ["apiaristchest", 0], ["apiaristchest", 2], ["apiaristchest", 3], ["apiaristchest", 2], ["apiaristchest", 2]],
     true, 126, {
         isValid(id) {

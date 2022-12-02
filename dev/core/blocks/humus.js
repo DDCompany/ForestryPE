@@ -5,7 +5,7 @@ Block.setPrototype("humus", {
 
     getVariations() {
         return [
-            {name: "Humus", texture: [["humus", 0]], inCreative: true},
+            {name: "forestry.block.humus", texture: [["humus", 0]], inCreative: true},
         ];
     },
 

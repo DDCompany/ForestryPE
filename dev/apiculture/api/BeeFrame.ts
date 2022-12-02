@@ -1,6 +1,6 @@
 interface BeeFramePrototype {
     codeName: string;
-    localize: Record<string, string>;
+    name: string;
     durability: number;
     modifier: BeeModifier;
     texture?: { name: string, meta: number };
@@ -15,8 +15,8 @@ class BeeFrame {
             return;
         }
 
-        if (!obj.localize) {
-            summonException("Localize is undefined! (Frames Registration)");
+        if (!obj.name) {
+            summonException("Name is undefined! (Frames Registration)");
             return;
         }
 
@@ -38,8 +38,7 @@ class BeeFrame {
         }
 
         IDRegistry.genItemID(obj.codeName);
-        Item.createItem(obj.codeName, obj.localize.en, obj.texture, {stack: 1});
-        Translation.addTranslation(obj.localize.en, obj.localize);
+        Item.createItem(obj.codeName, obj.name, obj.texture, {stack: 1});
 
         Item.setToolRender(ItemID[obj.codeName], true);
         Item.setMaxDamage(ItemID[obj.codeName], obj.durability);

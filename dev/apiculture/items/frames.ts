@@ -1,6 +1,6 @@
 BeeFrame.registerFrame({
     codeName: "frameUntreated",
-    localize: {en: "Untreated Frame", ru: "Необработанная рамка"},
+    name: "forestry.item.untreated_frame",
     modifier: {
         getProductionModifier() {
             return 2;
@@ -17,7 +17,7 @@ Item.registerNameOverrideFunction(ItemID.frameUntreated, (item, name) => name + 
 
 BeeFrame.registerFrame({
     codeName: "frameImpregnated",
-    localize: {en: "Impregnated Frame", ru: "Пропитанная рамка"},
+    name: "forestry.item.impregnated_frame",
     modifier: {
         getProductionModifier() {
             return 2;
@@ -34,7 +34,7 @@ Item.registerNameOverrideFunction(ItemID.frameImpregnated, (item, name) => name 
 
 BeeFrame.registerFrame({
     codeName: "frameProven",
-    localize: {en: "Proven Frame", ru: "Проверенная рамка"},
+    name: "forestry.item.proven_frame",
     modifier: {
         getProductionModifier() {
             return 2;
@@ -49,7 +49,11 @@ BeeFrame.registerFrame({
 
 Item.registerNameOverrideFunction(ItemID.frameProven, (item, name) => name + "§7\nProduction: 2.0x\nGenetic Decay: 0.3x\nDurability: " + (720 - item.data));
 
-Item.addCreativeGroup(GROUP_FRAMES, GROUP_FRAMES_NAME, [ItemID.frameUntreated, ItemID.frameImpregnated, ItemID.frameProven]);
+Item.addCreativeGroup("forestry_frames", t("forestry.creative_group.frames"), [
+    ItemID.frameUntreated,
+    ItemID.frameImpregnated,
+    ItemID.frameProven,
+]);
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.frameUntreated, count: 1, data: 0}, [

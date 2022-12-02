@@ -304,9 +304,15 @@ const BeeRegistry = {
         Item.registerNameOverrideFunction(ItemID["drone" + arg.species], NAME_OVERRIDE);
         Item.registerNameOverrideFunction(ItemID["queen" + arg.species], NAME_OVERRIDE);
 
-        Item.addCreativeGroup(GROUP_PRINCESSES, GROUP_PRINCESSES_NAME, [ItemID["princess" + arg.species]]);
-        Item.addCreativeGroup(GROUP_DRONES, GROUP_DRONES_NAME, [ItemID["drone" + arg.species]]);
-        Item.addCreativeGroup(GROUP_QUEENS, GROUP_QUEENS_NAME, [ItemID["queen" + arg.species]]);
+        Item.addCreativeGroup("forestry_princesses", t("forestry.creative_group.princesses"), [
+            ItemID["princess" + arg.species],
+        ]);
+        Item.addCreativeGroup("forestry_drones", t("forestry.creative_group.drones"), [
+            ItemID["drone" + arg.species],
+        ]);
+        Item.addCreativeGroup("forestry_queens", t("forestry.creative_group.queens"), [
+            ItemID["queen" + arg.species],
+        ]);
     },
 
     getBeeTypeByID(id) {
@@ -366,52 +372,48 @@ const BeeRegistry = {
 
     getChromosomeValueName(name, value) {
         if (name === "LIFESPAN") {
-
             switch (value) {
                 case BeeRegistry.LIFESPAN_SHORTER:
-                    return Translation.translate("bees.lifespan.shorted");
+                    return Translation.translate("forestry.alleles.lifespan.shorted");
                 case BeeRegistry.LIFESPAN_SHORTENED:
-                    return Translation.translate("bees.lifespan.shortened");
+                    return Translation.translate("forestry.alleles.lifespan.shortened");
                 case BeeRegistry.LIFESPAN_SHORTEST:
-                    return Translation.translate("bees.lifespan.shortest");
+                    return Translation.translate("forestry.alleles.lifespan.shortest");
                 case BeeRegistry.LIFESPAN_SHORT:
-                    return Translation.translate("bees.lifespan.short");
+                    return Translation.translate("forestry.alleles.lifespan.short");
                 case BeeRegistry.LIFESPAN_NORMAL:
-                    return Translation.translate("bees.lifespan.normal");
+                    return Translation.translate("forestry.alleles.lifespan.normal");
                 case BeeRegistry.LIFESPAN_ELONGATED:
-                    return Translation.translate("bees.lifespan.elongated");
+                    return Translation.translate("forestry.alleles.lifespan.elongated");
                 case BeeRegistry.LIFESPAN_LONG:
-                    return Translation.translate("bees.lifespan.long");
+                    return Translation.translate("forestry.alleles.lifespan.long");
                 case BeeRegistry.LIFESPAN_LONGER:
-                    return Translation.translate("bees.lifespan.longer");
+                    return Translation.translate("forestry.alleles.lifespan.longer");
                 case BeeRegistry.LIFESPAN_LONGEST:
-                    return Translation.translate("bees.lifespan.longest")
+                    return Translation.translate("forestry.alleles.lifespan.longest")
             }
-
         } else if (name === "SPEED") {
-
             switch (value) {
                 case BeeRegistry.SPEED_FAST:
-                    return Translation.translate("bees.speed.fast");
+                    return Translation.translate("forestry.alleles.speed.fast");
                 case BeeRegistry.SPEED_FASTER:
-                    return Translation.translate("bees.speed.faster");
+                    return Translation.translate("forestry.alleles.speed.faster");
                 case BeeRegistry.SPEED_FASTEST:
-                    return Translation.translate("bees.speed.fastest");
+                    return Translation.translate("forestry.alleles.speed.fastest");
                 case BeeRegistry.SPEED_NORMAL:
-                    return Translation.translate("bees.speed.normal");
+                    return Translation.translate("forestry.alleles.speed.normal");
                 case BeeRegistry.SPEED_SLOW:
-                    return Translation.translate("bees.speed.slow");
+                    return Translation.translate("forestry.alleles.speed.slow");
                 case BeeRegistry.SPEED_SLOWER:
-                    return Translation.translate("bees.speed.slower");
+                    return Translation.translate("forestry.alleles.speed.slower");
                 case BeeRegistry.SPEED_SLOWEST:
-                    return Translation.translate("bees.speed.slowest")
+                    return Translation.translate("forestry.alleles.speed.slowest")
             }
-
         } else if (name === "FLOWERS") {
             return Translation.translate(value[0]);
         } else if (name === "EFFECT") {
             if (!value) {
-                return Translation.translate("bees.effect.none");
+                return Translation.translate("forestry.alleles.effect.none");
             }
 
             return BeeEffects.getLocalizedName(value);

@@ -18,7 +18,7 @@ class AnalyzerUi {
     static setup() {
         this.window = new UI.StandartWindow({
             standard: {
-                header: {text: {text: "Portable Analyzer"}},
+                header: {text: {text: "forestry.gui.analyzer.title"}},
                 inventory: {standard: true},
                 background: {standard: true}
             },
@@ -68,8 +68,8 @@ class AnalyzerUi {
     }
 
     private static drawGenomePage(bee: Bee, container: ItemContainer) {
-        const active = Translation.translate("analyzer.active");
-        const inactive = Translation.translate("analyzer.inactive");
+        const active = Translation.translate("forestry.gui.analyzer.active");
+        const inactive = Translation.translate("forestry.gui.analyzer.inactive");
         const elements = this.window.getContent().elements!!;
         let LINE = 50;
 
@@ -120,7 +120,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.species")
+            text: Translation.translate("forestry.gui.analyzer.species")
         };
         elements["textSpecies1"] = {
             type: "text",
@@ -150,7 +150,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.lifespan")
+            text: Translation.translate("forestry.gui.analyzer.lifespan")
         };
         elements["textLifespan1"] = {
             type: "text",
@@ -180,7 +180,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.speed")
+            text: Translation.translate("forestry.gui.analyzer.speed")
         };
         elements["textProduction1"] = {
             type: "text",
@@ -210,7 +210,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.flowers")
+            text: Translation.translate("forestry.gui.analyzer.flowers")
         };
         elements["textFlowers1"] = {
             type: "text",
@@ -240,7 +240,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.fertility")
+            text: Translation.translate("forestry.gui.analyzer.fertility")
         };
         elements["textFertility1"] = {
             type: "text",
@@ -287,7 +287,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.territory")
+            text: Translation.translate("forestry.gui.analyzer.territory")
         };
         elements["textTerritory1"] = {
             type: "text",
@@ -317,7 +317,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.effect")
+            text: Translation.translate("forestry.gui.analyzer.effect")
         };
         elements["textEffect1"] = {
             type: "text",
@@ -353,7 +353,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.active")
+            text: Translation.translate("forestry.gui.analyzer.active")
         };
         elements["textInactive"] = {
             type: "text",
@@ -362,7 +362,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.inactive")
+            text: Translation.translate("forestry.gui.analyzer.inactive")
         };
 
         LINE += 32;
@@ -374,7 +374,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.climate")
+            text: Translation.translate("forestry.gui.analyzer.climate")
         };
         elements["textClimate1"] = {
             type: "text",
@@ -405,7 +405,7 @@ class AnalyzerUi {
             width: 180,
             height: 32,
             font: ANALYZER_FONT,
-            text: `   ${Translation.translate("analyzer.tolerance")}`
+            text: `   ${Translation.translate("forestry.gui.analyzer.tolerance")}`
         };
 
         elements["textClimateTol1"] = {
@@ -453,7 +453,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.humidity")
+            text: Translation.translate("forestry.gui.analyzer.humidity")
         };
         elements["textHumidity1"] = {
             type: "text",
@@ -483,7 +483,7 @@ class AnalyzerUi {
             width: 180,
             height: 32,
             font: ANALYZER_FONT,
-            text: `  ${Translation.translate("analyzer.tolerance")}`
+            text: `  ${Translation.translate("forestry.gui.analyzer.tolerance")}`
         };
         elements["textHumidityTol1"] = {
             type: "text",
@@ -530,7 +530,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.diurnal")
+            text: Translation.translate("forestry.gui.analyzer.diurnal")
         };
         elements["textDiurnal1"] = {
             type: "text",
@@ -539,7 +539,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: Translation.translate("analyzer.yes")
+            text: Translation.translate("forestry.gui.analyzer.yes")
         };
         elements["textDiurnal2"] = {
             type: "text",
@@ -548,7 +548,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: Translation.translate("analyzer.no")
+            text: Translation.translate("forestry.gui.analyzer.no")
         };
 
         LINE += 32;
@@ -560,7 +560,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.nocturnal")
+            text: Translation.translate("forestry.gui.analyzer.nocturnal")
         };
         elements["textNocturnal1"] = {
             type: "text",
@@ -569,7 +569,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getActiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getActiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
         elements["textNocturnal2"] = {
             type: "text",
@@ -578,7 +578,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getInactiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getInactiveChromosome("NEVER_SLEEPS") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
 
         LINE += 32;
@@ -590,7 +590,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.flyer")
+            text: Translation.translate("forestry.gui.analyzer.flyer")
         };
         elements["textFlyer1"] = {
             type: "text",
@@ -599,7 +599,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getActiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getActiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
         elements["textFlyer2"] = {
             type: "text",
@@ -608,7 +608,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getInactiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getInactiveChromosome("TOLERATES_RAIN") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
 
         LINE += 32;
@@ -620,7 +620,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT,
-            text: Translation.translate("analyzer.cave")
+            text: Translation.translate("forestry.gui.analyzer.cave")
         };
         elements["textCave1"] = {
             type: "text",
@@ -629,7 +629,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getActiveChromosome("CAVE_DWELLING") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getActiveChromosome("CAVE_DWELLING") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
         elements["textCave2"] = {
             type: "text",
@@ -638,13 +638,13 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: ANALYZER_FONT_BLUE,
-            text: bee.getInactiveChromosome("CAVE_DWELLING") === true ? Translation.translate("analyzer.yes") : Translation.translate("analyzer.no")
+            text: bee.getInactiveChromosome("CAVE_DWELLING") === true ? Translation.translate("forestry.gui.analyzer.yes") : Translation.translate("forestry.gui.analyzer.no")
         };
 
         LINE += 32;
 
-        const stock = bee.pristine ? Translation.translate("analyzer.pristine") : Translation.translate("analyzer.ignoble");
-        const generation = `${bee.generation} ${Translation.translate("analyzer.generation")}`;
+        const stock = bee.pristine ? Translation.translate("forestry.gui.analyzer.pristine") : Translation.translate("forestry.gui.analyzer.ignoble");
+        const generation = t("forestry.gui.analyzer.generation", bee.generation);
         elements["textStock"] = {
             type: "text",
             x: 335 + ((590 - stock.length * (ANALYZER_FONT_GREEN.size / 2)) / 2),
@@ -677,7 +677,7 @@ class AnalyzerUi {
             width: 500,
             height: 32,
             font: ANALYZER_FONT,
-            text: `${Translation.translate("analyzer.produce")}:`
+            text: `${Translation.translate("forestry.gui.analyzer.produce")}:`
         };
 
         LINE += 32;
@@ -705,7 +705,7 @@ class AnalyzerUi {
             width: 500,
             height: 32,
             font: ANALYZER_FONT,
-            text: `${Translation.translate("analyzer.specialty")}:`
+            text: `${Translation.translate("forestry.gui.analyzer.specialty")}:`
         };
 
         LINE += 32;

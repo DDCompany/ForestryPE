@@ -6,27 +6,27 @@ ToolType.scoop = {
 };
 
 IDRegistry.genItemID("kitPickaxe");
-Item.createItem("kitPickaxe", "Pickaxe Kit", {name: "kitPickaxe", meta: 0}, {stack: 24});
+Item.createItem("kitPickaxe", "forestry.item.pickaxe_kit", {name: "kitPickaxe", meta: 0}, {stack: 24});
 
 IDRegistry.genItemID("kitShovel");
-Item.createItem("kitShovel", "Shovel Kit", {name: "kitShovel", meta: 0}, {stack: 24});
+Item.createItem("kitShovel", "forestry.item.shovel_kit", {name: "kitShovel", meta: 0}, {stack: 24});
 
 IDRegistry.genItemID("brokenBronzePickaxe");
-Item.createItem("brokenBronzePickaxe", "Broken Pickaxe", {name: "brokenBronzePickaxe", meta: 0}, {stack: 1});
+Item.createItem("brokenBronzePickaxe", "forestry.item.broken_pickaxe", {name: "brokenBronzePickaxe", meta: 0}, {stack: 1});
 
 IDRegistry.genItemID("brokenBronzeShovel");
-Item.createItem("brokenBronzeShovel", "Broken Shovel", {name: "brokenBronzeShovel", meta: 0}, {stack: 1});
+Item.createItem("brokenBronzeShovel", "forestry.item.broken_shovel", {name: "brokenBronzeShovel", meta: 0}, {stack: 1});
 
 IDRegistry.genItemID("forestryBronzePickaxe");
-Item.createItem("forestryBronzePickaxe", "Survivalist's Pickaxe", {name: "forestryBronzePickaxe", meta: 0}, {stack: 1});
+Item.createItem("forestryBronzePickaxe", "forestry.item.survivalists_pickaxe", {name: "forestryBronzePickaxe", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.forestryBronzePickaxe, "bronze", ToolType.pickaxe, ItemID.brokenBronzePickaxe);
 
 IDRegistry.genItemID("forestryBronzeShovel");
-Item.createItem("forestryBronzeShovel", "Survivalist's Shovel", {name: "forestryBronzeShovel", meta: 0}, {stack: 1});
+Item.createItem("forestryBronzeShovel", "forestry.item.survivalists_shovel", {name: "forestryBronzeShovel", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.forestryBronzeShovel, "bronze", ToolType.shovel, ItemID.brokenBronzeShovel);
 
 IDRegistry.genItemID("scoop");
-Item.createItem("scoop", "Scoop", {name: "scoop", meta: 0}, {stack: 1});
+Item.createItem("scoop", "forestry.item.scoop", {name: "scoop", meta: 0}, {stack: 1});
 ToolAPI.setTool(ItemID.scoop, "scoop", ToolType.scoop);
 
 function crateUseKitCallback(itemId) {

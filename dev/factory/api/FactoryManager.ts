@@ -11,7 +11,9 @@ class FactoryManager {
         ], specType);
 
         this.createModel(BlockID[unique], textures);
-        Item.addCreativeGroup(GROUP_MACHINES, GROUP_MACHINES_NAME, [BlockID[unique]]);
+        Item.addCreativeGroup("forestry_machines", t("forestry.creative_group.machines"), [
+            BlockID[unique],
+        ]);
     }
 
     private static createModel(blockId: number, textures: [string, number][]) {

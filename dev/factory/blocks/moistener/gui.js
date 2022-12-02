@@ -2,7 +2,7 @@ const moistenerGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Moistener"
+                text: "forestry.gui.moistener.title"
             }
         },
         inventory: {

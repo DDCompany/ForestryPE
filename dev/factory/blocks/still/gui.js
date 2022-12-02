@@ -2,7 +2,7 @@ const stillGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Still"
+                text: "forestry.gui.still.title"
             }
         },
         inventory: {

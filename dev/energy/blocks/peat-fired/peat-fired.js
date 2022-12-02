@@ -3,7 +3,7 @@ Block.setPrototype("enginePeat", {
 
     getVariations() {
         return [{
-            name: "Peat-fired Engine",
+            name: "forestry.block.peat_engine",
             texture: [["engine_peat", 0], ["engine_peat", 2], ["engine_peat", 1]],
             inCreative: true
         }];
@@ -20,4 +20,6 @@ Callback.addCallback("PostLoaded", () => {
 
 GROUP_ITEM_PIPE.add(BlockID.enginePeat, -1);
 ModelHelper.createEngineModel(BlockID.enginePeat);
-Item.addCreativeGroup(GROUP_ENGINES, GROUP_ENGINES_NAME, [BlockID.enginePeat]);
+Item.addCreativeGroup("forestry_engines", t("forestry.creative_group.engines"), [
+    BlockID.enginePeat,
+]);

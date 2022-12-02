@@ -5,6 +5,12 @@ class ItemUtils {
         });
     }
 
+    static addTooltip(id: number, onTooltip: (item: ItemInstance) => string) {
+        Item.registerNameOverrideFunction(id, (item: ItemInstance, name: string) => {
+            return `${name}\n§7${onTooltip(item)}`;
+        });
+    }
+
     static addContainsTooltip(id: number, provider: (item: ItemInstance) => ItemContainer | null) {
         Item.registerNameOverrideFunction(id, (item: ItemInstance, name: string) => {
             const container = provider(item);

@@ -2,7 +2,7 @@ const raintankGUI = new UI.StandartWindow({
     standard: {
         header: {
             text: {
-                text: "Rain Tank"
+                text: "forestry.gui.rain_tank.title"
             }
         },
         inventory: {

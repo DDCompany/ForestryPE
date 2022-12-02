@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("oreCopper");
 Block.createBlock("oreCopper", [
-    {name: "Copper Ore", texture: [["oreCopper", 0]], inCreative: true}
+    {name: "forestry.block.copper_ore", texture: [["oreCopper", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreCopper, "stone", 1, true);
 Block.setDestroyTime(BlockID.oreCopper, 1);
@@ -8,7 +8,7 @@ Block.setDestroyLevel("oreCopper", 2);
 
 IDRegistry.genBlockID("oreTin");
 Block.createBlock("oreTin", [
-    {name: "Tin Ore", texture: [["oreTin", 0]], inCreative: true}
+    {name: "forestry.block.tin_ore", texture: [["oreTin", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreTin, "stone", 1, true);
 Block.setDestroyTime(BlockID.oreTin, 1);
@@ -16,13 +16,17 @@ Block.setDestroyLevel("oreTin", 2);
 
 IDRegistry.genBlockID("oreApatite");
 Block.createBlock("oreApatite", [
-    {name: "Apatite Ore", texture: [["oreApatite", 0]], inCreative: true}
+    {name: "forestry.block.apatite_ore", texture: [["oreApatite", 0]], inCreative: true}
 ], "opaque");
 ToolAPI.registerBlockMaterial(BlockID.oreApatite, "stone", 1, true);
 Block.setDestroyTime(BlockID.oreApatite, 1);
 Block.setDestroyLevel("oreApatite", 2);
 
-Item.addCreativeGroup(GROUP_ORES, GROUP_ORES_NAME, [BlockID.oreCopper, BlockID.oreTin, BlockID.oreApatite]);
+Item.addCreativeGroup("forestry_ores", t("forestry.creative_group.ores"), [
+    BlockID.oreCopper,
+    BlockID.oreTin,
+    BlockID.oreApatite,
+]);
 
 Block.registerDropFunction("oreApatite", (coords, id, data, diggingLevel) => {
     if (diggingLevel > 1) {

@@ -17,37 +17,37 @@ Block.setPrototype("beehiveForestry", {
     getVariations() {
         return [
             {
-                name: "Forest Hive",
+                name: "forestry.block.forest_hive",
                 texture: [["beehiveForest", 0], ["beehiveForest", 0], ["beehiveForest", 1]],
                 inCreative: true
             },
             {
-                name: "Meadows Hive",
+                name: "forestry.block.meadows_hive",
                 texture: [["beehiveMeadows", 0], ["beehiveMeadows", 0], ["beehiveMeadows", 1]],
                 inCreative: true
             },
             {
-                name: "Modest Hive",
+                name: "forestry.block.modest_hive",
                 texture: [["beehiveModest", 0], ["beehiveModest", 0], ["beehiveModest", 1]],
                 inCreative: true
             },
             {
-                name: "Tropical Hive",
+                name: "forestry.block.tropical_hive",
                 texture: [["beehiveTropical", 0], ["beehiveTropical", 0], ["beehiveTropical", 1]],
                 inCreative: true
             },
             {
-                name: "Wintry Hive",
+                name: "forestry.block.wintry_hive",
                 texture: [["beehiveWintry", 0], ["beehiveWintry", 0], ["beehiveWintry", 1]],
                 inCreative: true
             },
             {
-                name: "Marshy Hive",
+                name: "forestry.block.marshy_hive",
                 texture: [["beehiveMarshy", 0], ["beehiveMarshy", 0], ["beehiveMarshy", 1]],
                 inCreative: true
             },
             {
-                name: "Ender Hive",
+                name: "forestry.block.ender_hive",
                 texture: [["beehiveEnder", 0], ["beehiveEnder", 0], ["beehiveEnder", 1]],
                 inCreative: true
             }
@@ -55,7 +55,9 @@ Block.setPrototype("beehiveForestry", {
     }
 });
 
-Item.addCreativeGroup(GROUP_BEEHIVES, GROUP_BEEHIVES_NAME, [BlockID.beehiveForestry]);
+Item.addCreativeGroup("forestry_beehives", t("forestry.creative_group.beehives"), [
+    BlockID.beehiveForestry,
+]);
 
 Block.registerDropFunction("beehiveForestry", (coords, id, data, diggingLevel) => {
     attackByBeehive();

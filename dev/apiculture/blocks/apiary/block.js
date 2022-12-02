@@ -3,7 +3,7 @@ Block.setPrototype("apiary", {
 
     getVariations() {
         return [{
-            name: "Apiary",
+            name: "forestry.block.apiary",
             texture: [["apiary", 0], ["apiary", 0], ["apiary", 1], ["apiary", 1], ["apiary", 1], ["apiary", 1]],
             inCreative: true
         }];

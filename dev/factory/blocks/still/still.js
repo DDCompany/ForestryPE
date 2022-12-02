@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("still");
-FactoryManager.register("still", "Still",
+FactoryManager.register("still", "forestry.block.still",
     [["still_top", 0], ["still_top", 0], ["still", 0], ["still", 0], ["still_side", 0], ["still_side", 0]], true);
 
 Callback.addCallback("PostLoaded", () => {

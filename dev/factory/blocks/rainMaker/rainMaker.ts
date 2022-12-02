@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("rainmaker");
 Block.createBlock("rainmaker", [
-    {name: "Rainmaker", texture: [["rainmaker_pedestal", 0]], inCreative: true}
+    {name: "forestry.block.rainmaker", texture: [["rainmaker_pedestal", 0]], inCreative: true}
 ]);
 RainMakerRenderer.setStaticRender(BlockID.rainmaker);
 GROUP_ITEM_PIPE.add(BlockID.rainmaker, 0);

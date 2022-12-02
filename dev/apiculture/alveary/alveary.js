@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("alveary");
 Block.createBlock("alveary", [
-    {name: "Alveary", texture: [["alveary_bottom", 0], ["alveary_bottom", 0], ["alveary_plain", 0]], inCreative: true}
+    {name: "forestry.block.alveary", texture: [["alveary_bottom", 0], ["alveary_bottom", 0], ["alveary_plain", 0]], inCreative: true}
 ]);
 
 ToolAPI.registerBlockMaterial(BlockID.alveary_misc, "wood");

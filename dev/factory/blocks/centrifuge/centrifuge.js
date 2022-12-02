@@ -1,5 +1,5 @@
 IDRegistry.genBlockID("centrifuge");
-FactoryManager.register("centrifuge", "Centrifuge",
+FactoryManager.register("centrifuge", "forestry.block.centrifuge",
     [["centrifuge_top", 0], ["centrifuge_top", 0], ["centrifuge", 0], ["centrifuge", 0], ["centrifuge_side", 0], ["centrifuge_side", 0]], true);
 
 Callback.addCallback("PostLoaded", () => {

@@ -4,7 +4,7 @@ if (ForestryConfig.rainTankEnabled) {
 
         getVariations() {
             return [{
-                name: "Rain Tank",
+                name: "forestry.block.rain_tank",
                 texture: [["rainTank", 0], ["rainTank", 0], ["rainTank", 1]],
                 inCreative: true
             }];
