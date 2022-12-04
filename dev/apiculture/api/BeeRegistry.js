@@ -1,14 +1,14 @@
 const BeeRegistry = {
     bees: {},
 
-    FLOWERS_FLOWERS: ["Flowers", "38:-1", "37:-1", " 175:1", "175:4", " 175:5"],
-    FLOWERS_WHEAT: ["Wheat", "59:0"],
-    FLOWERS_NETHER: ["Nether", "115:0"],
-    FLOWERS_ENDS: ["Ends", "122:0"],
-    FLOWERS_CACTI: ["Cacti", "81:0"],
-    FLOWERS_MUSHROOMS: ["Mushrooms", "39:0", "40:0"],
-    FLOWERS_JUNGLE: ["Jungle", "106:-1", "175:2"],
-    FLOWERS_GOURD: ["Gourd", "104:0", "105:0"],
+    FLOWERS_FLOWERS: ["forestry.alleles.flowers.vanilla", "38:-1", "37:-1", " 175:1", "175:4", " 175:5"],
+    FLOWERS_WHEAT: ["forestry.alleles.flowers.wheat", "59:0"],
+    FLOWERS_NETHER: ["forestry.alleles.flowers.nether", "115:0"],
+    FLOWERS_ENDS: ["forestry.alleles.flowers.end", "122:0"],
+    FLOWERS_CACTI: ["forestry.alleles.flowers.cacti", "81:0"],
+    FLOWERS_MUSHROOMS: ["forestry.alleles.flowers.mushrooms", "39:0", "40:0"],
+    FLOWERS_JUNGLE: ["forestry.alleles.flowers.jungle", "106:-1", "175:2"],
+    FLOWERS_GOURD: ["forestry.alleles.flowers.gourd", "104:0", "105:0"],
 
     BEETYPE_NONE: -1,
     BEETYPE_PRINCESS: 0,

@@ -32,9 +32,12 @@ class I18n {
     }
 
     static t(key: string, ...args: any[]): string {
-        return args.length
-            ? Translation.translate(key).replace(/{(\d+)}/g, (match, number) => args[number] || match)
-            : Translation.translate(key);
+        if (args.length) {
+            return Translation.translate(key)
+                .replace(/{(\d+)}/g, (match, number) => args[number] ?? match)
+        }
+
+        return Translation.translate(key);
     }
 
     static formatLiquidAmount(amount: number): string {
