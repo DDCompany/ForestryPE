@@ -36,6 +36,50 @@ class I18n {
             ? Translation.translate(key).replace(/{(\d+)}/g, (match, number) => args[number] || match)
             : Translation.translate(key);
     }
+
+    static formatLiquidAmount(amount: number): string {
+        const units = ["forestry.gui.unit.liquid.mb", "forestry.gui.unit.liquid.b"];
+        return this.format(amount * 1000, units, 1000);
+    }
+
+    static formatEnergy(energy: number): string {
+        const units = ["forestry.gui.unit.energy.rf", "forestry.gui.unit.energy.krf", "forestry.gui.unit.energy.mrf"];
+        return this.format(energy, units, 1000);
+    }
+
+    static formatTicks(ticks: number): string {
+        if (ticks <= 0) {
+            return "0";
+        }
+
+        const units = {
+            "forestry.gui.unit.time.minutes": 1200,
+            "forestry.gui.unit.time.seconds": 20,
+            "forestry.gui.unit.time.ticks": 1,
+        };
+
+        let time = "";
+        let leftTicks = ticks;
+        for (const unit in units) {
+            const value = units[unit as keyof typeof units];
+            const count = Math.floor(leftTicks / value);
+            if (count > 0) {
+                time += `${t(unit, count)} `;
+                leftTicks -= count * value;
+            }
+
+            if (leftTicks === 0) {
+                break;
+            }
+        }
+
+        return time;
+    }
+
+    private static format(value: number, units: string[], unitValue: number): string {
+        const unitIndex = Math.floor(Math.log(value) / Math.log(unitValue));
+        return t(units[unitIndex], value / Math.pow(unitValue, unitIndex));
+    }
 }
 
 const t = I18n.t;

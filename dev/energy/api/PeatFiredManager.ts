@@ -69,10 +69,10 @@ class PeatFiredManager {
 
             onOpen(elements, data) {
                 elements.get("textTotalEnergy")
-                    .onBindingUpdated("text", "Total Energy: " + data.totalEnergy);
+                    .onBindingUpdated("text", t("forestry.gui.total_energy", I18n.formatEnergy(data.totalEnergy)));
 
                 elements.get("textBurnTime")
-                    .onBindingUpdated("text", "Burn Time: " + data.burnTime);
+                    .onBindingUpdated("text", t("forestry.gui.burn_time", I18n.formatTicks(data.burnTime)));
             }
         });
     }

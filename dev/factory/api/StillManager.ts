@@ -132,10 +132,10 @@ class StillManager {
                 scaleResultLiquid.onBindingUpdated("value", recipe.outputAmount * recipe.cycles / 10);
 
                 elements.get("textInputLiquid").onBindingUpdated("text",
-                    LiquidRegistry.getLiquidName(recipe.inputLiquid) + "\n" + recipe.inputAmount * recipe.cycles * 1000 + " mB");
+                    t(LiquidRegistry.getLiquidName(recipe.inputLiquid)) + "\n" + I18n.formatLiquidAmount(recipe.inputAmount * recipe.cycles));
 
                 elements.get("textResultLiquid").onBindingUpdated("text",
-                    LiquidRegistry.getLiquidName(recipe.outputLiquid) + "\n" + recipe.outputAmount * recipe.cycles * 1000 + " mB");
+                    t(LiquidRegistry.getLiquidName(recipe.outputLiquid)) + "\n" + I18n.formatLiquidAmount(recipe.outputAmount * recipe.cycles));
             }
         });
     }

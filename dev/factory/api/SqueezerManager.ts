@@ -153,7 +153,7 @@ class SqueezerManager {
                     scaleLiquid.onBindingUpdated("value",
                         recipe.liquidAmount / 10);
                     textLiquid.onBindingUpdated("text",
-                        LiquidRegistry.getLiquidName(recipe.liquid) + "\n" + (recipe.liquidAmount * 1000) + " mB");
+                        t(LiquidRegistry.getLiquidName(recipe.liquid)) + "\n" + I18n.formatLiquidAmount(recipe.liquidAmount));
                 } else {
                     scaleLiquid.onBindingUpdated("texture", null);
                     scaleLiquid.onBindingUpdated("value", 0);

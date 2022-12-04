@@ -146,10 +146,10 @@ class FermenterManager {
 
             onOpen(elements, data) {
                 elements.get("textValue")
-                    .onBindingUpdated("text", data ? "Value: " + data.value : "0");
+                    .onBindingUpdated("text", data ? t("forestry.gui.fermenter.per_cycle", data.value) : "0");
 
                 elements.get("textCycles")
-                    .onBindingUpdated("text", data ? "Cycles: " + data.cycles : "0");
+                    .onBindingUpdated("text", data ? t("forestry.gui.fermenter.cycles", data.cycles) : "0");
             }
         });
 
@@ -226,10 +226,10 @@ class FermenterManager {
                 scaleResultLiquid.onBindingUpdated("value", recipe.liquidAmount / 10);
 
                 elements.get("textInputLiquid").onBindingUpdated("text",
-                    LiquidRegistry.getLiquidName(recipe.inputLiquid) + "\n" + "Modifier: " + recipe.modifier + "x");
+                    t(LiquidRegistry.getLiquidName(recipe.inputLiquid)) + "\n" + t("forestry.gui.modifier", recipe.modifier));
 
                 elements.get("textResultLiquid").onBindingUpdated("text",
-                    LiquidRegistry.getLiquidName(recipe.liquid));
+                    t(LiquidRegistry.getLiquidName(recipe.liquid)));
             }
         });
     }

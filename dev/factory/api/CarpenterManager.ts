@@ -155,7 +155,7 @@ class CarpenterManager {
                 scaleLiquid.onBindingUpdated("value",
                     data.liquid ? data.liquidAmount / 10 : 0);
                 textLiquid.onBindingUpdated("text",
-                    data.liquid ? LiquidRegistry.getLiquidName(data.liquid) + "\n" + (data.liquidAmount * 1000) + " mB" : "");
+                    data.liquid ? t(LiquidRegistry.getLiquidName(data.liquid)) + "\n" + I18n.formatLiquidAmount(data.liquidAmount) : "");
             }
         });
 

@@ -494,7 +494,7 @@ const BeeRegistry = {
             },
             onOpen(elements, data) {
                 elements.get("textChance")
-                    .onBindingUpdated("text", data ? "Chance: " + data.chance + "%" : "%");
+                    .onBindingUpdated("text", data ? t("forestry.gui.chance", data.chance) : "%");
             }
         });
 
