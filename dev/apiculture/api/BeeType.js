@@ -1,5 +1,3 @@
-setLoadingTip("Apiculture Module Loading...");
-
 /**
  * @param {string} type
  * @param {number} princessID

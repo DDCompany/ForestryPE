@@ -1,5 +1,3 @@
-setLoadingTip("Factory Module Loading...");
-
 interface CarpenterRecipe {
     input: Record<number, SingleRecipeItem>;
 

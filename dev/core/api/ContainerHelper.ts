@@ -1,5 +1,3 @@
-setLoadingTip("Common Api Loading...");
-
 class ContainerHelper {
     static putInSlots(toPut: [number, number, number][], container: ItemContainer, slots: string[]) {
         for (const key in toPut) {

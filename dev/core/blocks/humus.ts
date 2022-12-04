@@ -1,5 +1,3 @@
-setLoadingTip("Core Module Loading...");
-
 IDRegistry.genBlockID("humus");
 Block.createBlock("humus", [
     {name: "forestry.block.humus", texture: [["humus", 0]], inCreative: true},

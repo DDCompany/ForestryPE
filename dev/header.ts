@@ -29,6 +29,4 @@ IMPORT("StorageInterface");
 
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);
-const startTime = java.lang.System.currentTimeMillis();
 const GROUP_ITEM_PIPE = ICRender.getGroup("item-pipe");
-const setLoadingTip = ModAPI.requireGlobal("MCSystem.setLoadingTip");

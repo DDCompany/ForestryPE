@@ -1,5 +1,3 @@
-setLoadingTip("Energy Module Loading...");
-
 interface BioGeneratorFuel {
     fluid: string;
 

@@ -105,4 +105,3 @@ ModAPI.registerAPI("ForestryAPI", {
 } as ForestryAPI);
 
 log("API shared with name ForestryAPI", "API");
-log("Load time: " + ((java.lang.System.currentTimeMillis() - startTime) / 1000) + "s", "INFO");

@@ -1,5 +1,3 @@
-setLoadingTip("Storage Module Loading...");
-
 interface BackpackDefinition {
     nameId: string;
     name: string;
