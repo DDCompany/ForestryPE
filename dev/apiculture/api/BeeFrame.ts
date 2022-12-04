@@ -40,10 +40,19 @@ class BeeFrame {
         IDRegistry.genItemID(obj.codeName);
         Item.createItem(obj.codeName, obj.name, obj.texture, {stack: 1});
 
-        Item.setToolRender(ItemID[obj.codeName], true);
-        Item.setMaxDamage(ItemID[obj.codeName], obj.durability);
+        const itemId = ItemID[obj.codeName];
+        Item.setToolRender(itemId, true);
+        Item.setMaxDamage(itemId, obj.durability);
 
-        this.frames[ItemID[obj.codeName]] = obj;
+        Item.registerNameOverrideFunction(itemId, (item, name) => {
+            const modifier = obj.modifier;
+            name += `§7${t("forestry.tooltip.frame.production", modifier.getProductionModifier?.() || 1)}\n`;
+            name += `${t("forestry.tooltip.frame.genetic_decay", modifier.getGeneticDecay?.() || 1)}\n`;
+            name += `${t("forestry.tooltip.frame.durability", obj.durability - item.data)}`;
+            return name;
+        });
+
+        this.frames[itemId] = obj;
     }
 
     static isFrame(id: number) {

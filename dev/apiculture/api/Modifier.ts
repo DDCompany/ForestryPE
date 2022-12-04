@@ -1,15 +1,15 @@
 type BeeModifier = {
-    getProductionModifier?(house: BeeHouse): number;
+    getProductionModifier?(house?: BeeHouse): number;
 
-    getMutationModifier?(house: BeeHouse): number;
+    getMutationModifier?(house?: BeeHouse): number;
 
-    isSealed?(house: BeeHouse): boolean;
+    isSealed?(house?: BeeHouse): boolean;
 
-    isSelfLighted?(house: BeeHouse): boolean;
+    isSelfLighted?(house?: BeeHouse): boolean;
 
-    getGeneticDecay?(house: BeeHouse): number;
+    getGeneticDecay?(house?: BeeHouse): number;
 
-    getLifespanModifier?(house: BeeHouse): number;
+    getLifespanModifier?(house?: BeeHouse): number;
 }
 
 class ModifierList {

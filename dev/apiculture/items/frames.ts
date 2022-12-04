@@ -13,8 +13,6 @@ BeeFrame.registerFrame({
     durability: 80
 });
 
-Item.registerNameOverrideFunction(ItemID.frameUntreated, (item, name) => name + "§7\nProduction: 2.0x\nGenetic Decay: 0.9x\nDurability: " + (80 - item.data));
-
 BeeFrame.registerFrame({
     codeName: "frameImpregnated",
     name: "forestry.item.impregnated_frame",
@@ -30,8 +28,6 @@ BeeFrame.registerFrame({
     durability: 240
 });
 
-Item.registerNameOverrideFunction(ItemID.frameImpregnated, (item, name) => name + "§7\nProduction: 2.0x\nGenetic Decay: 0.4x\nDurability: " + (240 - item.data));
-
 BeeFrame.registerFrame({
     codeName: "frameProven",
     name: "forestry.item.proven_frame",
@@ -46,8 +42,6 @@ BeeFrame.registerFrame({
     },
     durability: 720
 });
-
-Item.registerNameOverrideFunction(ItemID.frameProven, (item, name) => name + "§7\nProduction: 2.0x\nGenetic Decay: 0.3x\nDurability: " + (720 - item.data));
 
 Item.addCreativeGroup("forestry_frames", t("forestry.creative_group.frames"), [
     ItemID.frameUntreated,
