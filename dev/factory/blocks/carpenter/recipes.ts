@@ -1,11 +1,11 @@
 {
     const vanillaWood = [
         {
-            id: 17,
+            id: VanillaBlockID.log,
             variations: 4
         },
         {
-            id: 162,
+            id: VanillaBlockID.log2,
             variations: 2
         }
     ];
@@ -84,14 +84,14 @@
 CarpenterManager.registerRecipe({
     input: {
         0: {id: ItemID.ingotTin, data: 0},
-        1: {id: 102, data: 0},
+        1: {id: VanillaBlockID.glass_pane, data: 0},
         2: {id: ItemID.ingotTin, data: 0},
         3: {id: ItemID.ingotTin, data: 0},
-        4: {id: 102, data: 0},
+        4: {id: VanillaBlockID.glass_pane, data: 0},
         5: {id: ItemID.ingotTin, data: 0},
-        6: {id: 331, data: 0},
-        7: {id: 264, data: 0},
-        8: {id: 331, data: 0}
+        6: {id: VanillaItemID.redstone, data: 0},
+        7: {id: VanillaItemID.diamond, data: 0},
+        8: {id: VanillaItemID.redstone, data: 0}
     },
     liquid: "water",
     liquidAmount: 2,
@@ -104,9 +104,13 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 331, data: 0}, 2: {id: 331, data: 0},
-        3: {id: 331, data: 0}, 4: {id: ItemID.ingotTin, data: 0}, 5: {id: 331, data: 0},
-        6: {id: 331, data: 0}, 8: {id: 331, data: 0}
+        0: {id: VanillaItemID.redstone, data: 0},
+        2: {id: VanillaItemID.redstone, data: 0},
+        3: {id: VanillaItemID.redstone, data: 0},
+        4: {id: ItemID.ingotTin, data: 0},
+        5: {id: VanillaItemID.redstone, data: 0},
+        6: {id: VanillaItemID.redstone, data: 0},
+        8: {id: VanillaItemID.redstone, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -119,9 +123,14 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 331, data: 0}, 1: {id: ItemID.ingotBronze, data: 0}, 2: {id: 331, data: 0},
-        3: {id: 331, data: 0}, 4: {id: ItemID.ingotBronze, data: 0}, 5: {id: 331, data: 0},
-        6: {id: 331, data: 0}, 7: {id: ItemID.ingotBronze, data: 0}, 8: {id: 331, data: 0}
+        0: {id: VanillaItemID.redstone, data: 0},
+        1: {id: ItemID.ingotBronze, data: 0},
+        2: {id: VanillaItemID.redstone, data: 0},
+        3: {id: VanillaItemID.redstone, data: 0},
+        4: {id: ItemID.ingotBronze, data: 0},
+        5: {id: VanillaItemID.redstone, data: 0},
+        6: {id: VanillaItemID.redstone, data: 0},
+        7: {id: ItemID.ingotBronze, data: 0}, 8: {id: VanillaItemID.redstone, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -134,9 +143,15 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 331, data: 0}, 1: {id: 265, data: 0}, 2: {id: 331, data: 0},
-        3: {id: 331, data: 0}, 4: {id: 265, data: 0}, 5: {id: 331, data: 0},
-        6: {id: 331, data: 0}, 7: {id: 265, data: 0}, 8: {id: 331, data: 0}
+        0: {id: VanillaItemID.redstone, data: 0},
+        1: {id: VanillaItemID.iron_ingot, data: 0},
+        2: {id: VanillaItemID.redstone, data: 0},
+        3: {id: VanillaItemID.redstone, data: 0},
+        4: {id: VanillaItemID.iron_ingot, data: 0},
+        5: {id: VanillaItemID.redstone, data: 0},
+        6: {id: VanillaItemID.redstone, data: 0},
+        7: {id: VanillaItemID.iron_ingot, data: 0},
+        8: {id: VanillaItemID.redstone, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -149,9 +164,15 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 331, data: 0}, 1: {id: 266, data: 0}, 2: {id: 331, data: 0},
-        3: {id: 331, data: 0}, 4: {id: 266, data: 0}, 5: {id: 331, data: 0},
-        6: {id: 331, data: 0}, 7: {id: 266, data: 0}, 8: {id: 331, data: 0}
+        0: {id: VanillaItemID.redstone, data: 0},
+        1: {id: VanillaItemID.gold_ingot, data: 0},
+        2: {id: VanillaItemID.redstone, data: 0},
+        3: {id: VanillaItemID.redstone, data: 0},
+        4: {id: VanillaItemID.gold_ingot, data: 0},
+        5: {id: VanillaItemID.redstone, data: 0},
+        6: {id: VanillaItemID.redstone, data: 0},
+        7: {id: VanillaItemID.gold_ingot, data: 0},
+        8: {id: VanillaItemID.redstone, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -220,9 +241,9 @@ CarpenterManager.registerRecipe({
         3: {id: ItemID.royalJelly, data: 0},
         4: {id: ItemID.canEmpty, data: 0},
         5: {id: ItemID.royalJelly, data: 0},
-        6: {id: 289, data: 0},
+        6: {id: VanillaItemID.gunpowder, data: 0},
         7: {id: ItemID.royalJelly, data: 0},
-        8: {id: 289, data: 0}
+        8: {id: VanillaItemID.gunpowder, data: 0}
     },
     liquid: "water",
     liquidAmount: 1,
@@ -241,9 +262,9 @@ CarpenterManager.registerRecipe({
         3: {id: ItemID.pollen1, data: 0},
         4: {id: ItemID.canEmpty, data: 0},
         5: {id: ItemID.pollen1, data: 0},
-        6: {id: 289, data: 0},
+        6: {id: VanillaItemID.gunpowder, data: 0},
         7: {id: ItemID.pollen1, data: 0},
-        8: {id: 289, data: 0}
+        8: {id: VanillaItemID.gunpowder, data: 0}
     },
     liquid: "water",
     liquidAmount: 1,
@@ -256,9 +277,15 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 3, data: 0}, 1: {id: 12, data: 0}, 2: {id: 3, data: 0},
-        3: {id: 12, data: 0}, 4: {id: ItemID.mulch, data: 0}, 5: {id: 12, data: 0},
-        6: {id: 3, data: 0}, 7: {id: 12, data: 0}, 8: {id: 3, data: 0}
+        0: {id: VanillaBlockID.dirt, data: 0},
+        1: {id: VanillaBlockID.sand, data: 0},
+        2: {id: VanillaBlockID.dirt, data: 0},
+        3: {id: VanillaBlockID.sand, data: 0},
+        4: {id: ItemID.mulch, data: 0},
+        5: {id: VanillaBlockID.sand, data: 0},
+        6: {id: VanillaBlockID.dirt, data: 0},
+        7: {id: VanillaBlockID.sand, data: 0},
+        8: {id: VanillaBlockID.dirt, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -271,135 +298,15 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackAdventurer, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackAdventurerT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackMiners, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackMinersT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackBuilder, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackBuilderT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackDigger, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackDiggerT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackForester, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackForesterT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: ItemID.wovenSilk, data: 0},
-        1: {id: 264, data: 0},
-        2: {id: ItemID.wovenSilk, data: 0},
-        3: {id: ItemID.wovenSilk, data: 0},
-        4: {id: ItemID.backpackHunter, data: 0},
-        5: {id: ItemID.wovenSilk, data: 0},
-        6: {id: ItemID.wovenSilk, data: 0},
-        7: {id: ItemID.wovenSilk, data: 0},
-        8: {id: ItemID.wovenSilk, data: 0}
-    },
-    liquid: "water",
-    liquidAmount: 1,
-    result: {
-        id: ItemID.backpackHunterT2,
-        count: 1,
-        data: 0
-    }
-});
-
-CarpenterManager.registerRecipe({
-    input: {
-        0: {id: 3, data: 0}, 1: {id: 3, data: 0}, 2: {id: 3, data: 0},
-        3: {id: 3, data: 0}, 4: {id: ItemID.mulch, data: 0}, 5: {id: 3, data: 0},
-        6: {id: 3, data: 0}, 7: {id: 3, data: 0}, 8: {id: 3, data: 0}
+        0: {id: VanillaBlockID.dirt, data: 0},
+        1: {id: VanillaBlockID.dirt, data: 0},
+        2: {id: VanillaBlockID.dirt, data: 0},
+        3: {id: VanillaBlockID.dirt, data: 0},
+        4: {id: ItemID.mulch, data: 0},
+        5: {id: VanillaBlockID.dirt, data: 0},
+        6: {id: VanillaBlockID.dirt, data: 0},
+        7: {id: VanillaBlockID.dirt, data: 0},
+        8: {id: VanillaBlockID.dirt, data: 0},
     },
     liquid: "water",
     liquidAmount: 1,
@@ -431,8 +338,8 @@ CarpenterManager.registerRecipe({
         0: {id: ItemID.ingotBronze, data: 0},
         1: {id: ItemID.ingotBronze, data: 0},
         2: {id: ItemID.ingotBronze, data: 0},
-        4: {id: 280, data: 0},
-        7: {id: 280, data: 0}
+        4: {id: VanillaItemID.stick, data: 0},
+        7: {id: VanillaItemID.stick, data: 0}
     },
     special: {
         id: ItemID.carton,
@@ -449,9 +356,9 @@ CarpenterManager.registerRecipe({
 CarpenterManager.registerRecipe({
     input: {
         1: {id: ItemID.royalJelly, data: 0},
-        3: {id: 5, data: 0},
-        4: {id: 5, data: 0},
-        5: {id: 5, data: 0},
+        3: {id: VanillaBlockID.planks, data: 0},
+        4: {id: VanillaBlockID.planks, data: 0},
+        5: {id: VanillaBlockID.planks, data: 0},
         6: {id: ItemID.beeswax, data: 0},
         7: {id: ItemID.pollen1, data: 0},
         8: {id: ItemID.beeswax, data: 0}
@@ -466,7 +373,11 @@ CarpenterManager.registerRecipe({
 });
 
 CarpenterManager.registerRecipe({
-    input: {1: {id: ItemID.ingotBronze, data: 0}, 4: {id: 280, data: 0}, 7: {id: 280, data: 0}},
+    input: {
+        1: {id: ItemID.ingotBronze, data: 0},
+        4: {id: VanillaItemID.stick, data: 0},
+        7: {id: VanillaItemID.stick, data: 0},
+    },
     special: {
         id: ItemID.carton,
         data: 0,
@@ -496,11 +407,11 @@ CarpenterManager.registerRecipe({
 
 CarpenterManager.registerRecipe({
     input: {
-        0: {id: 264, data: 0},
-        2: {id: 264, data: 0},
+        0: {id: VanillaItemID.diamond, data: 0},
+        2: {id: VanillaItemID.diamond, data: 0},
         4: {id: ItemID.sturdyMachine, data: 0},
-        6: {id: 264, data: 0},
-        8: {id: 264, data: 0}
+        6: {id: VanillaItemID.diamond, data: 0},
+        8: {id: VanillaItemID.diamond, data: 0},
     },
     liquid: "water",
     liquidAmount: 5,

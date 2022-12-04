@@ -1,5 +1,5 @@
 SqueezerManager.registerRecipe({
-    input: [{id: 260}],
+    input: [{id: VanillaItemID.apple}],
     special: {
         id: ItemID.mulch,
         chance: 0.4
@@ -9,7 +9,7 @@ SqueezerManager.registerRecipe({
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 391}],
+    input: [{id: VanillaItemID.carrot}],
     special: {
         id: ItemID.mulch,
         chance: 0.4
@@ -19,31 +19,31 @@ SqueezerManager.registerRecipe({
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 295}],
+    input: [{id: VanillaItemID.wheat_seeds}],
     liquid: "seedOil",
     liquidAmount: 0.01
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 361}],
+    input: [{id: VanillaItemID.pumpkin_seeds}],
     liquid: "seedOil",
     liquidAmount: 0.01
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 362}],
+    input: [{id: VanillaItemID.melon_seeds}],
     liquid: "seedOil",
     liquidAmount: 0.01
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 458}],
+    input: [{id: VanillaItemID.beetroot_seeds}],
     liquid: "seedOil",
     liquidAmount: 0.01
 });
 
 SqueezerManager.registerRecipe({
-    input: [{id: 81}],
+    input: [{id: VanillaBlockID.cactus}],
     liquid: "water",
     liquidAmount: 0.5
 });
@@ -51,7 +51,7 @@ SqueezerManager.registerRecipe({
 SqueezerManager.registerRecipe({
     input: [
         {id: ItemID.phosphor, count: 2},
-        {id: 4},
+        {id: VanillaBlockID.cobblestone}
     ],
     liquid: "lava",
     liquidAmount: 1.6

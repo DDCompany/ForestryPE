@@ -10,5 +10,5 @@ Callback.addCallback("PostLoaded", () => {
         "tgt",
         "gcg",
         "tgt"
-    ], ['t', ItemID.gearTin, 0, 'g', 20, 0, 'c', ItemID.hardenedMachine, 0]);
+    ], ['t', ItemID.gearTin, -1, 'g', VanillaBlockID.glass, -1, 'c', ItemID.hardenedMachine, -1]);
 });

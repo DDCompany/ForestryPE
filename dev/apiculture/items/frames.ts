@@ -60,13 +60,13 @@ Callback.addCallback("PostLoaded", () => {
         "sss",
         "sws",
         "sss"
-    ], ['w', 287, -1, 's', 280, -1]);
+    ], ['w', VanillaItemID.string, -1, 's', VanillaItemID.stick, -1]);
 
     Recipes.addShaped({id: ItemID.frameImpregnated, count: 1, data: 0}, [
         "sss",
         "sws",
         "sss"
-    ], ['w', 287, -1, 's', ItemID.stickImpregnated, -1]);
+    ], ['w', VanillaItemID.string, -1, 's', ItemID.stickImpregnated, -1]);
 });
 
 

@@ -1,6 +1,6 @@
 //Fuel
 MoistenerManager.registerFuel({
-    inputItem: {id: 296},
+    inputItem: {id: VanillaBlockID.wheat},
     outputItem: {id: ItemID.mouldyWheat},
     time: 300,
 });
@@ -19,25 +19,25 @@ MoistenerManager.registerFuel({
 
 //Recipes
 MoistenerManager.registerRecipe({
-    inputItem: {id: 295},
-    outputItem: {id: 110},
+    inputItem: {id: VanillaItemID.wheat_seeds},
+    outputItem: {id: VanillaBlockID.mycelium},
     time: 5000,
 });
 
 MoistenerManager.registerRecipe({
-    inputItem: {id: 4},
-    outputItem: {id: 48},
+    inputItem: {id: VanillaBlockID.cobblestone},
+    outputItem: {id: VanillaBlockID.mossy_cobblestone},
     time: 20000,
 });
 
 MoistenerManager.registerRecipe({
-    inputItem: {id: 98},
-    outputItem: {id: 98, data: 1},
+    inputItem: {id: VanillaBlockID.stonebrick},
+    outputItem: {id: VanillaBlockID.stonebrick, data: 1},
     time: 20000,
 });
 
 MoistenerManager.registerRecipe({
-    inputItem: {id: 18, data: 1},
-    outputItem: {id: 3},
+    inputItem: {id: VanillaBlockID.leaves, data: 1},
+    outputItem: {id: VanillaBlockID.dirt},
     time: 5000,
 });

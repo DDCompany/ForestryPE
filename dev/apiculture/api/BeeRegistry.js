@@ -260,11 +260,11 @@ const BeeRegistry = {
         Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
 
         IDRegistry.genItemID("drone" + arg.species);
-        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone, meta: 0}, {stack: 1});
+        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone}, {stack: 1});
         Translation.addTranslation(arg.localize.drone.en, arg.localize.drone);
 
         IDRegistry.genItemID("queen" + arg.species);
-        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen, meta: 0}, {stack: 1});
+        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen}, {stack: 1});
         Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
 
         if (arg.hasGlint) {

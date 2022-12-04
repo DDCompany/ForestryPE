@@ -7,6 +7,11 @@ declare namespace ToolLib {
     function addBlockDropOnExplosion(nameID: string | number): void;
 }
 
+declare namespace ToolType {
+    const pickaxe: any;
+    const shovel: any;
+}
+
 declare enum MiningLevel {
 	STONE = 1,
 	IRON = 2,

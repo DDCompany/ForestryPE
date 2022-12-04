@@ -10,11 +10,11 @@ FermenterManager.addFuel({
     cycles: 56,
 });
 
-for (let i in fermenterLiquids) {
-    let modifier = fermenterLiquids[i as keyof typeof fermenterLiquids];
+for (const i in fermenterLiquids) {
+    const modifier = fermenterLiquids[i as keyof typeof fermenterLiquids];
 
     FermenterManager.addRecipe({
-        id: 6,
+        id: VanillaBlockID.sapling,
         inputLiquid: i,
         liquidAmount: 0.25,
         modifier,
@@ -22,7 +22,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 81,
+        id: VanillaBlockID.cactus,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,
@@ -30,7 +30,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 296,
+        id: VanillaBlockID.wheat,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,
@@ -38,7 +38,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 338,
+        id: VanillaBlockID.reeds,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,
@@ -46,7 +46,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 392,
+        id: VanillaItemID.potato,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,
@@ -54,7 +54,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 39,
+        id: VanillaBlockID.brown_mushroom,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,
@@ -62,7 +62,7 @@ for (let i in fermenterLiquids) {
     });
 
     FermenterManager.addRecipe({
-        id: 40,
+        id: VanillaBlockID.brown_mushroom,
         inputLiquid: i,
         liquidAmount: 0.05,
         modifier,

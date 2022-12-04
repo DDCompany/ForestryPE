@@ -1,5 +1,5 @@
 IDRegistry.genItemID("crate");
-Item.createItem("crate", "forestry.item.crate", {name: "crate", meta: 0}, {});
+Item.createItem("crate", "forestry.item.crate", {name: "crate"}, {});
 Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [
     ItemID.crate,
 ]);
@@ -12,7 +12,7 @@ function registerCrate(id: number, texture: string, data?: number) {
     let crateId = "crate" + id + "_" + data;
 
     IDRegistry.genItemID(crateId);
-    Item.createItem(crateId, "forestry.item.crate", {name: texture, meta: 0}, {});
+    Item.createItem(crateId, "forestry.item.crate", {name: texture}, {});
     ItemUtils.addTooltip(ItemID[crateId], () => t(Item.getName(id, data || 0)));
 
     Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [

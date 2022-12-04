@@ -3,7 +3,7 @@ interface BeeFramePrototype {
     name: string;
     durability: number;
     modifier: BeeModifier;
-    texture?: { name: string, meta: number };
+    texture?: { name: string, data: number };
 }
 
 class BeeFrame {
@@ -33,7 +33,7 @@ class BeeFrame {
         if (!obj.texture) {
             obj.texture = {
                 name: obj.codeName,
-                meta: 0
+                data: 0,
             };
         }
 

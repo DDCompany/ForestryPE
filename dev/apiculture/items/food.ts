@@ -1,17 +1,17 @@
 IDRegistry.genItemID("honeyedSlice");
-Item.createFoodItem("honeyedSlice", "forestry.item.honeyed_slice", {name: "honeyedSlice", meta: 0}, {food: 10});
+Item.createFoodItem("honeyedSlice", "forestry.item.honeyed_slice", {name: "honeyedSlice"}, {food: 10});
 
 IDRegistry.genItemID("honeyPot");
-Item.createFoodItem("honeyPot", "forestry.item.honey_pot", {name: "honeyPot", meta: 0}, {food: 2});
+Item.createFoodItem("honeyPot", "forestry.item.honey_pot", {name: "honeyPot"}, {food: 2});
 
 IDRegistry.genItemID("ambrosia");
-Item.createFoodItem("ambrosia", "forestry.item.ambrosia", {name: "ambrosia", meta: 0}, {food: 8});
+Item.createFoodItem("ambrosia", "forestry.item.ambrosia", {name: "ambrosia"}, {food: 8});
 
 Callback.addCallback("FoodEaten", (food, ratio, player) => {
     const actor = new PlayerActor(player);
     const carriedItem = actor.getInventorySlot(actor.getSelectedSlot());
     if (carriedItem.id === ItemID.ambrosia) {
-        Entity.addEffect(Player.get(), EPotionEffect.REGENERATION, 40, 1, true, true);
+        Entity.addEffect(player, EPotionEffect.REGENERATION, 40, 1, true, true);
     }
 });
 

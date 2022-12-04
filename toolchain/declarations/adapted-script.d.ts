@@ -5976,7 +5976,7 @@ declare namespace LiquidRegistry {
     function getLiquidUITexture(key: string, width: number, height: number): string;
 
     function getLiquidUIBitmap(key: string, width: number, height: number): android.graphics.Bitmap;
-    var FullByEmpty: object;
+    var FullByEmpty: Record<string, { id: number, data: number }>;
     var EmptyByFull: object;
 
     function registerItem(liquid: string, empty: { id: number, data: number }, full: { id: number, data: number }): void;

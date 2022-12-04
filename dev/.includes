@@ -1,207 +1,108 @@
 # noImplicitAny
 # strictNullChecks
 
-### DECLARATIONS
-../lib_declarations/**.d.ts
-
 ### HEADER
 header.ts
-creativeGroups.js
-
-### BASE API
-api/ForestryConfig.ts
-api/ContainerHelper.ts
-api/MachineRegistry.ts
-api/ModelHelper.ts
-api/Util.ts
-api/ChestManager.ts
-api/ItemUtils.ts
-api/PlayerUtils.ts
 
 ### CORE
-#API
-core/api/I18n.ts
-
-# BLOCKS
-core/blocks/humus.js
-
-core/blocks/peat/peat.js
+core/api/*.ts
+core/blocks/*.ts
+core/blocks/peat/peat.ts
 core/blocks/peat/tile.ts
-
-core/blocks/ores.js
-core/blocks/storage.js
-
-# ITEMS
-core/items/resources.js
-core/items/tools.js
-core/items/other.js
-core/items/debug.ts
-
-# OTHER
-core/fluids.js
+core/items/*.ts
+core/fluids.ts
 
 ### APICULTURE
-#API
-apiculture/api/BeeType.js
-apiculture/api/ApiaryRegistry.ts
-apiculture/api/Bee.js
-apiculture/api/BeeEffects.ts
-apiculture/api/BeeFrame.ts
-apiculture/api/BeeHouse.ts
-apiculture/api/BeeLogic.js
-apiculture/api/BeeRegistry.js
-apiculture/api/BeeSaver.js
-apiculture/api/Habitat.ts
-apiculture/api/Modifier.ts
-apiculture/api/HiveGenerator.ts
-
-# OTHER
-apiculture/mode.js
-apiculture/bees.ts
-apiculture/effects.ts
-
-# BLOCKS
-apiculture/blocks/apiaristChest.js
-
-apiculture/blocks/apiary/block.js
-apiculture/blocks/apiary/gui.ts
-apiculture/blocks/apiary/tile.ts
-
-apiculture/blocks/beeHouse/block.js
-apiculture/blocks/beeHouse/tile.ts
-
-apiculture/blocks/storage.js
-
-apiculture/blocks/beehives/beehives.js
-apiculture/blocks/beehives/generation.ts
-apiculture/blocks/beehives/particles.js
-
-# ITEMS
+apiculture/api/*.ts
+apiculture/api/*.js
+apiculture/*.ts
+apiculture/items/analyzer/analyzer.ts
 apiculture/items/analyzer/AnalyzerUi.ts
 apiculture/items/analyzer/AnalyzerManager.ts
-apiculture/items/analyzer/analyzer.ts
-
-apiculture/items/armor.js
-apiculture/items/combs.ts
-apiculture/items/frames.ts
-apiculture/items/food.ts
-apiculture/items/other.js
-
-# MULTIBLOCKS
-apiculture/alveary/alveary.js
-
-apiculture/alveary/fan/alvearyFan.js
-apiculture/alveary/fan/tile.ts
-
-apiculture/alveary/heater/alvearyHeater.js
-apiculture/alveary/heater/tile.ts
-
-apiculture/alveary/hygroregulator/alvearyHygroregulator.js
-apiculture/alveary/hygroregulator/gui.ts
-apiculture/alveary/hygroregulator/tile.ts
-
-apiculture/alveary/misc/alvearyMisc.js
-apiculture/alveary/misc/gui.ts
-apiculture/alveary/misc/tile.ts
-
-apiculture/alveary/stabiliser/alvearyStabiliser.js
-apiculture/alveary/stabiliser/tile.ts
+apiculture/items/*.ts
+apiculture/blocks/*.ts
+apiculture/blocks/apiary/apiary.ts
+apiculture/blocks/apiary/gui.ts
+apiculture/blocks/apiary/tile.ts
+apiculture/blocks/beeHouse/bee_house.ts
+apiculture/blocks/beeHouse/tile.ts
+apiculture/blocks/beehive/beehive.ts
+apiculture/blocks/beehive/generation.ts
+apiculture/blocks/beehive/particles.ts
+apiculture/blocks/alveary/*.ts
+apiculture/blocks/alveary/fan/alveary_fan.ts
+apiculture/blocks/alveary/fan/tile.ts
+apiculture/blocks/alveary/heater/alveary_heater.ts
+apiculture/blocks/alveary/heater/tile.ts
+apiculture/blocks/alveary/hygroregulator/alveary_hygroregulator.ts
+apiculture/blocks/alveary/hygroregulator/gui.ts
+apiculture/blocks/alveary/hygroregulator/tile.ts
+apiculture/blocks/alveary/controller/alveary_controller.ts
+apiculture/blocks/alveary/controller/gui.ts
+apiculture/blocks/alveary/controller/tile.ts
+apiculture/blocks/alveary/misc/alveary_misc.ts
+apiculture/blocks/alveary/misc/tile.ts
+apiculture/blocks/alveary/stabiliser/alveary_stabiliser.ts
+apiculture/blocks/alveary/stabiliser/tile.ts
+apiculture/integration/*.ts
 
 ### FACTORY
-# API
-factory/api/FactoryManager.ts
-factory/api/CarpenterManager.ts
-factory/api/CentrifugeManager.ts
-factory/api/FabricatorManager.ts
-factory/api/FermenterManager.ts
-factory/api/SqueezerManager.ts
-factory/api/StillManager.ts
-factory/api/MoistenerManager.ts
-factory/api/RainMakerRenderer.ts
-factory/api/RainSubstrateRecipes.ts
-
-#ITEMS
-factory/items/gears.js
-factory/items/casings.js
-factory/items/tubes.js
-factory/items/chipsets.js
-
-# BLOCKS
-factory/blocks/carpenter/carpenter.js
-factory/blocks/carpenter/gui.js
+factory/api/*.ts
+factory/blocks/carpenter/carpenter.ts
+factory/blocks/carpenter/gui.ts
 factory/blocks/carpenter/recipes.ts
 factory/blocks/carpenter/tile.ts
-
-factory/blocks/centrifuge/centrifuge.js
-factory/blocks/centrifuge/gui.js
+factory/blocks/centrifuge/centrifuge.ts
+factory/blocks/centrifuge/gui.ts
 factory/blocks/centrifuge/recipes.ts
 factory/blocks/centrifuge/tile.ts
-
-factory/blocks/fabricator/fabricator.js
-factory/blocks/fabricator/gui.js
+factory/blocks/fabricator/fabricator.ts
+factory/blocks/fabricator/gui.ts
 factory/blocks/fabricator/recipes.ts
 factory/blocks/fabricator/tile.ts
-
-factory/blocks/fermenter/fermenter.js
-factory/blocks/fermenter/gui.js
+factory/blocks/fermenter/fermenter.ts
+factory/blocks/fermenter/gui.ts
 factory/blocks/fermenter/recipes.ts
 factory/blocks/fermenter/tile.ts
-
-factory/blocks/moistener/moistener.js
-factory/blocks/moistener/gui.js
+factory/blocks/moistener/moistener.ts
+factory/blocks/moistener/gui.ts
 factory/blocks/moistener/recipes.ts
 factory/blocks/moistener/tile.ts
-
-factory/blocks/rainTank/rainTank.js
-factory/blocks/rainTank/gui.js
+factory/blocks/rainTank/rainTank.ts
+factory/blocks/rainTank/gui.ts
 factory/blocks/rainTank/tile.ts
-
-factory/blocks/squeezer/squeezer.js
-factory/blocks/squeezer/gui.js
+factory/blocks/squeezer/squeezer.ts
+factory/blocks/squeezer/gui.ts
 factory/blocks/squeezer/recipes.ts
 factory/blocks/squeezer/tile.ts
-
-factory/blocks/still/still.js
-factory/blocks/still/gui.js
+factory/blocks/still/still.ts
+factory/blocks/still/gui.ts
 factory/blocks/still/recipes.ts
 factory/blocks/still/tile.ts
-
 factory/blocks/rainMaker/rainMaker.ts
 factory/blocks/rainMaker/tile.ts
 factory/blocks/rainMaker/recipes.ts
+factory/integration/*.ts
 
 ### ENERGY
-# API
-energy/api/BioGeneratorManager.ts
-energy/api/PeatFiredManager.ts
-
-# BLOCKS
-energy/blocks/biogas/biogas.js
+energy/api/*.ts
+energy/blocks/biogas/biogas.ts
 energy/blocks/biogas/gui.ts
 energy/blocks/biogas/tile.ts
-
 energy/blocks/bioGenerator/bioGenerator.ts
 energy/blocks/bioGenerator/gui.ts
 energy/blocks/bioGenerator/tile.ts
-
-energy/blocks/clockwork/clockwork.js
+energy/blocks/bioGenerator/recipes.ts
+energy/blocks/clockwork/clockwork.ts
 energy/blocks/clockwork/tile.ts
-
-energy/blocks/peat-fired/peat-fired.js
+energy/blocks/peat-fired/peat-fired.ts
 energy/blocks/peat-fired/gui.ts
 energy/blocks/peat-fired/tile.ts
 energy/blocks/peat-fired/recipes.ts
 
 ### STORAGE
-# ITEMS
-storage/items/backpacks.js
-storage/items/capsules.ts
-storage/items/crates.ts
-
-# INTEGRATION
-integration/ic2.js
-integration/harvestCraft.js
-integration/recipeViewer.js
+storage/items/*.ts
+storage/integration/*.ts
 
 ### ALL API SHARE
 shared.ts
