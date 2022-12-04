@@ -58,7 +58,6 @@ const BeeRegistry = {
     mutations: {},
 
     init() {
-
         this.chromosomes_list["SPEED"] = this.SPEED_SLOWEST;
         this.chromosomes_list["LIFESPAN"] = this.LIFESPAN_SHORTER;
         this.chromosomes_list["FERTILITY"] = 2;
@@ -69,7 +68,6 @@ const BeeRegistry = {
         this.chromosomes_list["CAVE_DWELLING"] = false;
         this.chromosomes_list["TERRITORY"] = "9x6x9";
         this.chromosomes_list["EFFECT"] = null;
-
     },
 
     getBeeFromScope(scope) {
@@ -187,14 +185,11 @@ const BeeRegistry = {
     },
 
     registerBee(arg) {
-        if (!arg.localize) {
-            summonException("Localize is undefined! (Bee Registration)");
-            return;
-        }
         if (!arg.chromosomes) {
             summonException("Chromosomes is undefined! (Bee Registration)");
             return;
         }
+
         if (!arg.species) {
             summonException("Species is undefined! (Bee Registration)");
             return;
@@ -207,7 +202,6 @@ const BeeRegistry = {
         if (!arg.humidity) {
             arg.humidity = Humidity.NORMAL;
         }
-
 
         if (!arg.climate) {
             arg.climate = Temperature.NORMAL;
@@ -252,20 +246,18 @@ const BeeRegistry = {
             }
         }
 
+        const lowerSpecies = arg.species.toLowerCase();
         IDRegistry.genItemID("princess" + arg.species);
-        Item.createItem("princess" + arg.species, arg.localize.princess.en, {
+        Item.createItem("princess" + arg.species, `forestry.item.${lowerSpecies}_princess`, {
             name: arg.textures.princess,
             meta: 0
         }, {stack: 1});
-        Translation.addTranslation(arg.localize.princess.en, arg.localize.princess);
 
         IDRegistry.genItemID("drone" + arg.species);
-        Item.createItem("drone" + arg.species, arg.localize.drone.en, {name: arg.textures.drone}, {stack: 1});
-        Translation.addTranslation(arg.localize.drone.en, arg.localize.drone);
+        Item.createItem("drone" + arg.species, `forestry.item.${lowerSpecies}_drone`, {name: arg.textures.drone}, {stack: 1});
 
         IDRegistry.genItemID("queen" + arg.species);
-        Item.createItem("queen" + arg.species, arg.localize.queen.en, {name: arg.textures.queen}, {stack: 1});
-        Translation.addTranslation(arg.localize.queen.en, arg.localize.queen);
+        Item.createItem("queen" + arg.species, `forestry.item.${lowerSpecies}_queen`, {name: arg.textures.queen}, {stack: 1});
 
         if (arg.hasGlint) {
             Item.setGlint(ItemID["princess" + arg.species], true);
@@ -284,9 +276,11 @@ const BeeRegistry = {
         let NAME_OVERRIDE = (item, name) => {
             let beeType = BeeRegistry.getBeeTypeByID(item.id);
             let bee = BeeSaver.bees["b" + item.data];
+
             if (beeType !== BeeRegistry.BEETYPE_DRONE) {
                 name += "§e\n" + (!bee ? "Pristine Stock" : "Ignoble Stock");
             }
+
             if (bee && bee.analyzed) {
                 let climateTol = bee.getActiveChromosome("TEMPERATURE_TOLERANCE");
                 let humidityTol = bee.getActiveChromosome("HUMIDITY_TOLERANCE");
@@ -313,6 +307,40 @@ const BeeRegistry = {
         Item.addCreativeGroup("forestry_queens", t("forestry.creative_group.queens"), [
             ItemID["queen" + arg.species],
         ]);
+    },
+
+    generateNames() {
+        const hashCode = (str) => {
+            return java.lang.Integer.valueOf(new java.lang.String(str).hashCode())
+        };
+
+        const startTime = Date.now();
+        const organismTypes = ["princess", "drone", "queen"];
+        for (const lang of I18n.loadedLanguages) {
+            const translations = I18n.getTranslationMap(lang);
+            const name = translations.get(hashCode("forestry.bee.name")) + ""; // convert java.lang.String to js string
+            if (!name) {
+                continue;
+            }
+
+            for (const type of organismTypes) {
+                const typeName = translations.get(hashCode(`forestry.bee.${type}`));
+                if (!typeName) {
+                    continue;
+                }
+
+                for (const species in this.bees) {
+                    const lowerSpecies = species.toLowerCase();
+                    const itemKey = hashCode(`forestry.item.${lowerSpecies}_${type}`);
+                    if (!translations.containsKey(itemKey)) {
+                        const speciesName = translations.get(hashCode(`forestry.alleles.species.${lowerSpecies}`));
+                        translations.put(itemKey, I18n.formatString(name, speciesName, typeName));
+                    }
+                }
+            }
+        }
+
+        log(`Generated bee names in ${Date.now() - startTime}ms`, "INFO");
     },
 
     getBeeTypeByID(id) {
@@ -371,6 +399,10 @@ const BeeRegistry = {
     },
 
     getChromosomeValueName(name, value) {
+        if (name === "SPECIES") {
+            return t(`forestry.alleles.species.${value.toLowerCase()}`);
+        }
+
         if (name === "LIFESPAN") {
             switch (value) {
                 case BeeRegistry.LIFESPAN_SHORTER:
@@ -557,3 +589,7 @@ const BeeRegistry = {
 };
 
 BeeRegistry.init();
+
+Callback.addCallback("PreLoaded", () => {
+    BeeRegistry.generateNames();
+});

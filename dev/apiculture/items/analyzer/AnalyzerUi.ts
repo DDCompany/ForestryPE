@@ -129,7 +129,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: bee.getBeeType().dominant ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-            text: bee.getActiveChromosome("SPECIES")
+            text: BeeRegistry.getChromosomeValueName("SPECIES", bee.getActiveChromosome("SPECIES")),
         };
         elements["textSpecies2"] = {
             type: "text",
@@ -138,7 +138,7 @@ class AnalyzerUi {
             width: 200,
             height: 32,
             font: bee.getInactiveBeeType().dominant ? ANALYZER_FONT_RED : ANALYZER_FONT_BLUE,
-            text: bee.getInactiveChromosome("SPECIES")
+            text: BeeRegistry.getChromosomeValueName("SPECIES", bee.getInactiveChromosome("SPECIES")),
         };
 
         LINE += 32;

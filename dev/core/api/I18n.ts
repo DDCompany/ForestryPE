@@ -1,4 +1,17 @@
 class I18n {
+    static loadedLanguages: string[] = [];
+
+    static getTranslationMapMethod = java.lang.Class.forName(
+        "com.zhekasmirnov.innercore.api.runtime.other.NameTranslation",
+        true,
+        UI.getContext().getClass().getClassLoader(),
+    ).getDeclaredMethod("getTranslationMap", [new java.lang.String().getClass()]);
+
+    static init() {
+        I18n.loadFrom(`${__dir__}langs/`);
+        this.getTranslationMapMethod.setAccessible(true);
+    }
+
     static loadFrom(path: string) {
         const file = new java.io.File(path);
         if (!file.isDirectory()) {
@@ -23,6 +36,10 @@ class I18n {
                 }
 
                 translations[key][lang] = pairs[key];
+
+                if (this.loadedLanguages.indexOf(lang) === -1) {
+                    this.loadedLanguages.push(lang);
+                }
             }
         }
 
@@ -31,13 +48,22 @@ class I18n {
         }
     }
 
+    static getTranslationMap(lang: string): java.util.HashMap<string, java.util.HashMap<java.lang.Integer, string>> {
+        return this.getTranslationMapMethod.invoke(null, [lang]);
+    }
+
     static t(key: string, ...args: any[]): string {
         if (args.length) {
             return Translation.translate(key)
-                .replace(/{(\d+)}/g, (match, number) => args[number] ?? match)
+                .replace(/{(\d+)}/g, (match, number) => args[number] ?? match);
+
         }
 
         return Translation.translate(key);
+    }
+
+    static formatString(string: string, ...args: any[]): string {
+        return string.replace(/{(\d+)}/g, (match, number) => args[number] ?? match);
     }
 
     static formatLiquidAmount(amount: number): string {
@@ -85,5 +111,5 @@ class I18n {
     }
 }
 
+I18n.init();
 const t = I18n.t;
-I18n.loadFrom(`${__dir__}langs/`);
