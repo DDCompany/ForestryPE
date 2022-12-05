@@ -1,11 +1,20 @@
 IDRegistry.genItemID("carton");
 Item.createItem("carton", "forestry.item.carton", {name: "carton"}, {});
+Item.setCategory(ItemID.carton, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("kitPickaxe");
 Item.createItem("kitPickaxe", "forestry.item.pickaxe_kit", {name: "kitPickaxe"}, {stack: 24});
+Item.setCategory(ItemID.kitPickaxe, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("kitShovel");
 Item.createItem("kitShovel", "forestry.item.shovel_kit", {name: "kitShovel"}, {stack: 24});
+Item.setCategory(ItemID.kitShovel, EItemCategory.MATERIAL);
+
+Item.addCreativeGroup("kitAssembly", t("forestry.creative_group.kits"), [
+    ItemID.carton,
+    ItemID.kitPickaxe,
+    ItemID.kitShovel,
+]);
 
 function crateUseKitCallback(itemId: number): Callback.ItemUseLocalFunction {
     return (coords, item, block, player) => {

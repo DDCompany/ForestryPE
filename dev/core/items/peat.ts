@@ -1,8 +1,15 @@
 IDRegistry.genItemID("peat");
 Item.createItem("peat", "forestry.item.peat", {name: "peat"}, {});
+Item.setCategory(ItemID.peat, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("bituminousPeat");
 Item.createItem("bituminousPeat", "forestry.item.bituminous_peat", {name: "bituminousPeat"}, {});
+Item.setCategory(ItemID.bituminousPeat, EItemCategory.MATERIAL);
+
+Item.addCreativeGroup("peat", t("forestry.creative_group.peat"), [
+    ItemID.peat,
+    ItemID.bituminousPeat,
+]);
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addFurnace(ItemID.peat, ItemID.ash, 0);

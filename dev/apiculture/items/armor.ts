@@ -30,6 +30,22 @@ Item.createArmorItem("bootsApiarist", "forestry.item.apiarists_shoes", {name: "a
     texture: "armor/apiarist_armor_1.png"
 });
 
+Item.addCreativeGroup("helmet", t("forestry.creative_group.helmets"), [
+    ItemID.helmetApiarist,
+]);
+
+Item.addCreativeGroup("chestplate", t("forestry.creative_group.chestplates"), [
+    ItemID.chestApiarist,
+]);
+
+Item.addCreativeGroup("leggings", t("forestry.creative_group.leggings"), [
+    ItemID.leggingsApiarist,
+]);
+
+Item.addCreativeGroup("boots", t("forestry.creative_group.boots"), [
+    ItemID.bootsApiarist,
+]);
+
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: ItemID.helmetApiarist, count: 1, data: 0}, [
         "www",

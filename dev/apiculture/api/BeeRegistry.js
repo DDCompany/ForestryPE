@@ -252,12 +252,15 @@ const BeeRegistry = {
             name: arg.textures.princess,
             meta: 0
         }, {stack: 1});
+        Item.setCategory(ItemID["princess" + arg.species], EItemCategory.MATERIAL);
 
         IDRegistry.genItemID("drone" + arg.species);
         Item.createItem("drone" + arg.species, `forestry.item.${lowerSpecies}_drone`, {name: arg.textures.drone}, {stack: 1});
+        Item.setCategory(ItemID["drone" + arg.species], EItemCategory.MATERIAL);
 
         IDRegistry.genItemID("queen" + arg.species);
         Item.createItem("queen" + arg.species, `forestry.item.${lowerSpecies}_queen`, {name: arg.textures.queen}, {stack: 1});
+        Item.setCategory(ItemID["queen" + arg.species], EItemCategory.MATERIAL);
 
         if (arg.hasGlint) {
             Item.setGlint(ItemID["princess" + arg.species], true);
@@ -298,13 +301,13 @@ const BeeRegistry = {
         Item.registerNameOverrideFunction(ItemID["drone" + arg.species], NAME_OVERRIDE);
         Item.registerNameOverrideFunction(ItemID["queen" + arg.species], NAME_OVERRIDE);
 
-        Item.addCreativeGroup("forestry_princesses", t("forestry.creative_group.princesses"), [
+        Item.addCreativeGroup("forestryPrincess", t("forestry.creative_group.princesses"), [
             ItemID["princess" + arg.species],
         ]);
-        Item.addCreativeGroup("forestry_drones", t("forestry.creative_group.drones"), [
+        Item.addCreativeGroup("forestryDrone", t("forestry.creative_group.drones"), [
             ItemID["drone" + arg.species],
         ]);
-        Item.addCreativeGroup("forestry_queens", t("forestry.creative_group.queens"), [
+        Item.addCreativeGroup("forestryQueen", t("forestry.creative_group.queens"), [
             ItemID["queen" + arg.species],
         ]);
     },

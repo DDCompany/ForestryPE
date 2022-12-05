@@ -7,6 +7,10 @@ ChestManager.register("apiaristChest", "forestry.block.apiarists_chest", [
     }
 });
 
+Item.addCreativeGroup("chest", t("forestry.creative_group.chests"), [
+    BlockID.apiaristChest,
+]);
+
 Callback.addCallback("PostLoaded", () => {
     for (const i in COMBS) {
         Recipes.addShaped({id: BlockID.apiaristChest, count: 1, data: 0}, [

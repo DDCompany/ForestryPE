@@ -9,7 +9,7 @@ Block.createBlock("engineBiogas", [
 ModelHelper.createEngineModel(BlockID.engineBiogas);
 GROUP_ITEM_PIPE.add(BlockID.engineBiogas, -1);
 
-Item.addCreativeGroup("forestry_engines", t("forestry.creative_group.engines"), [
+Item.addCreativeGroup("engine", t("forestry.creative_group.engines"), [
     BlockID.engineBiogas,
 ]);
 

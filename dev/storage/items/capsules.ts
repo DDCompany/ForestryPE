@@ -1,21 +1,24 @@
 IDRegistry.genItemID("waxCapsuleEmpty");
 Item.createItem("waxCapsuleEmpty", "forestry.item.wax_capsule", {name: "waxCapsuleEmpty"});
+Item.setCategory(ItemID.waxCapsuleEmpty, EItemCategory.MATERIAL);
 Item.setLiquidClip(ItemID.waxCapsuleEmpty, true);
-Item.addCreativeGroup("forestry_wax_capsules", t("forestry.creative_group.wax_capsules"), [
+Item.addCreativeGroup("capsuleWax", t("forestry.creative_group.wax_capsules"), [
     ItemID.waxCapsuleEmpty,
 ]);
 
 IDRegistry.genItemID("canEmpty");
 Item.createItem("canEmpty", "forestry.item.can", {name: "canEmpty"});
+Item.setCategory(ItemID.canEmpty, EItemCategory.MATERIAL);
 Item.setLiquidClip(ItemID.canEmpty, true);
-Item.addCreativeGroup("forestry_cans", t("forestry.creative_group.cans"), [
+Item.addCreativeGroup("capsule", t("forestry.creative_group.cans"), [
     ItemID.canEmpty,
 ]);
 
 IDRegistry.genItemID("refractoryEmpty");
-Item.createItem("refractoryEmpty", "Refractory Capsule", {name: "refractoryEmpty"});
+Item.createItem("refractoryEmpty", "forestry.item.refractory_capsule", {name: "refractoryEmpty"});
+Item.setCategory(ItemID.refractoryEmpty, EItemCategory.MATERIAL);
 Item.setLiquidClip(ItemID.refractoryEmpty, true);
-Item.addCreativeGroup("forestry_refractory_capsules", t("forestry.creative_group.refractory_capsules"), [
+Item.addCreativeGroup("capsuleRefractory", t("forestry.creative_group.refractory_capsules"), [
     ItemID.refractoryEmpty,
 ]);
 
@@ -26,10 +29,11 @@ function registerLiquidContainer(liquid: string, food: number = 0, isNative?: bo
         let unique = `bucket${suffix}`;
         IDRegistry.genItemID(unique);
         Item.createItem(unique, "forestry.item.bucket", {name: unique}, {stack: 1});
+        Item.setCategory(ItemID[unique], EItemCategory.MATERIAL);
         LiquidRegistry.registerItem(liquid, {id: 325, data: 0}, {id: ItemID[unique], data: 0});
         ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
 
-        Item.addCreativeGroup("forestry_buckets", t("forestry.creative_group.buckets"), [
+        Item.addCreativeGroup("bucket", t("forestry.creative_group.buckets"), [
             ItemID[unique],
         ]);
     }
@@ -42,17 +46,23 @@ function registerLiquidContainer(liquid: string, food: number = 0, isNative?: bo
                 name: unique,
                 meta: 0
             }, {food});
+            Item.setCategory(ItemID[unique], EItemCategory.MATERIAL);
             ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
 
             LiquidRegistry.registerItem(liquid, {
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
             }, {id: ItemID[unique], data: 0});
+
+            Item.addCreativeGroup("capsuleWax", t("forestry.creative_group.wax_capsules"), [
+                ItemID[unique],
+            ]);
         }
 
         let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
         Item.createFoodItem(canUnique, "forestry.item.can", {name: canUnique}, {food});
+        Item.setCategory(ItemID[canUnique], EItemCategory.MATERIAL);
         ItemUtils.addStaticTooltip(ItemID[canUnique], liquidName);
 
         let refractoryUnique = `refractory${suffix}`;
@@ -61,6 +71,7 @@ function registerLiquidContainer(liquid: string, food: number = 0, isNative?: bo
             name: refractoryUnique,
             meta: 0
         }, {food});
+        Item.setCategory(ItemID[refractoryUnique], EItemCategory.MATERIAL);
         ItemUtils.addStaticTooltip(ItemID[refractoryUnique], liquidName);
     } else {
         if (!isHot) {
@@ -71,17 +82,24 @@ function registerLiquidContainer(liquid: string, food: number = 0, isNative?: bo
                 id: ItemID.waxCapsuleEmpty,
                 data: 0
             }, {id: ItemID[unique], data: 0});
+            Item.setCategory(ItemID[unique], EItemCategory.MATERIAL);
             ItemUtils.addStaticTooltip(ItemID[unique], liquidName);
+
+            Item.addCreativeGroup("capsuleWax", t("forestry.creative_group.wax_capsules"), [
+                ItemID[unique],
+            ]);
         }
 
         let canUnique = `can${suffix}`;
         IDRegistry.genItemID(canUnique);
         Item.createItem(canUnique, "forestry.item.can", {name: canUnique});
+        Item.setCategory(ItemID[canUnique], EItemCategory.MATERIAL);
         ItemUtils.addStaticTooltip(ItemID[canUnique], liquidName);
 
         let refractoryUnique = `refractory${suffix}`;
         IDRegistry.genItemID(refractoryUnique);
         Item.createItem(refractoryUnique, "forestry.item.refractory_capsule", {name: refractoryUnique});
+        Item.setCategory(ItemID[refractoryUnique], EItemCategory.MATERIAL);
         ItemUtils.addStaticTooltip(ItemID[refractoryUnique], liquidName);
     }
 
@@ -91,15 +109,10 @@ function registerLiquidContainer(liquid: string, food: number = 0, isNative?: bo
         data: 0
     });
 
-    if (!isHot)
-        Item.addCreativeGroup("forestry_wax_capsules", t("forestry.creative_group.wax_capsules"), [
-            ItemID[`waxCapsule${suffix}`],
-        ]);
-
-    Item.addCreativeGroup("forestry_cans", t("forestry.creative_group.cans"), [
+    Item.addCreativeGroup("capsule", t("forestry.creative_group.cans"), [
         ItemID[`can${suffix}`],
     ]);
-    Item.addCreativeGroup("forestry_refractory_capsules", t("forestry.creative_group.refractory_capsules"), [
+    Item.addCreativeGroup("capsuleRefractory", t("forestry.creative_group.refractory_capsules"), [
         ItemID[`refractory${suffix}`],
     ]);
 }

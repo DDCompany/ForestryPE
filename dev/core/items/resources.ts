@@ -1,19 +1,24 @@
 IDRegistry.genItemID("ingotCopper");
 Item.createItem("ingotCopper", "forestry.item.copper_ingot", {name: "ingotCopper"}, {});
+Item.setCategory(ItemID.ingotCopper, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("ingotTin");
 Item.createItem("ingotTin", "forestry.item.tin_ingot", {name: "ingotTin"}, {});
+Item.setCategory(ItemID.ingotTin, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("ingotBronze");
 Item.createItem("ingotBronze", "forestry.item.bronze_ingot", {name: "ingotBronze"}, {});
+Item.setCategory(ItemID.ingotBronze, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("apatite");
 Item.createItem("apatite", "forestry.item.apatite", {name: "apatite"}, {});
+Item.setCategory(ItemID.apatite, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("phosphor");
 Item.createItem("phosphor", "forestry.item.phosphor", {name: "phosphor"}, {});
+Item.setCategory(ItemID.phosphor, EItemCategory.MATERIAL);
 
-Item.addCreativeGroup("forestry_ingots", t("forestry.creative_group.ingots"), [
+Item.addCreativeGroup("ingot", t("forestry.creative_group.ingots"), [
     ItemID.ingotCopper,
     ItemID.ingotTin,
     ItemID.ingotBronze,

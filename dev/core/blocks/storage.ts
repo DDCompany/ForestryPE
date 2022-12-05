@@ -16,6 +16,11 @@ Block.createBlock("ashBricks", [
 ]);
 ToolAPI.registerBlockMaterial(BlockID.ashBricks, "stone", 1);
 
+Item.addCreativeGroup("blockResource", t("forestry.creative_group.ore_blocks"), [
+    BlockID.blockAsh,
+    BlockID.blockCharcoal,
+]);
+
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: BlockID.blockAsh, count: 1, data: 0}, [
         "iii",

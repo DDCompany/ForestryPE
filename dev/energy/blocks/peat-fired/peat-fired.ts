@@ -9,7 +9,7 @@ Block.createBlock("enginePeat", [
 ModelHelper.createEngineModel(BlockID.enginePeat);
 GROUP_ITEM_PIPE.add(BlockID.enginePeat, -1);
 
-Item.addCreativeGroup("forestry_engines", t("forestry.creative_group.engines"), [
+Item.addCreativeGroup("engine", t("forestry.creative_group.engines"), [
     BlockID.enginePeat,
 ]);
 

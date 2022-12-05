@@ -26,11 +26,8 @@ function createBackpack({nameId, name, texture, recipeItemId, items}: BackpackDe
         items,
     });
 
-    Item.addCreativeGroup("forestry_backpacks", t("forestry.creative_group.backpacks"), [
+    Item.addCreativeGroup("backpack", t("forestry.creative_group.backpacks"), [
         ItemID[nameId],
-    ]);
-
-    Item.addCreativeGroup("forestry_woven_backpacks", t("forestry.creative_group.woven_backpacks"), [
         ItemID[wovenId],
     ]);
 
@@ -270,7 +267,7 @@ BackpackRegistry.register(ItemID.backpackApiarist, {
     }
 });
 
-Item.addCreativeGroup("forestry_backpacks", t("forestry.creative_group.backpacks"), [
+Item.addCreativeGroup("backpack", t("forestry.creative_group.backpacks"), [
     ItemID.backpackApiarist,
 ]);
 

@@ -48,13 +48,11 @@ Block.createBlock("beehiveForestry", [
         inCreative: true,
     },
 ]);
-
 ToolAPI.addBlockMaterial("beehive", 1.5);
 Block.setBlockMaterial(BlockID.beehiveForestry, "beehive", 1);
-
-Item.addCreativeGroup("forestry_beehives", t("forestry.creative_group.beehives"), [
-    BlockID.beehiveForestry,
-]);
+// Item.addCreativeGroup("beehive", t("forestry.creative_group.beehives"), [
+//     BlockID.beehiveForestry,
+// ]);
 
 Block.registerDropFunction(BlockID.beehiveForestry, (coords, id, data, diggingLevel) => {
     if (diggingLevel) {

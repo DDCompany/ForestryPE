@@ -7,6 +7,12 @@ Item.createFoodItem("honeyPot", "forestry.item.honey_pot", {name: "honeyPot"}, {
 IDRegistry.genItemID("ambrosia");
 Item.createFoodItem("ambrosia", "forestry.item.ambrosia", {name: "ambrosia"}, {food: 8});
 
+Item.addCreativeGroup("food", t("forestry.creative_group.food"), [
+    ItemID.honeyedSlice,
+    ItemID.honeyPot,
+    ItemID.ambrosia,
+]);
+
 Callback.addCallback("FoodEaten", (food, ratio, player) => {
     const actor = new PlayerActor(player);
     const carriedItem = actor.getInventorySlot(actor.getSelectedSlot());

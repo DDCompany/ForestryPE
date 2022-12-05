@@ -1,19 +1,18 @@
 IDRegistry.genItemID("honeyDrop");
 Item.createItem("honeyDrop", "forestry.item.honey_drop", {name: "honeyDrop"}, {});
+Item.setCategory(ItemID.honeyDrop, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("honeydew");
 Item.createItem("honeydew", "forestry.item.honeydew", {name: "honeydew"}, {});
+Item.setCategory(ItemID.honeydew, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("royalJelly");
 Item.createItem("royalJelly", "forestry.item.royal_jelly", {name: "royalJelly"}, {});
+Item.setCategory(ItemID.royalJelly, EItemCategory.MATERIAL);
 
 IDRegistry.genItemID("waxCast");
 Item.createItem("waxCast", "forestry.item.wax_cast", {name: "waxCast"}, {});
-
-Item.addCreativeGroup("forestry_pollen", t("forestry.creative_group.pollen"), [
-    ItemID.pollen,
-    ItemID.pollen1,
-]);
+Item.setCategory(ItemID.waxCast, EItemCategory.MATERIAL);
 
 Callback.addCallback("PostLoaded", () => {
     Recipes.addShaped({id: VanillaItemID.speckled_melon, count: 1, data: 0}, [

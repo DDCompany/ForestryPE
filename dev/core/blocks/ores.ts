@@ -22,7 +22,7 @@ ToolAPI.registerBlockMaterial(BlockID.oreApatite, "stone", 1, true);
 Block.setDestroyTime(BlockID.oreApatite, 1);
 Block.setDestroyLevel("oreApatite", 2);
 
-Item.addCreativeGroup("forestry_ores", t("forestry.creative_group.ores"), [
+Item.addCreativeGroup("ores", t("forestry.creative_group.ores"), [
     BlockID.oreCopper,
     BlockID.oreTin,
     BlockID.oreApatite,

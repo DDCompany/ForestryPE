@@ -8,7 +8,7 @@ Block.createBlockWithRotation("fabricator", [
 ]);
 GROUP_ITEM_PIPE.add(BlockID.fabricator, -1);
 
-Item.addCreativeGroup("forestry_machines", t("forestry.creative_group.machines"), [
+Item.addCreativeGroup("forestryMachine", t("forestry.creative_group.machines"), [
     BlockID.fabricator,
 ]);
 

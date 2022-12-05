@@ -4,7 +4,7 @@ class ApiaryRegistry {
 
     static register(id: number) {
         this.blockIDs.push(id);
-        Item.addCreativeGroup("forestry_alveary_components", t("forestry.creative_group.alveary"), [id]);
+        Item.addCreativeGroup("forestryComponentAlveary", t("forestry.creative_group.alveary"), [id]);
     }
 
     static isApiaryComponent(id: number): boolean {

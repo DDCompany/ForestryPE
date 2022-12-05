@@ -43,7 +43,7 @@ BeeFrame.registerFrame({
     durability: 720
 });
 
-Item.addCreativeGroup("forestry_frames", t("forestry.creative_group.frames"), [
+Item.addCreativeGroup("frameHive", t("forestry.creative_group.frames"), [
     ItemID.frameUntreated,
     ItemID.frameImpregnated,
     ItemID.frameProven,

@@ -23,7 +23,7 @@ if (ForestryConfig.oresBlocksEnabled) {
     ]);
     ToolAPI.registerBlockMaterial(BlockID.blockApatite, "stone", 1);
 
-    Item.addCreativeGroup("forestry_ore_blocks", t("forestry.creative_group.ore_blocks"), [
+    Item.addCreativeGroup("blockResource", t("forestry.creative_group.ore_blocks"), [
         BlockID.blockCopper,
         BlockID.blockTin,
         BlockID.blockBronze,

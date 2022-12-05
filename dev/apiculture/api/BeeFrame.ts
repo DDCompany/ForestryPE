@@ -41,12 +41,13 @@ class BeeFrame {
         Item.createItem(obj.codeName, obj.name, obj.texture, {stack: 1});
 
         const itemId = ItemID[obj.codeName];
+        Item.setCategory(itemId, EItemCategory.MATERIAL);
         Item.setToolRender(itemId, true);
         Item.setMaxDamage(itemId, obj.durability);
 
         Item.registerNameOverrideFunction(itemId, (item, name) => {
             const modifier = obj.modifier;
-            name += `§7${t("forestry.tooltip.frame.production", modifier.getProductionModifier?.() || 1)}\n`;
+            name += `\n§7${t("forestry.tooltip.frame.production", modifier.getProductionModifier?.() || 1)}\n`;
             name += `${t("forestry.tooltip.frame.genetic_decay", modifier.getGeneticDecay?.() || 1)}\n`;
             name += `${t("forestry.tooltip.frame.durability", obj.durability - item.data)}`;
             return name;

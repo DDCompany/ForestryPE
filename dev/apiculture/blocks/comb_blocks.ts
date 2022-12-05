@@ -74,7 +74,7 @@ if (ForestryConfig.combsBlocksEnabled) {
     ]);
     Block.setBlockMaterial(BlockID.blockComb, "stone", 1);
 
-    Item.addCreativeGroup("forestry_bee_comb_blocks", t("forestry.creative_group.bee_comb_blocks"), [
+    Item.addCreativeGroup("blockCombBee", t("forestry.creative_group.bee_comb_blocks"), [
         BlockID.blockComb,
     ]);
 

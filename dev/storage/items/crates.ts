@@ -1,6 +1,7 @@
 IDRegistry.genItemID("crate");
 Item.createItem("crate", "forestry.item.crate", {name: "crate"}, {});
-Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [
+Item.setCategory(ItemID.crate, EItemCategory.MATERIAL);
+Item.addCreativeGroup("forestryCrate", t("forestry.creative_group.crates"), [
     ItemID.crate,
 ]);
 
@@ -13,9 +14,10 @@ function registerCrate(id: number, texture: string, data?: number) {
 
     IDRegistry.genItemID(crateId);
     Item.createItem(crateId, "forestry.item.crate", {name: texture}, {});
+    Item.setCategory(ItemID[crateId], EItemCategory.MATERIAL);
     ItemUtils.addTooltip(ItemID[crateId], () => t(Item.getName(id, data || 0)));
 
-    Item.addCreativeGroup("forestry_crates", t("forestry.creative_group.crates"), [
+    Item.addCreativeGroup("forestryCrate", t("forestry.creative_group.crates"), [
         ItemID[crateId],
     ]);
 
@@ -23,7 +25,7 @@ function registerCrate(id: number, texture: string, data?: number) {
         input: {
             0: {id, data}, 1: {id, data}, 2: {id, data},
             3: {id, data}, 4: {id, data}, 5: {id, data},
-            6: {id, data}, 7: {id, data}, 8: {id, data}
+            6: {id, data}, 7: {id, data}, 8: {id, data},
         },
         liquid: "water",
         liquidAmount: 0.1,
