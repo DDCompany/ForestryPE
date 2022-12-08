@@ -2,7 +2,7 @@ IDRegistry.genBlockID("beeHouse");
 Block.createBlock("beeHouse", [
     {
         name: "forestry.block.bee_house",
-        texture: [["bee_house", 0], ["bee_house", 0], ["bee_house", 1]],
+        texture: [["bee_house", 2], ["bee_house", 0], ["bee_house", 1]],
         inCreative: true,
     },
 ]);
