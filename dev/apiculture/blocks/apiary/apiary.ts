@@ -1,6 +1,6 @@
 IDRegistry.genBlockID("apiary");
 Block.createBlock("apiary", [
-    {name: "forestry.block.apiary", texture: [["apiary", 0], ["apiary", 0], ["apiary", 1]], inCreative: true},
+    {name: "forestry.block.apiary", texture: [["apiary", 2], ["apiary", 0], ["apiary", 1]], inCreative: true},
 ]);
 Block.setBlockMaterial(BlockID.apiary, "wood", 1);
 GROUP_ITEM_PIPE.add(BlockID.apiary, -1);
