@@ -277,22 +277,25 @@ const BeeRegistry = {
         this.bees[arg.species] = bee_type;
 
         let NAME_OVERRIDE = (item, name) => {
-            let beeType = BeeRegistry.getBeeTypeByID(item.id);
-            let bee = BeeSaver.bees["b" + item.data];
+            const beeType = BeeRegistry.getBeeTypeByID(item.id);
+            const bee = BeeSaver.bees["b" + item.data];
 
             if (beeType !== BeeRegistry.BEETYPE_DRONE) {
-                name += "§e\n" + (!bee ? "Pristine Stock" : "Ignoble Stock");
+                name += "§e\n" + (!bee ? t("forestry.bee.stock.pristine") : t("forestry.bee.stock.ignoble"));
             }
 
             if (bee && bee.analyzed) {
-                let climateTol = bee.getActiveChromosome("TEMPERATURE_TOLERANCE");
-                let humidityTol = bee.getActiveChromosome("HUMIDITY_TOLERANCE");
-                name += "§7\n" + BeeRegistry.getChromosomeValueName("LIFESPAN", bee.getActiveChromosome("LIFESPAN")) + " Life";
-                name += "\n" + BeeRegistry.getChromosomeValueName("SPEED", bee.getActiveChromosome("SPEED")) + " Worker";
-                name += "§a\nT: " + BeeRegistry.getChromosomeValueName("CLIMATE", bee.getClimate()) + "/" + bee.getClimateTolValue() + (climateTol === 0 ? "" : (climateTol < 6 ? " B" : (climateTol < 11 ? " U" : " D")));
-                name += "\nH: " + BeeRegistry.getChromosomeValueName("HUMIDITY", bee.getHumidity()) + "/" + bee.getClimateTolValue() + (humidityTol === 0 ? "" : (humidityTol < 6 ? " B" : (humidityTol < 11 ? " U" : " D")));
+                const speed = BeeRegistry._localizeWorkerSpeed(bee.getActiveChromosome("SPEED"));
+                const life = BeeRegistry.getChromosomeValueName("LIFESPAN", bee.getActiveChromosome("LIFESPAN")) + " " + t("forestry.tooltip.bee.life");
+                const climateTolerance = t(`forestry.alleles.tolerance.${bee.getActiveChromosome("TEMPERATURE_TOLERANCE")}`);
+                const humidityTolerance = t(`forestry.alleles.tolerance.${(bee.getActiveChromosome("HUMIDITY_TOLERANCE"))}`);
+
+                name += "§7\n" + life;
+                name += "\n" + speed;
+                name += "§a\n" + t("forestry.tooltip.bee.temperature", Habitat.localizeTemperature(bee.getClimate()), climateTolerance);
+                name += "\n" + t("forestry.tooltip.bee.humidity", Habitat.localizeHumidity(bee.getHumidity()), humidityTolerance);
                 name += "§7\n" + BeeRegistry.getChromosomeValueName("FLOWERS", bee.getFlowers());
-            } else name += "§7\n<unknown genome>";
+            } else name += "§7\n" + t("forestry.tooltip.bee.unknown_genome");
 
             return name;
         };
@@ -310,6 +313,27 @@ const BeeRegistry = {
         Item.addCreativeGroup("forestryQueen", t("forestry.creative_group.queens"), [
             ItemID["queen" + arg.species],
         ]);
+    },
+
+    _localizeWorkerSpeed(speed) {
+        switch (speed) {
+            case BeeRegistry.SPEED_FASTEST:
+                return t("forestry.tooltip.bee.worker.fastest");
+            case BeeRegistry.SPEED_FASTER:
+                return t("forestry.tooltip.bee.worker.faster");
+            case BeeRegistry.SPEED_FAST:
+                return t("forestry.tooltip.bee.worker.fast");
+            case BeeRegistry.SPEED_NORMAL:
+                return t("forestry.tooltip.bee.worker.normal");
+            case BeeRegistry.SPEED_SLOW:
+                return t("forestry.tooltip.bee.worker.slow");
+            case BeeRegistry.SPEED_SLOWER:
+                return t("forestry.tooltip.bee.worker.slower");
+            case BeeRegistry.SPEED_SLOWEST:
+                return t("forestry.tooltip.bee.worker.slowest");
+        }
+
+        throw new Error(`Invalid speed value: ${speed}`);
     },
 
     generateNames() {
