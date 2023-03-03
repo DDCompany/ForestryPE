@@ -6,7 +6,8 @@ Block.createBlock("engineClockwork", [
         inCreative: true,
     },
 ]);
-ModelHelper.createEngineModel(BlockID.engineClockwork);
+//TODO
+// ModelHelper.createEngineModel(BlockID.engineClockwork);
 
 Item.addCreativeGroup("engine", t("forestry.creative_group.engines"), [
     BlockID.engineClockwork,

@@ -6,7 +6,8 @@ Block.createBlock("engineBiogas", [
         inCreative: true,
     },
 ]);
-ModelHelper.createEngineModel(BlockID.engineBiogas);
+//TODO
+// ModelHelper.createEngineModel(BlockID.engineBiogas);
 GROUP_ITEM_PIPE.add(BlockID.engineBiogas, -1);
 
 Item.addCreativeGroup("engine", t("forestry.creative_group.engines"), [

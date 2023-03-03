@@ -63,10 +63,22 @@ enum EngineTemperature {
     OPERATING_TEMPERATURE,
     RUNNING_HOT,
     OVERHEATING,
+    MELTING,
 }
 
 class EngineRenderer {
     private static readonly cache: Record<string, Render> = {};
+
+    static setStaticRender(blockId: number) {
+        const emptyRender = new ICRender.Model();
+        BlockRenderer.setStaticICRender(blockId, -1, emptyRender);
+
+        const model = BlockRenderer.createModel();
+        model.addBox(0, 0, 0, 1, 0.374, 1, blockId, 0);
+        model.addBox(0.125, 0.374, 0.125, 0.875, 0.624, 0.875, blockId, 0);
+        model.addBox(0.25, 0.624, 0.25, 0.75, 0.999, 0.75, blockId, 0);
+        ItemModel.getFor(blockId, 0).setModel(model);
+    }
 
     static createBase(texture: string, dir: Direction, progress: number): Render {
         const key = `base:${progress}:${texture}:${dir.toString()}`;

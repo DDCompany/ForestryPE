@@ -23,9 +23,10 @@
 
 IMPORT("EnergyNet");
 IMPORT("flags");
-IMPORT("ToolLib");
 IMPORT("BackpackAPI");
 IMPORT("StorageInterface");
+IMPORT("BlockEngine");
+IMPORT("ToolLib");
 
 const EU = EnergyTypeRegistry.assureEnergyType("Eu", 1);
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 0.25);

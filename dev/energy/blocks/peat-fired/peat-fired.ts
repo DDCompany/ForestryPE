@@ -6,7 +6,9 @@ Block.createBlock("enginePeat", [
         inCreative: true,
     },
 ]);
-ModelHelper.createEngineModel(BlockID.enginePeat);
+EngineRenderer.setStaticRender(BlockID.enginePeat);
+MachineRegistry.setupWireConnection(BlockID.enginePeat, RF);
+ToolAPI.registerBlockMaterial(BlockID.enginePeat, "stone", 1, true);
 GROUP_ITEM_PIPE.add(BlockID.enginePeat, -1);
 
 Item.addCreativeGroup("engine", t("forestry.creative_group.engines"), [

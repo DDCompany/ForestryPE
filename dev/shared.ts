@@ -27,8 +27,6 @@ interface ForestryAPI {
 
     ApiaryRegistry: ApiaryRegistry;
 
-    ModelHelper: ModelHelper;
-
     Habitat: Habitat;
 
     Util: Util;
@@ -81,7 +79,6 @@ ModAPI.registerAPI("ForestryAPI", {
     HiveGenerator,
     Config: ForestryConfig,
     ContainerHelper,
-    ModelHelper,
     Util,
     ApiaryRegistry,
     ChestManager,
